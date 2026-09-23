@@ -14,6 +14,6 @@ Este proyecto consiste en crear una organización para poder realizar campeonato
 1. [Proceso AS-IS](Proceso-AS-IS.md)
 2. [Rediseño y TO-BE](Rediseño_y_TO-BE.md)
 3. [Clasificación de requisitos](Clasificación_de_requisitos.md)
-4. [Historias de usuario](./04-historias-usuario.md)
+4. [Historias de usuario](Historias_de_usuario.md)
 5. [Elicitación](./05-elicitacion.md)
 6. [Atributos de calidad](./06-atributos-calidad.md)
