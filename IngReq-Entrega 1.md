@@ -11,7 +11,7 @@
 Este proyecto consiste en crear una organización para poder realizar campeonatos para toda la comunidad Latina
  
 ## Índice de documentos
-1. [Proceso AS-IS](./Proceso AS-IS.md)
+1. [Proceso AS-IS](Proceso-AS-IS.md)
 2. [Rediseño y TO-BE](./02-rediseno-to-be.md)
 3. [Clasificación de requisitos](./03-requisitos.md)
 4. [Historias de usuario](./04-historias-usuario.md)
