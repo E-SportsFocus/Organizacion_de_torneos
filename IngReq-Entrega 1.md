@@ -7,8 +7,8 @@
 - Martín Durán
 - Matthew Osorio
  
-## Proyecto
-[Nombre del proyecto y una descripción breve, 3 a 5 líneas]
+## Proyecto E-Spots Focus
+Este proyecto consiste en crear una organización para poder realizar campeonatos para toda la comunidad Latina
  
 ## Índice de documentos
 1. [Proceso AS-IS](./01-proceso-as-is.md)
