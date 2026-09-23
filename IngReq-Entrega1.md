@@ -16,4 +16,4 @@ Este proyecto consiste en crear una organización para poder realizar campeonato
 3. [Clasificación de requisitos](Clasificación_de_requisitos.md)
 4. [Historias de usuario](Historias_de_usuario.md)
 5. [Elicitación](Elicitación.md)
-6. [Atributos de calidad](./06-atributos-calidad.md)
+6. [Atributos de calidad](Atributos_de_calidad.md)
