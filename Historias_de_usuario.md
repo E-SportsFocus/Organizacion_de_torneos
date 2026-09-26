@@ -15,3 +15,6 @@ Como [rol], quiero [funcionalidad], para [beneficio/objetivo].
 - CA1: [descripción]
 - CA2: [descripción]
 - ...
+
+## Regresar 
+[Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
