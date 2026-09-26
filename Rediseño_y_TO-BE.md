@@ -25,3 +25,6 @@ Nota: distingan tareas de usuario, de servicio y manuales con el marcador corres
 | [Actividad] | [Actividad] | [Descripción del cambio] |
  
 Esta tabla es la que usarán en 03-requisitos.md y 04-historias-usuario.md para asociar cada requisito e historia a la actividad que cambia.
+
+## Regresar 
+[Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
