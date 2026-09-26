@@ -8,7 +8,8 @@
 - Matthew Osorio
  
 ## Proyecto E-Spots Focus
-Este proyecto consiste en crear una organización para poder realizar campeonatos para toda la comunidad Latinoamericana de videojuegos, 
+Este proyecto consiste en crear una organización para poder realizar campeonatos para toda la comunidad Latinoamericana de videojuegos, para que todos tengan la oportinidad de participar en torneos de sus juegos favorito.
+Nos basaremos en lo que los usuarios les gustaría ver y tener una expectativa respecto a eso. 
  
 ## Índice de documentos
 1. [Proceso AS-IS](Proceso_AS-IS.md)
