@@ -1,6 +1,6 @@
 # Ingeniería de Requisitos — Entrega 1
  
-## Equipo
+## Equipo 3
 - Antonia Bustamante
 - Joaquin Bustamante
 - Fernanda Cerda
