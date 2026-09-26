@@ -2,7 +2,7 @@
  
 ## Equipo 3
 - Antonia Bustamante
-- Joaquin Bustamante
+- Joaquín Bustamante
 - Fernanda Cerda
 - Martín Durán
 - Matthew Osorio
