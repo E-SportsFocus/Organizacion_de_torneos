@@ -13,7 +13,7 @@
 | [Rol 2] | [Objetivo] |
  
 ## Diagrama AS-IS
-![Proceso AS-IS](diagram.png)
+![Proceso AS-IS](diagram-_1_.png)
  
 Archivo fuente: [`./diagramas/as-is.bpmn`](./diagramas/as-is.bpmn)
  
