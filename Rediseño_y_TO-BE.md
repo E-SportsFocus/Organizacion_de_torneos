@@ -20,7 +20,7 @@
 - Efecto esperado (tiempo/costo/calidad/flexibilidad): El tiempo entre el fin de la partida y el registro del resultado baja de hora (según disponibilidad del Moderador) a segundos; mejora la confiabilidad del dato al no depender de un reporte manual como paso por defecto.
  
 ## Diagrama TO-BE
-![Proceso TO-BE](./diagramas/to-be.png)
+![Proceso TO-BE](diagram1.png)
  
 Archivo fuente: [`./diagramas/to-be.bpmn`](diagram1.bpmn)
  
