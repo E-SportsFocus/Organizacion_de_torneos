@@ -3,7 +3,7 @@
 ## HU-01: Registro automático del resultado
 Como moderador, quiero que la plataforma obtenga y registre el resultado mediante la API del videojuego, para reducir el trabajo manual y disponer de resultados oportunos.
 
-**Actividad TO-BE asociada:** Determinar los resultados vía API.
+**Actividad TO-BE asociada:** Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible.
 
 **Criterios de aceptación:**
 - CA1: Cuando la API proporcione un resultado válido, el sistema debe registrarlo en la partida y equipos correspondientes, sin duplicarlo si   vuelve a recibirlo.
@@ -13,7 +13,7 @@ Como moderador, quiero que la plataforma obtenga y registre el resultado mediant
 ## HU-02: Notificación del resultado
 Como jugador participante, quiero recibir una notificación del resultado registrado y consultar el bracket actualizado, para conocer la situación de mi equipo en el torneo.
 
-**Actividad TO-BE asociada:** Notifica los resultados al organizador y jugadores con el bracket actualizado.
+**Actividad TO-BE asociada:** Sistema notifica automáticamente el resultado al organizador.
 
 **Criterios de aceptación:**
 - CA1: Al registrarse un resultado válido, de forma automática o manual, el sistema debe actualizar el bracket.
@@ -24,7 +24,7 @@ Como jugador participante, quiero recibir una notificación del resultado regist
 
 Como moderador, quiero registrar el resultado cuando no pueda obtenerse mediante la API, para permitir que el torneo continúe y conservar la trazabilidad.
 
-**Actividad TO-BE asociada:** Registra manualmente los resultados en la plataforma.
+**Actividad TO-BE asociada:** Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible.
 
 **Criterios de aceptación:**
 - CA1: Ante la ausencia o fallo de la API, solo un moderador autorizado debe poder registrar un resultado completo para los equipos de la partida.
