@@ -14,7 +14,7 @@ Como jugador competitivo, quiero que la plataforma muestre de forma pública las
 
 Como usuario y en nombre de mi equipo, nos gustaría que hubiera una tabla dinámica de posicionamientos e información sobre los participantes del torneo, al igual que se vea explícitamente en la etapa del torneo que esta. Cada equipo y en que momento pasará o estará pasando.
 
-**To-Be asociado:** consulta de tabla dinámica y posicionamiento de equipos e información sobre los mismos.
+**Actividad TO-BE asociada:** consulta de tabla dinámica y posicionamiento de equipos e información sobre los mismos.
 
 **Criterios de aceptación:**
 - CA1: Posicionamiento de cada equipo en la etapa del torneo respectiva e información de cada uno (integrantes, winrate, HS, etc.).
