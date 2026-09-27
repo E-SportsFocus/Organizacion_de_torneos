@@ -18,8 +18,6 @@ Asegurar que cada partida del torneo se juegue en el horario coordinado y que su
  
 Archivo fuente: [`./diagramas/as-is.bpmn`](diagram.bpmn)
  
-Nota: distingan tareas de usuario, de servicio y manuales con el marcador correspondiente.
- 
 ## Problemas identificados
 - El organizador depende de que el Moderador le informe manualmente el resultado por Discord; si se demora, no puede anunciar ganadores ni entregar premios a tiempo.
 - Los Jugadores/Equipos no recibe ninguna confirmación de que su resultado quedó bien registrado, lo que puede generar reclamos si el bracket no coincide con lo ocurrido en la partida.
