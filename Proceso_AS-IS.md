@@ -1,7 +1,7 @@
 # Proceso de negocio — AS-IS
  
 ## Macro-proceso y proceso específico
-[Macro-proceso] → [Proceso específico que se modela]
+Organización de torneos competitivos (E-Sports Focus) → Organización y desarrollo de una partida del torneo
  
 ## Objetivo de negocio del proceso
 [Descripción]
