@@ -22,7 +22,7 @@
 ## Diagrama TO-BE
 ![Proceso TO-BE](./diagramas/to-be.png)
  
-Archivo fuente: [`./diagramas/to-be.bpmn`](./diagramas/to-be.bpmn)
+Archivo fuente: [`./diagramas/to-be.bpmn`](diagram1.bpmn)
  
 ## Actividades que cambian del AS-IS al TO-BE
 | Actividad en el AS-IS | Actividad en el TO-BE | Qué cambia |
