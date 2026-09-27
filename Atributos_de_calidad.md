@@ -1,8 +1,7 @@
 # Atributos de calidad (ISO 25010)
  
 ## Priorización de los 9 atributos de primer nivel
-1. [Atributo más importante]
-2. [Atributo]
+
 ...
 9. [Atributo menos importante]
  
