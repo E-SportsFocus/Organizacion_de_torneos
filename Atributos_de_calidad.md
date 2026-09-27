@@ -6,8 +6,7 @@ Esta propuesta define la calidad esperada del software de apoyo a la organizaci�
 
 Se utiliza **ISO/IEC 25010:2023**, cuyo modelo de calidad del producto contiene nueve características de primer nivel. Las denominaciones en español se acompañan de su equivalente en inglés para evitar confusiones. En esta edición se emplean capacidad de interacción y flexibilidad, y se incorpora seguridad operacional.
 
-El orden prioriza que la información competitiva sea correcta, que el servicio continúe durante las partidas y que solo personas autorizadas puedan modificar datos. Las métricas y umbrales siguientes son **metas propuestas para el proyecto**, no exigencias numéricas de ISO ni resultados de pruebas ejecutadas. Deben validarse con el organizador y el moderador. El TO-BE todavía es una plantilla, por lo que no se atribuyen estas metas a actividades futuras ya aprobadas.
-
+El orden prioriza que la información competitiva sea correcta, que el servicio continúe durante las partidas y que solo personas autorizadas puedan modificar datos. Las métricas y umbrales siguientes son **metas propuestas para el proyecto**, no exigencias numéricas de ISO ni resultados de pruebas ejecutadas. Deben validarse con el organizador y el moderador. 
 ## Priorización de los nueve atributos de primer nivel
 
 | Prioridad | Atributo | Justificación para el proyecto |
