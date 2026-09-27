@@ -9,16 +9,23 @@
  
 ## Iniciativas de rediseño
 ### Iniciativa 1
-- Actividad(es) del AS-IS que afecta: Revisar todos los eventos que ocurrieron en la partida para los resultados (Moderador) / Entregan los resultados obtenidos para dar un posible ganador (Organizador)
-- Heurística aplicada: Automatización de tareas e integración con sistemas externos (via API del juego) 
-- Objetivo o mejora que resuelve: Objetivos
-
- | Organizador | Moderador |
- |-------------|-----------|
- | Anunciar a tiempo los resultados | Que los resultados sea los reales |
- 
+- Actividad(es) del AS-IS que afecta: Revisar todos los eventos que ocurrieron en la partida para los resultados (Moderador) / Entregan los resultados obtenidos para dar un posible ganador (Organizador).
+- Heurística aplicada: Automatización de tareas e integración con sistemas externos (via API del juego).
+- Objetivo o mejora que resuelve: El moderador anuncia a tiempo los resultados y el moderador da los resultados reales.
 - Efecto esperado (tiempo/costo/calidad/flexibilidad): El tiempo entre el fin de la partida y el registro del resultado baja de hora (según disponibilidad del Moderador) a segundos; mejora la confiabilidad del dato al no depender de un reporte manual como paso por defecto.
- 
+
+### Iniciativa 2
+- Actividad(es) del AS-IS que afecta: La cadena secuencial Moderador informa -> Organizador entrega resultados -> Organizador anuncia
+- Heurística aplicada: Reducción de contacto y paralelismo.
+- Objetivo o mejora que resuelve: Jugadores/Equipos reciben confirmación automática e inmediata de que su resultado quedo registrado. 
+- Efecto esperado (tiempo/costo/calidad/flexibilidad): El organizador, los jugadores y el moderador reciben la notificación al mismo tiempo, reduciendo reclamos por discrepancia en el bracket.
+
+### Iniciativa 3
+- Actividad(es) del AS-IS que afecta: La misma que la iniciativa 1, cubriendo el caso "API no disponible".
+- Heurística aplicada: Manejo de excepciones / trabajo basado en casos.
+- Objetivo o mejora que resuelve: El moderador tiene una continuidad operativa cuando falta la autorización, sin volver al proceso 100% manual.
+- Efecto esperado (tiempo/costo/calidad/flexibilidad): El proceso sigue funcionando aunque el juego no tenga API publica, el registro queda igual de trazable en la plataforma.
+
 ## Diagrama TO-BE
 ![Proceso TO-BE](diagramabueno2.png)
  
