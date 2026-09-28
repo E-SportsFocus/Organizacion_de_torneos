@@ -11,14 +11,14 @@
 ### Iniciativa 1
 - Actividad(es) del AS-IS que afecta: Revisar todos los eventos que ocurrieron en la partida para los resultados (Moderador) / Entregan los resultados obtenidos para dar un posible ganador (Organizador).
 - Heurística aplicada: Automatización de tareas e integración con sistemas externos (via API del juego).
-- Objetivo o mejora que resuelve: El moderador anuncia a tiempo los resultados y el moderador da los resultados reales.
+- Objetivo o mejora que resuelve: El organizador anuncia a tiempo los resultados y el moderador da los resultados reales.
 - Efecto esperado (tiempo/costo/calidad/flexibilidad): El tiempo entre el fin de la partida y el registro del resultado baja de hora (según disponibilidad del Moderador) a segundos; mejora la confiabilidad del dato al no depender de un reporte manual como paso por defecto.
 
 ### Iniciativa 2
 - Actividad(es) del AS-IS que afecta: La cadena secuencial Moderador informa -> Organizador entrega resultados -> Organizador anuncia
 - Heurística aplicada: Reducción de contacto y paralelismo.
 - Objetivo o mejora que resuelve: Jugadores/Equipos reciben confirmación automática e inmediata de que su resultado quedo registrado. 
-- Efecto esperado (tiempo/costo/calidad/flexibilidad): El organizador, los jugadores y el moderador reciben la notificación al mismo tiempo, reduciendo reclamos por discrepancia en el bracket.
+- Efecto esperado (tiempo/costo/calidad/flexibilidad): El organizador y loa jugadores reciben la notificación al mismo tiempo, reduciendo reclamos por discrepancia en el bracket.
 
 ### Iniciativa 3
 - Actividad(es) del AS-IS que afecta: La misma que la iniciativa 1, cubriendo el caso "API no disponible".
