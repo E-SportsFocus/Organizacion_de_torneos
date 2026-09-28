@@ -9,7 +9,7 @@ Asegurar que cada partida del torneo se juegue en el horario coordinado y que su
 ## Participantes y sus objetivos
 | Participante | Objetivo en el proceso |
 |---------------|------------------------|
-| Organizador | Mantener el torneo funcionando de principio a fin: publicar el cronograma, habilitar las salas de juego, anunciar resultados y premios a tiempos.|
+| Organizador | Mantener el torneo funcionando de principio a fin: publicar el cronograma, habilitar las salas de juego, anunciar resultados y premios a tiempo.|
 | Jugadores/Equipos | Jugar su partida en el horario acordado y que el resultado obtenido quede correctamente reflejado en el torneo.|
 | Moderador | Garantizar que las partidas se disputen según lo planificado (reagendando cuando sea necesario) y que el resultado registrado sea el real, verificándolo en vivo.|
  
@@ -20,7 +20,7 @@ Archivo fuente: [`./diagramas/as-is.bpmn`](Images/diagrama.bpmn)
  
 ## Problemas identificados
 - El organizador depende de que el Moderador le informe manualmente el resultado por Discord; si se demora, no puede anunciar ganadores ni entregar premios a tiempo.
-- Los Jugadores/Equipos no recibe ninguna confirmación de que su resultado quedó bien registrado, lo que puede generar reclamos si el bracket no coincide con lo ocurrido en la partida.
+- Los Jugadores/Equipos no reciben ninguna confirmación de que su resultado quedó bien registrado, lo que puede generar reclamos si el bracket no coincide con lo ocurrido en la partida.
 
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
