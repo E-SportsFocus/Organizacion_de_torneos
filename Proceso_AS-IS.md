@@ -14,9 +14,9 @@ Asegurar que cada partida del torneo se juegue en el horario coordinado y que su
 | Moderador | Garantizar que las partidas se disputen según lo planificado (reagendando cuando sea necesario) y que el resultado registrado sea el real, verificándolo en vivo.|
  
 ## Diagrama AS-IS
-![Proceso AS-IS](diagramabueno.png)
+![Proceso AS-IS](Images/diagrama.png)
  
-Archivo fuente: [`./diagramas/as-is.bpmn`](diagramabueno.bpmn)
+Archivo fuente: [`./diagramas/as-is.bpmn`](Images/diagrama.bpmn)
  
 ## Problemas identificados
 - El organizador depende de que el Moderador le informe manualmente el resultado por Discord; si se demora, no puede anunciar ganadores ni entregar premios a tiempo.
