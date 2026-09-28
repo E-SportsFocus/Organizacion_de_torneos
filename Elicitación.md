@@ -65,7 +65,7 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
 ## Técnica 2: Documentación (revisión docuemental)
 
 - Fuente revisada: vlr.gg, web de terceros donde sale explicitamente toda la informacion de diferentes torneos oficiales hechos en valorant (brackets, posiciones, enfrentamientos, horario, etc.)
-- Material revisado: [Horarios](./Images/horarios.png), [Info individual](./Images/Informacionindividual.png), [Bracket(Grupo A)](./Images/BracketGrupoA.png), [Bracket(Grupo B)](./Images/BracketGrupoB.png)
+- Material revisado: [Horarios](./Images/horarios.png), [Info individual](./Images/Informacionindividual.png), [Bracket (Grupo A)](./Images/BracketGrupoA.png), [Bracket (Grupo B)](./Images/BracketGrupoB.png)
 - Nota de escala: VCT es un torneo profesional de valorant, es una especie de mundial por lo que es una organización bastante distinta a una como la de E-sports Focus. Se revisa para usar de referencia, no como plagio ni replica, cada hallazgo indica que parte es mas aplicable a nuestra escala.
 
 ### Evidencia 1 - Cronograma de partidas ("Horarios.png")
