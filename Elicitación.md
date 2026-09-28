@@ -7,7 +7,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
  
 ## Entrevista Numero 1°.
 - **Participante:** Fernando Gonzáles 
-- **Evidencia:** Foto evidencia de la reunión via Discord: [Entrevista 1.png](./Images/Entrevista_1(Fernando).png)
+- **Evidencia:** Foto evidencia de la reunión via Discord: [Entrevista 1.png](./Images/Entrevista1Fernando.png)
 - **Hallazgos principales:**
 
 | Pregunta | Síntesis de la respuesta |
@@ -27,7 +27,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
 
 ## Entrevista Numero 2°.
 - **Participante:** Benjamín Muñoz. 
-- **Evidencia:** Foto evidencia de la reunion via Discord.[Entrevista 2.png](./Images/Entrevista_2(Benjamín).png)
+- **Evidencia:** Foto evidencia de la reunion via Discord.[Entrevista 2.png](./Images/Entrevista2Benjamín.png)
 - **Hallazgos principales:**
 
 | Pregunta | Síntesis de la respuesta |
