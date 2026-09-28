@@ -3,7 +3,7 @@
 ## Requisitos de producto
 | ID | Requisito | Tipo | Actividad TO-BE asociada |
 |----|-----------|--------------------------------|----------------------------|
-| RP-01 | El sistema debe permitir a los jugadores/confirmar su disponibilidad para una partida a través de la plataforma. | Funcional | Confirman disponibilidad en la plataforma |
+| RP-01 | El sistema debe permitir a los jugadores/equipos confirmar su disponibilidad para una partida a través de la plataforma. | Funcional | Confirman disponibilidad en la plataforma |
 | RP-02 | El sistema debe permitir a los jugadores/equipos solicitar solicitar un cambio de horario cuando no tengan disponibilidad. | Funcional | Solicitan cambio de horario en la plataforma |
 | RP-03 | El sistema debe notificar automáticamente al Moderador cuando un jugador/equipo solicite un cambio de horario. | Funcional | Solicitar cambio de horario en la plataforma (Jugadores) |
 | RP-04 | El sistema debe integrarse con la API del videojuego para detectar automáticamente el resultado de una partida al finalizar. | Funcional | Sistema detecta el resultado automaticamente vía API |
