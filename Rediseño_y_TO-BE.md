@@ -27,9 +27,9 @@
 - Efecto esperado (tiempo/costo/calidad/flexibilidad): El proceso sigue funcionando aunque el juego no tenga API publica, el registro queda igual de trazable en la plataforma.
 
 ## Diagrama TO-BE
-![Proceso TO-BE](diagrama2.png)
+![Proceso TO-BE](diagram1.png)
  
-Archivo fuente: [`./diagramas/to-be.bpmn`](diagrama2.bpmn)
+Archivo fuente: [`./diagramas/to-be.bpmn`](diagram1.bpmn)
  
 ## Actividades que cambian del AS-IS al TO-BE
 | Actividad en el AS-IS | Actividad en el TO-BE | Qué cambia |
