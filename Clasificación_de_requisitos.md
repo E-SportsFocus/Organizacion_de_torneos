@@ -17,7 +17,7 @@
 ## Requisitos de proyecto
 | ID | Requisito |
 |----|-----------|
-| RY-01 | El equipo debe documentar el proceso de negocio (AS-IS y TO-BE), la clasificación de requisitos, las historias de usuario, la e licitación y los atributos de calidad en una organización de Github compartida, siguiendo la estructura de archivos definida por la cátedra. |
+| RY-01 | El equipo debe documentar el proceso de negocio (AS-IS y TO-BE), la clasificación de requisitos, las historias de usuario, la elicitación y los atributos de calidad en una organización de Github compartida, siguiendo la estructura de archivos definida por la cátedra. |
 | RY-02 | El desarrollo del prototipo de la plataforma debe llevarse con control de versiones (Git) y un tablero de seguimiento (GitHub Projects) visible para todos los integrantes del equipo. | 
 | RY-03 | El equipo debe validar, antes de comprometer la funcionalidad de deteccion automatica de resultados, si existe una API publica o documentada para al menos uno de los videojuegos soportados en el torneo. |
  
