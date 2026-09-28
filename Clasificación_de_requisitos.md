@@ -10,7 +10,7 @@
 | RP-05 | El sistema debe permitir al Árbitro/Moderador registrar manualmente el resultado de una partida cuando la API del juego no esté disponible. | Funcional | Árbitro registra el resultado manualmente en la plataforma |
 | RP-06 | El sistema debe notificar automáticamente al Organizador y a los Jugadores/Equipos apenas se registre el resultado de una partida, actualizando el bracket del torneo. | Funcional | Sistema notifica automaticamente el resultado al Organizador | 
 | RP-07 | El sistema debe anunciar automáticamente a los ganadores de cada partida en la plataforma y en el canal de Discord del torneo. | Funcional | Sistema anuncia automaticamente a los ganadores |
-| RP-08 | El sistema debe detectar y notificar el resultado de una partida en un plazo máximo de segundos desde el fin de la partida, cuando la API esté disponible. | No funcional (rendimiento) | Sistema detecta el resultado automaticamente vía API |
+| RP-08 | El sistema debe detectar y notificar el resultado de una partida en un plazo máximo de cinco segundos desde el fin de la partida, cuando la API esté disponible. | No funcional (rendimiento) | Sistema detecta el resultado automaticamente vía API |
 | RP-09 | El sistema debe estar disponible al menos el 99% del tiempo durante los horarios de partidas programadas, dado que la confirmación de disponibilidad depende de él. | No funcional (disponibilidad) | Confirman disponibilidad en la plataforma | 
 | RP-10 | El sistema debe mantener un registro auditable de cada actualizacion del bracket, para poder verificar discrepancias reportadas por jugadores/equipos. | No funcional (trazabilidad) | Sistema notifica automaticamente el resultado al Organizador |
  
