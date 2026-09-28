@@ -113,7 +113,7 @@ Los umbrales propuestos deben validarse con el organizador y el moderador.
 
 ## Fuentes
 
-- [Descripción del proyecto](./IngReq-Entrega1.md), [proceso AS-IS](./Proceso_AS-IS.md) y [diagrama AS-IS](diagramabueno.png), versión `9198ebecd419de876d10f00acf001f5fa2be0bc6`.
+- [Descripción del proyecto](./IngReq-Entrega1.md), [proceso AS-IS](./Proceso_AS-IS.md) y [diagrama AS-IS](Images/diagrama.png), versión `9198ebecd419de876d10f00acf001f5fa2be0bc6`.
 - [ISO — ISO/IEC 25010:2023](https://www.iso.org/standard/78176.html).
 
 ## Regresar
