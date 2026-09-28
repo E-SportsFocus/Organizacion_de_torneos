@@ -3,7 +3,7 @@
 ## HU-01: Registro automático del resultado
 Como moderador, quiero que la plataforma obtenga y registre el resultado mediante la API del videojuego, para reducir el trabajo manual y disponer de resultados oportunos.
 
-**Actividad TO-BE asociada:** Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible.
+**Actividad TO-BE asociada:**  Determinar los resultados vía API.
 
 **Criterios de aceptación:**
 - CA1: Cuando la API proporcione un resultado válido, el sistema debe registrarlo en la partida y equipos correspondientes, sin duplicarlo si   vuelve a recibirlo.
