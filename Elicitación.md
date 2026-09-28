@@ -29,11 +29,12 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
 - **Participante:** Bejamín. 
 - **Evidencia:** Foto evidencia de la reunion via Discord. /////////////////////////////////////////////
 - **Hallazgos principales:**
+
 | Pregunta | Síntesis de la respuesta |
 |-----------------------------------------------------------|--------------------------------------------------------|
 |P.01_¿Cuál es tu función y qué experiencia tienes organizando o moderando torneos?|Cumple el rol de arbitro, recopila resultados y resuelve dudas a los participantes del torneo, lleva 2 años de experiencia moderando torneos.|
-|P.02_Describe cómo coordinan actualmente una partida, desde su programación hasta la publicación del resultado.|Avisos, horarios y llamadas mediante un servidor de Discord dedicado, con equipos organizados por canales de voz. |
-|P.03_¿Qué herramientas utilizan y qué dificultades encuentran al compartir información entre ellas?| Utiliza el software de la organización que sincroniza informacón entre su software y su API. |
+|P.02_Describe cómo coordinan actualmente una partida, desde su programación hasta la publicación del resultado.|Avisos, horarios y llamadas mediante un servidor de Discord dedicado, con equipos organizados por canales de voz.|
+|P.03_¿Qué herramientas utilizan y qué dificultades encuentran al compartir información entre ellas?| Utiliza el software de la organización que sincroniza informacón entre su software y su API.|
 |P.04_¿Cómo registran a los equipos y verifican que cumplan las condiciones para participar?| Desde información en la pagina oficial y una entrevista por Discord. Dice que se pedía que cada integrante muestre en su computador la sesión de juego asociada a su registro en el torneo para verificar la identidad, también consultaría si el equipo completo esta listo antes de comenzar la partida. |
 |P.05_¿Cómo definen los horarios y confirman la disponibilidad de los equipos?| Los horarios se definirían por Discord y la disponibilidad de preguntara a los equipos 8 horas antes. |
 |P.06_Cuando necesitan reprogramar una partida, ¿Quién autoriza el cambio y cómo se informa a los participantes?| El propio moderador autorizaría el cambio y lo avisaría al canal de discord dedicado, generalmente se requiere solicitar el cambio 2 horas antes de la realización del torneo. |
@@ -52,12 +53,12 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
 | ID | Hallazgo y Problema | Necesidad candidata |
 |---------------------------------------|---------------------------------------|---------------------------------------|
 | H-01 | El jugador no pudo anticipar el nivel de sus oponentes | Posibilidad de poder consultar la información oficial de sus contrincantes. |
-| H-02 | El jugador necesita conocer los posibles premios a 1° ,2° ,3° Lugar antes de pensar en inscribirse | Dentro de la publicación del torneo se debe incluir toda la información posible que sea de utilidad para los jugadores |
-| H-03 | La falta de un jugador puede afectar a su equipo completo, el moderador deberá de poder gestionar algún tipo de reemplazo | Se debe especificar un plazo maximo para poder notificar alguna baja en el equipo y se debera poder buscar alguna solución para no afectar a todo el equipo. |
+| H-02 | El jugador necesita conocer los posibles premios a 1° ,2° ,3° Lugar antes de pensar en inscribirse | Dentro de la publicación del torneo se debe incluir toda la información posible que sea de utilidad para los jugadores.|
+| H-03 | La falta de un jugador puede afectar a su equipo completo, el moderador deberá de poder gestionar algún tipo de reemplazo | Se debe especificar un plazo maximo para poder notificar alguna baja en el equipo y se debera poder buscar alguna solución para no afectar a todo el equipo.|
 | H-04 | Las reglas de conducta y las dudas que requieren el contacto con el arbitro. | Facilitar una consulta de reglas mediante algun canal oficial de contacto con algun moderador del torneo. |
 | H-05 | Se necesita un canal de reclamos y alguna validación humana para evitar mal entendidos con los equipos. | Se registran reclamos y permitir al moderador el poder gestionar el resultado de las partidas. |
-| H-06 | El moderador prioriza disponibilidad, resultados y repeticiones | Priorizar algun panel de disponibilidad y resultados, evaluar algun tipo de acceso a las repeticiones mediante enlaces oficiales o el mismo juego. |
-| H-07 | Se requiere confiar a de la organización. | La organización sea totalmente transparente, tanto con la entrega de premios, mostrando experiencia en el ambito de los torneos de e-sports y respaldo fiables con datos. |
+| H-06 | El moderador prioriza disponibilidad, resultados y repeticiones | Priorizar algun panel de disponibilidad y resultados, evaluar algun tipo de acceso a las repeticiones mediante enlaces oficiales o el mismo juego.|
+| H-07 | Se requiere confiar a de la organización. | La organización sea totalmente transparente, tanto con la entrega de premios, mostrando experiencia en el ambito de los torneos de e-sports y respaldo fiables con datos.|
 | H-08 | La sincronización externa puede introducir dependencias o demoras no esperadas | Se debe tener una correcta gestion con las APIS utilizadas para la plataforma, sin generar inconsistencias y coordinando bien las respuestas de sus solicitudes en caso de necesitarlo. |
 
 
