@@ -51,7 +51,6 @@ Casos candidatos derivados del AS-IS, sujetos a aprobación del alcance del soft
 | AF-05 | Confirmar un resultado con datos conocidos. | Conservar el resultado aprobado y mostrar el ganador correspondiente. | Crítico |
 | AF-06 | Intentar publicar un ganador con resultado pendiente o contradictorio. | Impedir la publicación definitiva e indicar qué validación falta. | Crítico |
 
-Esta métrica mide conformidad con los casos acordados; no demuestra por sí sola que se hayan descubierto todas las necesidades del usuario.
 
 ### 2 Fiabilidad
 
@@ -75,7 +74,6 @@ Esta métrica mide conformidad con los casos acordados; no demuestra por sí sol
 - **Procedimiento:** ejecutar tres ensayos en un entorno de prueba, registrar operaciones confirmadas, interrumpir y reiniciar el servicio, comprobar su recuperación y comparar los identificadores y contenidos de los registros. Usar datos ficticios.
 - **Frecuencia y evidencia:** antes del piloto y después de cambios de persistencia o recuperación; conservar tiempos y comparación de registros por ensayo.
 
-Las métricas evalúan el software propuesto. Una caída de Discord o del videojuego debe registrarse como dependencia externa; no se garantiza aquí la disponibilidad de esos proveedores.
 
 ### 3 Seguridad de la información
 
@@ -98,8 +96,6 @@ Las métricas evalúan el software propuesto. Una caída de Discord o del videoj
 - **Registro completo:** usuario responsable, fecha y hora con zona horaria, entidad afectada, acción y valores anterior y nuevo. Para creaciones, identificar expresamente que no existía valor anterior.
 - **Procedimiento:** ejecutar cambios conocidos y contrastarlos con la auditoría; verificar que un jugador no pueda modificar esos registros. Conservar reporte y evidencia de la comprobación.
 - **Frecuencia y responsable propuesto:** junto con M-SE01, por el mismo encargado de pruebas.
-
-Estos indicadores verifican controles específicos; no equivalen a demostrar ausencia de todas las vulnerabilidades.
 
 ## Validación y trazabilidad pendientes
 
