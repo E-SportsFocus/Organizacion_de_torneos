@@ -72,18 +72,18 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
 
 - Qué se observa: cada partido aparece con información sobre la fase en la que se encuentra cada equipo, cada equipo con su logo, el horario en el que se transmitirá y llevara a cabo el partido y el marcador del mismo.
 - Hallazgo: se muestra el tiempo que falta para el partido, no solamente su respectiva fecha, una forma bastante comoda para el usuario para saber cuanto queda para el partido, sin necesidad de calcularlo.
-- Implicancia para el proyecto: columna de "proximas partidas" con cuenta regresiva y la etapa visible, esto se conecta directamente con la Entrevista 1, P5 y P7.
+- Implicancia para el proyecto: columna de "proximas partidas" con cuenta regresiva y la etapa visible.
 
 ### Evidencia 2 - Brackets de Grupo A y Grupo B ("Bracket Grupo A y Bracket Grupo B)
 
 - Qué se observa: Ambos grupos usan la misma estructura de etapas: Openin, Winner´s, Elimination, Decider y Qualified, el equipo ganador queda resaltado en verde y se muestra explícitamente el marcador del partido y también se muestra un icono de cámara, el cual sirve para redireccionar a la transmisión o grabación del partido.
-- Hallazgos: El bracket del grupo se actualiza inmediatamente a medida que se van dando los resultados de los partidos, tener una grabación asociada al respectivo partido es una muy buena practica, la cual coincide con la propuesta realizada por el moderador (Entrevista 2, P12), los horarios están expuestos dependiendo de la zona horaria lo cual es eficiente para diferentes personas de diferentes paises.
+- Hallazgos: El bracket del grupo se actualiza inmediatamente a medida que se van dando los resultados de los partidos, tener una grabación asociada al respectivo partido es una muy buena practica, la cual coincide con la propuesta realizada por el moderador, los horarios están expuestos dependiendo de la zona horaria lo cual es eficiente para diferentes personas de diferentes paises.
 - Implicancia para el proyecto: vista de bracket con etapas identificables, ganador resaltado, hora dependiendo de zona horaria y acceso a replay de la partida.
 
 ### Evidencia 3 - Estadisticas individuales por jugador ("Informacion.png")
 
 - Qué se observa: tabla con cada jugador del equipo por fila (con la información de cada jugador como su país, etc.), al igual que sus estadísticas en la partida con sus personajes usados, lo que permite comparar entre jugadores solamente con un vistazo a la tabla.
-- Hallazgo: existe un estandar de publicar el rendimiento individual de cada jugador, esto valida lo que pidio el jugador entrevistado (Entrevista 1, P12)
+- Hallazgo: existe un estandar de publicar el rendimiento individual de cada jugador, esto valida lo que pidio el jugador entrevistado 
 - Implicancia para el proyecto: perfil del jugador/equipo con el historial visible, para un proyecto como el nuestro el cual no es profesional, bastaria con estadisticas basicas sobre cada jugador y equipo, con posible integracion a fuentes externas como pidio el entrevistado.
 
 ### Síntesis de la tecnica
