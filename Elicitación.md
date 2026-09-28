@@ -7,7 +7,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
  
 ## Entrevista Numero 1°.
 - **Participante:** Fernando Gonzáles 
-- **Evidencia:** Foto evidencia de la reunión via Discord: [Entrevista 1.png](./Images/Entrevista1Fernando.png)
+- **Evidencia:** Foto evidencia de la reunión via Discord: [Entrevista 1.png](./Images/Entrevista_1(Fernando).png)
 - **Hallazgos principales:**
 
 | Pregunta | Síntesis de la respuesta |
@@ -27,7 +27,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
 
 ## Entrevista Numero 2°.
 - **Participante:** Benjamín Muñoz. 
-- **Evidencia:** Foto evidencia de la reunion via Discord: [Entrevista 2.png](./Images/Entrevista2Benjamin.png)
+- **Evidencia:** Foto evidencia de la reunion via Discord.[Entrevista 2.png](./Images/Entrevista_2(Benjamín).png)
 - **Hallazgos principales:**
 
 | Pregunta | Síntesis de la respuesta |
@@ -62,13 +62,42 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
 | H-08 | La sincronización externa puede introducir dependencias o demoras no esperadas | Se debe tener una correcta gestión con las APIS utilizadas para la plataforma, sin generar inconsistencias y coordinando bien las respuestas de sus solicitudes en caso de necesitarlo. |
 
 
+## Técnica 2: Documentación (revisión docuemental)
+
+- Fuente revisada: vlr.gg, web de terceros donde sale explicitamente toda la informacion de diferentes torneos oficiales hechos en valorant (brackets, posiciones, enfrentamientos, horario, etc.)
+- Material revisado: [Horarios](./Images/Horarios.png), [Info individual](./Images/Información_individual.png), [Bracket(Grupo A)](./Images/BracketGrupoA.png), [Bracket(Grupo B)](./Images/BracketGrupoB.png)
+- Nota de escala: VCT es un torneo profesional de valorant, es una especie de mundial por lo que es una organización bastante distinta a una como la de E-sports Focus. Se revisa para usar de referencia, no como plagio ni replica, cada hallazgo indica que parte es mas aplicable a nuestra escala.
+
+### Evidencia 1 - Cronograma de partidas ("Horarios.png")
+
+- Qué se observa: cada partido aparece con información sobre la fase en la que se encuentra cada equipo, cada equipo con su logo, el horario en el que se transmitirá y llevara a cabo el partido y el marcador del mismo.
+- Hallazgo: se muestra el tiempo que falta para el partido, no solamente su respectiva fecha, una forma bastante comoda para el usuario para saber cuanto queda para el partido, sin necesidad de calcularlo.
+- Implicancia para el proyecto: columna de "proximas partidas" con cuenta regresiva y la etapa visible, esto se conecta directamente con la Entrevista 1, P5 y P7.
+
+### Evidencia 2 - Brackets de Grupo A y Grupo B ("Bracket Grupo A y Bracket Grupo B)
+
+- Qué se observa: Ambos grupos usan la misma estructura de etapas: Openin, Winner´s, Elimination, Decider y Qualified, el equipo ganador queda resaltado en verde y se muestra explícitamente el marcador del partido y también se muestra un icono de cámara, el cual sirve para redireccionar a la transmisión o grabación del partido.
+- Hallazgos: El bracket del grupo se actualiza inmediatamente a medida que se van dando los resultados de los partidos, tener una grabación asociada al respectivo partido es una muy buena practica, la cual coincide con la propuesta realizada por el moderador (Entrevista 2, P12), los horarios están expuestos dependiendo de la zona horaria lo cual es eficiente para diferentes personas de diferentes paises.
+- Implicancia para el proyecto: vista de bracket con etapas identificables, ganador resaltado, hora dependiendo de zona horaria y acceso a replay de la partida.
+
+### Evidencia 3 - Estadisticas individuales por jugador ("Informacion.png")
+
+- Qué se observa: tabla con cada jugador del equipo por fila (con la información de cada jugador como su país, etc.), al igual que sus estadísticas en la partida con sus personajes usados, lo que permite comparar entre jugadores solamente con un vistazo a la tabla.
+- Hallazgo: existe un estandar de publicar el rendimiento individual de cada jugador, esto valida lo que pidio el jugador entrevistado (Entrevista 1, P12)
+- Implicancia para el proyecto: perfil del jugador/equipo con el historial visible, para un proyecto como el nuestro el cual no es profesional, bastaria con estadisticas basicas sobre cada jugador y equipo, con posible integracion a fuentes externas como pidio el entrevistado.
+
+### Síntesis de la tecnica
+
+| Hallazgo de la revisión documental | Coincide con |
+|---|---|
+| Cronograma con cuenta regresiva y etapa visible | Jugador, Entrevista 1 (P5, P7) |
+| Bracket que se completa según resultados | Moderador, Entrevista 2 (P12: panel de resultados y ganador) |
+| Grabación asociada a cada partida | Moderador, Entrevista 2 (P12: replay) y P8 (grabación como evidencia) |
+| Estadísticas individuales por jugador | Jugador, Entrevista 1 (P2 y P12) |
 
 ## Acta de acuerdo
-[Resumen de lo acordado con el entrevistado o adjuntar el acta como archivo aparte]
+
+Ambos entrevistados coincidieron en que la coordinacion manual actual (Discord + confirmaciones caso a caso) genera dificultad de visibilidad de informacion importante. Se acordó verbalmente con ellos, que las prioridades para la version de lanzamiento de la plataforma sean: confirmacion de disponibilidad, consulta de resultados/ganador y, como mejora adicional que identificamos a traves de la entrevista, acceso a las replays.
  
-Nota: esta elicitación no necesita estar atada a las actividades del TO-BE; pudo haberse realizado antes de definirlo.
-
-
-
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
