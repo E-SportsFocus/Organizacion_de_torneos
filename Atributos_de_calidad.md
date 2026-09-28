@@ -103,7 +103,17 @@ Estos indicadores verifican controles específicos; no equivalen a demostrar aus
 
 ## Validación y trazabilidad pendientes
 
-Los participantes deben confirmar el orden de prioridad, la matriz de permisos, las funciones críticas, la carga y los umbrales. Después, el equipo podrá registrar los requisitos no funcionales correspondientes en la clasificación de requisitos y enlazarlos con las actividades que efectivamente cambien en el TO-BE. Los identificadores M-AF01, M-FI01, M-FI02, M-SE01 y M-SE02 permiten referenciar estas métricas sin atribuirles requisitos aún inexistentes.
+## Trazabilidad con los requisitos
+
+Las métricas se relacionan con los requisitos no funcionales definidos en la [clasificación de requisitos](./Clasificación_de_requisitos.md):
+
+| Requisito | Atributo | Métrica |
+|---|---|---|
+| RP-09 (disponibilidad) | Fiabilidad | M-FI01 |
+| RP-10 (trazabilidad del bracket) | Seguridad de la información | M-SE02 |
+| RP-08 (rendimiento) | Eficiencia de desempeño | Se mide directamente con el umbral definido en RP-08 |
+
+Los umbrales propuestos deben validarse con el organizador y el moderador.
 
 ## Fuentes
 
