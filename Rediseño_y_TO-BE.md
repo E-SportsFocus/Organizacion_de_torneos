@@ -34,11 +34,11 @@ Archivo fuente: [`./diagramas/to-be.bpmn`](Images/diagram.bpmn)
 ## Actividades que cambian del AS-IS al TO-BE
 | Actividad en el AS-IS | Actividad en el TO-BE | Qué cambia |
 |-------------------------|--------------------------|------------|
-| Revisan la información que recibieron (Jugadores) | Confirman disponibilidad en la plataforma (Jugadores) | Pasa de leer un mensaje de Discord a confirmar formalmente en el sistema, quedando registrado|
-| Avisan al moderador para hacer cambios (Jugadores) | Solicitan cambio de horario en la plataforma (Jugadores) | El Moderador es notificado automáticamente, en vez de recibir un mensaje suelto de Discord|
-| Revisar todos los eventos de la partida para los resultados (Moderador) | Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible | Se automatiza el caso general; el Moderador solo interviene como excepcion y registra en el sistema, no reporta por Discord|
-| Entregan los resultados obtenidos para dar un posible ganador (Organizador) | Sistema notifica automáticamente el resultado el organizador | Deja de depender de que el Moderador avise; ocurre solo|
-| Anuncian los ganadores y se les entrega un premio (Organizador) | Sistema anuncia automáticamente a los ganadores (plataforma + Discord) / Organizador coordina la entrega del premio | Se separa el anuncio (automatico) de la entrega fisica del premio (manual)|
+| Revisan la información que recibieron (Jugadores). | Confirman disponibilidad en la plataforma (Jugadores). | Pasa de leer un mensaje de Discord a confirmar formalmente en el sistema, quedando registrado.|
+| Avisan al moderador para hacer cambios (Jugadores). | Solicitan cambio de horario en la plataforma (Jugadores). | El Moderador es notificado automáticamente, en vez de recibir un mensaje suelto de Discord.|
+| Revisar todos los eventos de la partida para los resultados (Moderador). | Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible. | Se automatiza el caso general; el Moderador solo interviene como excepcion y registra en el sistema, no reporta por Discord.|
+| Entregan los resultados obtenidos para dar un posible ganador (Organizador). | Sistema notifica automáticamente el resultado el organizador. | Deja de depender de que el Moderador avise; ocurre solo.|
+| Anuncian los ganadores y se les entrega un premio (Organizador). | Sistema anuncia automáticamente a los ganadores (plataforma + Discord) / Organizador coordina la entrega del premio. | Se separa el anuncio (automatico) de la entrega fisica del premio (manual).|
 
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
