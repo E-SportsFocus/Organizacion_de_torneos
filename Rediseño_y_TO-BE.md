@@ -18,7 +18,7 @@
 - Actividad(es) del AS-IS que afecta: La cadena secuencial Moderador informa -> Organizador entrega resultados -> Organizador anuncia
 - Heurística aplicada: Reducción de contacto y paralelismo.
 - Objetivo o mejora que resuelve: Jugadores/Equipos reciben confirmación automática e inmediata de que su resultado quedo registrado. 
-- Efecto esperado (tiempo/costo/calidad/flexibilidad): El organizador y loa jugadores reciben la notificación al mismo tiempo, reduciendo reclamos por discrepancia en el bracket.
+- Efecto esperado (tiempo/costo/calidad/flexibilidad): El organizador y los jugadores reciben la notificación al mismo tiempo, reduciendo reclamos por discrepancia en el bracket.
 
 ### Iniciativa 3
 - Actividad(es) del AS-IS que afecta: La misma que la iniciativa 1, cubriendo el caso "API no disponible".
