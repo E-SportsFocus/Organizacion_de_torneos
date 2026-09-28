@@ -5,7 +5,7 @@
 |----------------|----------|----------|-----------------|
 | Organizador | Mantener el torneo funcionando de principio a fin: publicar el cronograma, habilitar las salas del juego, anunciar resultados y premios a tiempo. | Depende de que el Moderador le informe manualmente el resultado por Discord; si se demora, no puede anunciar ganadores ni entregar premios a tiempo. | Recibir el resultado de forma automática e inmediata apenas termina la partida, sin depender de un aviso manual. |
 | Jugadores/Equipos | Jugar su partida en el horario acordado y que el resultado obtenido quede correctamente reflejado en el torneo. | No recibe ninguna confirmación de que su resultado quedo bien registrada, lo que puede generar reclamos si el bracket no coincide con lo ocurrido en la partida. | Recibir confirmación automática e inmediata de que su resultado quedo registrado correctamente. |
-| Moderador | Garantizar que las partidas se disputen según lo planificado y que el resultado registrado sea el real, verificándolo en vivo. | Debe verificar en vivo en vivo cada partida y reportar manualmente por Discord, incluso cuando la API del juego podría hacerlo. | Que el sistema registre el resultado automáticamente cuando sea posible, e intervenir solo cuando la API no este disponible. |
+| Moderador | Garantizar que las partidas se disputen según lo planificado y que el resultado registrado sea el real, verificándolo en vivo. | Debe verificar en vivo cada partida y reportar manualmente por Discord, incluso cuando la API del juego podría hacerlo. | Que el sistema registre el resultado automáticamente cuando sea posible, e intervenir solo cuando la API no este disponible. |
  
 ## Iniciativas de rediseño
 ### Iniciativa 1
