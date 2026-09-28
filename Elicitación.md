@@ -27,7 +27,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
 
 ## Entrevista Numero 2°.
 - **Participante:** Benjamín Muñoz. 
-- **Evidencia:** Foto evidencia de la reunion via Discord.[Entrevista 2.png](./Images/Entrevista2Benjamín.png)
+- **Evidencia:** Foto evidencia de la reunion via Discord.[Entrevista 2.png](./Images/Entrevista2Benjamin.png)
 - **Hallazgos principales:**
 
 | Pregunta | Síntesis de la respuesta |
