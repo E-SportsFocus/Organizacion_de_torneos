@@ -12,7 +12,7 @@ Las siguientes respuestas son una pequeña síntesis fiel a la transcripción e 
 
 | Pregunta | Síntesis de la respuesta |
 |-----------------------------------------------------------|--------------------------------------------------------|
-|P.01 ¿Qué videojuegos juegas y qué experiencia tienes participando en torneos?| Ha competido en Torneos externos de **League of legends** y **Fortnite** |
+|P.01 ¿Qué videojuegos juegas y qué experiencia tienes participando en torneos?| Ha competido en Torneos externos de **League of legends** y **Fortnite.** |
 |P.02 Pensando en tu último torneo, ¿Cómo fue tu experiencia y qué dificultades encontraste? Si nunca has participado, ¿Qué te ha impedido hacerlo?| Su experiencia general fue buena, tuvo un único problema ya que los oponentes poseían un nivel superior a el, y no tuvo acceso a ninguna fuente de información sobre el nivel de sus oponentes.|
 |P.03 ¿Qué información necesitas conocer antes de decidir inscribirte en un torneo?| Horario, modalidad individual o de equipos, la plataforma a utilizar y premios para el 1° ,2° ,3° lugar, si es que estos existen.|
 |P.04 ¿Cómo esperarías inscribirte, de forma individual o con un equipo? ¿Qué dificultades podrían surgir?| Prefiere inscribirse con su equipo. Y experimento la situación de que alguno de los jugadores de su equipo se ausento y no le dieron oportunidad de obtener algún suplente o implementarlos ellos mismos.|
@@ -52,14 +52,14 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
 
 | ID | Hallazgo y Problema | Necesidad candidata |
 |---------------------------------------|---------------------------------------|---------------------------------------|
-| H-01 | El jugador no pudo anticipar el nivel de sus oponentes | Posibilidad de poder consultar la información oficial de sus contrincantes. |
-| H-02 | El jugador necesita conocer los posibles premios a 1° ,2° ,3° Lugar antes de pensar en inscribirse | Dentro de la publicación del torneo se debe incluir toda la información posible que sea de utilidad para los jugadores.|
-| H-03 | La falta de un jugador puede afectar a su equipo completo, el moderador deberá de poder gestionar algún tipo de reemplazo | Se debe especificar un plazo máximo para poder notificar alguna baja en el equipo y se deberá poder buscar alguna solución para no afectar a todo el equipo.|
+| H-01 | El jugador no pudo anticipar el nivel de sus oponentes. | Posibilidad de poder consultar la información oficial de sus contrincantes. |
+| H-02 | El jugador necesita conocer los posibles premios a 1° ,2° ,3° Lugar antes de pensar en inscribirse. | Dentro de la publicación del torneo se debe incluir toda la información posible que sea de utilidad para los jugadores.|
+| H-03 | La falta de un jugador puede afectar a su equipo completo, el moderador deberá de poder gestionar algún tipo de reemplazo. | Se debe especificar un plazo máximo para poder notificar alguna baja en el equipo y se deberá poder buscar alguna solución para no afectar a todo el equipo.|
 | H-04 | Las reglas de conducta y las dudas que requieren el contacto con el arbitro. | Facilitar una consulta de reglas mediante algún canal oficial de contacto con algún moderador del torneo. |
 | H-05 | Se necesita un canal de reclamos y alguna validación humana para evitar mal entendidos con los equipos. | Se registran reclamos y permitir al moderador el poder gestionar el resultado de las partidas. |
-| H-06 | El moderador prioriza disponibilidad, resultados y repeticiones | Priorizar algún panel de disponibilidad y resultados, evaluar algún tipo de acceso a las repeticiones mediante enlaces oficiales o el mismo juego.|
+| H-06 | El moderador prioriza disponibilidad, resultados y repeticiones. | Priorizar algún panel de disponibilidad y resultados, evaluar algún tipo de acceso a las repeticiones mediante enlaces oficiales o el mismo juego.|
 | H-07 | Se requiere confiar a de la organización. | La organización sea totalmente transparente, tanto con la entrega de premios, mostrando experiencia en el ámbito de los torneos de e-sports y respaldo fiables con datos.|
-| H-08 | La sincronización externa puede introducir dependencias o demoras no esperadas | Se debe tener una correcta gestión con las APIS utilizadas para la plataforma, sin generar inconsistencias y coordinando bien las respuestas de sus solicitudes en caso de necesitarlo. |
+| H-08 | La sincronización externa puede introducir dependencias o demoras no esperadas. | Se debe tener una correcta gestión con las APIS utilizadas para la plataforma, sin generar inconsistencias y coordinando bien las respuestas de sus solicitudes en caso de necesitarlo. |
 
 
 ## Técnica 2: Documentación (revisión docuemental)
