@@ -8,7 +8,7 @@ Como moderador, quiero que la plataforma obtenga y registre el resultado mediant
 **Criterios de aceptación:**
 - CA1: Cuando la API proporcione un resultado válido, el sistema debe registrarlo en la partida y equipos correspondientes, sin duplicarlo si   vuelve a recibirlo.
 - CA2: El registro debe conservar la fecha, hora y origen automático del resultado.
-- CA3: Si no se obtiene un resultado válido, la partida debe quedar pendiente y permitir su registro manual por el moderad
+- CA3: Si no se obtiene un resultado válido, la partida debe quedar pendiente y permitir su registro manual por el moderador
  
 ## HU-02: Notificación del resultado
 Como jugador participante, quiero recibir una notificación del resultado registrado y consultar el bracket actualizado, para conocer la situación de mi equipo en el torneo.
