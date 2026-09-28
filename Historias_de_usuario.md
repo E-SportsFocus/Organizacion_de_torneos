@@ -24,7 +24,7 @@ Como jugador participante, quiero recibir una notificación del resultado regist
 
 Como moderador, quiero registrar el resultado cuando no pueda obtenerse mediante la API, para permitir que el torneo continúe y conservar la trazabilidad.
 
-**Actividad TO-BE asociada:** Sistema detecta el resultado automáticamente vía API del juego / Árbitro registra el resultado manualmente en la plataforma si la API no esta disponible.
+**Actividad TO-BE asociada:** Registra manualmente los resultados en la plataforma.
 
 **Criterios de aceptación:**
 - CA1: Ante la ausencia o fallo de la API, solo un moderador autorizado debe poder registrar un resultado completo para los equipos de la partida.
