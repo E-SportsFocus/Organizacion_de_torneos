@@ -68,9 +68,6 @@ Las necesidades candidatas son interpretaciones del análisis. No se presentan c
  
 Nota: esta elicitación no necesita estar atada a las actividades del TO-BE; pudo haberse realizado antes de definirlo.
 
-## Objetivo y alcance:
-
-Preocuparnos de las necesidades de cada equipo y sus jugadores, al igual que de Moderadores/responsables de torneos hechos en E-sports Focus, una pagina de terceros hecha para apoyar la organización de torneos de forma independiente al videojuego. La pagina en si no ejecutara las partidas y tampoco controlará los servidores del juego a su favor. Las integraciones, estadísticas y repeticiones dependen de las herramientas que brinde cada juego y de las fuentes externas aparte de nosotros que estén autorizadas para su debido trabajo.
 
 
 ## Regresar 
