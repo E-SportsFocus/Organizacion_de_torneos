@@ -13,7 +13,7 @@ Como moderador, quiero que la plataforma obtenga y registre el resultado mediant
 ## HU-02: Notificación del resultado
 Como jugador participante, quiero recibir una notificación del resultado registrado y consultar el bracket actualizado, para conocer la situación de mi equipo en el torneo.
 
-**Actividad TO-BE asociada:** Notifica los resultados al organizador y jugadores con elbracket actualizado.
+**Actividad TO-BE asociada:** Notifica los resultados al organizador y jugadores con el bracket actualizado.
 **Criterios de aceptación:**
 - CA1: Al registrarse un resultado válido, de forma automática o manual, el sistema debe actualizar el bracket.
 - CA2: El sistema debe notificar directamente al organizador y a los jugadores involucrados, identificando la partida, los equipos y el resultado, con acceso al bracket.
