@@ -107,7 +107,7 @@ Los participantes deben confirmar el orden de prioridad, la matriz de permisos, 
 
 ## Fuentes
 
-- [Descripción del proyecto](./IngReq-Entrega1.md), [proceso AS-IS](./Proceso_AS-IS.md) y [modelo BPMN](./diagram.bpmn), versión `9198ebecd419de876d10f00acf001f5fa2be0bc6`.
+- [Descripción del proyecto](./IngReq-Entrega1.md), [proceso AS-IS](./Proceso_AS-IS.md) y [diagrama AS-IS](diagramabueno.png), versión `9198ebecd419de876d10f00acf001f5fa2be0bc6`.
 - Especificación de la Entrega 1 de CIN324, punto 6 de la rúbrica y plantilla 7.7, proporcionada para esta revisión.
 - [ISO — ISO/IEC 25010:2023](https://www.iso.org/standard/78176.html).
 - [Vista previa de ISO/IEC 25010:2023](https://cdn.standards.iteh.ai/samples/78176/13ff8ea97048443f99318920757df124/ISO-IEC-25010-2023.pdf), prólogo sobre cambios de la edición.
