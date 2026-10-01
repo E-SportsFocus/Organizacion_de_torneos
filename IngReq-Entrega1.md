@@ -1,11 +1,14 @@
 # Ingeniería de Requisitos — Entrega 1
  
 ## Equipo 3
-- Antonia Bustamante
-- Joaquín Bustamante
-- Fernanda Cerda
-- Martín Durán
-- Matthew Osorio
+
+| Nombre | Responsabilidad |
+|--------------------|----------------------|
+| Antonia Bustamante | AS-IS |
+| Joaquín Bustamante | Atributos de calidad |
+| Fernanda Cerda | TO-BE / Historias de usuarios |
+| Martín Durán | Elicitación |
+| Matthew Osorio | Clasificación de requisitos |
  
 ## Proyecto E-Spots Focus
 La organización E-Sports Focus busca unir a la comunidad Latinoamericana para poder realizar campeonatos competitivos de diversos videojuegos. Realizamos este proyecto con el fin de poder crear una plataforma donde se puedan organizar estos campeonato, apoyandonos en aplicaciones como Discord y las de los propios videojuegos, para asi poder dar recompensas a los ganadores y facilitar la coordinación tanto de los jugadores como de los moderadores y organizadores de estos eventos.
