@@ -1,0 +1,21 @@
+@startuml est-02
+title EST-02 - Ciclo de vida de SolicitudCambioHorario
+left to right direction
+
+[*] --> Solicitada : solicitud recibida\n[faltan más de 2 h]
+
+Solicitada --> Aprobada : Moderador aprueba\n[propuesta válida]
+Solicitada --> Rechazada : Moderador rechaza
+Solicitada --> Vencida : plazo de 2 h alcanzado\n[sin decisión]
+
+Aprobada --> [*]
+Rechazada --> [*]
+Vencida --> [*]
+
+note bottom of Solicitada
+  Si faltan 2 h o menos, la solicitud
+  no se registra (no hay estado).
+  La regla de las 2 horas proviene
+  de la Entrevista 2 (P06 y P07).
+end note
+@enduml

@@ -1,0 +1,20 @@
+@startuml est-01
+title EST-01 - Ciclo de vida de Partida
+
+[*] --> Programada
+
+Programada --> Programada : cambio de horario aprobado
+Programada --> Programada : hora de inicio\n[algún equipo sin confirmar]
+Programada --> EnCurso : hora de inicio\n[ambos equipos confirmaron]
+EnCurso --> Pendiente : plazo de detección vencido\n[sin resultado válido]
+EnCurso --> Confirmado : resultado válido de la API\n[sin resultado registrado]
+Pendiente --> Confirmado : resultado manual completo\n[Moderador asignado]
+Confirmado --> Confirmado : resultado repetido de la API\n[mismo resultado registrado]
+Confirmado --> Anunciada : registro y notificación completados
+Anunciada --> Anunciada : resultado repetido de la API\n[mismo resultado registrado]
+Anunciada --> [*]
+
+state "En curso" as EnCurso
+state "Pendiente de resultado" as Pendiente
+state "Resultado confirmado" as Confirmado
+@enduml

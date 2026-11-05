@@ -1,0 +1,33 @@
+@startuml dss-03
+title DSS-03 - Solicitud y resolución de un cambio de horario
+
+actor Jugador
+participant "Sistema E-Sports Focus" as S
+actor Moderador
+participant "Discord" as DC <<sistema externo>>
+
+Jugador -> S : Solicita un cambio de horario con un horario propuesto
+
+alt Faltan más de 2 horas (dentro del plazo)
+  S -> S : Registrar la solicitud como "Solicitada"
+  S -> Moderador : Notificar automáticamente la solicitud
+  S -> DC : Publicar aviso de la solicitud en el canal del torneo
+  alt Moderador aprueba
+    Moderador -> S : Aprueba la solicitud
+    S -> S : Reprogramar la partida con el horario propuesto
+    S -> Jugador : Confirmar el nuevo horario a ambos equipos
+    S -> DC : Publicar el nuevo horario en el canal del torneo
+  else Moderador rechaza
+    Moderador -> S : Rechaza la solicitud con un motivo
+    S -> S : Registrar la solicitud como "Rechazada"
+    S -> Jugador : Informar el motivo del rechazo
+    note right of S : La partida conserva su horario original
+  else Se alcanza el plazo de 2 horas sin decisión
+    S -> S : Registrar la solicitud como "Vencida"
+    S -> Jugador : Informar que la partida conserva su horario original
+  end
+else Faltan 2 horas o menos (fuera del plazo)
+  S --> Jugador : Informar que el plazo para solicitar cambios venció
+  note right of S : No se registra la solicitud
+end
+@enduml

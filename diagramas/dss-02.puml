@@ -1,0 +1,26 @@
+@startuml dss-02
+title DSS-02 - Registro manual del resultado cuando la API no está disponible
+
+actor Moderador
+participant "Sistema E-Sports Focus" as S
+participant "Discord" as DC <<sistema externo>>
+
+note over S : La API del videojuego no entregó un resultado válido\n(partida en estado "Pendiente de resultado")
+
+Moderador -> S : Solicita registrar el resultado de la partida pendiente
+
+alt Moderador asignado a la partida
+  Moderador -> S : Envía el resultado de ambos equipos
+  alt Resultado completo
+    S -> S : Registrar resultado con identidad del Moderador, fecha, hora y origen manual
+    S -> S : Actualizar el bracket y registrar la actualización
+    S -> DC : Notificar el resultado al Organizador y a los Jugadores
+    S -> S : Publicar el ganador en la plataforma
+    S -> DC : Anunciar al ganador en el canal del torneo
+  else Resultado incompleto
+    S --> Moderador : Solicita completar el resultado de ambos equipos
+  end
+else Moderador no asignado a la partida
+  S --> Moderador : Rechaza la operación; el resultado no cambia
+end
+@enduml

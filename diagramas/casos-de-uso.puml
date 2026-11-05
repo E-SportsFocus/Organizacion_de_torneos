@@ -1,0 +1,36 @@
+@startuml casos-de-uso
+title Casos de uso - E-Sports Focus
+left to right direction
+
+actor Jugador
+actor Moderador
+actor Organizador
+
+rectangle "Plataforma E-Sports Focus" {
+  usecase "CU-01\nConfirmar disponibilidad\ndel equipo" as CU01
+  usecase "CU-02\nSolicitar cambio\nde horario" as CU02
+  usecase "CU-03\nObtener resultado oficial\nsin reporte manual" as CU03
+  usecase "CU-04\nRegistrar resultado\ncuando la API no está disponible" as CU04
+  usecase "CU-05\nConsultar bracket actualizado\ny resultado notificado" as CU05
+  usecase "CU-06\nAnunciar ganador\nde una partida" as CU06
+}
+
+actor "API del videojuego" as API <<sistema externo>>
+actor "Discord" as DC <<sistema externo>>
+
+Jugador --> CU01
+Jugador --> CU02
+Jugador --> CU05
+Moderador --> CU02
+Moderador --> CU03
+Moderador --> CU04
+Organizador --> CU05
+Organizador --> CU06
+
+CU03 --> API
+CU02 --> DC
+CU03 --> DC
+CU04 --> DC
+CU05 --> DC
+CU06 --> DC
+@enduml

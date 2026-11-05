@@ -1,0 +1,34 @@
+@startuml dss-01
+title DSS-01 - Registro automático del resultado y actualización del bracket
+
+actor Jugador
+actor Organizador
+actor Moderador
+participant "Sistema E-Sports Focus" as S
+participant "API del videojuego" as API <<sistema externo>>
+participant "Discord" as DC <<sistema externo>>
+
+note over S : La partida en estado "En curso" termina
+loop Consulta del resultado hasta 5 segundos tras el fin de la partida
+  S -> API : Solicita el resultado de la partida finalizada
+  API --> S : Responde con el resultado o sin resultado
+end
+
+alt Resultado válido recibido
+  alt Resultado no registrado previamente
+    S -> S : Registrar resultado con origen automático, fecha y hora
+    S -> S : Actualizar el bracket y registrar la actualización
+    S -> DC : Enviar aviso del resultado y del bracket actualizado
+    DC -> Jugador : Notificación del resultado
+    DC -> Organizador : Notificación del resultado
+    S -> S : Publicar el ganador en la plataforma
+    S -> DC : Anunciar al ganador en el canal del torneo
+  else Resultado ya registrado
+    S -> S : No registrar un segundo resultado
+  end
+else Sin resultado válido
+  S -> S : Dejar la partida como pendiente de resultado
+  S -> DC : Avisar al Moderador que requiere registro manual
+  DC -> Moderador : Aviso de registro manual
+end
+@enduml
