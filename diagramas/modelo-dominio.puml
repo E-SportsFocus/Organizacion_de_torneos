@@ -1,0 +1,77 @@
+@startuml modelo-dominio
+title Modelo de dominio - E-Sports Focus
+hide methods
+
+abstract class Persona {
+  nombre
+  cuenta de Discord
+}
+
+class Jugador {
+  nickname
+  país
+}
+
+class Moderador
+
+class Organizador {
+  cuenta oficial
+}
+
+class Torneo {
+  nombre
+  juego
+  zona horaria
+}
+
+class Partida {
+  fecha y hora programada
+  fase
+  estado
+}
+
+class Equipo {
+  nombre
+  país
+}
+
+class Resultado {
+  marcador por equipo
+  fecha y hora de registro
+  origen
+}
+
+class Bracket {
+  última actualización
+  historial de actualizaciones
+}
+
+class Disponibilidad {
+  confirmada
+  fecha de confirmación
+}
+
+class SolicitudCambioHorario {
+  nuevo horario propuesto
+  fecha de solicitud
+  motivo de rechazo
+  estado
+}
+
+Persona <|-- Jugador
+Persona <|-- Moderador
+Persona <|-- Organizador
+
+Organizador "1" -- "0..*" Torneo : organiza
+Torneo "1" *-- "0..*" Partida : contiene
+Torneo "1" -- "1" Bracket : muestra
+Partida "0..*" -- "2" Equipo : enfrenta
+Partida "0..*" -- "1" Moderador : arbitrada por
+Partida "1" *-- "0..1" Resultado : se registra como
+Moderador "0..1" -- "0..*" Resultado : registra
+Equipo "1" o-- "1..*" Jugador : integrado por
+Equipo "1" -- "0..*" Disponibilidad : declara
+Disponibilidad "0..*" -- "1" Partida : para
+Equipo "1" -down- "0..*" SolicitudCambioHorario : solicita
+Partida "1" -right- "0..*" SolicitudCambioHorario : sobre
+@enduml
