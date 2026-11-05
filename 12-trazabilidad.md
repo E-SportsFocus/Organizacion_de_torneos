@@ -1,42 +1,30 @@
-# Ingeniería de Requisitos — Entrega 2
+# Trazabilidad
 
-## Equipo
+## Matriz de trazabilidad
 
-- Antonia Bustamante
-- Joaquín Bustamante
-- Fernanda Cerda
-- Martín Durán
-- Matthew Osorio
+| Requisito (Entrega 1) | Historia | Caso de uso | Secuencia | Estado | Clases del dominio |
+|---|---|---|---|---|---|
+| RP-01 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | [EST-01](./11-diagramas-estado.md) | Disponibilidad, Equipo, Partida |
+| RP-02 | [HU-05](./07-criterios-aceptacion.md) | [CU-02](./09-casos-de-uso.md) | [DSS-03](./10-diagramas-secuencia.md) | [EST-02](./11-diagramas-estado.md) | SolicitudCambioHorario, Equipo, Partida |
+| RP-03 | [HU-05](./07-criterios-aceptacion.md) | [CU-02](./09-casos-de-uso.md) | [DSS-03](./10-diagramas-secuencia.md) | [EST-02](./11-diagramas-estado.md) | SolicitudCambioHorario, Moderador |
+| RP-04 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Partida, Resultado |
+| RP-05 | [HU-03](./07-criterios-aceptacion.md) | [CU-04](./09-casos-de-uso.md) | [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Moderador, Resultado, Partida |
+| RP-06 | [HU-02](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Organizador, Jugador |
+| RP-07 | [HU-06](./07-criterios-aceptacion.md) | [CU-06](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Organizador, Partida |
+| RP-08 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Partida |
+| RP-09 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | --- | Disponibilidad |
+| RP-10 | [HU-02](./07-criterios-aceptacion.md), [HU-03](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md), [CU-04](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Moderador |
 
-## Proyecto
+Las historias HU-01 a HU-06 aparecen todas en la matriz.
 
-E-Sports Focus es una organización que busca unir a la comunidad latinoamericana para realizar campeonatos competitivos de distintos videojuegos. El proyecto consiste en una plataforma para organizar estos campeonatos, integrada con Discord y con las APIs de los videojuegos, que coordina a jugadores, moderadores y organizadores, registra los resultados de forma confiable y permite anunciar ganadores y entregar premios sin demoras.
+## Observaciones
 
-## Responsabilidades individuales
-
-| Documento | Ítem de rúbrica | Responsable(s) |
-|---|---|---|
-| 07-criterios-aceptacion.md | 1 | Fernanda Cerda |
-| 08-modelo-dominio.md | 2 | Matthew Osorio |
-| 09-casos-de-uso.md | 3 | Antonia Bustamante |
-| 10-diagramas-secuencia.md | 4 | Martín Durán |
-| 11-diagramas-estado.md | 5 | Joaquín Bustamante |
-| 12-trazabilidad.md | 6 | Fernanda Cerda |
-
-## Uso de IA generativa
-
-Se utilizó IA generativa (Claude, Anthropic) como apoyo para la estructuración preliminar de los documentos 07 a 12 y la revisión de coherencia entre modelos. A partir del control realizado por el equipo, se descartaron y corrigieron diversos aspectos del borrador: se eliminó el concepto de "validaciones pendientes" por no pertenecer al dominio; se unificó la disponibilidad por equipo (sin confirmación por integrante); se incorporó Discord como actor secundario descartando <<extend>> en CU-06; y se ajustaron las filas de RP-07 y RP-10 en la matriz de trazabilidad. El equipo es responsable de validar y corregir todo el contenido final de la entrega.
-
-## Entrega anterior
-
-[IngReq-Entrega 1](./IngReq-Entrega1.md)
-
-## Índice de documentos
-
-1. [Criterios de aceptación (Gherkin)](./07-criterios-aceptacion.md)
-2. [Modelo de dominio](./08-modelo-dominio.md)
-3. [Casos de uso](./09-casos-de-uso.md)
-4. [Diagramas de secuencia de sistema](./10-diagramas-secuencia.md)
-5. [Diagramas de estado](./11-diagramas-estado.md)
-6. [Trazabilidad](./12-trazabilidad.md)
-
+- **RP-07 (anuncio de ganadores):** el anuncio está en [DSS-01](./10-diagramas-secuencia.md) y [DSS-02](./10-diagramas-secuencia.md) (publicar el ganador y anunciarlo en Discord) y corresponde a la transición "Resultado confirmado → Anunciada" de [EST-01](./11-diagramas-estado.md).
+- **RP-09 (disponibilidad del 99 %):** es un requisito no funcional transversal. No se modela en un caso de uso ni en un diagrama. Se verifica con la métrica M-FI01 de los atributos de calidad de la Entrega 1. Se asocia a HU-04 y CU-01 porque la confirmación de disponibilidad depende de que el sistema esté disponible.
+- **RP-01 y RP-09 sin secuencia:** la confirmación de disponibilidad es un caso simple de consulta y escritura. Su efecto en el ciclo de vida aparece como condición de inicio en EST-01 ("Ambos equipos confirmaron disponibilidad").
+- **RP-08 (detección en 5 segundos):** se representa en el bucle de consulta de [DSS-01](./10-diagramas-secuencia.md) y como plazo de detección en HU-01. La medición con el umbral de 5 segundos corresponde a la prueba de rendimiento, no al diagrama.
+- **RP-10 (registro auditable de cada actualización del bracket):** se cubre con el historial de actualizaciones del Bracket (HU-02, escenario "Cada actualización del bracket queda registrada") y con los datos de origen, fecha, hora y Moderador que conserva cada Resultado (HU-01 y HU-03).
+- **HU-04 a HU-06 no están en `Historias_de_usuario.md` (Entrega 1):** se definen en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). Si el equipo decide agregarlas a la Entrega 1 para mantener coherencia, deben copiarse sin cambiar los IDs.
+- **Reclamos (hallazgo H-05 de la elicitación):** no tiene historia ni requisito en la Entrega 1, así que no aparece en la matriz. Queda como candidato para una próxima iteración.
+- **Terminología:** el "Árbitro" de RP-05 se trata como el **Moderador** de esta entrega, y el Moderador que puede registrar un resultado es el **Moderador asignado** a la partida.
+- **RY-03 (validar API pública):** sigue pendiente. El flujo de [DSS-02](./10-diagramas-secuencia.md) es la respuesta del sistema si la API no existe o no está disponible.
