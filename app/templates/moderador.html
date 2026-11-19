@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block titulo %}Moderador — E-Sports Focus{% endblock %}
+{% block contenido %}
+<div class="tarjeta">
+    <h2>Consulta del Moderador</h2>
+    <p class="suave">
+        Disponibilidad de los equipos en cada partida.
+        {% if moderador %}Moderador: <strong>{{ moderador }}</strong>.{% endif %}
+    </p>
+</div>
+
+{% for partida in partidas %}
+<div class="tarjeta">
+    <h3 style="margin-top:0">
+        {{ partida.fase }} — {{ partida.torneo }}
+        {% if partida.requiere_revision %}
+        <span class="etiqueta etiqueta-revision">Requiere revisión</span>
+        {% endif %}
+    </h3>
+    <p class="suave">
+        {{ partida.fecha_texto }} ·
+        <span class="etiqueta etiqueta-estado">{{ partida.estado }}</span>
+    </p>
+    <ul class="equipos">
+        {% for equipo in partida.equipos %}
+        <li>
+            <strong>{{ equipo.equipo }}</strong>:
+            {% if equipo.confirmada == "Confirmada" %}
+            <span class="etiqueta etiqueta-confirmada">Confirmada</span>
+            {% else %}
+            <span class="etiqueta etiqueta-pendiente">Pendiente</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<div class="tarjeta">
+    <p class="suave">No hay partidas registradas. Ejecuta <code>python -m app.db.seed</code>.</p>
+</div>
+{% endfor %}
+{% endblock %}

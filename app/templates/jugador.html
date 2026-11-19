@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block titulo %}Jugador — E-Sports Focus{% endblock %}
+{% block contenido %}
+<div class="tarjeta">
+    <h2>{{ persona.nombre }}</h2>
+    <p class="suave">Equipo: <strong>{{ persona.equipo }}</strong></p>
+
+    {% if mensaje %}<div class="aviso aviso-ok">{{ mensaje }}</div>{% endif %}
+    {% if error %}<div class="aviso aviso-error">{{ error }}</div>{% endif %}
+
+    <h3>Partidas del equipo</h3>
+    {% if partidas %}
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Fase</th>
+                <th>Estado de la partida</th>
+                <th>Disponibilidad</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partida in partidas %}
+            <tr>
+                <td>{{ partida.fecha_texto }}</td>
+                <td>{{ partida.fase }}</td>
+                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
+                <td>
+                    {% if partida.confirmada == "Confirmada" %}
+                    <span class="etiqueta etiqueta-confirmada">Confirmada</span>
+                    {% else %}
+                    <span class="etiqueta etiqueta-pendiente">Pendiente</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if partida.estado == "Programada" and partida.confirmada == "Pendiente" %}
+                    <form method="post" action="/disponibilidad/{{ partida.disponibilidad_id }}/confirmar">
+                        <input type="hidden" name="persona_id" value="{{ persona.id }}">
+                        <button class="boton" type="submit">Confirmar disponibilidad</button>
+                    </form>
+                    {% elif partida.confirmada == "Confirmada" %}
+                    <span class="suave">Confirmada el {{ partida.fecha_confirmacion }}</span>
+                    {% else %}
+                    <span class="suave">Plazo vencido</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="suave">El equipo no tiene partidas programadas.</p>
+    {% endif %}
+</div>
+{% endblock %}

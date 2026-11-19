@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio — E-Sports Focus{% endblock %}
+{% block contenido %}
+<div class="tarjeta">
+    <h2>Selector de rol de demostración</h2>
+    <p class="suave">
+        Elige un jugador para confirmar la disponibilidad de su equipo o entra como
+        Moderador para consultar todas las partidas.
+        {% if torneo %}Torneo: <strong>{{ torneo.nombre }}</strong> ({{ torneo.juego }}).{% endif %}
+    </p>
+</div>
+
+<div class="tarjeta">
+    <h2>Jugador</h2>
+    {% if jugadores %}
+    <ul class="lista-roles">
+        {% for jugador in jugadores %}
+        <li>
+            <span>{{ jugador.nombre }} <span class="suave">· {{ jugador.equipo }}</span></span>
+            <a class="boton" href="/jugador?persona_id={{ jugador.id }}">Entrar como jugador</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="suave">No hay jugadores de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h2>Moderador</h2>
+    <p class="suave">Consulta la disponibilidad de los equipos en cada partida.</p>
+    <a class="boton" href="/moderador">Entrar como moderador</a>
+</div>
+{% endblock %}

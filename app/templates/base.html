@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}E-Sports Focus{% endblock %}</title>
+    <style>
+        :root { color-scheme: light; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: #f4f5f8;
+            color: #1d2330;
+        }
+        header {
+            background: #1f2a44;
+            color: #fff;
+            padding: 1rem 1.5rem;
+        }
+        header h1 { margin: 0 0 .4rem; font-size: 1.15rem; }
+        header nav a {
+            color: #c8d4f0;
+            text-decoration: none;
+            margin-right: 1rem;
+            font-size: .9rem;
+        }
+        header nav a:hover { color: #fff; }
+        main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
+        h2 { font-size: 1.25rem; margin-top: 0; }
+        .tarjeta {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.25rem;
+            box-shadow: 0 1px 3px rgba(20, 30, 60, .1);
+            margin-bottom: 1.25rem;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+        th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid #e6e8ef; }
+        th { color: #5a6478; font-weight: 600; font-size: .82rem; text-transform: uppercase; }
+        .etiqueta {
+            display: inline-block;
+            padding: .15rem .55rem;
+            border-radius: 999px;
+            font-size: .78rem;
+            font-weight: 600;
+        }
+        .etiqueta-confirmada { background: #d9f2e3; color: #157347; }
+        .etiqueta-pendiente { background: #fdf0d5; color: #8a5a00; }
+        .etiqueta-revision { background: #fadbd8; color: #9b2c2c; }
+        .etiqueta-estado { background: #e4e9f7; color: #2c3e6b; }
+        .boton {
+            display: inline-block;
+            background: #2f5bd6;
+            color: #fff;
+            border: 0;
+            border-radius: 8px;
+            padding: .45rem .9rem;
+            font-size: .88rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .boton:hover { background: #2449ad; }
+        .aviso { padding: .75rem 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .aviso-ok { background: #d9f2e3; color: #157347; }
+        .aviso-error { background: #fadbd8; color: #9b2c2c; }
+        .suave { color: #5a6478; font-size: .9rem; }
+        ul.lista-roles { list-style: none; padding: 0; margin: 0; }
+        ul.lista-roles li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .55rem 0;
+            border-bottom: 1px solid #e6e8ef;
+        }
+        .equipos { margin: .4rem 0 0; padding-left: 1.1rem; }
+        .equipos li { margin-bottom: .2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-Sports Focus — Organización de torneos</h1>
+        <nav>
+            <a href="/">Inicio</a>
+            <a href="/moderador">Moderador</a>
+        </nav>
+    </header>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>
