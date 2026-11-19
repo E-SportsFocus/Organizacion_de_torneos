@@ -3,7 +3,7 @@
 ## Proyecto
 - Nombre: E-Sports Focus — Organización de torneos
 - Repositorio de documentación: esta carpeta
-- Última auditoría: 2026-11-10 — resultado: con supuestos (sin bloqueantes)
+- Última auditoría: 2026-11-19 — resultado: con supuestos (sin bloqueantes)
 
 ## Mapa de artefactos (rutas detectadas)
 | Artefacto | Ruta(s) | Estado |
@@ -26,6 +26,8 @@
 - 2026-11-10 — `07-criterios-aceptacion.md` es la fuente del Gherkin para HU-01..HU-06; las historias HU-02 y HU-03 se toman de `Historias_de_usuario.md` (decisión del estudiante).
 - 2026-11-10 — La tabla de actividades del TO-BE se usa sin IDs `ACT-TOBE-xx`; los enlaces a `as-is.bpmn`/`to-be.bpmn` quedan como están (no bloqueante).
 - 2026-11-17 — HU-04 validada: se acepta confirmar mientras la partida esté `Programada` (las 8 horas solo indican «requiere revisión» al Moderador), el Moderador es actor secundario de solo lectura en CU-01 y la «requiere revisión» se calcula al consultar (sin tarea en segundo plano). Ficha en `.cin324/historias/HU-04.md`.
+- 2026-11-19 — **Alcance confirmado por el estudiante:** HU-01 queda fuera porque depende de la API del videojuego. HU-04 se valida y se archiva. La siguiente historia es HU-03 (registro manual, sin depender de la API) y después HU-06. Discord se simula; no se excluye por ser sistema externo.
+- 2026-11-19 — **Validación de HU-04:** los 4 escenarios Gherkin se cumplen; 12 pruebas automáticas pasan. Observaciones menores sin cambios de requisitos: la fecha de confirmación se muestra en formato ISO y el `README`/`tasks.md` dicen 4 partidas de ejemplo cuando el `seed` crea 5.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -35,21 +37,22 @@
 - Cómo instalar: `python -m venv .venv`; `.venv\Scripts\activate`; `pip install -r requirements.txt`
 - Cómo ejecutar: `python -m app.db.seed` (crea la base y datos de ejemplo); `uvicorn app.main:app --reload` en http://localhost:8000
 - Cómo probar: `pytest`
+- Entorno local preparado el 2026-11-19: Python 3.12.10, `.venv` con dependencias y OpenSpec CLI 2.1.0.
 
 ## Historias
 | Historia | Estado | Cambio de OpenSpec | Fecha | Observaciones |
 |----------|--------|--------------------|-------|----------------|
-| HU-01 | fuera de alcance | — | — | Ignorada por decisión del estudiante |
-| HU-02 | pendiente | — | — | Notificación del resultado |
-| HU-03 | pendiente | — | — | Registro manual del resultado |
-| HU-04 | lista para especificar | — | 2026-11-17 | Ficha confirmada; confirmación de disponibilidad; sin sistemas externos |
-| HU-05 | fuera de alcance por ahora | — | — | No priorizada |
-| HU-06 | fuera de alcance por ahora | — | — | No priorizada |
+| HU-01 | fuera de alcance | — | 2026-11-19 | Depende de la API del videojuego; excluida por decisión del estudiante |
+| HU-02 | pendiente | — | — | Notificación del resultado; necesita un resultado de HU-03 |
+| HU-03 | en validación | — | 2026-11-19 | Registro manual del resultado; siguiente historia |
+| HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
+| HU-05 | pendiente | — | — | Cambio de horario; aún no priorizada |
+| HU-06 | pendiente | — | — | Anuncio del ganador; siguiente después de HU-03 |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
 |----------|---------|--------|-------|
-| — | — | — | — |
+| HU-04 | Validación en chat (no se guardó archivo) | Validada sin observaciones bloqueantes | 2026-11-19 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |
