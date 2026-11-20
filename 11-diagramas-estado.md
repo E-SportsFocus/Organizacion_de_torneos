@@ -21,7 +21,7 @@ Los estados son situaciones de la partida: Programada, En curso, Pendiente de re
 | Programada | Hora de inicio alcanzada | Ambos equipos confirmaron disponibilidad | Iniciar la partida | En curso |
 | En curso | Resultado válido recibido de la API | No existe resultado registrado | Registrar resultado con origen automático; actualizar bracket; notificar | Resultado confirmado |
 | En curso | Plazo de detección vencido | Sin resultado válido de la API | Dejar la partida pendiente y avisar al Moderador para el registro manual | Pendiente de resultado |
-| Pendiente de resultado | Resultado completo registrado por el Moderador | Moderador asignado y resultado de ambos equipos | Registrar resultado con origen manual; actualizar bracket; notificar | Resultado confirmado |
+| Pendiente de resultado | Resultado completo registrado por el Moderador | Moderador asignado, resultado de ambos equipos y un ganador | Registrar resultado con origen manual; actualizar bracket; notificar | Resultado confirmado |
 | Resultado confirmado | Resultado repetido recibido de la API | Mismo resultado ya registrado | No registrar duplicado | Resultado confirmado |
 | Resultado confirmado | Registro y notificación completados | — | Publicar el ganador en la plataforma y anunciarlo en Discord (si Discord no responde, el anuncio queda pendiente de envío) | Anunciada |
 | Anunciada | Resultado repetido recibido de la API | Mismo resultado ya registrado | No registrar duplicado | Anunciada |

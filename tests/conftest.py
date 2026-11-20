@@ -37,6 +37,9 @@ class DatosDePrueba:
     def moderador(self, nombre="Moderador de prueba"):
         return self.persona(nombre, "Moderador")
 
+    def organizador(self, nombre="Organizador de prueba"):
+        return self.persona(nombre, "Organizador")
+
     def torneo(self, nombre="Torneo de prueba"):
         cursor = self.conexion.execute(
             "INSERT INTO torneo (nombre, juego, zona_horaria) VALUES (?, ?, ?)",

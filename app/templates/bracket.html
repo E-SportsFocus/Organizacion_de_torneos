@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block titulo %}Bracket — E-Sports Focus{% endblock %}
+{% block contenido %}
+<div class="tarjeta">
+    <h2>Bracket del torneo</h2>
+    {% if torneo %}
+    <p class="suave">
+        {{ torneo.nombre }} ({{ torneo.juego }}).
+        {% if bracket and bracket.ultima_actualizacion %}
+        Última actualización: {{ bracket.ultima_actualizacion_texto }}.
+        {% else %}
+        Todavía no se ha registrado ningún resultado.
+        {% endif %}
+    </p>
+    {% else %}
+    <p class="suave">No hay torneos registrados. Ejecuta <code>python -m app.db.seed</code>.</p>
+    {% endif %}
+</div>
+
+{% if partidas %}
+<div class="tarjeta">
+    <h3 style="margin-top:0">Partidas</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Fase</th>
+                <th>Fecha</th>
+                <th>Equipos</th>
+                <th>Ganador</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partida in partidas %}
+            <tr>
+                <td>{{ partida.fase }}</td>
+                <td>{{ partida.fecha_texto }}</td>
+                <td>
+                    <ul class="equipos">
+                        {% for equipo in partida.equipos %}
+                        <li>
+                            {{ equipo.equipo }}
+                            {% if partida.resultado %}
+                            <strong>{{ partida.resultado.marcadores[equipo.equipo_id] }}</strong>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    {% if partida.resultado %}
+                    {{ partida.resultado.ganador.equipo }}
+                    {% else %}
+                    <span class="suave">—</span>
+                    {% endif %}
+                </td>
+                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="tarjeta">
+    <h3 style="margin-top:0">Historial de actualizaciones</h3>
+    {% if historial %}
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha y hora</th>
+                <th>Partida</th>
+                <th>Resultado que originó la actualización</th>
+                <th>Ganador</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in historial %}
+            <tr>
+                <td>{{ registro.fecha_texto }}</td>
+                <td>{{ registro.fase }}</td>
+                <td>{{ registro.marcador_texto }}</td>
+                <td>{{ registro.ganador.equipo if registro.ganador else "—" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="suave">Aún no hay actualizaciones del bracket.</p>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

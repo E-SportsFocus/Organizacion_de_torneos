@@ -48,5 +48,6 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 - Torneo compone Partida y Partida compone Resultado (composición), porque una partida no existe fuera de su torneo y un resultado no existe fuera de su partida.
 - Disponibilidad se modeló como clase y no como atributo de Equipo, porque la disponibilidad cambia para cada partida. La disponibilidad es del equipo: la confirma un jugador en nombre del equipo, por lo que no se modela una confirmación por integrante.
 - Quién registró un resultado se modeló como asociación Moderador — Resultado (y no como atributo), porque es una relación entre dos conceptos del negocio; en los resultados automáticos no hay Moderador.
+- El Resultado no admite empate: el marcador por equipo debe identificar un ganador, porque el bracket necesita avanzar. La regla se valida al registrar el resultado (HU-03).
 - No se modelaron como clases los roles de Jugador "capitán" ni de "suplente", porque la Entrega 1 no los define. Queda como posible extensión si el equipo lo confirma.
 

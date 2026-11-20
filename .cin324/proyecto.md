@@ -28,6 +28,8 @@
 - 2026-11-17 — HU-04 validada: se acepta confirmar mientras la partida esté `Programada` (las 8 horas solo indican «requiere revisión» al Moderador), el Moderador es actor secundario de solo lectura en CU-01 y la «requiere revisión» se calcula al consultar (sin tarea en segundo plano). Ficha en `.cin324/historias/HU-04.md`.
 - 2026-11-19 — **Alcance confirmado por el estudiante:** HU-01 queda fuera porque depende de la API del videojuego. HU-04 se valida y se archiva. La siguiente historia es HU-03 (registro manual, sin depender de la API) y después HU-06. Discord se simula; no se excluye por ser sistema externo.
 - 2026-11-19 — **Validación de HU-04:** los 4 escenarios Gherkin se cumplen; 12 pruebas automáticas pasan. Observaciones menores sin cambios de requisitos: la fecha de confirmación se muestra en formato ISO y el `README`/`tasks.md` dicen 4 partidas de ejemplo cuando el `seed` crea 5.
+- 2026-11-20 — **HU-03 validada:** no se permiten empates; el marcador es el resultado final de la serie. HU-03 incluye el registro, la actualización del bracket con historial y la notificación simulada a Organizador y Jugadores. Se mantiene la inferencia de los equipos desde `disponibilidad` (sin `partida_equipo`). Ficha en `.cin324/historias/HU-03.md`; se ajustaron `07-criterios-aceptacion.md`, `11-diagramas-estado.md` y `08-modelo-dominio.md`.
+- 2026-11-20 — **HU-03 implementada y validada por el estudiante:** los 5 escenarios Gherkin se cumplen; 26 pruebas automáticas pasan (14 de HU-03 y las 12 existentes de HU-04). El cambio se archivó y la capacidad `resultado` quedó en `openspec/specs/resultado/spec.md`. La base `data/app.db` se recreó con los datos nuevos.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -44,7 +46,7 @@
 |----------|--------|--------------------|-------|----------------|
 | HU-01 | fuera de alcance | — | 2026-11-19 | Depende de la API del videojuego; excluida por decisión del estudiante |
 | HU-02 | pendiente | — | — | Notificación del resultado; necesita un resultado de HU-03 |
-| HU-03 | en validación | — | 2026-11-19 | Registro manual del resultado; siguiente historia |
+| HU-03 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-03-registrar-resultado` | 2026-11-20 | Registro manual del resultado; 5 escenarios y 14 pruebas; spec en `openspec/specs/resultado/spec.md` |
 | HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
 | HU-05 | pendiente | — | — | Cambio de horario; aún no priorizada |
 | HU-06 | pendiente | — | — | Anuncio del ganador; siguiente después de HU-03 |
@@ -53,6 +55,7 @@
 | Historia | Informe | Estado | Fecha |
 |----------|---------|--------|-------|
 | HU-04 | Validación en chat (no se guardó archivo) | Validada sin observaciones bloqueantes | 2026-11-19 |
+| HU-03 | Validación en chat (no se guardó archivo) | Validada por el estudiante sin observaciones bloqueantes | 2026-11-20 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |

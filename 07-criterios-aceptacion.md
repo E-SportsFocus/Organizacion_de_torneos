@@ -94,6 +94,13 @@ Característica: Registro manual del resultado por un Moderador asignado
     Cuando registra el resultado de un solo equipo
     Entonces el sistema no confirma el resultado
     Y solicita completar el resultado de ambos equipos
+
+  Escenario: Un empate no se acepta como resultado
+    Dado que la partida está en estado "Pendiente de resultado"
+    Y que el usuario es el Moderador asignado a la partida
+    Cuando registra el mismo marcador para ambos equipos
+    Entonces el sistema no confirma el resultado
+    Y solicita un marcador con un ganador
 ```
 
 ## HU-04 — Confirmación de disponibilidad

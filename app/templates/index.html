@@ -5,7 +5,7 @@
     <h2>Selector de rol de demostración</h2>
     <p class="suave">
         Elige un jugador para confirmar la disponibilidad de su equipo o entra como
-        Moderador para consultar todas las partidas.
+        Moderador para consultar las partidas y registrar un resultado.
         {% if torneo %}Torneo: <strong>{{ torneo.nombre }}</strong> ({{ torneo.juego }}).{% endif %}
     </p>
 </div>
@@ -28,7 +28,31 @@
 
 <div class="tarjeta">
     <h2>Moderador</h2>
-    <p class="suave">Consulta la disponibilidad de los equipos en cada partida.</p>
-    <a class="boton" href="/moderador">Entrar como moderador</a>
+    <p class="suave">Consulta la disponibilidad y registra el resultado de las partidas pendientes.</p>
+    {% if moderadores %}
+    <ul class="lista-roles">
+        {% for moderador in moderadores %}
+        <li>
+            <span>{{ moderador.nombre }}</span>
+            <a class="boton" href="/moderador?persona_id={{ moderador.id }}">Entrar como moderador</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="suave">No hay moderadores de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h2>Organizador</h2>
+    {% if organizador %}
+    <p class="suave">
+        {{ organizador.nombre }} recibe la notificación de cada resultado. Su pantalla de
+        anuncio del ganador llega con HU-06.
+    </p>
+    {% else %}
+    <p class="suave">No hay organizador de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
+    {% endif %}
+    <a class="boton" href="/bracket">Ver el bracket</a>
 </div>
 {% endblock %}

@@ -2,11 +2,13 @@
 {% block titulo %}Moderador — E-Sports Focus{% endblock %}
 {% block contenido %}
 <div class="tarjeta">
-    <h2>Consulta del Moderador</h2>
+    <h2>Vista del Moderador</h2>
     <p class="suave">
-        Disponibilidad de los equipos en cada partida.
-        {% if moderador %}Moderador: <strong>{{ moderador }}</strong>.{% endif %}
+        Disponibilidad de los equipos y registro manual del resultado.
+        Moderador: <strong>{{ moderador }}</strong>.
     </p>
+    {% if mensaje %}<div class="aviso aviso-ok">{{ mensaje }}</div>{% endif %}
+    {% if error %}<div class="aviso aviso-error">{{ error }}</div>{% endif %}
 </div>
 
 {% for partida in partidas %}
@@ -19,7 +21,8 @@
     </h3>
     <p class="suave">
         {{ partida.fecha_texto }} ·
-        <span class="etiqueta etiqueta-estado">{{ partida.estado }}</span>
+        <span class="etiqueta etiqueta-estado">{{ partida.estado }}</span> ·
+        Moderador asignado: {{ partida.moderador or "sin asignar" }}
     </p>
     <ul class="equipos">
         {% for equipo in partida.equipos %}
@@ -33,6 +36,36 @@
         </li>
         {% endfor %}
     </ul>
+
+    {% if partida.resultado %}
+    <p class="resultado-marcador">
+        {{ partida.resultado.marcador_texto }} — Ganador:
+        {{ partida.resultado.ganador.equipo }}
+    </p>
+    <p class="suave">
+        Registrado por {{ partida.resultado.moderador }} el
+        {{ partida.resultado.fecha_texto }} · origen {{ partida.resultado.origen }}.
+    </p>
+    {% elif partida.puede_registrar %}
+    <form class="formulario-resultado" method="post"
+          action="/partidas/{{ partida.partida_id }}/resultado">
+        <input type="hidden" name="persona_id" value="{{ persona.id }}">
+        {% for equipo in partida.equipos %}
+        <label>
+            {{ equipo.equipo }}
+            <input type="number" min="0" step="1" required
+                   name="marcador_{{ equipo.equipo_id }}"
+                   value="{{ valores.get(equipo.equipo_id|string, '') }}">
+        </label>
+        {% endfor %}
+        <button class="boton" type="submit">Registrar resultado</button>
+    </form>
+    {% elif partida.estado == "Pendiente de resultado" %}
+    <p class="nota">
+        Esta partida está asignada a {{ partida.moderador or "otro Moderador" }};
+        solo esa persona puede registrar el resultado.
+    </p>
+    {% endif %}
 </div>
 {% else %}
 <div class="tarjeta">

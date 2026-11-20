@@ -82,6 +82,8 @@ def listar_partidas_moderador(conexion, ahora):
                p.fecha_hora,
                p.fase,
                p.estado,
+               p.moderador_id,
+               m.nombre AS moderador,
                t.nombre AS torneo,
                e.id AS equipo_id,
                e.nombre AS equipo,
@@ -90,6 +92,7 @@ def listar_partidas_moderador(conexion, ahora):
                d.fecha_confirmacion
         FROM partida p
         JOIN torneo t ON t.id = p.torneo_id
+        LEFT JOIN persona m ON m.id = p.moderador_id
         JOIN disponibilidad d ON d.partida_id = p.id
         JOIN equipo e ON e.id = d.equipo_id
         ORDER BY p.fecha_hora, e.nombre
@@ -105,6 +108,8 @@ def listar_partidas_moderador(conexion, ahora):
                 "fecha_hora": fila["fecha_hora"],
                 "fase": fila["fase"],
                 "estado": fila["estado"],
+                "moderador_id": fila["moderador_id"],
+                "moderador": fila["moderador"],
                 "torneo": fila["torneo"],
                 "equipos": [],
             },

@@ -54,6 +54,15 @@ def crear_router(templates, abrir_conexion, reloj):
     def inicio(request: Request):
         with abrir_conexion() as conexion:
             jugadores = [dict(fila) for fila in _jugadores(conexion)]
+            moderadores = [
+                dict(fila)
+                for fila in conexion.execute(
+                    "SELECT id, nombre FROM persona WHERE tipo = 'Moderador' ORDER BY nombre"
+                )
+            ]
+            organizador = conexion.execute(
+                "SELECT id, nombre FROM persona WHERE tipo = 'Organizador' ORDER BY id LIMIT 1"
+            ).fetchone()
             torneo = conexion.execute(
                 "SELECT nombre, juego FROM torneo ORDER BY id LIMIT 1"
             ).fetchone()
@@ -62,6 +71,8 @@ def crear_router(templates, abrir_conexion, reloj):
             name="index.html",
             context={
                 "jugadores": jugadores,
+                "moderadores": moderadores,
+                "organizador": dict(organizador) if organizador else None,
                 "torneo": dict(torneo) if torneo else None,
             },
         )
@@ -107,24 +118,6 @@ def crear_router(templates, abrir_conexion, reloj):
                 )
         return RedirectResponse(
             url=f"/jugador?persona_id={persona_id}&mensaje=ok", status_code=303
-        )
-
-    @router.get("/moderador", response_class=HTMLResponse)
-    def vista_moderador(request: Request):
-        with abrir_conexion() as conexion:
-            partidas = servicio.listar_partidas_moderador(conexion, reloj())
-            moderador = conexion.execute(
-                "SELECT nombre FROM persona WHERE tipo = 'Moderador' ORDER BY id LIMIT 1"
-            ).fetchone()
-        for partida in partidas:
-            partida["fecha_texto"] = _formatear_fecha(partida["fecha_hora"])
-        return templates.TemplateResponse(
-            request=request,
-            name="moderador.html",
-            context={
-                "partidas": partidas,
-                "moderador": moderador["nombre"] if moderador else None,
-            },
         )
 
     return router
