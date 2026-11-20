@@ -1,9 +1,11 @@
 import re
 
 from app.integraciones.discord import DiscordSimulado
+from app.servicios import anuncio as servicio_anuncio
 
 ESTADO_PENDIENTE = "Pendiente de resultado"
 ESTADO_CONFIRMADO = "Resultado confirmado"
+ESTADO_ANUNCIADA = "Anunciada"
 ORIGEN_MANUAL = "manual"
 TIPO_MODERADOR = "Moderador"
 TIPO_JUGADOR = "Jugador"
@@ -143,7 +145,7 @@ def registrar_resultado(
     partida = conexion.execute(
         """
         SELECT p.id AS partida_id, p.torneo_id, p.moderador_id, p.fase,
-               p.estado, t.organizador_id
+               p.estado, t.organizador_id, t.nombre AS torneo
         FROM partida p
         JOIN torneo t ON t.id = p.torneo_id
         WHERE p.id = ?
@@ -226,13 +228,23 @@ def registrar_resultado(
         conexion, partida, resultado_id, equipos, ganador, fecha_hora
     )
 
-    conexion.execute(
-        "UPDATE partida SET estado = ? WHERE id = ?",
-        (ESTADO_CONFIRMADO, partida_id),
+    adaptador = discord or DiscordSimulado()
+    adaptador.notificar_resultado(conexion, resultado_id, mensaje, fecha_hora)
+
+    marcador_texto = _resumen_marcador(equipos)
+    publicacion = servicio_anuncio.publicar_ganador(
+        conexion,
+        partida,
+        resultado_id,
+        ganador,
+        marcador_texto,
+        fecha_hora,
+        discord=adaptador,
     )
 
-    (discord or DiscordSimulado()).notificar_resultado(
-        conexion, resultado_id, mensaje, fecha_hora
+    conexion.execute(
+        "UPDATE partida SET estado = ? WHERE id = ?",
+        (ESTADO_ANUNCIADA, partida_id),
     )
     conexion.commit()
 
@@ -241,9 +253,11 @@ def registrar_resultado(
         "partida_id": partida_id,
         "equipos": equipos,
         "ganador": ganador,
-        "marcador_texto": _resumen_marcador(equipos),
+        "marcador_texto": marcador_texto,
         "notificaciones": notificaciones,
         "fecha_hora_registro": fecha_hora,
+        "estado": ESTADO_ANUNCIADA,
+        "publicacion": publicacion,
     }
 
 

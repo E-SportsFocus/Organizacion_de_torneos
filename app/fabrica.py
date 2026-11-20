@@ -6,12 +6,12 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 
 from app.db.conexion import RUTA_DB_POR_DEFECTO, aplicar_migraciones, conectar
-from app.rutas import disponibilidad, resultado
+from app.rutas import disponibilidad, organizador, resultado
 
 DIRECTORIO_PLANTILLAS = Path(__file__).resolve().parent / "templates"
 
 
-def crear_app(ruta_db=None, reloj=None):
+def crear_app(ruta_db=None, reloj=None, discord=None):
     ruta = Path(ruta_db) if ruta_db else RUTA_DB_POR_DEFECTO
     conexion_inicial = conectar(ruta)
     aplicar_migraciones(conexion_inicial)
@@ -32,6 +32,11 @@ def crear_app(ruta_db=None, reloj=None):
         disponibilidad.crear_router(templates, abrir_conexion, reloj or datetime.now)
     )
     aplicacion.include_router(
-        resultado.crear_router(templates, abrir_conexion, reloj or datetime.now)
+        resultado.crear_router(
+            templates, abrir_conexion, reloj or datetime.now, discord=discord
+        )
+    )
+    aplicacion.include_router(
+        organizador.crear_router(templates, abrir_conexion)
     )
     return aplicacion

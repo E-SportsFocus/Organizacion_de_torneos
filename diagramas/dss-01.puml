@@ -22,7 +22,11 @@ alt Resultado válido recibido
     DC -> Jugador : Notificación del resultado
     DC -> Organizador : Notificación del resultado
     S -> S : Publicar el ganador en la plataforma
-    S -> DC : Anunciar al ganador en el canal del torneo
+    alt Discord responde
+      S -> DC : Anunciar al ganador en el canal del torneo
+    else Discord no responde
+      S -> S : Mantener el anuncio como pendiente de envío
+    end
   else Resultado ya registrado
     S -> S : No registrar un segundo resultado
   end

@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block titulo %}Organizador — E-Sports Focus{% endblock %}
+{% block contenido %}
+{% if not organizador %}
+<div class="tarjeta">
+    <h2>Panel del Organizador</h2>
+    <p class="suave">No hay organizadores de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
+</div>
+{% elif not torneo %}
+<div class="tarjeta">
+    <h2>Panel del Organizador</h2>
+    <p class="suave">{{ organizador.nombre }} no tiene un torneo asignado.</p>
+</div>
+{% else %}
+<div class="tarjeta">
+    <h2>{{ torneo.nombre }}</h2>
+    <p class="suave">
+        {{ torneo.juego }} · Organiza <strong>{{ organizador.nombre }}</strong> ·
+        <span class="etiqueta etiqueta-estado">Torneo en curso</span>
+    </p>
+    <p class="suave" style="margin-bottom:0">
+        Anuncios de ganadores y estado de las partidas. El anuncio se publica
+        automáticamente al confirmarse el resultado.
+    </p>
+</div>
+
+<div class="tarjeta">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap">
+        <h3 style="margin:0">Anuncios</h3>
+        <a class="boton" href="/bracket">Ver bracket completo</a>
+    </div>
+    <div style="margin-top:.9rem">
+        {% for partida in anuncios %}
+        <div class="anuncio">
+            <p class="titulo">{{ partida.resultado.ganador.equipo }} es el ganador de {{ partida.fase }}</p>
+            <p class="detalle">{{ partida.resultado.marcador_texto }}</p>
+            <span class="etiqueta etiqueta-confirmada">Publicado en la plataforma</span>
+            {% if partida.anuncio.discord_estado == "Enviado" %}
+            <span class="etiqueta etiqueta-confirmada">Discord enviado</span>
+            {% else %}
+            <span class="etiqueta etiqueta-pendiente">Discord pendiente de envío</span>
+            {% endif %}
+            <span class="suave"> · {{ partida.anuncio.fecha_texto }}</span>
+        </div>
+        {% endfor %}
+        {% for partida in pendientes %}
+        <div class="anuncio anuncio-pendiente">
+            <p class="titulo">
+                {{ partida.fase }} —
+                {% for equipo in partida.equipos %}{{ equipo.equipo }}{% if not loop.last %} vs {% endif %}{% endfor %}
+            </p>
+            <p class="detalle">Todavía no hay un ganador que anunciar.</p>
+            <span class="etiqueta etiqueta-pendiente">Falta registrar el resultado</span>
+        </div>
+        {% endfor %}
+        {% if not anuncios and not pendientes %}
+        <p class="suave">Todavía no hay anuncios ni partidas pendientes.</p>
+        {% endif %}
+    </div>
+</div>
+
+<div class="tarjeta">
+    <h3 style="margin-top:0">Partidas del torneo</h3>
+    {% if partidas %}
+    <table>
+        <thead>
+            <tr>
+                <th>Fase</th>
+                <th>Fecha</th>
+                <th>Equipos</th>
+                <th>Resultado</th>
+                <th>Estado</th>
+                <th>Anuncio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partida in partidas %}
+            <tr>
+                <td>{{ partida.fase }}</td>
+                <td>{{ partida.fecha_texto }}</td>
+                <td>
+                    <ul class="equipos">
+                        {% for equipo in partida.equipos %}
+                        <li>
+                            {{ equipo.equipo }}
+                            {% if partida.resultado %}
+                            <strong>{{ partida.resultado.marcadores[equipo.equipo_id] }}</strong>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    {% if partida.resultado %}
+                    <strong>Ganador: {{ partida.resultado.ganador.equipo }}</strong><br>
+                    <span class="suave">{{ partida.resultado.marcador_texto }}</span>
+                    {% else %}
+                    <span class="suave">Sin resultado</span>
+                    {% endif %}
+                </td>
+                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
+                <td>
+                    {% if partida.anuncio and partida.anuncio.discord_estado == "Enviado" %}
+                    <span class="etiqueta etiqueta-confirmada">Enviado</span>
+                    {% elif partida.anuncio %}
+                    <span class="etiqueta etiqueta-pendiente">Pendiente de envío</span>
+                    {% elif partida.resultado %}
+                    <span class="etiqueta etiqueta-pendiente">Pendiente de publicación</span>
+                    {% else %}
+                    <span class="suave">—</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="suave">El torneo no tiene partidas registradas.</p>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

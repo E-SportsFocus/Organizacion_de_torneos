@@ -3,12 +3,13 @@
 - [Ingeniería de requisitos - Entrega 1](IngReq-Entrega1.md)
 - [Ingeniería de requisitos - Entrega 2](./IngReq-Entrega%202.md)
 
-## Aplicación web (HU-03 y HU-04)
+## Aplicación web (HU-03, HU-04 y HU-06)
 
 Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la documentación de requisitos. Historias implementadas:
 
 - **HU-04 — Confirmación de disponibilidad** (CU-01).
 - **HU-03 — Registro manual del resultado** (CU-04): resultado, bracket con historial y notificación simulada.
+- **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
 
 ### Requisitos
 
@@ -37,8 +38,8 @@ Carga 1 torneo, 4 equipos de 2 jugadores, 2 moderadores (Marta Arbitraje y Ósca
 2. Charlie vs Delta, en 30 horas, `Programada`.
 3. Alfa vs Delta, hace 1 hora, `Programada`.
 4. Alfa vs Charlie, hace 2 horas, `En curso`.
-5. Bravo vs Delta, hace 1 día, `Anunciada`, con resultado sembrado 2–1 y su actualización de bracket.
-6. Bravo vs Charlie, hace 3 horas, `Pendiente de resultado` (la que se registra en HU-03).
+5. Bravo vs Delta, hace 1 día, `Anunciada`, con resultado sembrado 2–1, su actualización de bracket y su anuncio enviado a Discord.
+6. Bravo vs Charlie, hace 3 horas, `Pendiente de resultado` (la que se registra en HU-03 y HU-06).
 
 Es idempotente: si ya hay datos, no los duplica.
 
@@ -67,11 +68,19 @@ pytest
 
 1. En **Inicio**, entra como **Marta Arbitraje** (Moderador asignado a las partidas).
 2. En la semifinal **Bravo vs Charlie**, que está `Pendiente de resultado`, escribe el marcador de ambos equipos y pulsa **Registrar resultado**.
-3. La partida pasa a `Resultado confirmado` y aparece «Resultado registrado. Ganador: … El bracket fue actualizado.».
+3. La partida pasa a `Anunciada` y aparece «Resultado registrado. Ganador: … El bracket fue actualizado. El ganador quedó anunciado.».
 4. Abre **Bracket** en la navegación: verás el marcador, el ganador y el historial de actualizaciones, incluida la final sembrada 2–1.
 5. Entra como **Óscar Réplica** (Moderador no asignado): la partida pendiente no muestra el formulario, sino la nota de que solo el Moderador asignado puede registrarla.
 6. El resultado solo admite marcadores enteros mayores o iguales a 0 y **no admite empate**; un envío incompleto o empatado no modifica la partida.
 
-La notificación al Organizador y a los Jugadores se guarda en la tabla `notificacion` y la llamada a Discord se simula en `integraciones_log`: no hay integración real con Discord ni con la API del videojuego.
+La notificación al Organizador y a los Jugadores se guarda en la tabla `notificacion`, el anuncio y su estado de envío en la tabla `anuncio`, y las llamadas a Discord se simulan en `integraciones_log`: no hay integración real con Discord ni con la API del videojuego.
 
-Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md` y las 4 de `tests/test_hu04.py` a los escenarios de HU-04.
+### Recorrido de HU-06 (anuncio del ganador)
+
+1. En **Inicio**, entra como **Olga Organización** (Organizador) o abre **Organizador** en la navegación.
+2. Verás la sección **Anuncios** con la final sembrada: **Equipo Bravo** ganó 2–1, publicada en la plataforma y con **Discord enviado**.
+3. Las partidas sin resultado aparecen como «Todavía no hay un ganador que anunciar» y «Falta registrar el resultado».
+4. Registra la semifinal **Bravo vs Charlie** como **Marta Arbitraje**: la partida pasa a `Anunciada` y el anuncio aparece en el panel del Organizador y en el bracket.
+5. Si Discord no responde, el ganador igual queda publicado y el anuncio figura como **pendiente de envío**; las pruebas simulan ese fallo.
+
+Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04 y las 3 de `tests/test_hu06.py` a los escenarios de HU-06.

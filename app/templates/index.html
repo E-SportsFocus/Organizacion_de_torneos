@@ -47,9 +47,9 @@
     <h2>Organizador</h2>
     {% if organizador %}
     <p class="suave">
-        {{ organizador.nombre }} recibe la notificación de cada resultado. Su pantalla de
-        anuncio del ganador llega con HU-06.
+        {{ organizador.nombre }} consulta los anuncios de ganadores y el estado de las partidas.
     </p>
+    <a class="boton" href="/organizador?persona_id={{ organizador.id }}">Entrar como organizador</a>
     {% else %}
     <p class="suave">No hay organizador de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
     {% endif %}

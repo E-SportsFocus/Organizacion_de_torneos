@@ -95,8 +95,9 @@ def sembrar(conexion, ahora=None):
                 (equipo_id, partida_id),
             )
 
-    # La final ya jugada tiene un resultado sembrado: así el bracket y su
-    # historial no están vacíos y la partida `Anunciada` es coherente.
+    # La final ya jugada tiene un resultado sembrado: el servicio publica al
+    # ganador y deja la partida `Anunciada`, así el bracket, su historial y el
+    # anuncio no están vacíos.
     servicio_resultado.registrar_resultado(
         conexion,
         partidas_ids[4],
@@ -106,9 +107,6 @@ def sembrar(conexion, ahora=None):
             equipos["Equipo Delta"]: 1,
         },
         ahora - timedelta(days=1) + timedelta(hours=3),
-    )
-    conexion.execute(
-        "UPDATE partida SET estado = 'Anunciada' WHERE id = ?", (partidas_ids[4],)
     )
 
     # La semifinal pendiente ya se jugó: se confirma la disponibilidad de ambos

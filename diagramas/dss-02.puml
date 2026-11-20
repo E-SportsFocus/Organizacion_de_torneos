@@ -16,7 +16,11 @@ alt Moderador asignado a la partida
     S -> S : Actualizar el bracket y registrar la actualización
     S -> DC : Notificar el resultado al Organizador y a los Jugadores
     S -> S : Publicar el ganador en la plataforma
-    S -> DC : Anunciar al ganador en el canal del torneo
+    alt Discord responde
+      S -> DC : Anunciar al ganador en el canal del torneo
+    else Discord no responde
+      S -> S : Mantener el anuncio como pendiente de envío
+    end
   else Resultado incompleto
     S --> Moderador : Solicita completar el resultado de ambos equipos
   end

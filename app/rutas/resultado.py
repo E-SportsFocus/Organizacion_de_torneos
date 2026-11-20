@@ -3,6 +3,7 @@ from datetime import datetime
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from app.servicios import anuncio as servicio_anuncio
 from app.servicios import disponibilidad as servicio_disponibilidad
 from app.servicios import resultado as servicio
 
@@ -48,7 +49,7 @@ def _moderador_seleccionado(conexion, persona_id):
     return persona
 
 
-def crear_router(templates, abrir_conexion, reloj):
+def crear_router(templates, abrir_conexion, reloj, discord=None):
     router = APIRouter()
 
     def _contexto_moderador(
@@ -63,9 +64,11 @@ def crear_router(templates, abrir_conexion, reloj):
             conexion, reloj()
         )
         resultados = servicio.resultados_por_partida(conexion)
+        anuncios = servicio_anuncio.anuncios_por_partida(conexion)
         for partida in partidas:
             partida["fecha_texto"] = _formatear_fecha(partida["fecha_hora"])
             partida["resultado"] = resultados.get(partida["partida_id"])
+            partida["anuncio"] = anuncios.get(partida["partida_id"])
             if partida["resultado"]:
                 partida["resultado"]["fecha_texto"] = _formatear_fecha(
                     partida["resultado"]["fecha_hora_registro"]
@@ -82,6 +85,11 @@ def crear_router(templates, abrir_conexion, reloj):
                     f"{servicio.MENSAJE_REGISTRADO} Ganador: "
                     f"{resultado['ganador']['equipo']}. El bracket fue actualizado."
                 )
+                anuncio = anuncios.get(partida_id)
+                if anuncio and anuncio["discord_estado"] == servicio_anuncio.DISCORD_PENDIENTE:
+                    mensaje += " El anuncio en Discord quedó pendiente de envío."
+                elif anuncio:
+                    mensaje += " El ganador quedó anunciado."
             else:
                 mensaje = servicio.MENSAJE_REGISTRADO
 
@@ -138,7 +146,12 @@ def crear_router(templates, abrir_conexion, reloj):
                 raise HTTPException(status_code=404, detail="Persona no encontrada")
             try:
                 servicio.registrar_resultado(
-                    conexion, partida_id, persona_id, marcadores, reloj()
+                    conexion,
+                    partida_id,
+                    persona_id,
+                    marcadores,
+                    reloj(),
+                    discord=discord,
                 )
             except servicio.ErrorResultado as error:
                 contexto = _contexto_moderador(

@@ -74,7 +74,7 @@ def test_moderador_asignado_registra_el_resultado_completo(cliente, ahora):
     partida = datos.conexion.execute(
         "SELECT estado FROM partida WHERE id = ?", (escenario["partida"],)
     ).fetchone()
-    assert partida["estado"] == "Resultado confirmado"
+    assert partida["estado"] == "Anunciada"
 
     bracket = datos.conexion.execute(
         "SELECT * FROM bracket WHERE torneo_id = ?", (escenario["torneo"],)
@@ -100,9 +100,14 @@ def test_moderador_asignado_registra_el_resultado_completo(cliente, ahora):
     }
     assert any("Equipo Alfa 2 - Equipo Bravo 1" in fila["mensaje"] for fila in notificaciones)
 
-    log = datos.conexion.execute("SELECT * FROM integraciones_log").fetchall()
-    assert len(log) == 1
-    assert log[0]["sistema"] == "Discord"
+    log = datos.conexion.execute(
+        "SELECT sistema, operacion FROM integraciones_log ORDER BY id"
+    ).fetchall()
+    assert [fila["operacion"] for fila in log] == [
+        "notificar_resultado",
+        "anunciar_ganador",
+    ]
+    assert all(fila["sistema"] == "Discord" for fila in log)
 
     bracket_html = http.get("/bracket")
     assert bracket_html.status_code == 200
