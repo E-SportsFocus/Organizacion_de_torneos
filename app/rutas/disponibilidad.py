@@ -15,17 +15,6 @@ def _formatear_fecha(valor):
 def crear_router(templates, abrir_conexion, reloj):
     router = APIRouter()
 
-    def _jugadores(conexion):
-        return conexion.execute(
-            """
-            SELECT p.id, p.nombre, p.nickname, e.nombre AS equipo
-            FROM persona p
-            JOIN equipo e ON e.id = p.equipo_id
-            WHERE p.tipo = 'Jugador'
-            ORDER BY e.nombre, p.nombre
-            """
-        ).fetchall()
-
     def _persona(conexion, persona_id):
         return conexion.execute(
             """
@@ -49,33 +38,6 @@ def crear_router(templates, abrir_conexion, reloj):
             "mensaje": mensaje,
             "error": error,
         }
-
-    @router.get("/", response_class=HTMLResponse)
-    def inicio(request: Request):
-        with abrir_conexion() as conexion:
-            jugadores = [dict(fila) for fila in _jugadores(conexion)]
-            moderadores = [
-                dict(fila)
-                for fila in conexion.execute(
-                    "SELECT id, nombre FROM persona WHERE tipo = 'Moderador' ORDER BY nombre"
-                )
-            ]
-            organizador = conexion.execute(
-                "SELECT id, nombre FROM persona WHERE tipo = 'Organizador' ORDER BY id LIMIT 1"
-            ).fetchone()
-            torneo = conexion.execute(
-                "SELECT nombre, juego FROM torneo ORDER BY id LIMIT 1"
-            ).fetchone()
-        return templates.TemplateResponse(
-            request=request,
-            name="index.html",
-            context={
-                "jugadores": jugadores,
-                "moderadores": moderadores,
-                "organizador": dict(organizador) if organizador else None,
-                "torneo": dict(torneo) if torneo else None,
-            },
-        )
 
     @router.get("/jugador", response_class=HTMLResponse)
     def vista_jugador(

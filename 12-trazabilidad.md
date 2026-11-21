@@ -11,11 +11,12 @@
 | RP-05 | [HU-03](./07-criterios-aceptacion.md) | [CU-04](./09-casos-de-uso.md) | [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Moderador, Resultado, Partida |
 | RP-06 | [HU-02](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Organizador, Jugador |
 | RP-07 | [HU-06](./07-criterios-aceptacion.md) | [CU-06](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Organizador, Partida |
+| RP-07 | [HU-07](./07-criterios-aceptacion.md) | [CU-07](./09-casos-de-uso.md) | — | — | Torneo, Partida, Equipo, Resultado, Anuncio |
 | RP-08 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Partida |
 | RP-09 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | --- | Disponibilidad |
 | RP-10 | [HU-02](./07-criterios-aceptacion.md), [HU-03](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md), [CU-04](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Moderador |
 
-Las historias HU-01 a HU-06 aparecen todas en la matriz.
+Las historias HU-01 a HU-07 aparecen todas en la matriz.
 
 ## Observaciones
 
@@ -27,4 +28,5 @@ Las historias HU-01 a HU-06 aparecen todas en la matriz.
 - **HU-04 a HU-06 no están en `Historias_de_usuario.md` (Entrega 1):** se definen en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). Si el equipo decide agregarlas a la Entrega 1 para mantener coherencia, deben copiarse sin cambiar los IDs.
 - **Reclamos (hallazgo H-05 de la elicitación):** no tiene historia ni requisito en la Entrega 1, así que no aparece en la matriz. Queda como candidato para una próxima iteración.
 - **Terminología:** el "Árbitro" de RP-05 se trata como el **Moderador** de esta entrega, y el Moderador que puede registrar un resultado es el **Moderador asignado** a la partida.
+- **HU-07 (inicio público del torneo):** es una vista de solo lectura sobre RP-07; no agrega un requisito funcional nuevo ni cambia estados. El menú lateral conserva el selector de rol de demostración y no representa autenticación real.
 - **RY-03 (validar API pública):** sigue pendiente. El flujo de [DSS-02](./10-diagramas-secuencia.md) es la respuesta del sistema si la API no existe o no está disponible.

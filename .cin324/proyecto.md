@@ -31,7 +31,10 @@
 - 2026-11-20 — **HU-03 validada:** no se permiten empates; el marcador es el resultado final de la serie. HU-03 incluye el registro, la actualización del bracket con historial y la notificación simulada a Organizador y Jugadores. Se mantiene la inferencia de los equipos desde `disponibilidad` (sin `partida_equipo`). Ficha en `.cin324/historias/HU-03.md`; se ajustaron `07-criterios-aceptacion.md`, `11-diagramas-estado.md` y `08-modelo-dominio.md`.
 - 2026-11-20 — **HU-03 implementada y validada por el estudiante:** los 5 escenarios Gherkin se cumplen; 26 pruebas automáticas pasan (14 de HU-03 y las 12 existentes de HU-04). El cambio se archivó y la capacidad `resultado` quedó en `openspec/specs/resultado/spec.md`. La base `data/app.db` se recreó con los datos nuevos.
 - 2026-11-20 — **HU-06 validada:** el anuncio del ganador se representa sin una clase `Anuncio`; se usa `Partida.estado = Anunciada` y un registro técnico del envío a Discord. La pantalla del Organizador usa la opción B (sección de Anuncios separada). Ficha en `.cin324/historias/HU-06.md`. HU-07 (página pública del torneo, opción C) queda para el ciclo siguiente.
-- 2026-11-20 — **HU-06 implementada:** anuncio automático al confirmar el resultado, tabla `anuncio` (migración `004`), adaptador `DiscordSimulado.anunciar_ganador`, pantalla `/organizador` y acceso desde el inicio. Se agregó la rama «Discord no responde» a DSS-01 y DSS-02. 29 pruebas pasan (17 de servicios, 5 de HU-03, 4 de HU-04 y 3 de HU-06). Pendiente de validación por el estudiante.
+- 2026-11-20 — **HU-06 implementada:** anuncio automático al confirmar el resultado, tabla `anuncio` (migración `004`), adaptador `DiscordSimulado.anunciar_ganador`, pantalla `/organizador` y acceso desde el inicio. Se agregó la rama «Discord no responde» a DSS-01 y DSS-02. 29 pruebas pasan (17 de servicios, 5 de HU-03, 4 de HU-04 y 3 de HU-06).
+- 2026-11-20 — **HU-06 cerrada:** validada por el estudiante; las specs `anuncio` y `resultado` se sincronizaron y el cambio se archivó en `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador`. 29 pruebas pasan.
+- 2026-11-20 — **HU-07 validada:** página pública del torneo (opción C) con anuncios, bracket y partidas de solo lectura; menú lateral derecho con navegación e inicios de sesión de demostración (Jugador, Moderador y Organizador). Se agrega el actor Visitante y el caso de uso CU-07. Ficha en `.cin324/historias/HU-07.md`; cambio `hu-07-pagina-torneo`.
+- 2026-11-20 — **HU-07 implementada:** el inicio (`/`) muestra el torneo con anuncios, bracket y partidas; `/torneo` redirige a `/`; el menú lateral en `base.html` tiene panel de 320 px, cierre con X/`Esc`/clic fuera, foco y atributos ARIA, y el procesador de contexto con los roles de demostración. Se retiran del inicio las tarjetas de rol duplicadas. 4 pruebas nuevas de HU-07 y 33 pruebas en total. Pendiente de validación por el estudiante.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -39,8 +42,8 @@
 - Base de datos: SQLite con la biblioteca estándar `sqlite3` (`data/app.db`); migraciones SQL numeradas en `app/db/migrations/`, registradas en `schema_migrations`
 - Pruebas: pytest + `TestClient` de FastAPI (httpx), una por escenario Gherkin
 - Cómo instalar: `python -m venv .venv`; `.venv\Scripts\activate`; `pip install -r requirements.txt`
-- Cómo ejecutar: `python -m app.db.seed` (crea la base y datos de ejemplo); `uvicorn app.main:app --reload` en http://localhost:8000
-- Cómo probar: `pytest`
+- Cómo ejecutar: `python -m app.db.seed` (crea la base y datos de ejemplo); `.venv\Scripts\python.exe -m uvicorn app.main:app --reload` en http://localhost:8000 (o activar `.venv` y usar `uvicorn app.main:app --reload`)
+- Cómo probar: `.venv\Scripts\python.exe -m pytest` (o `pytest` con el entorno activado)
 - Entorno local preparado el 2026-11-19: Python 3.12.10, `.venv` con dependencias y OpenSpec CLI 2.1.0.
 
 ## Historias
@@ -51,7 +54,8 @@
 | HU-03 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-03-registrar-resultado` | 2026-11-20 | Registro manual del resultado; 5 escenarios y 14 pruebas; spec en `openspec/specs/resultado/spec.md` |
 | HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
 | HU-05 | pendiente | — | — | Cambio de horario; aún no priorizada |
-| HU-06 | implementada — pendiente de validación | `openspec/changes/hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
+| HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
+| HU-07 | implementada — pendiente de validación | `openspec/changes/hu-07-pagina-torneo` | 2026-11-20 | Página pública del torneo y menú lateral; 4 escenarios y 4 pruebas; 33 pruebas en total |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
@@ -59,7 +63,9 @@
 | HU-04 | Validación en chat (no se guardó archivo) | Validada sin observaciones bloqueantes | 2026-11-19 |
 | HU-03 | Validación en chat (no se guardó archivo) | Validada por el estudiante sin observaciones bloqueantes | 2026-11-20 |
 | HU-06 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
-| HU-06 | Implementación (pendiente de validación en chat) | 29 pruebas pasan; `openspec validate --strict` válido | 2026-11-20 |
+| HU-06 | Implementación (validada y archivada) | 29 pruebas pasan; `openspec validate --strict` válido; specs sincronizadas | 2026-11-20 |
+| HU-07 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
+| HU-07 | Implementación (pendiente de validación en chat) | 33 pruebas pasan; `openspec validate --strict` válido; panel revisado en el navegador | 2026-11-20 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |

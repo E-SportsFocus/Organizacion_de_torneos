@@ -209,3 +209,39 @@ Característica: Anuncio automático del ganador de una partida
     Entonces el ganador queda publicado en la plataforma
     Y el anuncio en Discord queda pendiente de envío
 ```
+
+## HU-07 — Inicio público del torneo y navegación lateral
+
+Historia: Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores, el bracket y las partidas, y navegar entre las vistas desde un menú lateral, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
+
+```gherkin
+Característica: Consulta pública del torneo y menú lateral
+
+  Escenario: El visitante consulta el torneo público
+    Dado que el torneo tiene partidas y al menos un ganador anunciado
+    Cuando el visitante abre la página de inicio
+    Entonces ve el nombre y el juego del torneo
+    Y ve los anuncios de los ganadores publicados
+    Y ve el bracket y la tabla de partidas
+    Y no ve acciones para registrar resultados ni para anunciar ganadores
+
+  Escenario: Una partida sin resultado no muestra ganador
+    Dado que una partida está en estado "Pendiente de resultado"
+    Cuando el visitante consulta la página de inicio
+    Entonces la partida aparece como pendiente
+    Y no se muestra un ganador para esa partida
+
+  Escenario: El visitante abre el menú lateral y cambia de rol
+    Dado que el visitante está en cualquier página de la aplicación
+    Cuando pulsa el botón de menú
+    Entonces el panel lateral se abre desde la derecha
+    Y muestra la navegación (Inicio y Bracket) y los accesos de Jugador, Moderador y Organizador
+    Cuando elige un jugador de la lista
+    Entonces entra a la vista del jugador seleccionado
+
+  Escenario: El menú se cierra sin cambiar de página
+    Dado que el panel lateral está abierto
+    Cuando el visitante pulsa la X, presiona Esc o hace clic fuera del panel
+    Entonces el panel se cierra
+    Y la página sigue siendo la misma
+```

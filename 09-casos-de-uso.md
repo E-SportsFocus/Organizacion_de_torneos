@@ -7,6 +7,7 @@
 | Jugador | Humano | Integrante de un equipo que compite en las partidas del torneo. |
 | Moderador | Humano | Arbitra las partidas, aprueba cambios de horario y registra resultados cuando la API no está disponible. |
 | Organizador | Humano | Gestiona el torneo, recibe los resultados y anuncia a los ganadores. |
+| Visitante | Humano | Persona que consulta públicamente el estado del torneo, sin iniciar sesión ni modificar datos. |
 | API del videojuego | Sistema externo | Entrega el resultado oficial de una partida finalizada. |
 | Discord | Sistema externo | Canal donde se publican avisos, notificaciones y anuncios del torneo. |
 
@@ -26,8 +27,9 @@ Archivo fuente: [`./diagramas/casos-de-uso.puml`](./diagramas/casos-de-uso.puml)
 | CU-04 | Registrar el resultado de una partida cuando la API no está disponible | Moderador | [HU-03](./07-criterios-aceptacion.md) |
 | CU-05 | Consultar el bracket actualizado y el resultado notificado | Jugador | [HU-02](./07-criterios-aceptacion.md) |
 | CU-06 | Anunciar al ganador de una partida | Organizador | [HU-06](./07-criterios-aceptacion.md) |
+| CU-07 | Consultar el torneo público (anuncios, bracket y partidas) | Visitante | [HU-07](./07-criterios-aceptacion.md) |
 
-Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).
+Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-07 se incorporó el 2026-11-20 a partir de la validación del estudiante y también se documenta en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).
 
 ## Actores secundarios por caso de uso
 
@@ -38,6 +40,7 @@ Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1
 | CU-04 | Discord | Recibe la notificación del resultado registrado manualmente. |
 | CU-05 | Organizador, Discord | El Organizador recibe la notificación; Discord recibe el aviso del bracket actualizado. |
 | CU-06 | Discord | Recibe el anuncio del ganador en el canal del torneo. |
+| CU-07 | Ninguno | Es una consulta de solo lectura; no notifica ni modifica datos. |
 
 ## Relaciones entre casos de uso
 

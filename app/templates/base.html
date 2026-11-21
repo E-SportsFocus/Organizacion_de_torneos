@@ -13,19 +13,170 @@
             background: #f4f5f8;
             color: #1d2330;
         }
-        header {
+        body.menu-abierto { overflow: hidden; }
+
+        /* Barra superior */
+        .barra {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
             background: #1f2a44;
             color: #fff;
-            padding: 1rem 1.5rem;
+            padding: .75rem 1.5rem;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, .06);
         }
-        header h1 { margin: 0 0 .4rem; font-size: 1.15rem; }
-        header nav a {
-            color: #c8d4f0;
+        .barra .marca {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: .01em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .barra .marca a { color: #fff; text-decoration: none; }
+        .barra .marca span { font-weight: 400; color: #c8d4f0; }
+        .menu-boton {
+            flex: 0 0 auto;
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            cursor: pointer;
+        }
+        .menu-boton:hover { background: rgba(255, 255, 255, .14); }
+        .menu-boton:focus-visible,
+        .menu-cerrar:focus-visible,
+        .menu-enlace:focus-visible {
+            outline: 3px solid #8fb0ff;
+            outline-offset: 2px;
+        }
+
+        /* Panel lateral */
+        .menu-fondo {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            background: rgba(10, 16, 30, .5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .2s ease, visibility .2s ease;
+        }
+        body.menu-abierto .menu-fondo { opacity: 1; visibility: visible; }
+        .menu-lateral {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 50;
+            width: 320px;
+            max-width: 100vw;
+            height: 100dvh;
+            background: #fff;
+            color: #1d2330;
+            box-shadow: -12px 0 30px rgba(15, 25, 50, .2);
+            transform: translateX(100%);
+            transition: transform .22s ease;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        body.menu-abierto .menu-lateral { transform: translateX(0); }
+        .menu-cabecera {
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.1rem;
+            border-bottom: 1px solid #e6e8ef;
+            background: #fff;
+        }
+        .menu-cabecera strong { font-size: 1rem; }
+        .menu-cerrar {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 8px;
+            background: #eef1f8;
+            color: #1d2330;
+            cursor: pointer;
+        }
+        .menu-cerrar:hover { background: #e2e7f4; }
+        .menu-contenido { padding: 1rem 0 1.5rem; }
+        .menu-grupo { padding: .35rem 1.1rem 1rem; }
+        .menu-grupo + .menu-grupo {
+            border-top: 1px solid #eef0f6;
+            padding-top: 1rem;
+        }
+        .menu-grupo h2 {
+            margin: 0 0 .45rem;
+            font-size: .74rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #6b7488;
+        }
+        .menu-enlace {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .75rem;
+            padding: .65rem .7rem;
+            margin: .15rem -.7rem;
+            border-radius: 8px;
             text-decoration: none;
-            margin-right: 1rem;
-            font-size: .9rem;
+            color: #1d2330;
+            font-size: .93rem;
         }
-        header nav a:hover { color: #fff; }
+        .menu-enlace:hover { background: #f2f5fc; }
+        .menu-enlace.activo {
+            background: #e8eefc;
+            color: #1f3f9e;
+            font-weight: 600;
+            box-shadow: inset 3px 0 0 #2f5bd6;
+        }
+        .menu-enlace .equipo {
+            color: #6b7488;
+            font-size: .8rem;
+            font-weight: 400;
+            text-align: right;
+        }
+        .menu-rol { margin-top: .35rem; }
+        .menu-rol-titulo {
+            margin: .7rem 0 .2rem;
+            font-size: .8rem;
+            font-weight: 600;
+            color: #5a6478;
+        }
+        .menu-vacio {
+            margin: .35rem 0;
+            color: #6b7488;
+            font-size: .85rem;
+        }
+
+        @media (max-width: 420px) {
+            .menu-lateral { width: 100vw; }
+        }
+        @media (max-width: 600px) {
+            .barra { padding: .65rem 1rem; }
+            .barra .marca span { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .menu-lateral, .menu-fondo { transition: none; }
+        }
+
+        /* Contenido */
         main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem; }
         h2 { font-size: 1.25rem; margin-top: 0; }
         .tarjeta {
@@ -114,17 +265,139 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>E-Sports Focus — Organización de torneos</h1>
-        <nav>
-            <a href="/">Inicio</a>
-            <a href="/moderador">Moderador</a>
-            <a href="/organizador">Organizador</a>
-            <a href="/bracket">Bracket</a>
-        </nav>
+    <header class="barra">
+        <h1 class="marca">
+            <a href="/">E-Sports Focus <span>— Organización de torneos</span></a>
+        </h1>
+        <button class="menu-boton" type="button" data-menu-abrir
+                aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-lateral">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor"
+                      stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
     </header>
+
+    <div class="menu-fondo" id="menu-fondo" data-menu-fondo aria-hidden="true"></div>
+    <aside class="menu-lateral" id="menu-lateral" aria-label="Menú de navegación"
+           aria-hidden="true" inert>
+        <div class="menu-cabecera">
+            <strong>Menú</strong>
+            <button class="menu-cerrar" type="button" data-menu-cerrar aria-label="Cerrar menú">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="menu-contenido">
+            {% set ruta = request.url.path if request else "" %}
+            {% set persona_actual = request.query_params.get("persona_id") if request else none %}
+            <nav class="menu-grupo" aria-label="Navegación">
+                <h2>Navegación</h2>
+                <a class="menu-enlace {{ 'activo' if ruta == '/' else '' }}" href="/"
+                   {% if ruta == '/' %}aria-current="page"{% endif %}>Inicio</a>
+                <a class="menu-enlace {{ 'activo' if ruta == '/bracket' else '' }}" href="/bracket"
+                   {% if ruta == '/bracket' %}aria-current="page"{% endif %}>Bracket</a>
+            </nav>
+            <section class="menu-grupo" aria-labelledby="menu-entrar">
+                <h2 id="menu-entrar">Entrar como</h2>
+
+                <p class="menu-rol-titulo">Jugador</p>
+                <div class="menu-rol">
+                    {% for jugador in nav_jugadores %}
+                    {% set activo = ruta.startswith('/jugador') and persona_actual == jugador.id|string %}
+                    <a class="menu-enlace {{ 'activo' if activo else '' }}"
+                       href="/jugador?persona_id={{ jugador.id }}"
+                       {% if activo %}aria-current="page"{% endif %}>
+                        <span>{{ jugador.nombre }}</span>
+                        <span class="equipo">{{ jugador.equipo }}</span>
+                    </a>
+                    {% else %}
+                    <p class="menu-vacio">No hay jugadores de ejemplo. Ejecuta
+                        <code>python -m app.db.seed</code>.</p>
+                    {% endfor %}
+                </div>
+
+                <p class="menu-rol-titulo">Moderador</p>
+                <div class="menu-rol">
+                    {% for moderador in nav_moderadores %}
+                    {% set activo = ruta.startswith('/moderador') and persona_actual == moderador.id|string %}
+                    <a class="menu-enlace {{ 'activo' if activo else '' }}"
+                       href="/moderador?persona_id={{ moderador.id }}"
+                       {% if activo %}aria-current="page"{% endif %}>
+                        <span>{{ moderador.nombre }}</span>
+                    </a>
+                    {% else %}
+                    <p class="menu-vacio">No hay moderadores de ejemplo. Ejecuta
+                        <code>python -m app.db.seed</code>.</p>
+                    {% endfor %}
+                </div>
+
+                <p class="menu-rol-titulo">Organizador</p>
+                <div class="menu-rol">
+                    {% if nav_organizador %}
+                    {% set activo = ruta.startswith('/organizador') and persona_actual == nav_organizador.id|string %}
+                    <a class="menu-enlace {{ 'activo' if activo else '' }}"
+                       href="/organizador?persona_id={{ nav_organizador.id }}"
+                       {% if activo %}aria-current="page"{% endif %}>
+                        <span>{{ nav_organizador.nombre }}</span>
+                    </a>
+                    {% else %}
+                    <p class="menu-vacio">No hay organizador de ejemplo. Ejecuta
+                        <code>python -m app.db.seed</code>.</p>
+                    {% endif %}
+                </div>
+            </section>
+        </div>
+    </aside>
+
     <main>
         {% block contenido %}{% endblock %}
     </main>
+
+    <script>
+        (function () {
+            var boton = document.querySelector('[data-menu-abrir]');
+            var panel = document.getElementById('menu-lateral');
+            var fondo = document.getElementById('menu-fondo');
+            var cerrar = document.querySelector('[data-menu-cerrar]');
+            if (!boton || !panel || !fondo || !cerrar) return;
+
+            function abrirMenu() {
+                panel.classList.add('abierto');
+                panel.removeAttribute('inert');
+                panel.setAttribute('aria-hidden', 'false');
+                boton.setAttribute('aria-expanded', 'true');
+                fondo.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('menu-abierto');
+                cerrar.focus();
+            }
+
+            function cerrarMenu() {
+                if (!panel.classList.contains('abierto')) return;
+                panel.classList.remove('abierto');
+                panel.setAttribute('inert', '');
+                panel.setAttribute('aria-hidden', 'true');
+                boton.setAttribute('aria-expanded', 'false');
+                fondo.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('menu-abierto');
+                boton.focus();
+            }
+
+            boton.addEventListener('click', abrirMenu);
+            cerrar.addEventListener('click', cerrarMenu);
+            fondo.addEventListener('click', cerrarMenu);
+            document.addEventListener('keydown', function (evento) {
+                if (evento.key === 'Escape') cerrarMenu();
+            });
+            panel.querySelectorAll('a').forEach(function (enlace) {
+                enlace.addEventListener('click', function () {
+                    panel.classList.remove('abierto');
+                    document.body.classList.remove('menu-abierto');
+                });
+            });
+        })();
+    </script>
 </body>
 </html>
