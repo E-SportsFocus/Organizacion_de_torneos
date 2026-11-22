@@ -33,8 +33,10 @@
 - 2026-11-20 — **HU-06 validada:** el anuncio del ganador se representa sin una clase `Anuncio`; se usa `Partida.estado = Anunciada` y un registro técnico del envío a Discord. La pantalla del Organizador usa la opción B (sección de Anuncios separada). Ficha en `.cin324/historias/HU-06.md`. HU-07 (página pública del torneo, opción C) queda para el ciclo siguiente.
 - 2026-11-20 — **HU-06 implementada:** anuncio automático al confirmar el resultado, tabla `anuncio` (migración `004`), adaptador `DiscordSimulado.anunciar_ganador`, pantalla `/organizador` y acceso desde el inicio. Se agregó la rama «Discord no responde» a DSS-01 y DSS-02. 29 pruebas pasan (17 de servicios, 5 de HU-03, 4 de HU-04 y 3 de HU-06).
 - 2026-11-20 — **HU-06 cerrada:** validada por el estudiante; las specs `anuncio` y `resultado` se sincronizaron y el cambio se archivó en `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador`. 29 pruebas pasan.
-- 2026-11-20 — **HU-07 validada:** página pública del torneo (opción C) con anuncios, bracket y partidas de solo lectura; menú lateral derecho con navegación e inicios de sesión de demostración (Jugador, Moderador y Organizador). Se agrega el actor Visitante y el caso de uso CU-07. Ficha en `.cin324/historias/HU-07.md`; cambio `hu-07-pagina-torneo`.
-- 2026-11-20 — **HU-07 implementada:** el inicio (`/`) muestra el torneo con anuncios, bracket y partidas; `/torneo` redirige a `/`; el menú lateral en `base.html` tiene panel de 320 px, cierre con X/`Esc`/clic fuera, foco y atributos ARIA, y el procesador de contexto con los roles de demostración. Se retiran del inicio las tarjetas de rol duplicadas. 4 pruebas nuevas de HU-07 y 33 pruebas en total. Pendiente de validación por el estudiante.
+- 2026-11-20 — **HU-07 validada:** página pública del torneo (opción C) con anuncios, bracket y partidas de solo lectura; menú desplegable derecho con navegación e inicios de sesión de demostración (Jugador, Moderador y Organizador). Se agrega el actor Visitante y el caso de uso CU-07. Ficha en `.cin324/historias/HU-07.md`; cambio `hu-07-pagina-torneo`.
+- 2026-11-20 — **HU-07 implementada:** el inicio (`/`) muestra el torneo con anuncios, bracket y partidas; `/torneo` redirige a `/`; el menú desplegable en `base.html` usa barra blanca, panel de 360 px alineado a la derecha, cierre con X/`Esc`/clic fuera, foco y atributos ARIA, y el procesador de contexto con los roles de demostración. Se retiran del inicio las tarjetas de rol duplicadas. 4 pruebas nuevas de HU-07 y 33 pruebas en total. Pendiente de validación por el estudiante.
+- 2026-11-21 — **HU-07 ajustada por feedback:** barra blanca con borde, menú desplegable bajo la barra (sin fondo oscuro, 360 px en escritorio y ancho completo en móvil) y «Entrar como» con tres botones de rol que despliegan la lista de personas (una por vez). 33 pruebas y `openspec validate --strict` válidos.
+- 2026-11-21 — **HU-07 validada y archivada:** el estudiante aprobó el inicio público y el menú de tres botones. Spec `torneo-publico` sincronizada en `openspec/specs/torneo-publico/spec.md`; cambio en `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo`.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -55,7 +57,7 @@
 | HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
 | HU-05 | pendiente | — | — | Cambio de horario; aún no priorizada |
 | HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
-| HU-07 | implementada — pendiente de validación | `openspec/changes/hu-07-pagina-torneo` | 2026-11-20 | Página pública del torneo y menú lateral; 4 escenarios y 4 pruebas; 33 pruebas en total |
+| HU-07 | implementada, validada y archivada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; 33 pruebas en total; spec en `openspec/specs/torneo-publico/spec.md` |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
@@ -65,7 +67,7 @@
 | HU-06 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
 | HU-06 | Implementación (validada y archivada) | 29 pruebas pasan; `openspec validate --strict` válido; specs sincronizadas | 2026-11-20 |
 | HU-07 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
-| HU-07 | Implementación (pendiente de validación en chat) | 33 pruebas pasan; `openspec validate --strict` válido; panel revisado en el navegador | 2026-11-20 |
+| HU-07 | Implementación (validada y archivada) | 33 pruebas pasan; `openspec validate --strict` válido; spec `torneo-publico` sincronizada; menú revisado en el navegador | 2026-11-21 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |

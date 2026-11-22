@@ -10,7 +10,7 @@ Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la
 - **HU-04 — Confirmación de disponibilidad** (CU-01).
 - **HU-03 — Registro manual del resultado** (CU-04): resultado, bracket con historial y notificación simulada.
 - **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
-- **HU-07 — Inicio público del torneo** (CU-07): anuncios, bracket y partidas de solo lectura en la página de inicio, con un menú lateral común para navegar y cambiar de rol de demostración.
+- **HU-07 — Inicio público del torneo** (CU-07): anuncios, bracket y partidas de solo lectura en la página de inicio, con un menú desplegable común para navegar y cambiar de rol de demostración.
 
 ### Requisitos
 
@@ -70,7 +70,7 @@ pytest
 1. Abre el menú **☰** y entra como **Marta Arbitraje** (Moderador asignado a las partidas).
 2. En la semifinal **Bravo vs Charlie**, que está `Pendiente de resultado`, escribe el marcador de ambos equipos y pulsa **Registrar resultado**.
 3. La partida pasa a `Anunciada` y aparece «Resultado registrado. Ganador: … El bracket fue actualizado. El ganador quedó anunciado.».
-4. Abre **Bracket** en el menú lateral: verás el marcador, el ganador y el historial de actualizaciones, incluida la final sembrada 2–1.
+4. Abre **Bracket** en el menú desplegable: verás el marcador, el ganador y el historial de actualizaciones, incluida la final sembrada 2–1.
 5. Entra como **Óscar Réplica** (Moderador no asignado): la partida pendiente no muestra el formulario, sino la nota de que solo el Moderador asignado puede registrarla.
 6. El resultado solo admite marcadores enteros mayores o iguales a 0 y **no admite empate**; un envío incompleto o empatado no modifica la partida.
 
@@ -84,13 +84,13 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 4. Registra la semifinal **Bravo vs Charlie** como **Marta Arbitraje**: la partida pasa a `Anunciada` y el anuncio aparece en el panel del Organizador y en el bracket.
 5. Si Discord no responde, el ganador igual queda publicado y el anuncio figura como **pendiente de envío**; las pruebas simulan ese fallo.
 
-### Recorrido de HU-07 (inicio público y menú lateral)
+### Recorrido de HU-07 (inicio público y menú desplegable)
 
 1. Abre <http://localhost:8000>: el inicio ya muestra el torneo, sin pasar por ningún botón.
 2. Verás el nombre y el juego del torneo, la marca **Vista pública · solo lectura**, los **Anuncios de ganadores**, el **Bracket** y la tabla de **Partidas**.
 3. La final sembrada aparece como ganadora; la semifinal pendiente muestra **Sin resultado** y no inventa un ganador.
-4. Pulsa el botón **☰** de la derecha: el panel se abre desde la derecha con **Navegación** (Inicio y Bracket) y **Entrar como** (los 8 jugadores agrupados por equipo, los 2 moderadores y la organizadora).
-5. Elige un jugador, un moderador o la organizadora; entrarás a su vista. Cierra el panel con la **X**, con **Esc** o tocando fuera.
+4. Pulsa el botón **☰** de la derecha: el menú se despliega bajo la barra, alineado a la derecha, con **Navegación** (Inicio y Bracket) y **Entrar como**, que muestra tres botones: **Jugador**, **Moderador** y **Organizador**.
+5. Pulsa uno de los tres botones para desplegar la lista de personas de ese rol (solo una lista a la vez). Elige una persona y entrarás a su vista. Cierra el menú con la **X**, con **Esc** o tocando fuera.
 6. La página pública no tiene formularios ni botones para registrar resultados o anunciar ganadores: es solo de lectura.
 7. El enlace anterior `/torneo` redirige al inicio, así que no se rompe si lo tenías guardado.
 

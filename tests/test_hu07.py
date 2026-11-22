@@ -95,7 +95,7 @@ def test_partida_sin_resultado_no_muestra_ganador(cliente, ahora):
     assert "Ganador anunciado" not in html
 
 
-def test_menu_lateral_ofrece_navegacion_y_roles(cliente):
+def test_menu_desplegable_ofrece_navegacion_y_roles(cliente):
     """HU-07 · El visitante abre el menú lateral y cambia de rol"""
     http, datos = cliente
     alfa = datos.equipo("Equipo Alfa")
@@ -114,6 +114,13 @@ def test_menu_lateral_ofrece_navegacion_y_roles(cliente):
     assert 'href="/"' in html
     assert 'href="/bracket"' in html
     assert 'href="/torneo"' not in html
+    assert html.count('<button class="menu-enlace menu-rol-boton"') == 3
+    assert 'aria-controls="menu-rol-jugador"' in html
+    assert 'aria-controls="menu-rol-moderador"' in html
+    assert 'aria-controls="menu-rol-organizador"' in html
+    assert 'id="menu-rol-jugador"' in html
+    assert 'id="menu-rol-moderador"' in html
+    assert 'id="menu-rol-organizador"' in html
     assert "Ana Ríos" in html
     assert "Equipo Alfa" in html
     assert "Marta Arbitraje" in html
@@ -132,8 +139,9 @@ def test_menu_se_cierra_sin_cambiar_de_pagina(cliente):
     assert respuesta.status_code == 200
     html = respuesta.text
     assert 'data-menu-cerrar' in html
-    assert 'id="menu-fondo"' in html
     assert 'aria-label="Cerrar menú"' in html
     assert "Escape" in html
     assert "cerrarMenu" in html
     assert "inert" in html
+    assert "panel.contains(evento.target)" in html
+    assert "menu-fondo" not in html

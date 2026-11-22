@@ -212,10 +212,10 @@ Característica: Anuncio automático del ganador de una partida
 
 ## HU-07 — Inicio público del torneo y navegación lateral
 
-Historia: Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores, el bracket y las partidas, y navegar entre las vistas desde un menú lateral, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
+Historia: Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores, el bracket y las partidas, y navegar entre las vistas desde un menú desplegable, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
 
 ```gherkin
-Característica: Consulta pública del torneo y menú lateral
+Característica: Consulta pública del torneo y menú desplegable
 
   Escenario: El visitante consulta el torneo público
     Dado que el torneo tiene partidas y al menos un ganador anunciado
@@ -231,16 +231,18 @@ Característica: Consulta pública del torneo y menú lateral
     Entonces la partida aparece como pendiente
     Y no se muestra un ganador para esa partida
 
-  Escenario: El visitante abre el menú lateral y cambia de rol
+  Escenario: El visitante abre el menú desplegable y cambia de rol
     Dado que el visitante está en cualquier página de la aplicación
     Cuando pulsa el botón de menú
-    Entonces el panel lateral se abre desde la derecha
-    Y muestra la navegación (Inicio y Bracket) y los accesos de Jugador, Moderador y Organizador
+    Entonces el menú se despliega bajo la barra, alineado a la derecha
+    Y muestra la navegación (Inicio y Bracket) y los botones Jugador, Moderador y Organizador
+    Cuando pulsa el botón Jugador
+    Entonces se despliega la lista de jugadores y se cierra cualquier otra lista
     Cuando elige un jugador de la lista
     Entonces entra a la vista del jugador seleccionado
 
   Escenario: El menú se cierra sin cambiar de página
-    Dado que el panel lateral está abierto
+    Dado que el menú está abierto
     Cuando el visitante pulsa la X, presiona Esc o hace clic fuera del panel
     Entonces el panel se cierra
     Y la página sigue siendo la misma
