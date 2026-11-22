@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.servicios import anuncio as servicio_anuncio
+from app.servicios import cambio_horario as servicio_cambio
 from app.servicios import disponibilidad as servicio_disponibilidad
 from app.servicios import resultado as servicio
 
@@ -93,10 +94,19 @@ def crear_router(templates, abrir_conexion, reloj, discord=None):
             else:
                 mensaje = servicio.MENSAJE_REGISTRADO
 
+        solicitudes = servicio_cambio.listar_solicitudes_moderador(
+            conexion, persona["id"], reloj()
+        )
+        for s in solicitudes:
+            s["fecha_solicitud_texto"] = _formatear_fecha(s["fecha_solicitud"])
+            s["nuevo_horario_texto"] = _formatear_fecha(s["nuevo_horario"])
+            s["partida_fecha_texto"] = _formatear_fecha(s["partida_fecha_hora"])
+
         return {
             "persona": dict(persona),
             "moderador": persona["nombre"],
             "partidas": partidas,
+            "solicitudes": solicitudes,
             "mensaje": mensaje,
             "error": error,
             "valores": valores or {},

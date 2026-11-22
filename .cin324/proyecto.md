@@ -37,6 +37,7 @@
 - 2026-11-20 — **HU-07 implementada:** el inicio (`/`) muestra el torneo con anuncios, bracket y partidas; `/torneo` redirige a `/`; el menú desplegable en `base.html` usa barra blanca, panel de 360 px alineado a la derecha, cierre con X/`Esc`/clic fuera, foco y atributos ARIA, y el procesador de contexto con los roles de demostración. Se retiran del inicio las tarjetas de rol duplicadas. 4 pruebas nuevas de HU-07 y 33 pruebas en total. Pendiente de validación por el estudiante.
 - 2026-11-21 — **HU-07 ajustada por feedback:** barra blanca con borde, menú desplegable bajo la barra (sin fondo oscuro, 360 px en escritorio y ancho completo en móvil) y «Entrar como» con tres botones de rol que despliegan la lista de personas (una por vez). 33 pruebas y `openspec validate --strict` válidos.
 - 2026-11-21 — **HU-07 validada y archivada:** el estudiante aprobó el inicio público y el menú de tres botones. Spec `torneo-publico` sincronizada en `openspec/specs/torneo-publico/spec.md`; cambio en `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo`.
+- 2026-11-22 — **Ajuste de Inicio y Paleta de colores:** se retiró la tarjeta redundante de Partidas del inicio (`/`), dejando solo Anuncios y Bracket resumido con enlace hacia `/bracket` (donde reside la tabla completa con marcadores e historial). Se incorporó la paleta de colores personalizada (`#F4E9CD`, `#9DBEBB`, `#77ACA2`, `#468189`) mediante variables CSS armónicas para mejorar la estética visual y cumplir criterios de contraste/accesibilidad. Se actualizaron los artefactos de requisitos y la especificación.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -55,7 +56,7 @@
 | HU-02 | pendiente | — | — | Notificación del resultado; necesita un resultado de HU-03 |
 | HU-03 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-03-registrar-resultado` | 2026-11-20 | Registro manual del resultado; 5 escenarios y 14 pruebas; spec en `openspec/specs/resultado/spec.md` |
 | HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
-| HU-05 | pendiente | — | — | Cambio de horario; aún no priorizada |
+| HU-05 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-05-cambio-horario` | 2026-11-22 | Solicitud y resolución de cambio de horario; 5 escenarios y 5 pruebas; 38 pruebas en total; spec en `openspec/specs/cambio-horario/spec.md` |
 | HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
 | HU-07 | implementada, validada y archivada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; 33 pruebas en total; spec en `openspec/specs/torneo-publico/spec.md` |
 
@@ -68,8 +69,11 @@
 | HU-06 | Implementación (validada y archivada) | 29 pruebas pasan; `openspec validate --strict` válido; specs sincronizadas | 2026-11-20 |
 | HU-07 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
 | HU-07 | Implementación (validada y archivada) | 33 pruebas pasan; `openspec validate --strict` válido; spec `torneo-publico` sincronizada; menú revisado en el navegador | 2026-11-21 |
+| HU-05 | Implementación (validada) | 38 pruebas pasan; `openspec validate` válido; capacidad `cambio-horario` especificada y probada | 2026-11-22 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |
 |--------|-------------------|--------|-------|
-| — | — | — | — |
+| Ajuste semántico de disponibilidad (colores verde/amarillo/rojo, estado Cancelado por plazo vencido) y retiro de emojis excepto copa | HU-04, HU-07 | Petición del estudiante para clarificar estados de disponibilidad y refinar la estética visual | 2026-11-22 |
+| Rediseño heurístico UX/UI (4 fases: Arquitectura Inicio/Bracket, Wayfinding/Migas, Hero y VS-inline, Responsividad y Badges) | HU-07 | Auditoría de usabilidad y jerarquía visual aprobada por el estudiante | 2026-11-22 |
+| Simplificación de inicio (sin tabla Partidas redundante) y paleta modo oscuro/claro con alternador | HU-07 | Petición del estudiante para clarificar la vista pública y dotar de identidad visual con tema dual | 2026-11-22 |

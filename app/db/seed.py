@@ -123,6 +123,28 @@ def sembrar(conexion, ahora=None):
         ),
     )
 
+    # Sembrar una solicitud de cambio de horario de ejemplo para Charlie vs Delta
+    charlie_jugador = conexion.execute(
+        "SELECT id FROM persona WHERE equipo_id = ? LIMIT 1",
+        (equipos["Equipo Charlie"],),
+    ).fetchone()["id"]
+    conexion.execute(
+        """
+        INSERT INTO solicitud_cambio_horario (
+            partida_id, equipo_id, solicitante_id, nuevo_horario,
+            fecha_solicitud, estado
+        )
+        VALUES (?, ?, ?, ?, ?, 'Solicitada')
+        """,
+        (
+            partidas_ids[1],
+            equipos["Equipo Charlie"],
+            charlie_jugador,
+            (ahora + timedelta(days=2, hours=4)).isoformat(timespec="minutes"),
+            (ahora - timedelta(hours=1)).isoformat(timespec="seconds"),
+        ),
+    )
+
     conexion.commit()
     return True
 

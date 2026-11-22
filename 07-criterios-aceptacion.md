@@ -210,9 +210,9 @@ Característica: Anuncio automático del ganador de una partida
     Y el anuncio en Discord queda pendiente de envío
 ```
 
-## HU-07 — Inicio público del torneo y navegación lateral
+## HU-07 — Inicio público del torneo y menú desplegable
 
-Historia: Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores, el bracket y las partidas, y navegar entre las vistas desde un menú desplegable, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
+Historia: Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores y el bracket resumido (con enlace al detalle completo de partidas), y navegar entre las vistas desde un menú desplegable, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
 
 ```gherkin
 Característica: Consulta pública del torneo y menú desplegable
@@ -222,7 +222,7 @@ Característica: Consulta pública del torneo y menú desplegable
     Cuando el visitante abre la página de inicio
     Entonces ve el nombre y el juego del torneo
     Y ve los anuncios de los ganadores publicados
-    Y ve el bracket y la tabla de partidas
+    Y ve el bracket resumido y un enlace al detalle en el bracket
     Y no ve acciones para registrar resultados ni para anunciar ganadores
 
   Escenario: Una partida sin resultado no muestra ganador

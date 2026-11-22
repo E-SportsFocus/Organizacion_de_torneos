@@ -1,13 +1,13 @@
 # torneo-publico Specification
 
 ## Purpose
-Permite que un Visitante consulte al abrir el inicio, de forma pública y sin iniciar sesión, los anuncios de ganadores, el bracket y las partidas del torneo, y que navegue entre las vistas desde un menú desplegable con accesos de demostración para cada rol.
+Permite que un Visitante consulte al abrir el inicio, de forma pública y sin iniciar sesión, los anuncios de ganadores y el bracket resumido (con enlace al detalle de partidas en `/bracket`), y que navegue entre las vistas desde un menú desplegable con accesos de demostración para cada rol.
 
 ## Requirements
 
 ### Requirement: Inicio público de solo lectura con el estado del torneo
 
-El sistema DEBE (SHALL) mostrar en la página de inicio el nombre y el juego del torneo, los anuncios de ganadores publicados, el bracket y la tabla de partidas, sin ofrecer acciones para registrar resultados, anunciar ganadores ni modificar datos.
+El sistema DEBE (SHALL) mostrar en la página de inicio el nombre y el juego del torneo, los anuncios de ganadores publicados, el bracket resumido y un enlace hacia el detalle completo en `/bracket`, sin ofrecer acciones para registrar resultados, anunciar ganadores ni modificar datos.
 
 #### Scenario: El visitante consulta el torneo público
 
@@ -15,7 +15,7 @@ El sistema DEBE (SHALL) mostrar en la página de inicio el nombre y el juego del
 - **WHEN** el visitante abre la página de inicio
 - **THEN** ve el nombre y el juego del torneo
 - **AND** ve los anuncios de los ganadores publicados
-- **AND** ve el bracket y la tabla de partidas
+- **AND** ve el bracket resumido y el enlace al detalle en el bracket
 - **AND** no ve acciones para registrar resultados ni para anunciar ganadores
 
 ### Requirement: Las partidas sin resultado no muestran ganador

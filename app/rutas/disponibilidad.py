@@ -1,8 +1,9 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from fastapi import APIRouter, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from app.servicios import cambio_horario as servicio_cambio
 from app.servicios import disponibilidad as servicio
 
 MENSAJE_CONFIRMADA_OK = "Disponibilidad del equipo confirmada."
@@ -27,14 +28,30 @@ def crear_router(templates, abrir_conexion, reloj):
         ).fetchone()
 
     def _contexto_jugador(conexion, persona, mensaje=None, error=None):
+        ahora = reloj()
         partidas = servicio.listar_partidas_equipo(
-            conexion, persona["equipo_id"], reloj()
+            conexion, persona["equipo_id"], ahora
         )
         for partida in partidas:
             partida["fecha_texto"] = _formatear_fecha(partida["fecha_hora"])
+            f_dt = datetime.fromisoformat(partida["fecha_hora"])
+            partida["puede_solicitar_cambio"] = (
+                partida["estado"] == "Programada"
+                and ahora < f_dt - timedelta(hours=2)
+            )
+
+        solicitudes = servicio_cambio.listar_solicitudes_equipo(
+            conexion, persona["equipo_id"], ahora
+        )
+        for s in solicitudes:
+            s["fecha_solicitud_texto"] = _formatear_fecha(s["fecha_solicitud"])
+            s["nuevo_horario_texto"] = _formatear_fecha(s["nuevo_horario"])
+            s["partida_fecha_texto"] = _formatear_fecha(s["partida_fecha_hora"])
+
         return {
             "persona": dict(persona),
             "partidas": partidas,
+            "solicitudes": solicitudes,
             "mensaje": mensaje,
             "error": error,
         }
@@ -49,10 +66,11 @@ def crear_router(templates, abrir_conexion, reloj):
             persona = _persona(conexion, persona_id)
             if persona is None:
                 raise HTTPException(status_code=404, detail="Jugador no encontrado")
+            msg_texto = MENSAJE_CONFIRMADA_OK if mensaje == "ok" else mensaje
             contexto = _contexto_jugador(
                 conexion,
                 persona,
-                mensaje=MENSAJE_CONFIRMADA_OK if mensaje == "ok" else None,
+                mensaje=msg_texto,
             )
         return templates.TemplateResponse(
             request=request, name="jugador.html", context=contexto

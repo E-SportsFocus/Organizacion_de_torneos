@@ -38,8 +38,8 @@ def _torneo_con_resultado(datos, ahora):
     }
 
 
-def test_pagina_publica_muestra_anuncios_bracket_y_partidas(cliente, ahora):
-    """HU-07 · El visitante consulta el torneo público"""
+def test_pagina_publica_muestra_anuncios_y_bracket(cliente, ahora):
+    """HU-07 · El visitante consulta el torneo público (anuncios y bracket)"""
     http, datos = cliente
     _torneo_con_resultado(datos, ahora)
 
@@ -54,13 +54,20 @@ def test_pagina_publica_muestra_anuncios_bracket_y_partidas(cliente, ahora):
     assert "Equipo Alfa es el ganador de Final" in html
     assert "Ganador anunciado" in html
     assert "Bracket" in html
-    assert "Partidas" in html
+    assert "<h3 style=\"margin-top:0\">Partidas</h3>" not in html
+    assert "Ver detalle completo de partidas y marcador en Bracket" in html
     assert "Equipo Bravo" in html
     assert "<form" not in html
     assert "Registrar resultado" not in html
     assert "Anunciar ganador" not in html
     assert "Selector de rol de demostración" not in html
     assert "Ver el torneo público" not in html
+
+    # La tabla detallada de partidas se conserva en /bracket
+    respuesta_bracket = http.get("/bracket")
+    assert respuesta_bracket.status_code == 200
+    assert "Partidas" in respuesta_bracket.text
+    assert "Historial de actualizaciones" in respuesta_bracket.text
 
     redireccion = http.get("/torneo", follow_redirects=False)
 

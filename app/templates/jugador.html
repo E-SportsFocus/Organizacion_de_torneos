@@ -8,49 +8,119 @@
     {% if mensaje %}<div class="aviso aviso-ok">{{ mensaje }}</div>{% endif %}
     {% if error %}<div class="aviso aviso-error">{{ error }}</div>{% endif %}
 
-    <h3>Partidas del equipo</h3>
+    <h3 style="margin-top:1.25rem">Partidas del equipo</h3>
     {% if partidas %}
-    <table>
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Fase</th>
-                <th>Estado de la partida</th>
-                <th>Disponibilidad</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for partida in partidas %}
-            <tr>
-                <td>{{ partida.fecha_texto }}</td>
-                <td>{{ partida.fase }}</td>
-                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
-                <td>
-                    {% if partida.confirmada == "Confirmada" %}
-                    <span class="etiqueta etiqueta-confirmada">Confirmada</span>
-                    {% else %}
-                    <span class="etiqueta etiqueta-pendiente">Pendiente</span>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if partida.estado == "Programada" and partida.confirmada == "Pendiente" %}
-                    <form method="post" action="/disponibilidad/{{ partida.disponibilidad_id }}/confirmar">
-                        <input type="hidden" name="persona_id" value="{{ persona.id }}">
-                        <button class="boton" type="submit">Confirmar disponibilidad</button>
-                    </form>
-                    {% elif partida.confirmada == "Confirmada" %}
-                    <span class="suave">Confirmada el {{ partida.fecha_confirmacion }}</span>
-                    {% else %}
-                    <span class="suave">Plazo vencido</span>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="tabla-contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Fase</th>
+                    <th>Estado de la partida</th>
+                    <th>Disponibilidad</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partida in partidas %}
+                <tr>
+                    <td>{{ partida.fecha_texto }}</td>
+                    <td><strong>{{ partida.fase }}</strong></td>
+                    <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
+                    <td>
+                        {% if partida.confirmada == "Confirmada" %}
+                        <span class="etiqueta etiqueta-confirmada">Confirmada</span>
+                        {% elif partida.estado != "Programada" %}
+                        <span class="etiqueta etiqueta-cancelada">Cancelado</span>
+                        {% else %}
+                        <span class="etiqueta etiqueta-pendiente">Pendiente</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if partida.estado == "Programada" and partida.confirmada == "Pendiente" %}
+                        <form method="post" action="/disponibilidad/{{ partida.disponibilidad_id }}/confirmar" style="margin-bottom:.35rem">
+                            <input type="hidden" name="persona_id" value="{{ persona.id }}">
+                            <button class="boton" type="submit">Confirmar disponibilidad</button>
+                        </form>
+                        {% elif partida.confirmada == "Confirmada" %}
+                        <span class="suave">Confirmada el {{ partida.fecha_confirmacion }}</span>
+                        {% else %}
+                        <span class="texto-vencido">Plazo vencido</span>
+                        {% endif %}
+
+                        {% if partida.puede_solicitar_cambio %}
+                        <details style="margin-top:.4rem">
+                            <summary class="suave" style="cursor:pointer; font-size:.82rem">Solicitar cambio de horario</summary>
+                            <form method="post" action="/cambio-horario/solicitar" style="margin-top:.4rem; display:flex; gap:.4rem; align-items:center; flex-wrap:wrap">
+                                <input type="hidden" name="persona_id" value="{{ persona.id }}">
+                                <input type="hidden" name="partida_id" value="{{ partida.partida_id }}">
+                                <input type="datetime-local" name="nuevo_horario" required style="padding:.3rem; border:1px solid var(--color-borde); border-radius:6px; background:var(--color-surface); color:var(--color-texto); font-size:.82rem">
+                                <button class="boton" type="submit" style="padding:.3rem .6rem; font-size:.8rem">Enviar solicitud</button>
+                            </form>
+                        </details>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
     {% else %}
     <p class="suave">El equipo no tiene partidas programadas.</p>
+    {% endif %}
+</div>
+
+<div class="tarjeta">
+    <h3 style="margin-top:0">Solicitudes de cambio de horario</h3>
+    {% if solicitudes %}
+    <div class="tabla-contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Partida</th>
+                    <th>Horario original</th>
+                    <th>Nuevo horario propuesto</th>
+                    <th>Fecha de solicitud</th>
+                    <th>Estado</th>
+                    <th>Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for s in solicitudes %}
+                <tr>
+                    <td><strong>{{ s.fase }}</strong></td>
+                    <td class="suave">{{ s.partida_fecha_texto }}</td>
+                    <td><strong>{{ s.nuevo_horario_texto }}</strong></td>
+                    <td class="suave">{{ s.fecha_solicitud_texto }}</td>
+                    <td>
+                        {% if s.estado == "Aprobada" %}
+                        <span class="etiqueta etiqueta-confirmada">Aprobada</span>
+                        {% elif s.estado == "Solicitada" %}
+                        <span class="etiqueta etiqueta-pendiente">Solicitada</span>
+                        {% elif s.estado == "Rechazada" %}
+                        <span class="etiqueta etiqueta-cancelada">Rechazada</span>
+                        {% else %}
+                        <span class="etiqueta etiqueta-cancelada">Vencida</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if s.estado == "Rechazada" and s.motivo_rechazo %}
+                        <span class="suave">Motivo: {{ s.motivo_rechazo }}</span>
+                        {% elif s.estado == "Vencida" %}
+                        <span class="suave">La partida conserva su horario original</span>
+                        {% elif s.estado == "Aprobada" %}
+                        <span class="suave">Reprogramada por {{ s.moderador_nombre or "Moderador" }}</span>
+                        {% else %}
+                        <span class="suave">Esperando decisión del Moderador</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="suave">El equipo no ha realizado solicitudes de cambio de horario.</p>
     {% endif %}
 </div>
 {% endblock %}

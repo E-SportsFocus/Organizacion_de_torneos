@@ -7,27 +7,37 @@
     <p class="suave">No hay torneos registrados. Ejecuta <code>python -m app.db.seed</code>.</p>
 </div>
 {% else %}
-<div class="tarjeta">
-    <p class="etiqueta etiqueta-estado">Vista pública · solo lectura</p>
-    <h2 style="margin-top:.6rem">{{ torneo.nombre }}</h2>
-    <p class="suave" style="margin-bottom:0">
-        {{ torneo.juego }}
+<section class="hero-banner">
+    <div class="hero-insignia">
+        <span class="etiqueta etiqueta-estado">Vista pública · solo lectura</span>
+        <span class="hero-juego">{{ torneo.juego }}</span>
+    </div>
+    <h2 class="hero-titulo">{{ torneo.nombre }}</h2>
+    <p class="hero-meta suave">
         {% if bracket and bracket.ultima_actualizacion_texto %}
-        · Última actualización: {{ bracket.ultima_actualizacion_texto }}
+        Última actualización: {{ bracket.ultima_actualizacion_texto }}
         {% else %}
-        · Todavía no se ha registrado ningún resultado.
+        Todavía no se ha registrado ningún resultado.
         {% endif %}
     </p>
-</div>
+</section>
 
-<div class="tarjeta">
-    <h3 style="margin-top:0">Anuncios de ganadores</h3>
+<div class="tarjeta tarjeta-anuncios">
+    <div class="seccion-cabecera">
+        <div class="seccion-icono" aria-hidden="true">🏆</div>
+        <div>
+            <h3 style="margin-top:0; margin-bottom:.15rem">Anuncios de ganadores</h3>
+            <p class="suave seccion-bajada">Resultados oficiales confirmados y comunicados</p>
+        </div>
+    </div>
     {% for partida in anuncios %}
     <div class="anuncio">
         <p class="titulo">{{ partida.resultado.ganador.equipo }} es el ganador de {{ partida.fase }}</p>
         <p class="detalle">{{ partida.resultado.marcador_texto }}</p>
-        <span class="etiqueta etiqueta-confirmada">Ganador anunciado</span>
-        <span class="suave"> · {{ partida.anuncio.fecha_texto }}</span>
+        <div class="anuncio-pie">
+            <span class="etiqueta etiqueta-confirmada">Ganador anunciado</span>
+            <span class="suave"> · {{ partida.anuncio.fecha_texto }}</span>
+        </div>
     </div>
     {% else %}
     <p class="suave">
@@ -38,97 +48,55 @@
 </div>
 
 <div class="tarjeta">
-    <h3 style="margin-top:0">Bracket</h3>
+    <div class="seccion-cabecera">
+        <div>
+            <h3 style="margin-top:0; margin-bottom:.15rem">Bracket</h3>
+            <p class="suave seccion-bajada">Resumen de enfrentamientos del torneo</p>
+        </div>
+    </div>
     {% if partidas %}
-    <table>
-        <thead>
-            <tr>
-                <th>Fase</th>
-                <th>Fecha</th>
-                <th>Equipos</th>
-                <th>Ganador</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for partida in partidas %}
-            <tr>
-                <td>{{ partida.fase }}</td>
-                <td>{{ partida.fecha_texto }}</td>
-                <td>
-                    <ul class="equipos">
-                        {% for equipo in partida.equipos %}
-                        <li>{{ equipo.equipo }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    {% if partida.resultado %}
-                    {{ partida.resultado.ganador.equipo }}
-                    {% else %}
-                    <span class="suave">—</span>
-                    {% endif %}
-                </td>
-                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <p class="suave">El torneo no tiene partidas registradas.</p>
-    {% endif %}
-</div>
-
-<div class="tarjeta">
-    <h3 style="margin-top:0">Partidas</h3>
-    {% if partidas %}
-    <table>
-        <thead>
-            <tr>
-                <th>Fase</th>
-                <th>Fecha</th>
-                <th>Equipos</th>
-                <th>Marcador</th>
-                <th>Ganador</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for partida in partidas %}
-            <tr>
-                <td>{{ partida.fase }}</td>
-                <td>{{ partida.fecha_texto }}</td>
-                <td>
-                    <ul class="equipos">
-                        {% for equipo in partida.equipos %}
-                        <li>
-                            {{ equipo.equipo }}
-                            {% if partida.resultado %}
-                            <strong>{{ partida.resultado.marcadores[equipo.equipo_id] }}</strong>
+    <div class="tabla-contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Fecha</th>
+                    <th>Equipos</th>
+                    <th>Ganador</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partida in partidas %}
+                <tr>
+                    <td><strong>{{ partida.fase }}</strong></td>
+                    <td class="suave">{{ partida.fecha_texto }}</td>
+                    <td>
+                        <div class="vs-inline">
+                            {% for equipo in partida.equipos %}
+                            <span class="equipo-nombre {% if partida.resultado and partida.resultado.ganador.equipo == equipo.equipo %}equipo-ganador{% endif %}">{{ equipo.equipo }}</span>
+                            {% if not loop.last %}
+                            <span class="vs-separador">vs</span>
                             {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    {% if partida.resultado %}
-                    {{ partida.resultado.marcador_texto }}
-                    {% else %}
-                    <span class="suave">Sin resultado</span>
-                    {% endif %}
-                </td>
-                <td>
-                    {% if partida.resultado %}
-                    {{ partida.resultado.ganador.equipo }}
-                    {% else %}
-                    <span class="suave">—</span>
-                    {% endif %}
-                </td>
-                <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                            {% endfor %}
+                        </div>
+                    </td>
+                    <td>
+                        {% if partida.resultado %}
+                        <span class="ganador-destacado">{{ partida.resultado.ganador.equipo }}</span>
+                        {% else %}
+                        <span class="suave">Sin resultado</span>
+                        {% endif %}
+                    </td>
+                    <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="bracket-cta">
+        <a href="/bracket" class="boton-enlace">Ver detalle completo de partidas y marcador en Bracket →</a>
+    </div>
     {% else %}
     <p class="suave">El torneo no tiene partidas registradas.</p>
     {% endif %}

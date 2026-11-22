@@ -10,6 +10,12 @@ class Discord:
     def anunciar_ganador(self, conexion, partida, ganador, marcador_texto, fecha_hora):
         raise NotImplementedError
 
+    def avisar_solicitud_cambio(self, conexion, partida_id, equipo, nuevo_horario, fecha_hora):
+        raise NotImplementedError
+
+    def avisar_resolucion_cambio(self, conexion, partida_id, estado, nuevo_horario, motivo, fecha_hora):
+        raise NotImplementedError
+
 
 class DiscordSimulado(Discord):
     """Simulación local: no hay red; cada llamada queda en `integraciones_log`."""
@@ -46,6 +52,50 @@ class DiscordSimulado(Discord):
             """
             INSERT INTO integraciones_log (sistema, operacion, detalle, fecha_hora)
             VALUES ('Discord', 'anunciar_ganador', ?, ?)
+            """,
+            (detalle, fecha_hora),
+        )
+        return True
+
+    def avisar_solicitud_cambio(self, conexion, partida_id, equipo, nuevo_horario, fecha_hora):
+        mensaje = f"Aviso en canal de Discord: {equipo} solicitó cambio de horario para la partida #{partida_id} proponiendo {nuevo_horario}."
+        detalle = json.dumps(
+            {
+                "partida_id": partida_id,
+                "equipo": equipo,
+                "nuevo_horario": nuevo_horario,
+                "mensaje": mensaje,
+            },
+            ensure_ascii=False,
+        )
+        conexion.execute(
+            """
+            INSERT INTO integraciones_log (sistema, operacion, detalle, fecha_hora)
+            VALUES ('Discord', 'aviso_solicitud_cambio', ?, ?)
+            """,
+            (detalle, fecha_hora),
+        )
+        return True
+
+    def avisar_resolucion_cambio(self, conexion, partida_id, estado, nuevo_horario, motivo, fecha_hora):
+        if estado == "Aprobada":
+            mensaje = f"Aviso en canal de Discord: Partida #{partida_id} reprogramada con éxito. Nuevo horario: {nuevo_horario}."
+        else:
+            mensaje = f"Aviso en canal de Discord: Solicitud de cambio de horario para la partida #{partida_id} rechazada. Motivo: {motivo}."
+        detalle = json.dumps(
+            {
+                "partida_id": partida_id,
+                "estado": estado,
+                "nuevo_horario": nuevo_horario,
+                "motivo": motivo,
+                "mensaje": mensaje,
+            },
+            ensure_ascii=False,
+        )
+        conexion.execute(
+            """
+            INSERT INTO integraciones_log (sistema, operacion, detalle, fecha_hora)
+            VALUES ('Discord', 'aviso_resolucion_cambio', ?, ?)
             """,
             (detalle, fecha_hora),
         )

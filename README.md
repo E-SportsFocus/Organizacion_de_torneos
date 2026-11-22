@@ -10,7 +10,7 @@ Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la
 - **HU-04 — Confirmación de disponibilidad** (CU-01).
 - **HU-03 — Registro manual del resultado** (CU-04): resultado, bracket con historial y notificación simulada.
 - **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
-- **HU-07 — Inicio público del torneo** (CU-07): anuncios, bracket y partidas de solo lectura en la página de inicio, con un menú desplegable común para navegar y cambiar de rol de demostración.
+- **HU-07 — Inicio público del torneo** (CU-07): anuncios y bracket resumido de solo lectura en la página de inicio (con enlace al detalle de partidas en `/bracket`), con un menú desplegable común para navegar y cambiar de rol de demostración.
 
 ### Requisitos
 
@@ -76,6 +76,15 @@ pytest
 
 La notificación al Organizador y a los Jugadores se guarda en la tabla `notificacion`, el anuncio y su estado de envío en la tabla `anuncio`, y las llamadas a Discord se simulan en `integraciones_log`: no hay integración real con Discord ni con la API del videojuego.
 
+### Recorrido de HU-05 (solicitud de cambio de horario)
+
+1. Abre el menú **☰** y entra como **Ana Ríos** (Equipo Alfa) o **Elena Gómez** (Equipo Charlie).
+2. En las partidas programadas donde falten más de 2 horas para el inicio, despliega «Solicitar cambio de horario», selecciona un nuevo horario propuesto y pulsa «Enviar solicitud».
+3. Si la partida inicia en 2 horas o menos, el sistema rechaza la solicitud e informa que el plazo ya venció.
+4. Entra como **Marta Arbitraje** (Moderador asignado): en la sección «Solicitudes de cambio de horario» verás la solicitud del equipo.
+5. Puedes pulsar **Aprobar** (la partida se reprograma con el nuevo horario y se avisa a Discord) o desplegar **Rechazar...** e indicar un motivo obligatorio (la partida conserva su horario original).
+6. Si una solicitud queda sin decisión y se alcanza el plazo límite de 2 horas antes de la partida, la solicitud vence automáticamente y la partida conserva su horario.
+
 ### Recorrido de HU-06 (anuncio del ganador)
 
 1. Abre el menú **☰** y elige **Olga Organización** en **Entrar como** (Organizador).
@@ -87,11 +96,11 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 ### Recorrido de HU-07 (inicio público y menú desplegable)
 
 1. Abre <http://localhost:8000>: el inicio ya muestra el torneo, sin pasar por ningún botón.
-2. Verás el nombre y el juego del torneo, la marca **Vista pública · solo lectura**, los **Anuncios de ganadores**, el **Bracket** y la tabla de **Partidas**.
+2. Verás el nombre y el juego del torneo, la marca **Vista pública · solo lectura**, los **Anuncios de ganadores**, el **Bracket** resumido y el enlace hacia el detalle de partidas en `/bracket`.
 3. La final sembrada aparece como ganadora; la semifinal pendiente muestra **Sin resultado** y no inventa un ganador.
 4. Pulsa el botón **☰** de la derecha: el menú se despliega bajo la barra, alineado a la derecha, con **Navegación** (Inicio y Bracket) y **Entrar como**, que muestra tres botones: **Jugador**, **Moderador** y **Organizador**.
 5. Pulsa uno de los tres botones para desplegar la lista de personas de ese rol (solo una lista a la vez). Elige una persona y entrarás a su vista. Cierra el menú con la **X**, con **Esc** o tocando fuera.
 6. La página pública no tiene formularios ni botones para registrar resultados o anunciar ganadores: es solo de lectura.
 7. El enlace anterior `/torneo` redirige al inicio, así que no se rompe si lo tenías guardado.
 
-Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 3 de `tests/test_hu06.py` a los escenarios de HU-06 y las 4 de `tests/test_hu07.py` a los escenarios de HU-07. En total son 33 pruebas.
+Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06 y las 4 de `tests/test_hu07.py` a los escenarios de HU-07. En total son 38 pruebas.

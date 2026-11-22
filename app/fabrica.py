@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.templating import Jinja2Templates
 
 from app.db.conexion import RUTA_DB_POR_DEFECTO, aplicar_migraciones, conectar
-from app.rutas import disponibilidad, organizador, resultado, torneo
+from app.rutas import cambio_horario, disponibilidad, organizador, resultado, torneo
 
 DIRECTORIO_PLANTILLAS = Path(__file__).resolve().parent / "templates"
 
@@ -74,6 +74,9 @@ def crear_app(ruta_db=None, reloj=None, discord=None):
     aplicacion = FastAPI(title="E-Sports Focus — Organización de torneos")
     aplicacion.include_router(
         disponibilidad.crear_router(templates, abrir_conexion, reloj or datetime.now)
+    )
+    aplicacion.include_router(
+        cambio_horario.crear_router(abrir_conexion, reloj or datetime.now, discord=discord)
     )
     aplicacion.include_router(
         resultado.crear_router(
