@@ -401,30 +401,12 @@
             background: var(--color-primario-light);
             color: var(--color-primario);
         }
-        .menu-rol-boton[aria-controls="menu-rol-jugador"][aria-expanded="true"] {
-            border-color: var(--color-rol-jugador-borde);
-            background: var(--color-rol-jugador-bg);
-            color: var(--color-rol-jugador);
-        }
-        .menu-rol-boton[aria-controls="menu-rol-moderador"][aria-expanded="true"] {
-            border-color: var(--color-rol-moderador-borde);
-            background: var(--color-rol-moderador-bg);
-            color: var(--color-rol-moderador);
-        }
-        .menu-rol-boton[aria-controls="menu-rol-organizador"][aria-expanded="true"] {
-            border-color: var(--color-rol-organizador-borde);
-            background: var(--color-rol-organizador-bg);
-            color: var(--color-rol-organizador);
-        }
         .menu-rol-boton[aria-expanded="true"] .chevron { transform: rotate(180deg); }
         .menu-rol-lista {
             margin: .15rem 0 .5rem .35rem;
             padding: .15rem 0 .15rem .65rem;
             border-left: 2px solid var(--color-primario);
         }
-        #menu-rol-jugador { border-left-color: var(--color-rol-jugador); }
-        #menu-rol-moderador { border-left-color: var(--color-rol-moderador); }
-        #menu-rol-organizador { border-left-color: var(--color-rol-organizador); }
         .menu-sesion {
             border-color: transparent;
             background: var(--color-bg);
@@ -434,9 +416,6 @@
         }
         .menu-sesion:hover { background: var(--color-primario-light); border-color: var(--color-primario); }
         .menu-sesion.activo { background: var(--color-primario-light); border-color: var(--color-primario); font-weight: 700; color: var(--color-primario); }
-        #menu-rol-jugador .menu-sesion.activo { background: var(--color-rol-jugador-bg); border-color: var(--color-rol-jugador-borde); color: var(--color-rol-jugador); }
-        #menu-rol-moderador .menu-sesion.activo { background: var(--color-rol-moderador-bg); border-color: var(--color-rol-moderador-borde); color: var(--color-rol-moderador); }
-        #menu-rol-organizador .menu-sesion.activo { background: var(--color-rol-organizador-bg); border-color: var(--color-rol-organizador-borde); color: var(--color-rol-organizador); }
         .menu-vacio {
             margin: .35rem 0;
             color: var(--color-suave);
