@@ -59,6 +59,7 @@
 | HU-05 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-05-cambio-horario` | 2026-11-22 | Solicitud y resolución de cambio de horario; 5 escenarios y 5 pruebas; 38 pruebas en total; spec en `openspec/specs/cambio-horario/spec.md` |
 | HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
 | HU-07 | implementada, validada y archivada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; 33 pruebas en total; spec en `openspec/specs/torneo-publico/spec.md` |
+| HU-08 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-08-bracket-grafico` | 2026-11-22 | Visualización gráfica del Bracket del torneo (árbol de llaves estilo Liquipedia/VLR); 4 escenarios y 4 pruebas; 42 pruebas en total; spec en `openspec/specs/bracket-grafico/spec.md` |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
@@ -70,6 +71,7 @@
 | HU-07 | Validación en chat (no se guardó archivo) | Confirmada por el estudiante; ficha lista para especificar | 2026-11-20 |
 | HU-07 | Implementación (validada y archivada) | 33 pruebas pasan; `openspec validate --strict` válido; spec `torneo-publico` sincronizada; menú revisado en el navegador | 2026-11-21 |
 | HU-05 | Implementación (validada) | 38 pruebas pasan; `openspec validate` válido; capacidad `cambio-horario` especificada y probada | 2026-11-22 |
+| HU-08 | Implementación (validada) | 42 pruebas pasan; `openspec validate` válido; capacidad `bracket-grafico` especificada y probada | 2026-11-22 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |

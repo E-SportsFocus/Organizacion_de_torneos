@@ -79,5 +79,17 @@ Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganador
 - CA3: El menú desplegable lateral permite acceder a Inicio, Bracket y alternar entre los roles de Jugador, Moderador y Organizador con simulación demostrativa.
 - CA4: El menú puede cerrarse sin cambiar de página con botón cerrar, tecla Esc o clic exterior.
 
+## HU-08: Visualización gráfica del Bracket del torneo
+
+Como visitante o participante del torneo, quiero consultar el bracket en un formato visual de árbol de llaves con rondas secuenciales y líneas conectoras, para comprender de un vistazo la progresión de los equipos, los resultados de cada enfrentamiento y qué equipos avanzan a las siguientes fases.
+
+**Actividad TO-BE asociada:** Seguimiento visual del progreso del torneo y llaves competitivas.
+
+**Criterios de aceptación:**
+- CA1: El bracket gráfico muestra las rondas organizadas secuencialmente en columnas y cada enfrentamiento muestra equipos, fecha y estado.
+- CA2: Los enfrentamientos con resultado destacan visualmente al equipo ganador y muestran marcadores en casillas individuales con conexión hacia la siguiente ronda.
+- CA3: Las partidas pendientes no muestran ganador anticipado y reflejan su estado de espera.
+- CA4: Se permite consultar tanto el árbol visual de llaves como la tabla detallada de auditoría e historial de actualizaciones.
+
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)

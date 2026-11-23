@@ -247,3 +247,36 @@ Característica: Consulta pública del torneo y menú desplegable
     Entonces el panel se cierra
     Y la página sigue siendo la misma
 ```
+
+## HU-08 — Visualización gráfica del Bracket del torneo
+
+Historia: Como visitante o participante del torneo, quiero consultar el bracket en un formato visual de árbol de llaves con rondas secuenciales y líneas conectoras, para comprender de un vistazo la progresión de los equipos, los resultados de cada enfrentamiento y qué equipos avanzan a las siguientes fases.
+
+```gherkin
+Característica: Visualización gráfica interactiva del Bracket del torneo
+
+  Escenario: El bracket gráfico muestra las rondas organizadas secuencialmente
+    Dado que el torneo tiene partidas programadas o jugadas en distintas fases
+    Cuando un visitante consulta la página del bracket
+    Entonces ve el árbol visual de llaves organizado por columnas de rondas
+    Y cada enfrentamiento muestra los equipos participantes, la fecha y el estado
+
+  Escenario: Los enfrentamientos con resultado destacan al equipo ganador
+    Dado que una partida del bracket tiene un resultado registrado
+    Cuando se visualiza la llave de esa partida
+    Entonces se muestran los marcadores de cada equipo en casillas individuales
+    Y el equipo ganador aparece visualmente destacado
+    Y se visualiza la conexión de avance hacia la siguiente ronda
+
+  Escenario: Las partidas pendientes no muestran ganador anticipado
+    Dado que una partida del bracket aún no tiene resultado confirmado
+    Cuando se visualiza en el árbol de llaves
+    Entonces la partida muestra su estado de espera
+    Y no se asigna ni inventa un ganador prematuramente
+
+  Escenario: Se permite alternar entre vista de árbol gráfico y tabla de auditoría
+    Dado que el usuario está consultando el bracket del torneo
+    Cuando navega por la sección
+    Entonces dispone del árbol visual interactivo de llaves
+    Y puede consultar el historial detallado de actualizaciones y auditoría
+```

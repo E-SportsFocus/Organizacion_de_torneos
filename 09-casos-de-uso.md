@@ -28,6 +28,7 @@ Archivo fuente: [`./diagramas/casos-de-uso.puml`](./diagramas/casos-de-uso.puml)
 | CU-05 | Consultar el bracket actualizado y el resultado notificado | Jugador | [HU-02](./07-criterios-aceptacion.md) |
 | CU-06 | Anunciar al ganador de una partida | Organizador | [HU-06](./07-criterios-aceptacion.md) |
 | CU-07 | Consultar el torneo público (anuncios y bracket) | Visitante | [HU-07](./07-criterios-aceptacion.md) |
+| CU-08 | Consultar el bracket gráfico e interactivo de llaves | Visitante / Jugador | [HU-08](./07-criterios-aceptacion.md) |
 
 Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-07 se incorporó el 2026-11-20 a partir de la validación del estudiante y también se documenta en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).
 

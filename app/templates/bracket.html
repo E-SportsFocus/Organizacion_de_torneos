@@ -21,6 +21,70 @@
     </div>
 </div>
 
+{% if rondas_bracket %}
+<div class="tarjeta tarjeta-bracket-visual">
+    <div class="seccion-cabecera">
+        <div>
+            <h3 style="margin-top:0; margin-bottom:.15rem">Árbol visual de llaves</h3>
+            <p class="suave seccion-bajada">Seguimiento gráfico y progresión competitiva del torneo por fases</p>
+        </div>
+    </div>
+
+    <div class="bracket-scroll-container">
+        <div class="bracket-arbol">
+            {% for ronda in rondas_bracket %}
+            <div class="bracket-columna-ronda" data-ronda="{{ ronda.nombre }}">
+                <div class="bracket-columna-cabecera">
+                    <span class="bracket-ronda-titulo">{{ ronda.nombre }}</span>
+                    <span class="bracket-ronda-conteo suave">{{ ronda.partidas|length }} partida{{ 's' if ronda.partidas|length != 1 else '' }}</span>
+                </div>
+
+                <div class="bracket-nodos">
+                    {% for partida in ronda.partidas %}
+                    <div class="bracket-nodo-wrapper {% if not loop.first and not loop.last %}nodo-intermedio{% endif %}">
+                        <div class="bracket-nodo {% if partida.tiene_resultado %}con-resultado{% else %}pendiente{% endif %} {% if loop.first and loop.length > 1 %}nodo-par-arriba{% elif loop.last and loop.length > 1 %}nodo-par-abajo{% endif %}">
+                            <div class="bracket-nodo-meta">
+                                <span class="bracket-nodo-fecha suave">{{ partida.fecha_texto }}</span>
+                                <span class="etiqueta etiqueta-estado bracket-nodo-estado">{{ partida.estado }}</span>
+                            </div>
+
+                            <div class="bracket-enfrentamiento">
+                                {% for eq in partida.equipos %}
+                                <div class="bracket-slot-equipo {% if eq.es_ganador %}slot-ganador{% endif %}">
+                                    <div class="bracket-slot-info">
+                                        <span class="bracket-slot-indicador {% if eq.es_ganador %}indicador-ganador{% endif %}"></span>
+                                        <span class="bracket-equipo-nombre {% if eq.es_ganador %}nombre-ganador{% endif %}">
+                                            {{ eq.nombre }}
+                                        </span>
+                                    </div>
+                                    <span class="bracket-marcador-caja {% if eq.es_ganador %}marcador-ganador{% endif %}">
+                                        {{ eq.marcador }}
+                                    </span>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            {% if partida.tiene_resultado and partida.ganador_nombre %}
+                            <div class="bracket-nodo-pie">
+                                <span class="suave">Avanza:</span>
+                                <strong class="ganador-destacado">{{ partida.ganador_nombre }}</strong>
+                            </div>
+                            {% else %}
+                            <div class="bracket-nodo-pie">
+                                <span class="suave">Esperando resultado oficial</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% if partidas %}
 <div class="tarjeta">
     <h3 style="margin-top:0">Partidas</h3>
@@ -111,4 +175,218 @@
     {% endif %}
 </div>
 {% endif %}
+
+<style>
+/* Estilos para el árbol visual de llaves (HU-08) */
+.tarjeta-bracket-visual {
+    overflow: hidden;
+}
+
+.bracket-scroll-container {
+    overflow-x: auto;
+    padding: 1rem 0.5rem 1.5rem 0.5rem;
+    scrollbar-width: thin;
+}
+
+.bracket-arbol {
+    display: flex;
+    gap: 3.25rem;
+    align-items: stretch;
+    min-width: max-content;
+    padding: 0.5rem;
+}
+
+.bracket-columna-ronda {
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    flex-shrink: 0;
+}
+
+.bracket-columna-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--color-borde);
+}
+
+.bracket-ronda-titulo {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-primario);
+}
+
+.bracket-ronda-conteo {
+    font-size: 0.8rem;
+}
+
+.bracket-nodos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 2.25rem;
+    flex-grow: 1;
+    position: relative;
+}
+
+.bracket-nodo-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.bracket-nodo {
+    position: relative;
+    width: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--color-card-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    overflow: visible;
+}
+
+.bracket-nodo:hover {
+    border-color: var(--color-primario);
+    box-shadow: 0 4px 14px var(--color-card-shadow);
+}
+
+/* Conectores tipo bracket hacia la derecha (excepto en la última columna) */
+.bracket-columna-ronda:not(:last-child) .bracket-nodo::after {
+    content: '';
+    position: absolute;
+    right: -1.625rem;
+    top: 50%;
+    width: 1.625rem;
+    height: 2px;
+    background: var(--color-borde);
+    z-index: 1;
+}
+
+/* Conectores tipo bracket desde la izquierda (excepto en la primera columna) */
+.bracket-columna-ronda:not(:first-child) .bracket-nodo::before {
+    content: '';
+    position: absolute;
+    left: -1.625rem;
+    top: 50%;
+    width: 1.625rem;
+    height: 2px;
+    background: var(--color-borde);
+    z-index: 1;
+}
+
+.bracket-nodo-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.65rem;
+    background: var(--color-th-bg);
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom: 1px solid var(--color-borde);
+    font-size: 0.76rem;
+}
+
+.bracket-nodo-estado {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.45rem;
+}
+
+.bracket-enfrentamiento {
+    display: flex;
+    flex-direction: column;
+}
+
+.bracket-slot-equipo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.65rem;
+    border-bottom: 1px solid var(--color-borde);
+    background: var(--color-surface);
+    transition: background-color 0.15s ease;
+}
+
+.bracket-slot-equipo:last-child {
+    border-bottom: none;
+}
+
+.bracket-slot-info {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    flex-grow: 1;
+}
+
+.bracket-slot-indicador {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-borde);
+    flex-shrink: 0;
+}
+
+.bracket-slot-indicador.indicador-ganador {
+    background: var(--color-verde);
+    box-shadow: 0 0 6px var(--color-verde);
+}
+
+.bracket-equipo-nombre {
+    font-size: 0.88rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bracket-equipo-nombre.nombre-ganador {
+    font-weight: 700;
+    color: var(--color-verde);
+}
+
+.bracket-slot-equipo.slot-ganador {
+    background: var(--color-verde-bg);
+}
+
+.bracket-marcador-caja {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6rem;
+    height: 1.5rem;
+    padding: 0 0.35rem;
+    margin-left: 0.5rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    border-radius: 4px;
+    background: var(--color-th-bg);
+    border: 1px solid var(--color-borde);
+    color: var(--color-texto);
+    flex-shrink: 0;
+}
+
+.bracket-marcador-caja.marcador-ganador {
+    background: var(--color-verde-bg);
+    border-color: var(--color-verde-borde);
+    color: var(--color-verde);
+    font-weight: 800;
+}
+
+.bracket-nodo-pie {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-borde);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    font-size: 0.76rem;
+}
+</style>
 {% endblock %}

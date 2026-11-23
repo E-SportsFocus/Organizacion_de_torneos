@@ -3,7 +3,7 @@
 - [Ingeniería de requisitos - Entrega 1](IngReq-Entrega1.md)
 - [Ingeniería de requisitos - Entrega 2](./IngReq-Entrega%202.md)
 
-## Aplicación web (HU-03, HU-04, HU-05, HU-06 y HU-07)
+## Aplicación web (HU-03, HU-04, HU-05, HU-06, HU-07 y HU-08)
 
 Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la documentación de requisitos. Historias implementadas:
 
@@ -12,6 +12,7 @@ Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la
 - **HU-03 — Registro manual del resultado** (CU-04): resultado, bracket con historial y notificación simulada.
 - **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
 - **HU-07 — Inicio público del torneo** (CU-07): anuncios y bracket resumido de solo lectura en la página de inicio (con enlace al detalle de partidas en `/bracket`), con un menú desplegable común para navegar y cambiar de rol de demostración.
+- **HU-08 — Visualización gráfica del Bracket del torneo** (CU-08): árbol interactivo de llaves tipo esport (Liquipedia/VLR) organizado por columnas de rondas secuenciales, con marcadores individuales, destaque del equipo ganador, estado claro para partidas pendientes y coexistencia con la tabla de auditoría (RP-10).
 
 ### Requisitos
 
@@ -104,4 +105,13 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 6. La página pública no tiene formularios ni botones para registrar resultados o anunciar ganadores: es solo de lectura.
 7. El enlace anterior `/torneo` redirige al inicio, así que no se rompe si lo tenías guardado.
 
-Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06 y las 4 de `tests/test_hu07.py` a los escenarios de HU-07. En total son 38 pruebas.
+### Recorrido de HU-08 (bracket gráfico)
+
+1. Abre el menú **☰** y pulsa **Bracket** (o accede directamente a <http://localhost:8000/bracket>).
+2. Verás la tarjeta principal **Árbol visual de llaves** con la estructura de fases consecutivas en columnas horizontales (Cuartos de final, Semifinal y Final).
+3. Cada enfrentamiento se presenta en una tarjeta de llave con fecha, estado en chip y dos casillas para los equipos con sus casillas individuales de marcador.
+4. En las partidas con resultado confirmado (como la Final ya disputada), el equipo ganador aparece resaltado visualmente en verde suave con su marcador destacado y la indicación de que avanza a la siguiente ronda.
+5. En las partidas pendientes o programadas, las casillas muestran su estado de espera sin asignar un ganador prematuro.
+6. Debajo del árbol visual, se mantiene accesible la tabla detallada de **Partidas** y el **Historial de actualizaciones** con la auditoría cronológica de moderación (cumpliendo RP-10).
+
+Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06, las 4 de `tests/test_hu07.py` a los escenarios de HU-07 y las 4 de `tests/test_hu08.py` a los escenarios de HU-08. En total son 42 pruebas.

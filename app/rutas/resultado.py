@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.servicios import anuncio as servicio_anuncio
+from app.servicios import bracket as servicio_bracket
 from app.servicios import cambio_horario as servicio_cambio
 from app.servicios import disponibilidad as servicio_disponibilidad
 from app.servicios import resultado as servicio
@@ -195,7 +196,7 @@ def crear_router(templates, abrir_conexion, reloj, discord=None):
                 return templates.TemplateResponse(
                     request=request,
                     name="bracket.html",
-                    context={"torneo": None, "partidas": [], "historial": []},
+                    context={"torneo": None, "partidas": [], "historial": [], "rondas_bracket": []},
                 )
             bracket = conexion.execute(
                 "SELECT ultima_actualizacion FROM bracket WHERE torneo_id = ?",
@@ -203,6 +204,7 @@ def crear_router(templates, abrir_conexion, reloj, discord=None):
             ).fetchone()
             partidas = servicio.listar_bracket(conexion, torneo["id"])
             historial = servicio.historial_bracket(conexion, torneo["id"])
+            rondas_bracket = servicio_bracket.obtener_bracket_estructurado(conexion, torneo["id"])
 
         for partida in partidas:
             partida["fecha_texto"] = _formatear_fecha(partida["fecha_hora"])
@@ -223,6 +225,7 @@ def crear_router(templates, abrir_conexion, reloj, discord=None):
                 "bracket": bracket,
                 "partidas": partidas,
                 "historial": historial,
+                "rondas_bracket": rondas_bracket,
             },
         )
 
