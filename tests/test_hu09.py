@@ -12,13 +12,13 @@ def test_creacion_torneo_con_datos_validos(base, ahora):
     torneo_id = servicio.crear_o_actualizar_torneo(
         datos.conexion,
         organizador_id=organizador,
-        nombre="Torneo Relámpago CS2",
-        juego="Counter-Strike 2",
+        nombre="Torneo Relámpago Fortnite",
+        juego="Fortnite",
         fecha_inicio="2026-11-25T18:00",
         zona_horaria="America/Santiago",
         descripcion="Torneo rápido de fin de semana",
         estado="Inscripciones abiertas",
-        bolsa_premios="$1.000 USD",
+        bolsa_premios="$1.000.000 CLP",
         ahora=ahora,
     )
 
@@ -27,11 +27,11 @@ def test_creacion_torneo_con_datos_validos(base, ahora):
     ).fetchone()
 
     assert fila is not None
-    assert fila["nombre"] == "Torneo Relámpago CS2"
-    assert fila["juego"] == "Counter-Strike 2"
+    assert fila["nombre"] == "Torneo Relámpago Fortnite"
+    assert fila["juego"] == "Fortnite"
     assert fila["zona_horaria"] == "America/Santiago"
     assert fila["estado"] == "Inscripciones abiertas"
-    assert fila["bolsa_premios"] == "$1.000 USD"
+    assert fila["bolsa_premios"] == "$1.000.000 CLP"
     assert fila["organizador_id"] == organizador
 
 
@@ -68,19 +68,19 @@ def test_definicion_y_desglose_de_estructura_de_premios(base, ahora):
         {
             "posicion": 1,
             "posicion_texto": "1.º Lugar (Campeón)",
-            "monto_texto": "$500 USD + Trofeo",
+            "monto_texto": "$500.000 CLP + Trofeo",
             "descripcion": "Premio al campeón",
         },
         {
             "posicion": 2,
             "posicion_texto": "2.º Lugar",
-            "monto_texto": "$250 USD",
+            "monto_texto": "$250.000 CLP",
             "descripcion": "Premio al subcampeón",
         },
         {
             "posicion": 3,
             "posicion_texto": "3.º Lugar",
-            "monto_texto": "$100 USD",
+            "monto_texto": "$100.000 CLP",
             "descripcion": "Tercer puesto",
         },
     ]
@@ -89,7 +89,7 @@ def test_definicion_y_desglose_de_estructura_de_premios(base, ahora):
         datos.conexion,
         organizador_id=organizador,
         nombre="Copa de Maestros",
-        juego="Valorant",
+        juego="Fortnite",
         fecha_inicio="2026-11-26T20:00",
         premios=premios,
         ahora=ahora,
@@ -98,11 +98,11 @@ def test_definicion_y_desglose_de_estructura_de_premios(base, ahora):
     premios_db = servicio.obtener_premios_torneo(datos.conexion, torneo_id)
     assert len(premios_db) == 3
     assert premios_db[0]["posicion"] == 1
-    assert premios_db[0]["monto_texto"] == "$500 USD + Trofeo"
+    assert premios_db[0]["monto_texto"] == "$500.000 CLP + Trofeo"
     assert premios_db[1]["posicion"] == 2
-    assert premios_db[1]["monto_texto"] == "$250 USD"
+    assert premios_db[1]["monto_texto"] == "$250.000 CLP"
     assert premios_db[2]["posicion"] == 3
-    assert premios_db[2]["monto_texto"] == "$100 USD"
+    assert premios_db[2]["monto_texto"] == "$100.000 CLP"
 
 
 def test_validacion_campos_obligatorios_torneo(base, ahora):
@@ -140,14 +140,14 @@ def test_actualizacion_de_torneo_y_premios_existentes(base, ahora):
         datos.conexion,
         organizador_id=organizador,
         nombre="Copa Inicial",
-        juego="Valorant",
+        juego="Fortnite",
         fecha_inicio="2026-11-24T10:00",
-        bolsa_premios="$500 USD",
+        bolsa_premios="$500.000 CLP",
         premios=[
             {
                 "posicion": 1,
                 "posicion_texto": "1.º Lugar",
-                "monto_texto": "$500 USD",
+                "monto_texto": "$500.000 CLP",
                 "descripcion": "",
             }
         ],
@@ -160,20 +160,20 @@ def test_actualizacion_de_torneo_y_premios_existentes(base, ahora):
         organizador_id=organizador,
         torneo_id=torneo_id,
         nombre="Copa Inicial Renovada",
-        juego="Valorant",
+        juego="Fortnite",
         fecha_inicio="2026-11-24T12:00",
-        bolsa_premios="$800 USD",
+        bolsa_premios="$800.000 CLP",
         premios=[
             {
                 "posicion": 1,
                 "posicion_texto": "1.º Lugar",
-                "monto_texto": "$600 USD",
+                "monto_texto": "$600.000 CLP",
                 "descripcion": "Actualizado",
             },
             {
                 "posicion": 2,
                 "posicion_texto": "2.º Lugar",
-                "monto_texto": "$200 USD",
+                "monto_texto": "$200.000 CLP",
                 "descripcion": "Nuevo premio",
             },
         ],
@@ -184,9 +184,9 @@ def test_actualizacion_de_torneo_y_premios_existentes(base, ahora):
         "SELECT * FROM torneo WHERE id = ?", (torneo_id,)
     ).fetchone()
     assert fila["nombre"] == "Copa Inicial Renovada"
-    assert fila["bolsa_premios"] == "$800 USD"
+    assert fila["bolsa_premios"] == "$800.000 CLP"
 
     premios_db = servicio.obtener_premios_torneo(datos.conexion, torneo_id)
     assert len(premios_db) == 2
-    assert premios_db[0]["monto_texto"] == "$600 USD"
-    assert premios_db[1]["monto_texto"] == "$200 USD"
+    assert premios_db[0]["monto_texto"] == "$600.000 CLP"
+    assert premios_db[1]["monto_texto"] == "$200.000 CLP"

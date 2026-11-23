@@ -10,13 +10,13 @@
     </p>
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
         <div>
-            <h2 style="margin:0;">⚙️ Gestión y Creación del Torneo</h2>
+            <h2 style="margin:0;">Gestión y Creación del Torneo</h2>
             <p class="suave" style="margin:.3rem 0 0 0;">
                 Configura los datos generales del torneo, selecciona los participantes y define los premios oficiales.
             </p>
         </div>
         <a class="boton boton-secundario" href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}">
-            ⬅️ Volver al Panel
+            Volver al Panel
         </a>
     </div>
 </div>
@@ -41,8 +41,8 @@
 
     <!-- SECCIÓN 1: DATOS GENERALES -->
     <div class="tarjeta">
-        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
-            <span>🏆</span> 1. Información General del Torneo
+        <h3 style="margin-top:0;">
+            1. Información General del Torneo
         </h3>
         <p class="suave" style="margin-top:-.4rem; margin-bottom:1.1rem;">
             Datos de identificación y planificación oficial del campeonato.
@@ -53,12 +53,13 @@
                 <label for="nombre">Nombre del torneo *</label>
                 <input class="input-control" type="text" id="nombre" name="nombre"
                        value="{{ torneo.nombre if torneo else '' }}"
-                       placeholder="Ej: Copa E-Sports Focus Latinoamérica" required minlength="3">
+                       placeholder="Ej: Copa E-Sports Focus" required minlength="3">
             </div>
 
             <div class="campo-grupo">
                 <label for="juego">Videojuego oficial *</label>
                 <select class="input-control" id="juego" name="juego" required>
+                    <option value="Fortnite" {% if torneo and torneo.juego == 'Fortnite' %}selected{% endif %}>Fortnite</option>
                     <option value="Valorant" {% if torneo and torneo.juego == 'Valorant' %}selected{% endif %}>Valorant</option>
                     <option value="League of Legends" {% if torneo and torneo.juego == 'League of Legends' %}selected{% endif %}>League of Legends</option>
                     <option value="Counter-Strike 2" {% if torneo and torneo.juego == 'Counter-Strike 2' %}selected{% endif %}>Counter-Strike 2</option>
@@ -77,8 +78,8 @@
             <div class="campo-grupo">
                 <label for="zona_horaria">Zona horaria *</label>
                 <select class="input-control" id="zona_horaria" name="zona_horaria" required>
-                    <option value="America/Bogota" {% if torneo and torneo.zona_horaria == 'America/Bogota' %}selected{% endif %}>America/Bogota (UTC-5)</option>
                     <option value="America/Santiago" {% if torneo and torneo.zona_horaria == 'America/Santiago' %}selected{% endif %}>America/Santiago (UTC-3)</option>
+                    <option value="America/Bogota" {% if torneo and torneo.zona_horaria == 'America/Bogota' %}selected{% endif %}>America/Bogota (UTC-5)</option>
                     <option value="America/Buenos_Aires" {% if torneo and torneo.zona_horaria == 'America/Buenos_Aires' %}selected{% endif %}>America/Buenos_Aires (UTC-3)</option>
                     <option value="America/Mexico_City" {% if torneo and torneo.zona_horaria == 'America/Mexico_City' %}selected{% endif %}>America/Mexico_City (UTC-6)</option>
                 </select>
@@ -96,40 +97,40 @@
         </div>
 
         <div class="campo-grupo">
-            <label for="bolsa_premios">Bolsa total de premios (Prize Pool acumulado)</label>
+            <label for="bolsa_premios">Bolsa total de premios (Prize Pool acumulado en CLP)</label>
             <input class="input-control" type="text" id="bolsa_premios" name="bolsa_premios"
                    value="{{ torneo.bolsa_premios if torneo and torneo.bolsa_premios else '' }}"
-                   placeholder="Ej: $850 USD o 500.000 CLP">
+                   placeholder="Ej: $850.000 CLP">
         </div>
 
         <div class="campo-grupo">
             <label for="descripcion">Descripción y reglamento del torneo</label>
             <textarea class="input-control" id="descripcion" name="descripcion" rows="3"
-                      placeholder="Información relevante para los equipos, formato de eliminación, enlaces al servidor de juego...">{{ torneo.descripcion if torneo and torneo.descripcion else '' }}</textarea>
+                      placeholder="Información relevante para los equipos, formato de eliminación, reglas...">{{ torneo.descripcion if torneo and torneo.descripcion else '' }}</textarea>
         </div>
     </div>
 
     <!-- SECCIÓN 2: ESTRUCTURA DE PREMIOS -->
     <div class="tarjeta">
-        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
-            <span>🎁</span> 2. Estructura Oficial de Premios
+        <h3 style="margin-top:0;">
+            2. Estructura Oficial de Premios
         </h3>
         <p class="suave" style="margin-top:-.4rem; margin-bottom:1.1rem;">
-            Define la recompensa por posición competitiva. Los premios se mostrarán a todos los participantes en la vista pública.
+            Define la recompensa por posición competitiva en pesos chilenos (CLP). Los premios se mostrarán a todos los participantes en la vista pública.
         </p>
 
         {% for p in premios_formulario %}
         <div class="tarjeta-item-gestion">
             <input type="hidden" name="premio_{{ p.posicion }}_texto" value="{{ p.posicion_texto }}">
             <div style="font-weight:700; margin-bottom:.5rem; color:var(--color-primario);">
-                🏅 {{ p.posicion_texto }}
+                {{ p.posicion_texto }}
             </div>
             <div class="form-grid-2">
                 <div class="campo-grupo" style="margin-bottom:0;">
-                    <label>Premio / Monto asignado</label>
+                    <label>Premio / Monto asignado (CLP)</label>
                     <input class="input-control" type="text" name="premio_{{ p.posicion }}_monto"
                            value="{{ p.monto_texto }}"
-                           placeholder="Ej: $500 USD + Trofeo de Campeón">
+                           placeholder="{% if p.posicion == 1 %}Ej: $500.000 CLP + Trofeo de Campeón{% elif p.posicion == 2 %}Ej: $250.000 CLP + Medalla de Plata{% else %}Ej: $100.000 CLP + Medalla de Bronce{% endif %}">
                 </div>
                 <div class="campo-grupo" style="margin-bottom:0;">
                     <label>Detalle / Condiciones de entrega</label>
@@ -144,8 +145,8 @@
 
     <!-- SECCIÓN 3: GESTIÓN DE PARTICIPANTES -->
     <div class="tarjeta">
-        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
-            <span>👥</span> 3. Equipos y Jugadores Participantes
+        <h3 style="margin-top:0;">
+            3. Equipos y Jugadores Participantes
         </h3>
         <p class="suave" style="margin-top:-.4rem; margin-bottom:.9rem;">
             Selecciona los equipos que disputarán este torneo. Los jugadores inscritos podrán confirmar disponibilidad y jugar las partidas.
@@ -157,12 +158,11 @@
                 <input type="checkbox" name="equipos_ids" value="{{ eq.id }}"
                        {% if eq.id in inscritos_ids %}checked{% endif %}>
                 <div style="flex:1;">
-                    <div style="font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="font-weight:700;">
                         <span>{{ eq.nombre }}</span>
-                        <span class="suave" style="font-size:.78rem;">{{ eq.pais }}</span>
                     </div>
                     <div class="suave" style="font-size:.82rem; margin-top:.25rem;">
-                        👤 Integrantes:
+                        Integrantes:
                         {% for j in eq.jugadores %}
                         {{ j.nombre }}{% if not loop.last %}, {% endif %}
                         {% else %}
@@ -176,12 +176,12 @@
     </div>
 
     <!-- BOTONES DE ACCIÓN -->
-    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
+    <div style="display:flex; justify-content:flex-end; gap:.75rem; margin-top:1.5rem; flex-wrap:wrap; align-items:center;">
         <a class="boton boton-secundario" href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}">
             Cancelar
         </a>
-        <button class="boton" type="submit" style="font-size:1rem; padding:.65rem 1.75rem;">
-            💾 Guardar Configuración del Torneo
+        <button class="boton" type="submit">
+            Guardar Configuración del Torneo
         </button>
     </div>
 </form>
