@@ -38,6 +38,8 @@
 - 2026-11-21 — **HU-07 ajustada por feedback:** barra blanca con borde, menú desplegable bajo la barra (sin fondo oscuro, 360 px en escritorio y ancho completo en móvil) y «Entrar como» con tres botones de rol que despliegan la lista de personas (una por vez). 33 pruebas y `openspec validate --strict` válidos.
 - 2026-11-21 — **HU-07 validada y archivada:** el estudiante aprobó el inicio público y el menú de tres botones. Spec `torneo-publico` sincronizada en `openspec/specs/torneo-publico/spec.md`; cambio en `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo`.
 - 2026-11-22 — **Ajuste de Inicio y Paleta de colores:** se retiró la tarjeta redundante de Partidas del inicio (`/`), dejando solo Anuncios y Bracket resumido con enlace hacia `/bracket` (donde reside la tabla completa con marcadores e historial). Se incorporó la paleta de colores personalizada (`#F4E9CD`, `#9DBEBB`, `#77ACA2`, `#468189`) mediante variables CSS armónicas para mejorar la estética visual y cumplir criterios de contraste/accesibilidad. Se actualizaron los artefactos de requisitos y la especificación.
+- 2026-11-22 — **HU-08 implementada y validada:** visualización gráfica de bracket tipo árbol con llaves competitivas, rondas secuenciales y actualización dinámica de ganadores.
+- 2026-11-23 — **HU-09 acordada con el docente:** incorporación del módulo exclusivo del Organizador para creación y configuración de torneos, gestión de jugadores/equipos participantes y estructura de premios (RP-11, CU-09). Ficha en `.cin324/historias/HU-09.md`.
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante

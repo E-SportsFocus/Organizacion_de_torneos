@@ -9,19 +9,91 @@
 {% elif not torneo %}
 <div class="tarjeta">
     <h2>Panel del Organizador</h2>
-    <p class="suave">{{ organizador.nombre }} no tiene un torneo asignado.</p>
+    <p class="suave">{{ organizador.nombre }} no tiene un torneo creado o asignado todavía.</p>
+    <a class="boton" href="/organizador/torneo/gestion?persona_id={{ organizador.id }}" style="margin-top:.6rem;">
+        ➕ Crear y Configurar Nuevo Torneo
+    </a>
 </div>
 {% else %}
+
+{% if mensaje %}
+<div class="aviso aviso-ok">
+    {{ mensaje }}
+</div>
+{% endif %}
+
 <div class="tarjeta">
-    <h2>{{ torneo.nombre }}</h2>
-    <p class="suave">
-        {{ torneo.juego }} · Organiza <strong>{{ organizador.nombre }}</strong> ·
-        <span class="etiqueta etiqueta-estado">Torneo en curso</span>
-    </p>
-    <p class="suave" style="margin-bottom:0">
-        Anuncios de ganadores y estado de las partidas. El anuncio se publica
-        automáticamente al confirmarse el resultado.
-    </p>
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap;">
+        <div>
+            <h2 style="margin:0 0 .35rem 0;">{{ torneo.nombre }}</h2>
+            <p class="suave" style="margin:0;">
+                {{ torneo.juego }} · Organiza <strong>{{ organizador.nombre }}</strong> ·
+                <span class="etiqueta etiqueta-estado">{{ torneo.estado or 'Torneo en curso' }}</span>
+                {% if torneo.bolsa_premios %}
+                · <span class="etiqueta etiqueta-confirmada">💰 Prize Pool: {{ torneo.bolsa_premios }}</span>
+                {% endif %}
+            </p>
+            {% if torneo.descripcion %}
+            <p class="suave" style="margin:.45rem 0 0 0; font-size:.88rem;">
+                {{ torneo.descripcion }}
+            </p>
+            {% endif %}
+        </div>
+        <a class="boton" href="/organizador/torneo/gestion?persona_id={{ organizador.id }}&torneo_id={{ torneo.id }}">
+            ⚙️ Gestionar Torneo, Jugadores y Premios
+        </a>
+    </div>
+</div>
+
+<!-- PREMIOS Y PARTICIPANTES (HU-09) -->
+<div class="tarjeta">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+        <h3 style="margin:0; display:flex; align-items:center; gap:.45rem;">
+            <span>🎁</span> Estructura de Premios y Participantes
+        </h3>
+        <span class="suave" style="font-size:.85rem;">
+            {{ equipos_inscritos|length }} equipos inscritos oficialmente
+        </span>
+    </div>
+
+    <!-- PREMIOS -->
+    {% if premios %}
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.75rem; margin-top:.9rem;">
+        {% for p in premios %}
+        <div style="border:1px solid var(--color-borde); border-radius:8px; padding:.75rem; background:var(--color-bg);">
+            <div style="font-weight:700; color:var(--color-primario); font-size:.88rem;">
+                🏅 {{ p.posicion_texto }}
+            </div>
+            <div style="font-weight:800; font-size:1.02rem; margin:.2rem 0; color:var(--color-texto);">
+                {{ p.monto_texto }}
+            </div>
+            {% if p.descripcion %}
+            <div class="suave" style="font-size:.8rem;">
+                {{ p.descripcion }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="suave" style="margin-top:.8rem;">Todavía no se han configurado premios para este torneo.</p>
+    {% endif %}
+
+    <!-- PARTICIPANTES -->
+    {% if equipos_inscritos %}
+    <div style="margin-top:1.1rem; border-top:1px solid var(--color-borde); padding-top:.9rem;">
+        <div style="font-size:.88rem; font-weight:700; margin-bottom:.5rem;">
+            👥 Equipos en competición:
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
+            {% for eq in equipos_inscritos %}
+            <span style="display:inline-flex; align-items:center; gap:.35rem; padding:.25rem .65rem; border-radius:9999px; background:var(--color-surface); border:1px solid var(--color-borde); font-size:.82rem; font-weight:600;">
+                {{ eq.nombre }} <span class="suave" style="font-size:.74rem;">({{ eq.pais }})</span>
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 <div class="tarjeta">

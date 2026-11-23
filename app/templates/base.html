@@ -739,6 +739,85 @@
         .anuncio .detalle { margin: .2rem 0 .5rem; font-size: .9rem; }
         .anuncio-pie { display: flex; align-items: center; gap: .35rem; flex-wrap: wrap; }
 
+        /* Estilos de formulario de gestión de torneos y premios (HU-09) */
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            gap: .35rem;
+            margin-bottom: .9rem;
+        }
+        .campo-grupo label {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--color-texto);
+        }
+        .input-control {
+            width: 100%;
+            padding: .5rem .75rem;
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            font-size: .92rem;
+            color: var(--color-texto);
+            background: var(--color-surface);
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: border-color .15s ease, box-shadow .15s ease;
+        }
+        .input-control:focus {
+            border-color: var(--color-primario);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--color-info-bg);
+        }
+        .form-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+        .form-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .tarjeta-item-gestion {
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            padding: .95rem;
+            background: var(--color-bg);
+            margin-bottom: .85rem;
+            transition: border-color .15s ease;
+        }
+        .tarjeta-item-gestion:hover {
+            border-color: var(--color-primario);
+        }
+        .equipo-grid-seleccion {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: .75rem;
+            margin-top: .5rem;
+        }
+        .equipo-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: .75rem;
+            padding: .75rem;
+            border: 1px solid var(--color-borde);
+            border-radius: 8px;
+            background: var(--color-surface);
+            cursor: pointer;
+            transition: all .15s ease;
+        }
+        .equipo-check-item:hover {
+            border-color: var(--color-primario);
+            background: var(--color-info-bg);
+        }
+        .equipo-check-item input[type="checkbox"] {
+            margin-top: .2rem;
+            accent-color: var(--color-primario);
+            cursor: pointer;
+            width: 1.1rem;
+            height: 1.1rem;
+        }
+
         /* Responsividad móvil */
         @media (max-width: 640px) {
             .barra { padding: .55rem 1rem; }

@@ -280,3 +280,38 @@ Característica: Visualización gráfica interactiva del Bracket del torneo
     Entonces dispone del árbol visual interactivo de llaves
     Y puede consultar el historial detallado de actualizaciones y auditoría
 ```
+
+## HU-09 — Creación y gestión de torneos, participantes y premios
+
+Historia: Como organizador, quiero contar con un apartado exclusivo para crear y configurar torneos, gestionando su información principal, los equipos/jugadores participantes y la estructura de premios, para planificar y poner en marcha competiciones de manera autónoma y transparente desde la plataforma.
+
+```gherkin
+Característica: Creación y gestión integral de torneos, participantes y premios por el Organizador
+
+  Escenario: Registro exitoso de un nuevo torneo con sus datos generales
+    Dado que el Organizador se encuentra en el panel de gestión de torneos
+    Cuando ingresa el nombre del torneo, selecciona el videojuego, define la fecha y hora de inicio y la zona horaria
+    Y presiona "Guardar torneo"
+    Entonces el sistema registra el nuevo torneo vinculado al Organizador
+    Y el torneo queda disponible para su administración
+
+  Escenario: Asignación e inscripción de equipos participantes
+    Dado que existe un torneo creado por el Organizador
+    Cuando el Organizador selecciona los equipos y jugadores que disputarán la competición
+    Y confirma la inscripción
+    Entonces los equipos quedan registrados como participantes oficiales del torneo
+    Y se visualizan organizados en el listado de participantes
+
+  Escenario: Definición y desglose de la estructura de premios
+    Dado que el Organizador está configurando la premiación del torneo
+    Cuando ingresa la distribución de premios indicando posición (1.º, 2.º y 3.º lugar) y monto o descripción
+    Y guarda la configuración de premios
+    Entonces los premios quedan asociados formalmente al torneo
+    Y se muestran claramente desglosados en el panel y en la vista informativa pública
+
+  Escenario: Validación de campos obligatorios al registrar el torneo
+    Dado que el Organizador intenta registrar un torneo sin completar el nombre o el videojuego
+    Cuando envía el formulario
+    Entonces el sistema no registra el torneo
+    Y muestra un mensaje de error indicando los datos obligatorios requeridos
+```

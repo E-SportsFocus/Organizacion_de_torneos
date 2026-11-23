@@ -66,10 +66,45 @@ def sembrar(conexion, ahora=None):
     organizador_id = cursor.lastrowid
 
     cursor = conexion.execute(
-        "INSERT INTO torneo (nombre, juego, zona_horaria, organizador_id) VALUES (?, ?, ?, ?)",
-        ("Copa E-Sports Focus", "Valorant", "America/Bogota", organizador_id),
+        """
+        INSERT INTO torneo (nombre, juego, zona_horaria, organizador_id, fecha_inicio, descripcion, estado, bolsa_premios)
+        VALUES (?, ?, ?, ?, ?, ?, 'En curso', '$850 USD')
+        """,
+        (
+            "Copa E-Sports Focus",
+            "Valorant",
+            "America/Bogota",
+            organizador_id,
+            ahora.strftime("%Y-%m-%dT%H:%M"),
+            "Torneo oficial de Valorant para equipos de Latinoamérica. Modalidad 5v5 Eliminación Directa.",
+        ),
     )
     torneo_id = cursor.lastrowid
+
+    # Premios oficiales del torneo (HU-09)
+    premios = [
+        (1, "1.º Lugar (Campeón)", "$500 USD + Trofeo de Campeón E-Sports Focus", "Trofeo y premio en metálico al ganador de la Gran Final"),
+        (2, "2.º Lugar (Subcampeón)", "$250 USD + Medalla de Plata", "Premio al subcampeón de la Gran Final"),
+        (3, "3.º Lugar", "$100 USD + Medalla de Bronce", "Premio a la tercera posición de la competición"),
+    ]
+    for pos, pos_txt, monto, desc in premios:
+        conexion.execute(
+            """
+            INSERT INTO premio (torneo_id, posicion, posicion_texto, monto_texto, descripcion)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (torneo_id, pos, pos_txt, monto, desc),
+        )
+
+    # Equipos participantes inscritos (HU-09)
+    for eq_id in equipos.values():
+        conexion.execute(
+            """
+            INSERT INTO torneo_equipo (torneo_id, equipo_id, fecha_inscripcion)
+            VALUES (?, ?, ?)
+            """,
+            (torneo_id, eq_id, ahora.isoformat(timespec="seconds")),
+        )
 
     conexion.execute(
         "INSERT INTO bracket (torneo_id, ultima_actualizacion) VALUES (?, ?)",

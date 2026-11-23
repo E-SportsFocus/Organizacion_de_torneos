@@ -124,4 +124,13 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 6. En las partidas pendientes o programadas, las casillas muestran su estado de espera sin asignar un ganador prematuro.
 7. Debajo del árbol visual, se mantiene accesible la tabla detallada de **Partidas** y el **Historial de actualizaciones** con la auditoría cronológica de moderación (cumpliendo RP-10).
 
+### Recorrido de HU-09 (creación y gestión de torneos, participantes y premios)
+
+1. Abre el menú **☰** y entra como **Olga Organización** (Organizador).
+2. En el panel del Organizador, accede al módulo **Gestión de Torneo** o pulsa en **Crear / Configurar Torneo**.
+3. En la sección de **Datos Generales**, configura el nombre del torneo, el videojuego, la fecha/hora de inicio, la zona horaria y una descripción oficial.
+4. En la sección de **Participantes**, visualiza y selecciona los equipos y jugadores que competirán en el torneo.
+5. En la sección de **Premios**, define la bolsa de premios y el desglose oficial por posición (1.º, 2.º y 3.º lugar).
+6. Al guardar los cambios, la información se almacena en la base de datos y se hace visible tanto en el panel administrativo como en la portada pública del torneo.
+
 Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06, las 4 de `tests/test_hu07.py` a los escenarios de HU-07 y las 5 de `tests/test_hu08.py` a los escenarios y avance dinámico de HU-08. En total son 43 pruebas.

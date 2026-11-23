@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block titulo %}Gestión y Creación de Torneo — E-Sports Focus{% endblock %}
+{% block contenido %}
+
+<div style="margin-bottom: 1.25rem;">
+    <p class="suave" style="margin: 0 0 .5rem 0;">
+        <a href="/" style="color: inherit; text-decoration: none;">Inicio</a> /
+        <a href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}" style="color: inherit; text-decoration: none;">Panel Organizador</a> /
+        <strong>Gestión del Torneo</strong>
+    </p>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+            <h2 style="margin:0;">⚙️ Gestión y Creación del Torneo</h2>
+            <p class="suave" style="margin:.3rem 0 0 0;">
+                Configura los datos generales del torneo, selecciona los participantes y define los premios oficiales.
+            </p>
+        </div>
+        <a class="boton boton-secundario" href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}">
+            ⬅️ Volver al Panel
+        </a>
+    </div>
+</div>
+
+{% if mensaje %}
+<div class="aviso aviso-ok">
+    {{ mensaje }}
+</div>
+{% endif %}
+
+{% if error %}
+<div class="aviso aviso-error">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="post" action="/organizador/torneo/guardar">
+    <input type="hidden" name="persona_id" value="{{ persona.id }}">
+    {% if torneo and torneo.id %}
+    <input type="hidden" name="torneo_id" value="{{ torneo.id }}">
+    {% endif %}
+
+    <!-- SECCIÓN 1: DATOS GENERALES -->
+    <div class="tarjeta">
+        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
+            <span>🏆</span> 1. Información General del Torneo
+        </h3>
+        <p class="suave" style="margin-top:-.4rem; margin-bottom:1.1rem;">
+            Datos de identificación y planificación oficial del campeonato.
+        </p>
+
+        <div class="form-grid-2">
+            <div class="campo-grupo">
+                <label for="nombre">Nombre del torneo *</label>
+                <input class="input-control" type="text" id="nombre" name="nombre"
+                       value="{{ torneo.nombre if torneo else '' }}"
+                       placeholder="Ej: Copa E-Sports Focus Latinoamérica" required minlength="3">
+            </div>
+
+            <div class="campo-grupo">
+                <label for="juego">Videojuego oficial *</label>
+                <select class="input-control" id="juego" name="juego" required>
+                    <option value="Valorant" {% if torneo and torneo.juego == 'Valorant' %}selected{% endif %}>Valorant</option>
+                    <option value="League of Legends" {% if torneo and torneo.juego == 'League of Legends' %}selected{% endif %}>League of Legends</option>
+                    <option value="Counter-Strike 2" {% if torneo and torneo.juego == 'Counter-Strike 2' %}selected{% endif %}>Counter-Strike 2</option>
+                    <option value="Rocket League" {% if torneo and torneo.juego == 'Rocket League' %}selected{% endif %}>Rocket League</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-grid-3">
+            <div class="campo-grupo">
+                <label for="fecha_inicio">Fecha y hora de inicio *</label>
+                <input class="input-control" type="datetime-local" id="fecha_inicio" name="fecha_inicio"
+                       value="{{ torneo.fecha_inicio if torneo and torneo.fecha_inicio else '' }}" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="zona_horaria">Zona horaria *</label>
+                <select class="input-control" id="zona_horaria" name="zona_horaria" required>
+                    <option value="America/Bogota" {% if torneo and torneo.zona_horaria == 'America/Bogota' %}selected{% endif %}>America/Bogota (UTC-5)</option>
+                    <option value="America/Santiago" {% if torneo and torneo.zona_horaria == 'America/Santiago' %}selected{% endif %}>America/Santiago (UTC-3)</option>
+                    <option value="America/Buenos_Aires" {% if torneo and torneo.zona_horaria == 'America/Buenos_Aires' %}selected{% endif %}>America/Buenos_Aires (UTC-3)</option>
+                    <option value="America/Mexico_City" {% if torneo and torneo.zona_horaria == 'America/Mexico_City' %}selected{% endif %}>America/Mexico_City (UTC-6)</option>
+                </select>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="estado">Estado del torneo</label>
+                <select class="input-control" id="estado" name="estado">
+                    <option value="En curso" {% if not torneo or torneo.estado == 'En curso' %}selected{% endif %}>En curso</option>
+                    <option value="Inscripciones abiertas" {% if torneo and torneo.estado == 'Inscripciones abiertas' %}selected{% endif %}>Inscripciones abiertas</option>
+                    <option value="Borrador" {% if torneo and torneo.estado == 'Borrador' %}selected{% endif %}>Borrador</option>
+                    <option value="Finalizado" {% if torneo and torneo.estado == 'Finalizado' %}selected{% endif %}>Finalizado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="campo-grupo">
+            <label for="bolsa_premios">Bolsa total de premios (Prize Pool acumulado)</label>
+            <input class="input-control" type="text" id="bolsa_premios" name="bolsa_premios"
+                   value="{{ torneo.bolsa_premios if torneo and torneo.bolsa_premios else '' }}"
+                   placeholder="Ej: $850 USD o 500.000 CLP">
+        </div>
+
+        <div class="campo-grupo">
+            <label for="descripcion">Descripción y reglamento del torneo</label>
+            <textarea class="input-control" id="descripcion" name="descripcion" rows="3"
+                      placeholder="Información relevante para los equipos, formato de eliminación, enlaces al servidor de juego...">{{ torneo.descripcion if torneo and torneo.descripcion else '' }}</textarea>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: ESTRUCTURA DE PREMIOS -->
+    <div class="tarjeta">
+        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
+            <span>🎁</span> 2. Estructura Oficial de Premios
+        </h3>
+        <p class="suave" style="margin-top:-.4rem; margin-bottom:1.1rem;">
+            Define la recompensa por posición competitiva. Los premios se mostrarán a todos los participantes en la vista pública.
+        </p>
+
+        {% for p in premios_formulario %}
+        <div class="tarjeta-item-gestion">
+            <input type="hidden" name="premio_{{ p.posicion }}_texto" value="{{ p.posicion_texto }}">
+            <div style="font-weight:700; margin-bottom:.5rem; color:var(--color-primario);">
+                🏅 {{ p.posicion_texto }}
+            </div>
+            <div class="form-grid-2">
+                <div class="campo-grupo" style="margin-bottom:0;">
+                    <label>Premio / Monto asignado</label>
+                    <input class="input-control" type="text" name="premio_{{ p.posicion }}_monto"
+                           value="{{ p.monto_texto }}"
+                           placeholder="Ej: $500 USD + Trofeo de Campeón">
+                </div>
+                <div class="campo-grupo" style="margin-bottom:0;">
+                    <label>Detalle / Condiciones de entrega</label>
+                    <input class="input-control" type="text" name="premio_{{ p.posicion }}_desc"
+                           value="{{ p.descripcion }}"
+                           placeholder="Ej: Entrega por transferencia bancaria tras Gran Final">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- SECCIÓN 3: GESTIÓN DE PARTICIPANTES -->
+    <div class="tarjeta">
+        <h3 style="margin-top:0; display:flex; align-items:center; gap:.5rem;">
+            <span>👥</span> 3. Equipos y Jugadores Participantes
+        </h3>
+        <p class="suave" style="margin-top:-.4rem; margin-bottom:.9rem;">
+            Selecciona los equipos que disputarán este torneo. Los jugadores inscritos podrán confirmar disponibilidad y jugar las partidas.
+        </p>
+
+        <div class="equipo-grid-seleccion">
+            {% for eq in todos_equipos %}
+            <label class="equipo-check-item">
+                <input type="checkbox" name="equipos_ids" value="{{ eq.id }}"
+                       {% if eq.id in inscritos_ids %}checked{% endif %}>
+                <div style="flex:1;">
+                    <div style="font-weight:700; display:flex; justify-content:space-between; align-items:center;">
+                        <span>{{ eq.nombre }}</span>
+                        <span class="suave" style="font-size:.78rem;">{{ eq.pais }}</span>
+                    </div>
+                    <div class="suave" style="font-size:.82rem; margin-top:.25rem;">
+                        👤 Integrantes:
+                        {% for j in eq.jugadores %}
+                        {{ j.nombre }}{% if not loop.last %}, {% endif %}
+                        {% else %}
+                        <em>Sin jugadores registrados</em>
+                        {% endfor %}
+                    </div>
+                </div>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN -->
+    <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
+        <a class="boton boton-secundario" href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}">
+            Cancelar
+        </a>
+        <button class="boton" type="submit" style="font-size:1rem; padding:.65rem 1.75rem;">
+            💾 Guardar Configuración del Torneo
+        </button>
+    </div>
+</form>
+
+{% endblock %}

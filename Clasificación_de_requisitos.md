@@ -13,6 +13,7 @@
 | RP-08 | El sistema debe detectar y notificar el resultado de una partida en un plazo máximo de cinco segundos desde el fin de la partida, cuando la API esté disponible. | No funcional (rendimiento) | Determinar los resultados vía API |
 | RP-09 | El sistema debe estar disponible al menos el 99% del tiempo durante los horarios de partidas programadas, dado que la confirmación de disponibilidad depende de él. | No funcional (disponibilidad) | Confirman disponibilidad en la plataforma | 
 | RP-10 | El sistema debe mantener un registro auditable de cada actualizacion del bracket, para poder verificar discrepancias reportadas por jugadores/equipos. | No funcional (trazabilidad) | Sistema notifica automaticamente el resultado al Organizador |
+| RP-11 | El sistema debe permitir al Organizador crear y configurar un torneo definiendo sus datos generales, asociando los equipos/jugadores participantes y configurando la estructura de premios. | Funcional | Planificación, registro de torneo y configuración competitiva |
  
 ## Requisitos de proyecto
 | ID | Requisito |

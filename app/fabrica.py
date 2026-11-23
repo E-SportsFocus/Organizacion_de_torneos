@@ -86,7 +86,7 @@ def crear_app(ruta_db=None, reloj=None, discord=None):
         )
     )
     aplicacion.include_router(
-        organizador.crear_router(templates, abrir_conexion)
+        organizador.crear_router(templates, abrir_conexion, reloj=reloj or datetime.now)
     )
     aplicacion.include_router(
         torneo.crear_router(templates, abrir_conexion)

@@ -91,5 +91,18 @@ Como visitante o participante del torneo, quiero consultar el bracket en un form
 - CA3: Las partidas pendientes no muestran ganador anticipado y reflejan su estado de espera.
 - CA4: Se permite consultar tanto el árbol visual de llaves como la tabla detallada de auditoría e historial de actualizaciones.
 
+## HU-09: Creación y gestión de torneos, participantes y premios
+
+Como organizador, quiero contar con un apartado exclusivo para crear y configurar torneos, gestionando su información principal, los equipos/jugadores participantes y la estructura de premios, para planificar y poner en marcha competiciones de manera autónoma y transparente desde la plataforma.
+
+**Actividad TO-BE asociada:** Planificación, registro de torneo y configuración competitiva.
+
+**Criterios de aceptación:**
+- CA1: El organizador puede crear un torneo indicando su nombre, videojuego, fecha/hora de inicio, zona horaria y descripción opcional.
+- CA2: El organizador puede gestionar la lista de equipos y jugadores participantes inscritos en el torneo.
+- CA3: El organizador puede configurar la bolsa de premios (*prize pool*) desglosada por posiciones (1.º, 2.º, 3.º lugar u otros reconocimientos).
+- CA4: El sistema valida que los campos esenciales no estén vacíos y que las fechas y montos sean consistentes antes de confirmar la creación o actualización.
+- CA5: La información de fechas, participantes y premios queda disponible de forma clara en el panel del organizador y en la vista pública de consulta.
+
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)

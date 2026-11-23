@@ -11,6 +11,9 @@
     <div class="hero-insignia">
         <span class="etiqueta etiqueta-estado">Vista pública · solo lectura</span>
         <span class="hero-juego">{{ torneo.juego }}</span>
+        {% if torneo.bolsa_premios %}
+        <span class="etiqueta etiqueta-confirmada">💰 Prize Pool: {{ torneo.bolsa_premios }}</span>
+        {% endif %}
     </div>
     <h2 class="hero-titulo">{{ torneo.nombre }}</h2>
     <p class="hero-meta suave">
@@ -19,8 +22,43 @@
         {% else %}
         Todavía no se ha registrado ningún resultado.
         {% endif %}
+        {% if torneo.descripcion %}
+        <br><span style="font-size:.88rem; display:inline-block; margin-top:.35rem;">{{ torneo.descripcion }}</span>
+        {% endif %}
     </p>
 </section>
+
+{% if premios %}
+<div class="tarjeta">
+    <div class="seccion-cabecera">
+        <div class="seccion-icono" aria-hidden="true">🎁</div>
+        <div>
+            <h3 style="margin-top:0; margin-bottom:.15rem">Premios Oficiales del Torneo</h3>
+            <p class="suave seccion-bajada">
+                Recompensas y reconocimientos establecidos por la organización
+                {% if torneo.bolsa_premios %} · Bolsa acumulada: <strong>{{ torneo.bolsa_premios }}</strong>{% endif %}
+            </p>
+        </div>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.75rem; margin-top:.75rem;">
+        {% for p in premios %}
+        <div style="border:1px solid var(--color-borde); border-radius:8px; padding:.75rem; background:var(--color-bg);">
+            <div style="font-weight:700; color:var(--color-primario); font-size:.86rem;">
+                🏅 {{ p.posicion_texto }}
+            </div>
+            <div style="font-weight:800; font-size:1.02rem; margin:.2rem 0; color:var(--color-texto);">
+                {{ p.monto_texto }}
+            </div>
+            {% if p.descripcion %}
+            <div class="suave" style="font-size:.8rem;">
+                {{ p.descripcion }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 <div class="tarjeta tarjeta-anuncios">
     <div class="seccion-cabecera">

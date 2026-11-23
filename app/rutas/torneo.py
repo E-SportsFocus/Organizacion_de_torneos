@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.servicios import anuncio as servicio_anuncio
 from app.servicios import resultado as servicio_resultado
+from app.servicios import torneo_gestion as servicio_torneo
 
 
 def _formatear_fecha(valor):
@@ -27,7 +28,12 @@ def crear_router(templates, abrir_conexion):
 
         with abrir_conexion() as conexion:
             torneo = conexion.execute(
-                "SELECT id, nombre, juego FROM torneo ORDER BY id LIMIT 1"
+                """
+                SELECT id, nombre, juego, fecha_inicio, descripcion, estado, bolsa_premios
+                FROM torneo
+                ORDER BY id
+                LIMIT 1
+                """
             ).fetchone()
 
             if torneo is not None:
@@ -37,6 +43,7 @@ def crear_router(templates, abrir_conexion):
                 ).fetchone()
                 partidas = servicio_resultado.listar_bracket(conexion, torneo["id"])
                 anuncios = servicio_anuncio.anuncios_por_partida(conexion)
+                premios = servicio_torneo.obtener_premios_torneo(conexion, torneo["id"])
 
                 for partida in partidas:
                     partida["anuncio"] = anuncios.get(partida["partida_id"])
@@ -45,6 +52,7 @@ def crear_router(templates, abrir_conexion):
                     "torneo": dict(torneo),
                     "bracket": dict(bracket) if bracket else None,
                     "partidas": partidas,
+                    "premios": premios,
                     "anuncios": [
                         partida
                         for partida in partidas

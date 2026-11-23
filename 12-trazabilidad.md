@@ -13,13 +13,16 @@
 | RP-07 | [HU-06](./07-criterios-aceptacion.md) | [CU-06](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Organizador, Partida |
 | RP-07 | [HU-07](./07-criterios-aceptacion.md) | [CU-07](./09-casos-de-uso.md) | — | — | Torneo, Partida, Equipo, Resultado, Anuncio |
 | RP-06, RP-10 | [HU-08](./07-criterios-aceptacion.md) | [CU-08](./09-casos-de-uso.md) | — | [EST-01](./11-diagramas-estado.md) | Bracket, Partida, Equipo, Resultado |
+| RP-11 | [HU-09](./07-criterios-aceptacion.md) | [CU-09](./09-casos-de-uso.md) | — | — | Torneo, Premio, Organizador, Equipo, Jugador |
 | RP-08 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Partida |
 | RP-09 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | --- | Disponibilidad |
 | RP-10 | [HU-02](./07-criterios-aceptacion.md), [HU-03](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md), [CU-04](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Moderador |
 
-Las historias HU-01 a HU-08 aparecen todas en la matriz.
+Las historias HU-01 a HU-09 aparecen todas en la matriz.
 
 ## Observaciones
+
+- **RP-11 (creación y gestión de torneos, participantes y premios):** implementado mediante HU-09 y CU-09. Permite al Organizador registrar torneos, configurar la lista de participantes y definir el desglose oficial de premios, articulando la clase `Premio` con `Torneo`.
 
 - **RP-07 (anuncio de ganadores):** el anuncio está en [DSS-01](./10-diagramas-secuencia.md) y [DSS-02](./10-diagramas-secuencia.md) (publicar el ganador y anunciarlo en Discord) y corresponde a la transición "Resultado confirmado → Anunciada" de [EST-01](./11-diagramas-estado.md).
 - **RP-09 (disponibilidad del 99 %):** es un requisito no funcional transversal. No se modela en un caso de uso ni en un diagrama. Se verifica con la métrica M-FI01 de los atributos de calidad de la Entrega 1. Se asocia a HU-04 y CU-01 porque la confirmación de disponibilidad depende de que el sistema esté disponible.

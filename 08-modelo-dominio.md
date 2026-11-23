@@ -21,6 +21,7 @@ Archivo fuente: [`./diagramas/modelo-dominio.puml`](./diagramas/modelo-dominio.p
 | Bracket | Vista del torneo que muestra las fases, los equipos y los resultados, y conserva el historial de sus actualizaciones. | última actualización, historial de actualizaciones |
 | Disponibilidad | Confirmación de que un equipo puede jugar una partida. | confirmada, fecha de confirmación |
 | SolicitudCambioHorario | Petición de un equipo para mover una partida a otro horario. | nuevo horario propuesto, fecha de solicitud, motivo de rechazo, estado |
+| Premio | Reconocimiento o recompensa oficial asignada a una posición en el torneo. | posición (1.º, 2.º, 3.º), monto/descripción, condiciones de entrega |
 
 ## Asociaciones
 
@@ -40,6 +41,7 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 | para | Disponibilidad — Partida | 0..* a 1 | Cada registro de disponibilidad corresponde a una partida. |
 | solicita | Equipo — SolicitudCambioHorario | 1 a 0..* | Cada solicitud de cambio la hace un equipo; un equipo puede hacer varias solicitudes. |
 | sobre | Partida — SolicitudCambioHorario | 1 a 0..* | Una partida puede tener varias solicitudes de cambio a lo largo del tiempo. |
+| premia con | Torneo — Premio | 1 a 0..* | Un torneo define una estructura con varios premios asignados por posición (composición). |
 
 ## Decisiones de modelado
 
