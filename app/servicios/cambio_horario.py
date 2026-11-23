@@ -95,11 +95,16 @@ def solicitar_cambio_horario(
 
     # Verificar que el equipo del jugador juegue en esta partida
     en_partida = conexion.execute(
-        "SELECT 1 FROM disponibilidad WHERE partida_id = ? AND equipo_id = ?",
+        "SELECT confirmada FROM disponibilidad WHERE partida_id = ? AND equipo_id = ?",
         (partida_id, jugador["equipo_id"]),
     ).fetchone()
     if not en_partida:
         raise ErrorCambioHorario("El equipo del jugador no participa en esta partida.")
+
+    if en_partida["confirmada"] == "Confirmada":
+        raise ErrorCambioHorario(
+            "La disponibilidad de este equipo ya fue confirmada; no se pueden solicitar cambios de horario."
+        )
 
     if partida["estado"] != "Programada":
         raise ErrorCambioHorario("Solo se pueden solicitar cambios de horario para partidas programadas.")

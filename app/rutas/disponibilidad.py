@@ -37,8 +37,10 @@ def crear_router(templates, abrir_conexion, reloj):
             f_dt = datetime.fromisoformat(partida["fecha_hora"])
             partida["puede_solicitar_cambio"] = (
                 partida["estado"] == "Programada"
+                and partida.get("confirmada") == "Pendiente"
                 and ahora < f_dt - timedelta(hours=2)
             )
+            partida["min_nuevo_horario"] = (ahora + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M")
 
         solicitudes = servicio_cambio.listar_solicitudes_equipo(
             conexion, persona["equipo_id"], ahora

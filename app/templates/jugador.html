@@ -48,13 +48,13 @@
                         <span class="texto-vencido">Plazo vencido</span>
                         {% endif %}
 
-                        {% if partida.puede_solicitar_cambio %}
+                        {% if partida.puede_solicitar_cambio and partida.confirmada == "Pendiente" %}
                         <details style="margin-top:.4rem">
                             <summary class="suave" style="cursor:pointer; font-size:.82rem">Solicitar cambio de horario</summary>
                             <form method="post" action="/cambio-horario/solicitar" style="margin-top:.4rem; display:flex; gap:.4rem; align-items:center; flex-wrap:wrap">
                                 <input type="hidden" name="persona_id" value="{{ persona.id }}">
                                 <input type="hidden" name="partida_id" value="{{ partida.partida_id }}">
-                                <input type="datetime-local" name="nuevo_horario" required style="padding:.3rem; border:1px solid var(--color-borde); border-radius:6px; background:var(--color-surface); color:var(--color-texto); font-size:.82rem">
+                                <input type="datetime-local" name="nuevo_horario" min="{{ partida.min_nuevo_horario }}" required style="padding:.3rem; border:1px solid var(--color-borde); border-radius:6px; background:var(--color-surface); color:var(--color-texto); font-size:.82rem">
                                 <button class="boton" type="submit" style="padding:.3rem .6rem; font-size:.8rem">Enviar solicitud</button>
                             </form>
                         </details>

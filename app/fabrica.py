@@ -76,7 +76,9 @@ def crear_app(ruta_db=None, reloj=None, discord=None):
         disponibilidad.crear_router(templates, abrir_conexion, reloj or datetime.now)
     )
     aplicacion.include_router(
-        cambio_horario.crear_router(abrir_conexion, reloj or datetime.now, discord=discord)
+        cambio_horario.crear_router(
+            abrir_conexion, reloj or datetime.now, discord=discord, templates=templates
+        )
     )
     aplicacion.include_router(
         resultado.crear_router(
