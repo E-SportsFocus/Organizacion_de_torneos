@@ -176,32 +176,16 @@ def avanzar_ganador(conexion, partida_id, ganador_equipo_id, fecha_hora):
         return
 
     # Asignar el equipo ganador a la disponibilidad de la siguiente partida
+    # (queda como "Pendiente": el jugador clasificado debe confirmar de nuevo
+    # su disponibilidad para la siguiente fase, simulando un flujo real).
     ya_asignado = conexion.execute(
         "SELECT 1 FROM disponibilidad WHERE partida_id = ? AND equipo_id = ?",
         (siguiente_id, ganador_equipo_id),
     ).fetchone()
     if not ya_asignado:
         conexion.execute(
-            """
-            INSERT INTO disponibilidad (equipo_id, partida_id, confirmada, fecha_confirmacion)
-            VALUES (?, ?, 'Confirmada', ?)
-            """,
-            (ganador_equipo_id, siguiente_id, fecha_hora),
-        )
-
-    # Si la partida destino ya tiene 2 equipos clasificados, queda lista para registrar resultado
-    conteo = conexion.execute(
-        "SELECT COUNT(*) FROM disponibilidad WHERE partida_id = ?",
-        (siguiente_id,),
-    ).fetchone()[0]
-    if conteo >= 2:
-        conexion.execute(
-            """
-            UPDATE partida
-            SET estado = 'Pendiente de resultado'
-            WHERE id = ? AND estado NOT IN ('Resultado confirmado', 'Anunciada')
-            """,
-            (siguiente_id,),
+            "INSERT INTO disponibilidad (equipo_id, partida_id) VALUES (?, ?)",
+            (ganador_equipo_id, siguiente_id),
         )
 
     # Actualizar la marca de tiempo del bracket

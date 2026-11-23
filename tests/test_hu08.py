@@ -176,22 +176,34 @@ def test_coexistencia_de_arbol_grafico_y_tabla_de_auditoria(cliente, ahora):
 
 def test_avance_dinamico_de_ganador_a_siguiente_fase(cliente, ahora):
     """
-    Simulación real: Al inicio solo existen Cuartos de final. Al registrar el moderador
-    un resultado, el ganador avanza automáticamente a Semifinal y el bracket se actualiza dinámicamente.
+    Simulación real completa: Al inicio solo existen Cuartos de final en Programada.
+    Los jugadores confirman disponibilidad → la partida pasa a Pendiente de resultado.
+    El moderador registra el resultado → el ganador avanza a Semifinal con disponibilidad
+    Pendiente, y la Semifinal aparece en el bracket como Programada.
     """
     http, datos = cliente
     alfa = datos.equipo("Equipo Alfa")
     bravo = datos.equipo("Equipo Bravo")
     moderador = datos.moderador("Marta Arbitraje")
+    organizador = datos.organizador("Olga Organización")
     torneo = datos.torneo("Copa Dinámica")
+    datos.conexion.execute(
+        "UPDATE torneo SET organizador_id = ? WHERE id = ?", (organizador, torneo)
+    )
+    datos.conexion.commit()
 
-    # Solo se crea Cuartos de final
+    j_alfa = datos.jugador("Jugador Alfa", alfa)
+    j_bravo = datos.jugador("Jugador Bravo", bravo)
+
+    from app.servicios import disponibilidad as servicio_disp
+
+    # Solo se crea Cuartos de final en Programada (el estado inicial limpio)
     p_cuartos = datos.partida(
         torneo,
         moderador,
-        ahora,
+        ahora + timedelta(hours=4),
         [alfa, bravo],
-        estado="Pendiente de resultado",
+        estado="Programada",
         fase="Cuartos de final",
     )
 
@@ -200,6 +212,31 @@ def test_avance_dinamico_de_ganador_a_siguiente_fase(cliente, ahora):
     assert resp1.status_code == 200
     assert "Cuartos de final" in resp1.text
     assert "Semifinal" not in resp1.text
+
+    # Verificar que la partida está en Programada
+    estado = datos.conexion.execute(
+        "SELECT estado FROM partida WHERE id = ?", (p_cuartos,)
+    ).fetchone()["estado"]
+    assert estado == "Programada"
+
+    # Jugador de Alfa confirma disponibilidad
+    disp_alfa = datos.disponibilidad(p_cuartos, alfa)
+    servicio_disp.confirmar_disponibilidad(datos.conexion, disp_alfa["id"], j_alfa, ahora)
+
+    # Partida sigue en Programada (falta Bravo)
+    estado = datos.conexion.execute(
+        "SELECT estado FROM partida WHERE id = ?", (p_cuartos,)
+    ).fetchone()["estado"]
+    assert estado == "Programada"
+
+    # Jugador de Bravo confirma → partida pasa automáticamente a Pendiente de resultado
+    disp_bravo = datos.disponibilidad(p_cuartos, bravo)
+    servicio_disp.confirmar_disponibilidad(datos.conexion, disp_bravo["id"], j_bravo, ahora)
+
+    estado = datos.conexion.execute(
+        "SELECT estado FROM partida WHERE id = ?", (p_cuartos,)
+    ).fetchone()["estado"]
+    assert estado == "Pendiente de resultado"
 
     # El moderador registra la victoria de Alfa
     servicio_resultado.registrar_resultado(
@@ -210,9 +247,17 @@ def test_avance_dinamico_de_ganador_a_siguiente_fase(cliente, ahora):
         ahora,
     )
 
-    # Ahora el bracket se ha construido dinámicamente: Semifinal aparece con Alfa clasificado
+    # El bracket se ha construido dinámicamente: Semifinal aparece con Alfa clasificado
     resp2 = http.get("/bracket")
     assert resp2.status_code == 200
     assert "Cuartos de final" in resp2.text
     assert "Semifinal" in resp2.text
     assert "Equipo Alfa" in resp2.text
+
+    # La semifinal está en Programada (Alfa debe confirmar disponibilidad para la semifinal)
+    semi = datos.conexion.execute(
+        "SELECT id, estado FROM partida WHERE torneo_id = ? AND fase = 'Semifinal'",
+        (torneo,),
+    ).fetchone()
+    assert semi is not None
+    assert semi["estado"] == "Programada"

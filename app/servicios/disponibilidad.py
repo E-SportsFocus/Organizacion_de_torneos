@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 HORAS_ANTICIPACION_REVISION = 8
 ESTADO_PROGRAMADA = "Programada"
+ESTADO_PENDIENTE_RESULTADO = "Pendiente de resultado"
 DISPONIBILIDAD_PENDIENTE = "Pendiente"
 DISPONIBILIDAD_CONFIRMADA = "Confirmada"
 
@@ -175,5 +176,31 @@ def confirmar_disponibilidad(conexion, disponibilidad_id, persona_id, ahora):
             disponibilidad_id,
         ),
     )
+
+    # Auto-transición: si ambos equipos ya confirmaron, la partida pasa
+    # automáticamente a "Pendiente de resultado" para que el Moderador
+    # pueda registrar el marcador (simulación real del flujo del torneo).
+    partida_id = conexion.execute(
+        "SELECT partida_id FROM disponibilidad WHERE id = ?",
+        (disponibilidad_id,),
+    ).fetchone()["partida_id"]
+
+    pendientes = conexion.execute(
+        """
+        SELECT COUNT(*) FROM disponibilidad
+        WHERE partida_id = ? AND confirmada = ?
+        """,
+        (partida_id, DISPONIBILIDAD_PENDIENTE),
+    ).fetchone()[0]
+
+    if pendientes == 0:
+        conexion.execute(
+            """
+            UPDATE partida SET estado = ?
+            WHERE id = ? AND estado = ?
+            """,
+            (ESTADO_PENDIENTE_RESULTADO, partida_id, ESTADO_PROGRAMADA),
+        )
+
     conexion.commit()
     return disponibilidad_id

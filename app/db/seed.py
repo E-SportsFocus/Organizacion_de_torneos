@@ -75,63 +75,37 @@ def sembrar(conexion, ahora=None):
         (torneo_id, ahora.isoformat(timespec="seconds")),
     )
 
-    # Inicia la simulación únicamente con las 4 llaves de Cuartos de final
-    # listas para ser moderadas. Semifinal y Final se construirán dinámicamente
-    # a medida que el moderador registre los resultados.
+    # Simulación real: solo Cuartos de final en estado "Programada" con
+    # disponibilidad "Pendiente". Los jugadores deben confirmar su disponibilidad
+    # antes de que el moderador pueda registrar resultados.
+    # Las fases de Semifinal y Final se construyen dinámicamente.
     partidas = [
-        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=2), "Cuartos de final", "Pendiente de resultado"),
-        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=4), "Cuartos de final", "Pendiente de resultado"),
-        (equipos["Equipo Eco"], equipos["Equipo Foxtrot"], ahora + timedelta(hours=6), "Cuartos de final", "Pendiente de resultado"),
-        (equipos["Equipo Golf"], equipos["Equipo Hotel"], ahora + timedelta(hours=8), "Cuartos de final", "Pendiente de resultado"),
+        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=6), "Cuartos de final"),
+        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=8), "Cuartos de final"),
+        (equipos["Equipo Eco"], equipos["Equipo Foxtrot"], ahora + timedelta(hours=10), "Cuartos de final"),
+        (equipos["Equipo Golf"], equipos["Equipo Hotel"], ahora + timedelta(hours=12), "Cuartos de final"),
     ]
 
-    partidas_ids = []
-    for equipo_a, equipo_b, fecha_hora, fase, estado in partidas:
+    for equipo_a, equipo_b, fecha_hora, fase in partidas:
         cursor = conexion.execute(
             """
             INSERT INTO partida (torneo_id, moderador_id, fecha_hora, fase, estado)
-            VALUES (?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, 'Programada')
             """,
             (
                 torneo_id,
                 moderador_id,
                 fecha_hora.isoformat(timespec="minutes"),
                 fase,
-                estado,
             ),
         )
         partida_id = cursor.lastrowid
-        partidas_ids.append(partida_id)
+        # Disponibilidad queda en "Pendiente" por defecto (sin confirmar)
         for equipo_id in (equipo_a, equipo_b):
             conexion.execute(
-                """
-                INSERT INTO disponibilidad (equipo_id, partida_id, confirmada, fecha_confirmacion)
-                VALUES (?, ?, 'Confirmada', ?)
-                """,
-                (equipo_id, partida_id, ahora.isoformat(timespec="seconds")),
+                "INSERT INTO disponibilidad (equipo_id, partida_id) VALUES (?, ?)",
+                (equipo_id, partida_id),
             )
-
-    # Sembrar una solicitud de cambio de horario de ejemplo para Charlie vs Delta (HU-05)
-    charlie_jugador = conexion.execute(
-        "SELECT id FROM persona WHERE equipo_id = ? LIMIT 1",
-        (equipos["Equipo Charlie"],),
-    ).fetchone()["id"]
-    conexion.execute(
-        """
-        INSERT INTO solicitud_cambio_horario (
-            partida_id, equipo_id, solicitante_id, nuevo_horario,
-            fecha_solicitud, estado
-        )
-        VALUES (?, ?, ?, ?, ?, 'Solicitada')
-        """,
-        (
-            partidas_ids[1],
-            equipos["Equipo Charlie"],
-            charlie_jugador,
-            (ahora + timedelta(days=2, hours=4)).isoformat(timespec="minutes"),
-            (ahora - timedelta(hours=1)).isoformat(timespec="seconds"),
-        ),
-    )
 
     conexion.commit()
     return True
