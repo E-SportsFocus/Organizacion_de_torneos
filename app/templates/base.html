@@ -48,18 +48,31 @@
             --color-rojo-bg: #FEE2E2;
             --color-rojo-borde: #FCA5A5;
 
-            /* Colores de roles (Rose Frambuesa) Modo Claro */
-            --color-rol-jugador: #BE185D;
-            --color-rol-jugador-bg: #FFE4E6;
-            --color-rol-jugador-borde: #FECDD3;
+            /* Estados informativos y chips de sistema (Celeste Cielo) Modo Claro */
+            --color-info: #0284C7;
+            --color-info-bg: #E0F2FE;
+            --color-info-borde: #7DD3FC;
 
-            --color-rol-moderador: #BE185D;
-            --color-rol-moderador-bg: #FFE4E6;
-            --color-rol-moderador-borde: #FECDD3;
+            /* Separador VS neutral deportivo Modo Claro */
+            --color-vs-texto: #475569;
+            --color-vs-bg: #F1F5F9;
+            --color-vs-borde: #CBD5E1;
 
-            --color-rol-organizador: #BE185D;
-            --color-rol-organizador-bg: #FFE4E6;
-            --color-rol-organizador-borde: #FECDD3;
+            /* Colores semánticos de roles Modo Claro */
+            /* 1. Jugador: Verde Menta Deportivo */
+            --color-rol-jugador: #15803D;
+            --color-rol-jugador-bg: #DCFCE7;
+            --color-rol-jugador-borde: #86EFAC;
+
+            /* 2. Moderador: Ámbar Árbitro */
+            --color-rol-moderador: #B45309;
+            --color-rol-moderador-bg: #FEF3C7;
+            --color-rol-moderador-borde: #FCD34D;
+
+            /* 3. Organizador: Púrpura Índigo */
+            --color-rol-organizador: #4F46E5;
+            --color-rol-organizador-bg: #EEF2FF;
+            --color-rol-organizador-borde: #C7D2FE;
         }
 
         [data-tema="dark"] {
@@ -97,18 +110,31 @@
             --color-rojo-bg: rgba(239, 68, 68, 0.18);
             --color-rojo-borde: #EF4444;
 
-            /* Colores de roles (Púrpura neón) Modo Oscuro */
-            --color-rol-jugador: #C084FC;
-            --color-rol-jugador-bg: rgba(168, 85, 247, 0.16);
-            --color-rol-jugador-borde: #A855F7;
+            /* Estados informativos y chips de sistema (Cyan Neón) Modo Oscuro */
+            --color-info: #00F0FF;
+            --color-info-bg: rgba(0, 240, 255, 0.14);
+            --color-info-borde: #00F0FF;
 
-            --color-rol-moderador: #C084FC;
-            --color-rol-moderador-bg: rgba(168, 85, 247, 0.16);
-            --color-rol-moderador-borde: #A855F7;
+            /* Separador VS neutral deportivo Modo Oscuro */
+            --color-vs-texto: #94A3B8;
+            --color-vs-bg: #1E293B;
+            --color-vs-borde: #334155;
 
-            --color-rol-organizador: #C084FC;
-            --color-rol-organizador-bg: rgba(168, 85, 247, 0.16);
-            --color-rol-organizador-borde: #A855F7;
+            /* Colores semánticos de roles Modo Oscuro */
+            /* 1. Jugador: Verde Neón */
+            --color-rol-jugador: #4ADE80;
+            --color-rol-jugador-bg: rgba(34, 197, 94, 0.16);
+            --color-rol-jugador-borde: #22C55E;
+
+            /* 2. Moderador: Ámbar Neón */
+            --color-rol-moderador: #FCD34D;
+            --color-rol-moderador-bg: rgba(245, 158, 11, 0.18);
+            --color-rol-moderador-borde: #F59E0B;
+
+            /* 3. Organizador: Púrpura Índigo Neón */
+            --color-rol-organizador: #A78BFA;
+            --color-rol-organizador-bg: rgba(139, 92, 246, 0.18);
+            --color-rol-organizador-borde: #8B5CF6;
         }
 
         * { box-sizing: border-box; }
@@ -171,9 +197,9 @@
             flex-shrink: 0;
         }
         .chip-publico {
-            background: var(--color-primario-light);
-            border-color: var(--color-primario);
-            color: var(--color-primario);
+            background: var(--color-info-bg);
+            border-color: var(--color-info-borde);
+            color: var(--color-info);
         }
         .chip-jugador {
             background: var(--color-rol-jugador-bg);
@@ -375,12 +401,30 @@
             background: var(--color-primario-light);
             color: var(--color-primario);
         }
+        .menu-rol-boton[aria-controls="menu-rol-jugador"][aria-expanded="true"] {
+            border-color: var(--color-rol-jugador-borde);
+            background: var(--color-rol-jugador-bg);
+            color: var(--color-rol-jugador);
+        }
+        .menu-rol-boton[aria-controls="menu-rol-moderador"][aria-expanded="true"] {
+            border-color: var(--color-rol-moderador-borde);
+            background: var(--color-rol-moderador-bg);
+            color: var(--color-rol-moderador);
+        }
+        .menu-rol-boton[aria-controls="menu-rol-organizador"][aria-expanded="true"] {
+            border-color: var(--color-rol-organizador-borde);
+            background: var(--color-rol-organizador-bg);
+            color: var(--color-rol-organizador);
+        }
         .menu-rol-boton[aria-expanded="true"] .chevron { transform: rotate(180deg); }
         .menu-rol-lista {
             margin: .15rem 0 .5rem .35rem;
             padding: .15rem 0 .15rem .65rem;
             border-left: 2px solid var(--color-primario);
         }
+        #menu-rol-jugador { border-left-color: var(--color-rol-jugador); }
+        #menu-rol-moderador { border-left-color: var(--color-rol-moderador); }
+        #menu-rol-organizador { border-left-color: var(--color-rol-organizador); }
         .menu-sesion {
             border-color: transparent;
             background: var(--color-bg);
@@ -390,6 +434,9 @@
         }
         .menu-sesion:hover { background: var(--color-primario-light); border-color: var(--color-primario); }
         .menu-sesion.activo { background: var(--color-primario-light); border-color: var(--color-primario); font-weight: 700; color: var(--color-primario); }
+        #menu-rol-jugador .menu-sesion.activo { background: var(--color-rol-jugador-bg); border-color: var(--color-rol-jugador-borde); color: var(--color-rol-jugador); }
+        #menu-rol-moderador .menu-sesion.activo { background: var(--color-rol-moderador-bg); border-color: var(--color-rol-moderador-borde); color: var(--color-rol-moderador); }
+        #menu-rol-organizador .menu-sesion.activo { background: var(--color-rol-organizador-bg); border-color: var(--color-rol-organizador-borde); color: var(--color-rol-organizador); }
         .menu-vacio {
             margin: .35rem 0;
             color: var(--color-suave);
@@ -451,9 +498,9 @@
         .hero-juego {
             font-size: .82rem;
             font-weight: 700;
-            color: var(--color-secundario);
-            background: var(--color-secundario-light);
-            border: 1px solid var(--color-secundario);
+            color: var(--color-info);
+            background: var(--color-info-bg);
+            border: 1px solid var(--color-info-borde);
             border-radius: 9999px;
             padding: .15rem .6rem;
         }
@@ -542,9 +589,10 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: .05em;
-            color: var(--color-secundario);
-            background: var(--color-secundario-light);
-            padding: .1rem .4rem;
+            color: var(--color-vs-texto);
+            background: var(--color-vs-bg);
+            border: 1px solid var(--color-vs-borde);
+            padding: .1rem .45rem;
             border-radius: 4px;
         }
         .equipo-nombre {
@@ -601,9 +649,9 @@
             border: 1px solid var(--color-rojo-borde);
         }
         .etiqueta-estado {
-            background: var(--color-primario-light);
-            color: var(--color-primario);
-            border: 1px solid var(--color-primario);
+            background: var(--color-info-bg);
+            color: var(--color-info);
+            border: 1px solid var(--color-info-borde);
         }
         .texto-vencido {
             color: var(--color-rojo);
