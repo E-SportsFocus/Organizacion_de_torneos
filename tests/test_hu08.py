@@ -86,7 +86,7 @@ def test_bracket_grafico_muestra_rondas_organizadas_secuencialmente(cliente, aho
 
     # Verifica contenedor del árbol visual
     assert "tarjeta-bracket-visual" in html
-    assert "Árbol visual de llaves" in html
+    assert "Clasificaciones" in html
     assert "bracket-arbol" in html
 
     # Verifica columnas de rondas secuenciales
@@ -164,8 +164,8 @@ def test_coexistencia_de_arbol_grafico_y_tabla_de_auditoria(cliente, ahora):
     assert respuesta.status_code == 200
     html = respuesta.text
 
-    # Dispone del árbol visual de llaves
-    assert "Árbol visual de llaves" in html
+    # Dispone de la vista visual de clasificaciones
+    assert "Clasificaciones" in html
     assert "bracket-arbol" in html
 
     # Conserva la tabla de auditoría e historial (RP-10)

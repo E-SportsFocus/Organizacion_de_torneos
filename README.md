@@ -117,7 +117,7 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 ### Recorrido de HU-08 (bracket gráfico)
 
 1. Abre el menú **☰** y pulsa **Bracket** (o accede directamente a <http://localhost:8000/bracket>).
-2. Verás la tarjeta principal **Árbol visual de llaves** con la estructura de fases en columnas horizontales. Inicialmente solo aparecen los **Cuartos de final** en estado `Programada`.
+2. Verás la tarjeta principal **Clasificaciones** con la estructura de fases en columnas horizontales. Inicialmente solo aparecen los **Cuartos de final** en estado `Programada`.
 3. Cada enfrentamiento se presenta en una tarjeta de llave con fecha, estado en chip y dos casillas para los equipos con sus casillas individuales de marcador.
 4. A medida que los jugadores confirman disponibilidad y el moderador registra resultados, las **Semifinales** y la **Final** se van construyendo dinámicamente en el árbol.
 5. En las partidas con resultado confirmado, el equipo ganador aparece resaltado visualmente en verde suave con su marcador destacado y la indicación de que avanza a la siguiente ronda.
