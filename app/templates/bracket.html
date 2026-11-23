@@ -7,7 +7,7 @@
             <h2 style="margin:0">Bracket del torneo</h2>
             {% if torneo %}
             <p class="suave" style="margin:.2rem 0 0">
-                {{ torneo.nombre }} · <strong>{{ torneo.juego }}</strong>
+                {{ torneo.nombre }}
                 {% if bracket and bracket.ultima_actualizacion %}
                 · Última actualización: {{ bracket.ultima_actualizacion_texto }}
                 {% else %}

@@ -68,14 +68,15 @@ def sembrar(conexion, ahora=None):
     cursor = conexion.execute(
         """
         INSERT INTO torneo (nombre, juego, zona_horaria, organizador_id, fecha_inicio, estado)
-        VALUES (?, ?, ?, ?, ?, 'En curso')
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
         (
-            "Copa E-Sports Focus",
-            "Valorant",
-            "America/Bogota",
+            "",
+            "",
+            "",
             organizador_id,
-            ahora.strftime("%Y-%m-%dT%H:%M"),
+            "",
+            "",
         ),
     )
     torneo_id = cursor.lastrowid

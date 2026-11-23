@@ -6,12 +6,12 @@
     <h2>Panel del Organizador</h2>
     <p class="suave">No hay organizadores de ejemplo. Ejecuta <code>python -m app.db.seed</code>.</p>
 </div>
-{% elif not torneo %}
+{% elif not torneo or not torneo.nombre %}
 <div class="tarjeta">
     <h2>Panel del Organizador</h2>
-    <p class="suave">{{ organizador.nombre }} no tiene un torneo creado o asignado todavía.</p>
+    <p class="suave">{{ organizador.nombre }} no tiene un torneo configurado todavía.</p>
     <a class="boton" href="/organizador/torneo/gestion?persona_id={{ organizador.id }}" style="margin-top:.6rem;">
-        Crear y Configurar Nuevo Torneo
+        Crear y Configurar Torneo
     </a>
 </div>
 {% else %}
@@ -27,7 +27,7 @@
         <div>
             <h2 style="margin:0 0 .35rem 0;">{{ torneo.nombre }}</h2>
             <p class="suave" style="margin:0;">
-                {{ torneo.juego }} · Organiza <strong>{{ organizador.nombre }}</strong> ·
+                Organiza <strong>{{ organizador.nombre }}</strong> ·
                 <span class="etiqueta etiqueta-estado">{{ torneo.estado or 'Torneo en curso' }}</span>
                 {% if torneo.bolsa_premios %}
                 · <span class="etiqueta etiqueta-confirmada">Bolsa de premios: {{ torneo.bolsa_premios }}</span>

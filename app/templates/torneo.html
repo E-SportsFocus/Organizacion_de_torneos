@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block titulo %}Torneo — E-Sports Focus{% endblock %}
 {% block contenido %}
-{% if not torneo %}
+{% if not torneo or not torneo.nombre %}
 <div class="tarjeta">
     <h2>Torneo</h2>
-    <p class="suave">No hay torneos registrados. Ejecuta <code>python -m app.db.seed</code>.</p>
+    <p class="suave">No hay ningún torneo configurado todavía. Entra como Organizador para crearlo y configurarlo.</p>
 </div>
 {% else %}
 <section class="hero-banner">
     <div class="hero-insignia">
         <span class="etiqueta etiqueta-estado">Vista pública · solo lectura</span>
+        {% if torneo.juego %}
         <span class="hero-juego">{{ torneo.juego }}</span>
+        {% endif %}
         {% if torneo.bolsa_premios %}
         <span class="etiqueta etiqueta-confirmada">Bolsa de premios: {{ torneo.bolsa_premios }}</span>
         {% endif %}

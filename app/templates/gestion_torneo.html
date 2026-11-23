@@ -52,13 +52,14 @@
             <div class="campo-grupo">
                 <label for="nombre">Nombre del torneo *</label>
                 <input class="input-control" type="text" id="nombre" name="nombre"
-                       value="{{ torneo.nombre if torneo else '' }}"
+                       value="{{ torneo.nombre if torneo and torneo.nombre else '' }}"
                        placeholder="Ej: Copa E-Sports Focus" required minlength="3">
             </div>
 
             <div class="campo-grupo">
                 <label for="juego">Videojuego oficial *</label>
                 <select class="input-control" id="juego" name="juego" required>
+                    <option value="" {% if not torneo or not torneo.juego %}selected disabled{% endif %}>Selecciona un videojuego...</option>
                     <option value="Fortnite" {% if torneo and torneo.juego == 'Fortnite' %}selected{% endif %}>Fortnite</option>
                     <option value="Valorant" {% if torneo and torneo.juego == 'Valorant' %}selected{% endif %}>Valorant</option>
                     <option value="League of Legends" {% if torneo and torneo.juego == 'League of Legends' %}selected{% endif %}>League of Legends</option>
@@ -78,6 +79,7 @@
             <div class="campo-grupo">
                 <label for="zona_horaria">Zona horaria *</label>
                 <select class="input-control" id="zona_horaria" name="zona_horaria" required>
+                    <option value="" {% if not torneo or not torneo.zona_horaria %}selected disabled{% endif %}>Selecciona una zona horaria...</option>
                     <option value="America/Santiago" {% if torneo and torneo.zona_horaria == 'America/Santiago' %}selected{% endif %}>America/Santiago (UTC-3)</option>
                     <option value="America/Bogota" {% if torneo and torneo.zona_horaria == 'America/Bogota' %}selected{% endif %}>America/Bogota (UTC-5)</option>
                     <option value="America/Buenos_Aires" {% if torneo and torneo.zona_horaria == 'America/Buenos_Aires' %}selected{% endif %}>America/Buenos_Aires (UTC-3)</option>
@@ -88,7 +90,8 @@
             <div class="campo-grupo">
                 <label for="estado">Estado del torneo</label>
                 <select class="input-control" id="estado" name="estado">
-                    <option value="En curso" {% if not torneo or torneo.estado == 'En curso' %}selected{% endif %}>En curso</option>
+                    <option value="" {% if not torneo or not torneo.estado %}selected disabled{% endif %}>Selecciona un estado...</option>
+                    <option value="En curso" {% if torneo and torneo.estado == 'En curso' %}selected{% endif %}>En curso</option>
                     <option value="Inscripciones abiertas" {% if torneo and torneo.estado == 'Inscripciones abiertas' %}selected{% endif %}>Inscripciones abiertas</option>
                     <option value="Borrador" {% if torneo and torneo.estado == 'Borrador' %}selected{% endif %}>Borrador</option>
                     <option value="Finalizado" {% if torneo and torneo.estado == 'Finalizado' %}selected{% endif %}>Finalizado</option>
