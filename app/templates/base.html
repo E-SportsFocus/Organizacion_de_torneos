@@ -763,11 +763,11 @@
             </span>
             {% elif en_moderador %}
             <span class="chip-rol chip-moderador" title="Sesión activa como Moderador">
-                🛡️ Moderador{% if persona %}: {{ persona.nombre }}{% endif %}
+                👤 Moderador{% if persona %}: {{ persona.nombre }}{% endif %}
             </span>
             {% elif en_organizador %}
             <span class="chip-rol chip-organizador" title="Sesión activa como Organizador">
-                📋 Organizador{% if persona %}: {{ persona.nombre }}{% elif organizador %}: {{ organizador.nombre }}{% endif %}
+                👤 Organizador{% if persona %}: {{ persona.nombre }}{% elif organizador %}: {{ organizador.nombre }}{% endif %}
             </span>
             {% else %}
             <span class="chip-rol chip-publico" title="Visualizando vista pública">
