@@ -31,5 +31,53 @@ Como moderador, quiero registrar el resultado cuando no pueda obtenerse mediante
 - CA2: El registro debe conservar el resultado, la identidad del moderador, la fecha, la hora y su origen manual.
 - CA3: Al confirmar el resultado, el sistema debe continuar con la actualización del bracket y la notificación a los participantes correspondientes.
 
+## HU-04: Confirmación de disponibilidad
+
+Como jugador de un equipo, quiero confirmar la disponibilidad de mi equipo para una partida, para que el Moderador sepa con anticipación que la partida puede jugarse.
+
+**Actividad TO-BE asociada:** Confirman disponibilidad en la plataforma (Jugadores).
+
+**Criterios de aceptación:**
+- CA1: Un jugador de un equipo puede confirmar la disponibilidad de su equipo para una partida programada si faltan 8 horas o menos.
+- CA2: El Moderador puede consultar en todo momento el estado de disponibilidad de los equipos; si algún equipo sigue pendiente, la partida queda marcada como «Requiere revisión».
+- CA3: Una partida con un equipo sin confirmar no inicia automáticamente al llegar la hora de inicio y permanece en «Programada» para revisión.
+- CA4: No se acepta la confirmación de disponibilidad si la partida ya inició o finalizó.
+
+## HU-05: Solicitud de cambio de horario
+
+Como jugador de un equipo, quiero solicitar un cambio de horario cuando mi equipo no esté disponible, para jugar la partida en un horario acordado con el Moderador.
+
+**Actividad TO-BE asociada:** Solicitud y resolución de cambio de horario (Jugador y Moderador).
+
+**Criterios de aceptación:**
+- CA1: Un jugador de un equipo puede solicitar un cambio de horario proponiendo fecha y hora cuando faltan más de 2 horas para el inicio de la partida.
+- CA2: Al registrarse dentro del plazo, la solicitud queda en estado «Solicitada», se notifica al Moderador asignado y se publica aviso en Discord.
+- CA3: El Moderador puede aprobar una solicitud válida, lo que reprograma la fecha/hora de la partida, confirma a ambos equipos y publica en Discord.
+- CA4: El Moderador puede rechazar la solicitud indicando un motivo obligatorio; la partida conserva su horario original y el equipo recibe el motivo.
+- CA5: Una solicitud solicitada con 2 horas o menos de anticipación no se acepta; si una solicitud no tiene decisión al llegar a 2 horas antes de la partida, pasa automáticamente a «Vencida».
+
+## HU-06: Anuncio automático de ganadores
+
+Como organizador, quiero que la plataforma anuncie automáticamente al ganador de cada partida, para anunciar resultados a tiempo sin depender de un aviso manual del Moderador.
+
+**Actividad TO-BE asociada:** Publica y anuncia los resultados oficiales y bracket actualizado.
+
+**Criterios de aceptación:**
+- CA1: Al confirmarse un resultado, el ganador se publica automáticamente en la plataforma, se anuncia en Discord y la partida pasa a «Anunciada».
+- CA2: No se anuncia ningún ganador mientras la partida tenga resultado pendiente.
+- CA3: Si Discord no responde, el ganador se publica igual en la plataforma y el anuncio queda marcado como «Pendiente de envío».
+
+## HU-07: Inicio público del torneo y menú desplegable
+
+Como visitante del torneo, quiero ver al abrir el inicio los anuncios de ganadores y el bracket resumido (con enlace al detalle completo de partidas), y navegar entre las vistas desde un menú desplegable, para seguir el torneo desde un solo lugar sin depender de las pantallas internas de Organizador o Moderador.
+
+**Actividad TO-BE asociada:** Consulta pública del torneo y navegación centralizada.
+
+**Criterios de aceptación:**
+- CA1: El inicio público muestra el torneo, juego, anuncios de ganadores y bracket resumido con enlace al detalle en `/bracket`, en modo solo lectura y sin formularios internos.
+- CA2: Una partida sin resultado no inventa ganadores y muestra «Sin resultado».
+- CA3: El menú desplegable lateral permite acceder a Inicio, Bracket y alternar entre los roles de Jugador, Moderador y Organizador con simulación demostrativa.
+- CA4: El menú puede cerrarse sin cambiar de página con botón cerrar, tecla Esc o clic exterior.
+
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
