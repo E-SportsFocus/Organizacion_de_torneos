@@ -52,3 +52,26 @@ Los estados son situaciones de la solicitud: Solicitada, Aprobada, Rechazada y V
 
 *La regla de las 2 horas proviene de la Entrevista 2 (P06 y P07). Debe validarse con el Moderador antes de dar la especificación por cerrada.*
 
+## EST-03 — Ciclo de vida de Torneo
+
+- Clase del dominio: [Torneo](./08-modelo-dominio.md)
+- Historia relacionada: [HU-09](./07-criterios-aceptacion.md)
+- Requisito: [RP-11](./Clasificación_de_requisitos.md)
+
+![EST-03](./diagramas/est-03.png)
+
+Archivo fuente: [`./diagramas/est-03.puml`](./diagramas/est-03.puml)
+
+Los estados son situaciones del campeonato: Borrador, Inscripciones abiertas, En curso y Finalizado.
+
+### Tabla de transiciones
+
+| Estado origen | Evento | Guarda | Acción | Estado destino |
+|---|---|---|---|---|
+| — (inicial) | Torneo registrado por el Organizador | Nombre y juego válidos | Guardar datos generales y estructura inicial | Borrador |
+| Borrador | Publicar torneo / habilitar convocatoria | Datos generales completos | Habilitar selección de equipos participantes | Inscripciones abiertas |
+| Inscripciones abiertas | Equipos inscritos y bracket generado | Mínimo de equipos inscritos | Generar llaves y programar partidas iniciales | En curso |
+| En curso | Final disputada y resultado confirmado | Todos los enfrentamientos resueltos | Publicar podio, distribuir premios y anunciar campeón | Finalizado |
+| Finalizado | — (final) | — | — | — (final) |
+
+

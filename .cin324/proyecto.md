@@ -13,9 +13,9 @@
 | Historias de usuario | `Historias_de_usuario.md` (HU-01..03), `07-criterios-aceptacion.md` (HU-01..06) | completo |
 | Criterios Gherkin | `07-criterios-aceptacion.md` | completo |
 | Modelo de dominio | `diagramas/modelo-dominio.puml`, `diagramas/modelo-dominio.png`, `08-modelo-dominio.md` | completo |
-| Casos de uso | `09-casos-de-uso.md`, `diagramas/casos-de-uso.puml` | completo |
-| Diagramas de estado | `diagramas/est-01.puml` (Partida), `diagramas/est-02.puml` (SolicitudCambioHorario), `11-diagramas-estado.md` | completo |
-| Diagramas de secuencia | `diagramas/dss-01.puml`, `dss-02.puml`, `dss-03.puml`, `10-diagramas-secuencia.md` | completo |
+| Casos de uso | `09-casos-de-uso.md`, `diagramas/casos-de-uso.puml`, `diagramas/casos-de-uso.png` | completo |
+| Diagramas de estado | `diagramas/est-01.puml`, `diagramas/est-01.png` (Partida), `diagramas/est-02.puml`, `diagramas/est-02.png` (SolicitudCambioHorario), `diagramas/est-03.puml`, `diagramas/est-03.png` (Torneo), `11-diagramas-estado.md` | completo |
+| Diagramas de secuencia | `diagramas/dss-01.puml`, `diagramas/dss-01.png`, `diagramas/dss-02.puml`, `diagramas/dss-02.png`, `diagramas/dss-03.puml`, `diagramas/dss-03.png`, `diagramas/dss-04.puml`, `diagramas/dss-04.png`, `10-diagramas-secuencia.md` | completo |
 | Requisitos y atributos de calidad | `Clasificación_de_requisitos.md`, `Atributos_de_calidad.md`, `12-trazabilidad.md` | completo |
 
 ## Supuestos acordados (por elementos faltantes o dudosos)
@@ -62,6 +62,7 @@
 | HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
 | HU-07 | implementada, validada y archivada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; 33 pruebas en total; spec en `openspec/specs/torneo-publico/spec.md` |
 | HU-08 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-08-bracket-grafico` | 2026-11-22 | Visualización gráfica del Bracket del torneo (árbol de llaves estilo Liquipedia/VLR con avance dinámico en vivo); 4 escenarios y 5 pruebas; 43 pruebas en total; spec en `openspec/specs/bracket-grafico/spec.md` |
+| HU-09 | implementada, validada y archivada | `openspec/changes/archive/2026-11-23-hu-09-gestion-torneo` | 2026-11-23 | Creación y gestión de torneos, participantes y premios por el Organizador (RP-11, CU-09); 4 escenarios y 5 pruebas; 48 pruebas en total; spec en `openspec/specs/gestion-torneo/spec.md` |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
@@ -74,6 +75,7 @@
 | HU-07 | Implementación (validada y archivada) | 33 pruebas pasan; `openspec validate --strict` válido; spec `torneo-publico` sincronizada; menú revisado en el navegador | 2026-11-21 |
 | HU-05 | Implementación (validada) | 38 pruebas pasan; `openspec validate` válido; capacidad `cambio-horario` especificada y probada | 2026-11-22 |
 | HU-08 | Implementación (validada) | 42 pruebas pasan; `openspec validate` válido; capacidad `bracket-grafico` especificada y probada | 2026-11-22 |
+| HU-09 | Implementación (validada y archivada) | 48 pruebas pasan; `openspec validate --all` (7 specs válidas); capacidad `gestion-torneo` especificada, probada y archivada | 2026-11-23 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |

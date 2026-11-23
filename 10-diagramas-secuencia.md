@@ -54,3 +54,19 @@ Variantes representadas:
   - **alt — rechazada:** el Moderador rechaza con un motivo, la solicitud queda "Rechazada", la partida conserva su horario original y el equipo recibe el motivo.
   - **alt — vencida:** si se alcanza el plazo de 2 horas sin decisión del Moderador, la solicitud queda "Vencida" y la partida conserva su horario original.
 - **alt — fuera del plazo (2 horas o menos antes):** el sistema no registra la solicitud e informa que el plazo venció.
+
+## DSS-04 — Creación y gestión de torneo, participantes y premios
+
+- Caso de uso: [CU-09](./09-casos-de-uso.md)
+- Historia: [HU-09](./07-criterios-aceptacion.md)
+- Requisito: [RP-11](./Clasificación_de_requisitos.md)
+- Actor: Organizador
+
+![DSS-04](./diagramas/dss-04.png)
+
+Archivo fuente: [`./diagramas/dss-04.puml`](./diagramas/dss-04.puml)
+
+Variantes representadas:
+
+- **alt — datos obligatorios completos (nombre y juego válidos):** el sistema registra o actualiza la información oficial del torneo, inscribe los equipos participantes en la nómina oficial, guarda la escala de premios desglosada por posición y confirma la operación al Organizador. El torneo queda disponible para administración y sus datos y premios se difunden en la vista pública.
+- **alt — datos obligatorios incompletos (falta nombre o juego):** el sistema rechaza el guardado e informa los campos requeridos, sin modificar los datos del torneo.

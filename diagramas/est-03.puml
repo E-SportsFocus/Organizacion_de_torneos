@@ -1,0 +1,24 @@
+@startuml est-03
+title EST-03 - Ciclo de vida de Torneo
+left to right direction
+
+[*] --> Borrador : torneo registrado por Organizador
+
+Borrador --> InscripcionesAbiertas : abrir inscripciones
+InscripcionesAbiertas --> EnCurso : equipos inscritos y bracket generado
+EnCurso --> Finalizado : final disputada y campeón anunciado
+Finalizado --> [*]
+
+state "Inscripciones abiertas" as InscripcionesAbiertas
+state "En curso" as EnCurso
+
+note bottom of Borrador
+  El Organizador configura los datos
+  generales, el juego y los premios.
+end note
+
+note bottom of EnCurso
+  Se disputan las partidas
+  según el bracket oficial.
+end note
+@enduml

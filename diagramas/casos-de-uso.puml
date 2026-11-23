@@ -5,6 +5,7 @@ left to right direction
 actor Jugador
 actor Moderador
 actor Organizador
+actor Visitante
 
 rectangle "Plataforma E-Sports Focus" {
   usecase "CU-01\nConfirmar disponibilidad\ndel equipo" as CU01
@@ -13,6 +14,9 @@ rectangle "Plataforma E-Sports Focus" {
   usecase "CU-04\nRegistrar resultado\ncuando la API no está disponible" as CU04
   usecase "CU-05\nConsultar bracket actualizado\ny resultado notificado" as CU05
   usecase "CU-06\nAnunciar ganador\nde una partida" as CU06
+  usecase "CU-07\nConsultar torneo público\n(anuncios y bracket)" as CU07
+  usecase "CU-08\nConsultar bracket gráfico\ne interactivo" as CU08
+  usecase "CU-09\nGestionar creación de torneo,\nparticipantes y premios" as CU09
 }
 
 actor "API del videojuego" as API <<sistema externo>>
@@ -21,11 +25,15 @@ actor "Discord" as DC <<sistema externo>>
 Jugador --> CU01
 Jugador --> CU02
 Jugador --> CU05
+Jugador --> CU08
 Moderador --> CU02
 Moderador --> CU03
 Moderador --> CU04
 Organizador --> CU05
 Organizador --> CU06
+Organizador --> CU09
+Visitante --> CU07
+Visitante --> CU08
 
 CU03 --> API
 CU02 --> DC

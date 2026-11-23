@@ -43,6 +43,8 @@ Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1
 | CU-05 | Organizador, Discord | El Organizador recibe la notificación; Discord recibe el aviso del bracket actualizado. |
 | CU-06 | Discord | Recibe el anuncio del ganador en el canal del torneo. |
 | CU-07 | Ninguno | Es una consulta de solo lectura; no notifica ni modifica datos. |
+| CU-08 | Ninguno | Es una consulta de solo lectura del árbol de llaves; no modifica datos. |
+| CU-09 | Ninguno | Configuración administrativa del torneo y premios realizada directamente por el Organizador. |
 
 ## Relaciones entre casos de uso
 

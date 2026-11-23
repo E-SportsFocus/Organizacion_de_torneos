@@ -21,7 +21,11 @@ class Organizador {
 class Torneo {
   nombre
   juego
+  fecha y hora de inicio
   zona horaria
+  bolsa de premios
+  descripción
+  estado
 }
 
 class Partida {
@@ -58,6 +62,12 @@ class SolicitudCambioHorario {
   estado
 }
 
+class Premio {
+  posición
+  monto / descripción
+  condiciones de entrega
+}
+
 Persona <|-- Jugador
 Persona <|-- Moderador
 Persona <|-- Organizador
@@ -65,6 +75,8 @@ Persona <|-- Organizador
 Organizador "1" -- "0..*" Torneo : organiza
 Torneo "1" *-- "0..*" Partida : contiene
 Torneo "1" -- "1" Bracket : muestra
+Torneo "1" *-- "0..*" Premio : premia con
+Torneo "1" o-- "0..*" Equipo : inscribe
 Partida "0..*" -- "2" Equipo : enfrenta
 Partida "0..*" -- "1" Moderador : arbitrada por
 Partida "1" *-- "0..1" Resultado : se registra como
