@@ -3,7 +3,7 @@
 - [Ingeniería de requisitos - Entrega 1](IngReq-Entrega1.md)
 - [Ingeniería de requisitos - Entrega 2](./IngReq-Entrega%202.md)
 
-## Aplicación web (HU-03, HU-04, HU-06 y HU-07)
+## Aplicación web (HU-03, HU-04, HU-05, HU-06 y HU-07)
 
 Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la documentación de requisitos. Historias implementadas:
 
