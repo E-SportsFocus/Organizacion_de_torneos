@@ -103,3 +103,110 @@ def obtener_bracket_estructurado(conexion, torneo_id):
             })
 
     return rondas
+
+
+def avanzar_ganador(conexion, partida_id, ganador_equipo_id, fecha_hora):
+    """
+    Avanza dinámicamente al equipo ganador hacia la siguiente fase competitiva
+    (Cuartos de final -> Semifinal -> Final).
+    Si la siguiente partida no existe, la crea dinámicamente para construir el árbol
+    en tiempo real según los resultados que vaya registrando el moderador.
+    """
+    partida = conexion.execute(
+        "SELECT id, torneo_id, moderador_id, fecha_hora, fase FROM partida WHERE id = ?",
+        (partida_id,),
+    ).fetchone()
+    if not partida:
+        return
+
+    fase_actual = partida["fase"]
+    torneo_id = partida["torneo_id"]
+    moderador_id = partida["moderador_id"]
+
+    if fase_actual == "Cuartos de final":
+        siguiente_fase = "Semifinal"
+        # Obtener todas las partidas de cuartos del torneo ordenadas por id
+        cuartos = conexion.execute(
+            "SELECT id FROM partida WHERE torneo_id = ? AND fase = 'Cuartos de final' ORDER BY id",
+            (torneo_id,),
+        ).fetchall()
+        cuartos_ids = [c["id"] for c in cuartos]
+        try:
+            posicion = cuartos_ids.index(partida_id)
+        except ValueError:
+            posicion = 0
+        target_sf_index = posicion // 2
+
+        # Buscar o crear la partida de semifinal correspondiente
+        semis = conexion.execute(
+            "SELECT id FROM partida WHERE torneo_id = ? AND fase = 'Semifinal' ORDER BY id",
+            (torneo_id,),
+        ).fetchall()
+        if len(semis) > target_sf_index:
+            siguiente_id = semis[target_sf_index]["id"]
+        else:
+            cursor = conexion.execute(
+                """
+                INSERT INTO partida (torneo_id, moderador_id, fecha_hora, fase, estado)
+                VALUES (?, ?, ?, 'Semifinal', 'Programada')
+                """,
+                (torneo_id, moderador_id, fecha_hora),
+            )
+            siguiente_id = cursor.lastrowid
+
+    elif fase_actual == "Semifinal":
+        siguiente_fase = "Final"
+        final_existente = conexion.execute(
+            "SELECT id FROM partida WHERE torneo_id = ? AND fase = 'Final' ORDER BY id LIMIT 1",
+            (torneo_id,),
+        ).fetchone()
+        if final_existente:
+            siguiente_id = final_existente["id"]
+        else:
+            cursor = conexion.execute(
+                """
+                INSERT INTO partida (torneo_id, moderador_id, fecha_hora, fase, estado)
+                VALUES (?, ?, ?, 'Final', 'Programada')
+                """,
+                (torneo_id, moderador_id, fecha_hora),
+            )
+            siguiente_id = cursor.lastrowid
+    else:
+        # Final u otra fase que no genera avance
+        return
+
+    # Asignar el equipo ganador a la disponibilidad de la siguiente partida
+    ya_asignado = conexion.execute(
+        "SELECT 1 FROM disponibilidad WHERE partida_id = ? AND equipo_id = ?",
+        (siguiente_id, ganador_equipo_id),
+    ).fetchone()
+    if not ya_asignado:
+        conexion.execute(
+            """
+            INSERT INTO disponibilidad (equipo_id, partida_id, confirmada, fecha_confirmacion)
+            VALUES (?, ?, 'Confirmada', ?)
+            """,
+            (ganador_equipo_id, siguiente_id, fecha_hora),
+        )
+
+    # Si la partida destino ya tiene 2 equipos clasificados, queda lista para registrar resultado
+    conteo = conexion.execute(
+        "SELECT COUNT(*) FROM disponibilidad WHERE partida_id = ?",
+        (siguiente_id,),
+    ).fetchone()[0]
+    if conteo >= 2:
+        conexion.execute(
+            """
+            UPDATE partida
+            SET estado = 'Pendiente de resultado'
+            WHERE id = ? AND estado NOT IN ('Resultado confirmado', 'Anunciada')
+            """,
+            (siguiente_id,),
+        )
+
+    # Actualizar la marca de tiempo del bracket
+    conexion.execute(
+        "UPDATE bracket SET ultima_actualizacion = ? WHERE torneo_id = ?",
+        (fecha_hora, torneo_id),
+    )
+

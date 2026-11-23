@@ -35,14 +35,14 @@ Remove-Item data\app.db -ErrorAction SilentlyContinue
 python -m app.db.seed
 ```
 
-Carga 1 torneo, 4 equipos de 2 jugadores, 2 moderadores (Marta Arbitraje y Óscar Réplica), 1 organizador (Olga Organización) y 6 partidas:
+Carga 1 torneo ("Copa E-Sports Focus"), 8 equipos de 2 jugadores, 2 moderadores (Marta Arbitraje y Óscar Réplica), 1 organizador (Olga Organización) y las 4 llaves iniciales de **Cuartos de final** listas para moderar en simulación real:
 
-1. Alfa vs Bravo, en 6 horas, `Programada`.
-2. Charlie vs Delta, en 30 horas, `Programada`.
-3. Alfa vs Delta, hace 1 hora, `Programada`.
-4. Alfa vs Charlie, hace 2 horas, `En curso`.
-5. Bravo vs Delta, hace 1 día, `Anunciada`, con resultado sembrado 2–1, su actualización de bracket y su anuncio enviado a Discord.
-6. Bravo vs Charlie, hace 3 horas, `Pendiente de resultado` (la que se registra en HU-03 y HU-06).
+1. Alfa vs Bravo (`Pendiente de resultado`).
+2. Charlie vs Delta (`Pendiente de resultado`, con solicitud de cambio de horario de ejemplo).
+3. Eco vs Foxtrot (`Pendiente de resultado`).
+4. Golf vs Hotel (`Pendiente de resultado`).
+
+A diferencia de una vista estática, no hay resultados predeterminados: las fases de **Semifinal** y **Final** se van construyendo y desbloqueando dinámicamente en tiempo real a medida que el Moderador registra los resultados oficiales en cada enfrentamiento.
 
 Es idempotente: si ya hay datos, no los duplica.
 
@@ -114,4 +114,4 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 5. En las partidas pendientes o programadas, las casillas muestran su estado de espera sin asignar un ganador prematuro.
 6. Debajo del árbol visual, se mantiene accesible la tabla detallada de **Partidas** y el **Historial de actualizaciones** con la auditoría cronológica de moderación (cumpliendo RP-10).
 
-Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06, las 4 de `tests/test_hu07.py` a los escenarios de HU-07 y las 4 de `tests/test_hu08.py` a los escenarios de HU-08. En total son 42 pruebas.
+Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06, las 4 de `tests/test_hu07.py` a los escenarios de HU-07 y las 5 de `tests/test_hu08.py` a los escenarios y avance dinámico de HU-08. En total son 43 pruebas.

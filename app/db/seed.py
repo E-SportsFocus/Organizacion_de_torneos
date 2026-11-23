@@ -1,13 +1,16 @@
 from datetime import datetime, timedelta
 
 from app.db.conexion import preparar_base
-from app.servicios import resultado as servicio_resultado
 
 EQUIPOS = [
     ("Equipo Alfa", "Colombia"),
     ("Equipo Bravo", "México"),
     ("Equipo Charlie", "Argentina"),
     ("Equipo Delta", "Chile"),
+    ("Equipo Eco", "Perú"),
+    ("Equipo Foxtrot", "Brasil"),
+    ("Equipo Golf", "Uruguay"),
+    ("Equipo Hotel", "Ecuador"),
 ]
 
 JUGADORES = {
@@ -15,6 +18,10 @@ JUGADORES = {
     "Equipo Bravo": [("Carla Méndez", "carla_mendez"), ("Diego Paz", "diego_paz")],
     "Equipo Charlie": [("Elena Gómez", "elena_gomez"), ("Fabián Torres", "fabian_torres")],
     "Equipo Delta": [("Gloria Vega", "gloria_vega"), ("Hugo Lara", "hugo_lara")],
+    "Equipo Eco": [("Ignacio Soto", "ignacio_soto"), ("Julia Mora", "julia_mora")],
+    "Equipo Foxtrot": [("Kevin Rivas", "kevin_rivas"), ("Lorena Cruz", "lorena_cruz")],
+    "Equipo Golf": [("Mateo Silva", "mateo_silva"), ("Natalia Ortiz", "natalia_ortiz")],
+    "Equipo Hotel": [("Oscar Benítez", "oscar_benitez"), ("Paula Vargas", "paula_vargas")],
 }
 
 
@@ -63,13 +70,19 @@ def sembrar(conexion, ahora=None):
     )
     torneo_id = cursor.lastrowid
 
+    conexion.execute(
+        "INSERT INTO bracket (torneo_id, ultima_actualizacion) VALUES (?, ?)",
+        (torneo_id, ahora.isoformat(timespec="seconds")),
+    )
+
+    # Inicia la simulación únicamente con las 4 llaves de Cuartos de final
+    # listas para ser moderadas. Semifinal y Final se construirán dinámicamente
+    # a medida que el moderador registre los resultados.
     partidas = [
-        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=6), "Cuartos de final", "Programada"),
-        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=30), "Cuartos de final", "Programada"),
-        (equipos["Equipo Alfa"], equipos["Equipo Delta"], ahora - timedelta(hours=1), "Cuartos de final", "Programada"),
-        (equipos["Equipo Alfa"], equipos["Equipo Charlie"], ahora - timedelta(hours=2), "Semifinal", "En curso"),
-        (equipos["Equipo Bravo"], equipos["Equipo Delta"], ahora - timedelta(days=1), "Final", "Pendiente de resultado"),
-        (equipos["Equipo Bravo"], equipos["Equipo Charlie"], ahora - timedelta(hours=3), "Semifinal", "Pendiente de resultado"),
+        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=2), "Cuartos de final", "Pendiente de resultado"),
+        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=4), "Cuartos de final", "Pendiente de resultado"),
+        (equipos["Equipo Eco"], equipos["Equipo Foxtrot"], ahora + timedelta(hours=6), "Cuartos de final", "Pendiente de resultado"),
+        (equipos["Equipo Golf"], equipos["Equipo Hotel"], ahora + timedelta(hours=8), "Cuartos de final", "Pendiente de resultado"),
     ]
 
     partidas_ids = []
@@ -91,39 +104,14 @@ def sembrar(conexion, ahora=None):
         partidas_ids.append(partida_id)
         for equipo_id in (equipo_a, equipo_b):
             conexion.execute(
-                "INSERT INTO disponibilidad (equipo_id, partida_id) VALUES (?, ?)",
-                (equipo_id, partida_id),
+                """
+                INSERT INTO disponibilidad (equipo_id, partida_id, confirmada, fecha_confirmacion)
+                VALUES (?, ?, 'Confirmada', ?)
+                """,
+                (equipo_id, partida_id, ahora.isoformat(timespec="seconds")),
             )
 
-    # La final ya jugada tiene un resultado sembrado: el servicio publica al
-    # ganador y deja la partida `Anunciada`, así el bracket, su historial y el
-    # anuncio no están vacíos.
-    servicio_resultado.registrar_resultado(
-        conexion,
-        partidas_ids[4],
-        moderador_id,
-        {
-            equipos["Equipo Bravo"]: 2,
-            equipos["Equipo Delta"]: 1,
-        },
-        ahora - timedelta(days=1) + timedelta(hours=3),
-    )
-
-    # La semifinal pendiente ya se jugó: se confirma la disponibilidad de ambos
-    # equipos para que el Moderador solo tenga que registrar el resultado.
-    conexion.execute(
-        """
-        UPDATE disponibilidad
-        SET confirmada = 'Confirmada', fecha_confirmacion = ?
-        WHERE partida_id = ?
-        """,
-        (
-            (ahora - timedelta(hours=2)).isoformat(timespec="seconds"),
-            partidas_ids[5],
-        ),
-    )
-
-    # Sembrar una solicitud de cambio de horario de ejemplo para Charlie vs Delta
+    # Sembrar una solicitud de cambio de horario de ejemplo para Charlie vs Delta (HU-05)
     charlie_jugador = conexion.execute(
         "SELECT id FROM persona WHERE equipo_id = ? LIMIT 1",
         (equipos["Equipo Charlie"],),

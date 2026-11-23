@@ -246,6 +246,8 @@ def registrar_resultado(
         "UPDATE partida SET estado = ? WHERE id = ?",
         (ESTADO_ANUNCIADA, partida_id),
     )
+    from app.servicios import bracket as servicio_bracket
+    servicio_bracket.avanzar_ganador(conexion, partida_id, ganador["equipo_id"], fecha_hora)
     conexion.commit()
 
     return {

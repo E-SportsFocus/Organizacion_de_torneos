@@ -172,3 +172,47 @@ def test_coexistencia_de_arbol_grafico_y_tabla_de_auditoria(cliente, ahora):
     assert "Partidas" in html
     assert "Historial de actualizaciones" in html
     assert "Auditoría cronológica de cambios y avances en las llaves" in html
+
+
+def test_avance_dinamico_de_ganador_a_siguiente_fase(cliente, ahora):
+    """
+    Simulación real: Al inicio solo existen Cuartos de final. Al registrar el moderador
+    un resultado, el ganador avanza automáticamente a Semifinal y el bracket se actualiza dinámicamente.
+    """
+    http, datos = cliente
+    alfa = datos.equipo("Equipo Alfa")
+    bravo = datos.equipo("Equipo Bravo")
+    moderador = datos.moderador("Marta Arbitraje")
+    torneo = datos.torneo("Copa Dinámica")
+
+    # Solo se crea Cuartos de final
+    p_cuartos = datos.partida(
+        torneo,
+        moderador,
+        ahora,
+        [alfa, bravo],
+        estado="Pendiente de resultado",
+        fase="Cuartos de final",
+    )
+
+    # Inicialmente en el bracket solo aparece Cuartos de final
+    resp1 = http.get("/bracket")
+    assert resp1.status_code == 200
+    assert "Cuartos de final" in resp1.text
+    assert "Semifinal" not in resp1.text
+
+    # El moderador registra la victoria de Alfa
+    servicio_resultado.registrar_resultado(
+        datos.conexion,
+        p_cuartos,
+        moderador,
+        {alfa: 2, bravo: 0},
+        ahora,
+    )
+
+    # Ahora el bracket se ha construido dinámicamente: Semifinal aparece con Alfa clasificado
+    resp2 = http.get("/bracket")
+    assert resp2.status_code == 200
+    assert "Cuartos de final" in resp2.text
+    assert "Semifinal" in resp2.text
+    assert "Equipo Alfa" in resp2.text
