@@ -8,6 +8,7 @@
 Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la documentación de requisitos. Historias implementadas:
 
 - **HU-04 — Confirmación de disponibilidad** (CU-01).
+- **HU-05 — Solicitud de cambio de horario** (CU-02): solicitud de reprogramación con más de 2 horas de anticipación, resolución por el Moderador (aprobar o rechazar con motivo) y aviso simulado en Discord.
 - **HU-03 — Registro manual del resultado** (CU-04): resultado, bracket con historial y notificación simulada.
 - **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
 - **HU-07 — Inicio público del torneo** (CU-07): anuncios y bracket resumido de solo lectura en la página de inicio (con enlace al detalle de partidas en `/bracket`), con un menú desplegable común para navegar y cambiar de rol de demostración.
