@@ -400,6 +400,8 @@
             margin: .15rem 0 .5rem .35rem;
             padding: .15rem 0 .15rem .65rem;
             border-left: 2px solid var(--color-primario);
+            max-height: 280px;
+            overflow-y: auto;
         }
         .menu-sesion {
             border-color: transparent;
@@ -1015,6 +1017,12 @@
             <a href="/" class="miga-item">Inicio</a>
             <span class="miga-separador">/</span>
             <span class="miga-item miga-activa">Bracket</span>
+            {% elif ruta == '/organizador/torneo' %}
+            <a href="/" class="miga-item">Inicio</a>
+            <span class="miga-separador">/</span>
+            <a href="/organizador{% if persona %}?persona_id={{ persona.id }}{% endif %}" class="miga-item">Panel Organizador</a>
+            <span class="miga-separador">/</span>
+            <span class="miga-item miga-activa">Gestión del Torneo</span>
             {% elif en_jugador %}
             <a href="/" class="miga-item">Inicio</a>
             <span class="miga-separador">/</span>
