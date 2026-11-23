@@ -42,8 +42,10 @@ def _organizador_seleccionado(conexion, persona_id):
 
 
 def _contexto_vacio(organizador=None, torneo=None):
+    org_dict = dict(organizador) if organizador else None
     return {
-        "organizador": dict(organizador) if organizador else None,
+        "organizador": org_dict,
+        "persona": org_dict,
         "torneo": dict(torneo) if torneo else None,
         "partidas": [],
         "anuncios": [],

@@ -15,10 +15,10 @@
     <style>
         :root {
             color-scheme: light;
-            /* Paleta Modo Claro: #F8F7FC, #FFFFFF, #E4E0F2, #0284C7, #E11D48 */
-            --color-bg: #F8F7FC;
-            --color-surface: #FFFFFF;
-            --color-borde: #E4E0F2;
+            /* Paleta Modo Claro: Fondo #B09CF7, Viñetas #E4E0F2, Púrpura #9333EA */
+            --color-bg: #B09CF7;
+            --color-surface: #E4E0F2;
+            --color-borde: #CFC5EB;
             --color-primario: #0284C7;
             --color-primario-hover: #0369A1;
             --color-primario-light: #E0F2FE;
@@ -27,13 +27,13 @@
             --color-secundario-light: #FFE4E6;
             --color-boton-texto: #FFFFFF;
             --color-texto: #0F0C18;
-            --color-suave: #645D7A;
-            --color-barra: #FFFFFF;
-            --color-barra-borde: #E4E0F2;
-            --color-card-shadow: rgba(46, 39, 74, 0.06);
-            --color-th-bg: #F3F1FA;
-            --color-anuncio-bg: #FAF9FD;
-            --color-focus: #0284C7;
+            --color-suave: #4A4266;
+            --color-barra: #E4E0F2;
+            --color-barra-borde: #CFC5EB;
+            --color-card-shadow: rgba(46, 39, 74, 0.08);
+            --color-th-bg: #D8D2EB;
+            --color-anuncio-bg: #D8D2EB;
+            --color-focus: #9333EA;
 
             /* Estados semánticos Modo Claro */
             --color-verde: #16A34A;
@@ -759,19 +759,19 @@
             </h1>
             {% if en_jugador %}
             <span class="chip-rol chip-jugador" title="Sesión activa como Jugador">
-                Jugador
+                👤 Jugador{% if persona %}: {{ persona.nombre }}{% endif %}
             </span>
             {% elif en_moderador %}
             <span class="chip-rol chip-moderador" title="Sesión activa como Moderador">
-                Moderador
+                🛡️ Moderador{% if persona %}: {{ persona.nombre }}{% endif %}
             </span>
             {% elif en_organizador %}
             <span class="chip-rol chip-organizador" title="Sesión activa como Organizador">
-                Organizador
+                📋 Organizador{% if persona %}: {{ persona.nombre }}{% elif organizador %}: {{ organizador.nombre }}{% endif %}
             </span>
             {% else %}
             <span class="chip-rol chip-publico" title="Visualizando vista pública">
-                Vista pública
+                🌐 Vista pública
             </span>
             {% endif %}
         </div>

@@ -51,12 +51,13 @@ def sembrar(conexion, ahora=None):
         "INSERT INTO persona (nombre, cuenta_discord, tipo) VALUES (?, ?, 'Moderador')",
         ("Marta Arbitraje", "marta_arbitraje"),
     )
-    moderador_id = cursor.lastrowid
+    moderador_marta_id = cursor.lastrowid
 
-    conexion.execute(
+    cursor = conexion.execute(
         "INSERT INTO persona (nombre, cuenta_discord, tipo) VALUES (?, ?, 'Moderador')",
         ("Óscar Réplica", "oscar_replica"),
     )
+    moderador_oscar_id = cursor.lastrowid
 
     cursor = conexion.execute(
         "INSERT INTO persona (nombre, cuenta_discord, tipo) VALUES (?, ?, 'Organizador')",
@@ -78,15 +79,15 @@ def sembrar(conexion, ahora=None):
     # Simulación real: solo Cuartos de final en estado "Programada" con
     # disponibilidad "Pendiente". Los jugadores deben confirmar su disponibilidad
     # antes de que el moderador pueda registrar resultados.
-    # Las fases de Semifinal y Final se construyen dinámicamente.
+    # Marta modera las llaves 1 y 2; Óscar modera las llaves 3 y 4.
     partidas = [
-        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=6), "Cuartos de final"),
-        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=8), "Cuartos de final"),
-        (equipos["Equipo Eco"], equipos["Equipo Foxtrot"], ahora + timedelta(hours=10), "Cuartos de final"),
-        (equipos["Equipo Golf"], equipos["Equipo Hotel"], ahora + timedelta(hours=12), "Cuartos de final"),
+        (equipos["Equipo Alfa"], equipos["Equipo Bravo"], ahora + timedelta(hours=6), "Cuartos de final", moderador_marta_id),
+        (equipos["Equipo Charlie"], equipos["Equipo Delta"], ahora + timedelta(hours=8), "Cuartos de final", moderador_marta_id),
+        (equipos["Equipo Eco"], equipos["Equipo Foxtrot"], ahora + timedelta(hours=10), "Cuartos de final", moderador_oscar_id),
+        (equipos["Equipo Golf"], equipos["Equipo Hotel"], ahora + timedelta(hours=12), "Cuartos de final", moderador_oscar_id),
     ]
 
-    for equipo_a, equipo_b, fecha_hora, fase in partidas:
+    for equipo_a, equipo_b, fecha_hora, fase, mod_id in partidas:
         cursor = conexion.execute(
             """
             INSERT INTO partida (torneo_id, moderador_id, fecha_hora, fase, estado)
@@ -94,7 +95,7 @@ def sembrar(conexion, ahora=None):
             """,
             (
                 torneo_id,
-                moderador_id,
+                mod_id,
                 fecha_hora.isoformat(timespec="minutes"),
                 fase,
             ),
