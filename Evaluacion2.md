@@ -14,4 +14,5 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 **Criterios de aceptación:**
 - CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
+
 **Diagrama de estado**
