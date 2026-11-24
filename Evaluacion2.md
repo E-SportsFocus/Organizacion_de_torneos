@@ -16,3 +16,5 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
 
 **Diagrama de estado**
+
+<img width="2819" height="1997" alt="image" src="https://github.com/user-attachments/assets/8cc1639e-7833-4025-886b-d3797b3d4ef6" />
