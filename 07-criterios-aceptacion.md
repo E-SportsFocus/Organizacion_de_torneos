@@ -307,7 +307,7 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Cuando ingresa el nombre del torneo, selecciona el videojuego, define la fecha y hora de inicio y la zona horaria
     Y presiona "Guardar torneo"
     Entonces el sistema registra el nuevo torneo vinculado al Organizador
-    Y el torneo queda disponible para su administración
+    Y el torneo queda en estado "Borrador", visible solo para el Organizador
 
   Escenario: Asignación e inscripción de equipos participantes
     Dado que existe un torneo creado por el Organizador
