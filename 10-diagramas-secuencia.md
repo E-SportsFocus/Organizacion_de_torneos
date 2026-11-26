@@ -56,7 +56,7 @@ Variantes representadas:
   - **alt — vencida:** si se alcanza el plazo de 2 horas sin decisión del Moderador, la solicitud queda "Vencida" y la partida conserva su horario original.
 - **alt — fuera del plazo (2 horas o menos antes):** el sistema no registra la solicitud e informa que el plazo venció.
 
-DSS-04 — Creación y gestión de torneo, participantes y premios
+## DSS-04 — Creación y gestión de torneo, participantes y premios
 - Caso de uso: [CU-09](./09-casos-de-uso.md)
 - Historia: [HU-09](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
 - Requisito: [RP-11](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
@@ -71,7 +71,7 @@ Variantes representadas:
 - alt anidado — datos obligatorios incompletos (falta nombre o juego): el sistema rechaza el guardado e informa los campos requeridos, sin modificar los datos ni el estado del torneo.
 - alt — usuario sin rol Organizador: el sistema rechaza el acceso a la gestión del torneo.
 
-DSS-05 — Consulta del torneo según su estado y el rol del usuario
+## DSS-05 — Consulta del torneo según su estado y el rol del usuario
 - Caso de uso: [CU-07](./09-casos-de-uso.md), [CU-08](./09-casos-de-uso.md) y [CU-10](./09-casos-de-uso.md)
 - Historia: [HU-07](./07-criterios-aceptacion.md), [HU-08](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
 - Requisito: [RP-07](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
