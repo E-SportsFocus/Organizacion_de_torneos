@@ -101,6 +101,13 @@ Característica: Registro manual del resultado por un Moderador asignado
     Cuando registra el mismo marcador para ambos equipos
     Entonces el sistema no confirma el resultado
     Y solicita un marcador con un ganador
+
+  Escenario: No se registra un resultado si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el usuario es el Moderador asignado a la partida
+    Cuando intenta registrar el resultado de la partida
+    Entonces el sistema rechaza la operación
+    Y el estado y el resultado de la partida no cambian
 ```
 
 ## HU-04 — Confirmación de disponibilidad
@@ -136,6 +143,13 @@ Característica: Confirmación de disponibilidad de un equipo para una partida
     Cuando un jugador intenta confirmar la disponibilidad de su equipo
     Entonces el sistema no acepta la confirmación
     Y la disponibilidad de la partida no cambia
+
+  Escenario: No se confirma disponibilidad si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el equipo tiene una partida programada en el torneo
+    Cuando un jugador del equipo intenta confirmar la disponibilidad del equipo
+    Entonces el sistema rechaza la confirmación
+    Y la disponibilidad del equipo no cambia
 ```
 
 ## HU-05 — Solicitud de cambio de horario
