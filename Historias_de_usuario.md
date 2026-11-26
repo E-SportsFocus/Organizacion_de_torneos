@@ -104,5 +104,14 @@ Como organizador, quiero contar con un apartado exclusivo para crear y configura
 - CA4: El sistema valida que los campos esenciales no estén vacíos y que las fechas y montos sean consistentes antes de confirmar la creación o actualización.
 - CA5: La información de fechas, participantes y premios queda disponible de forma clara en el panel del organizador y en la vista pública de consulta.
 
+## HU-10 — Control del estado del torneo por el Organizador
+Como organizador de torneos me gustaría tener control total sobre la edición y estados del torneo, estos permisos deben ser exclusivamente del rol “Organizador/a”.
+
+**Actividad TO-BE asociada:**Gestión de estados y control de permisos del torneo
+
+**Criterios de aceptación:**
+- CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
+- CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
+
 ## Regresar 
 [Ingeniería en Requisitos - Entrega 1](IngReq-Entrega1.md)
