@@ -21,7 +21,7 @@ Se nos pidió modificar el comportamiento de los estados de un torneo, ya que el
 
 En algunos apartados tendran cambios diminutos pero en otros seran un poco mas extensos debido al cambio que se nos pide.
 
-## HU-10: Estado Torneo - Interacción Organizador/Usuario 
+## HU-10 — Control del estado del torneo por el Organizador
 Como organizador de torneos me gustaría tener control total sobre la edición y estados del torneo, estos permisos deben ser exclusivamente del rol “Organizador/a”.
 
 **Criterios de aceptación:**
