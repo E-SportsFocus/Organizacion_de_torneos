@@ -50,6 +50,7 @@ def listar_partidas_equipo(conexion, equipo_id, ahora):
                p.fase,
                p.estado,
                t.nombre AS torneo,
+               t.estado AS torneo_estado,
                d.id AS disponibilidad_id,
                d.confirmada,
                d.fecha_confirmacion,
@@ -138,15 +139,21 @@ def listar_partidas_moderador(conexion, ahora):
 def confirmar_disponibilidad(conexion, disponibilidad_id, persona_id, ahora):
     registro = conexion.execute(
         """
-        SELECT d.id, d.confirmada, d.equipo_id, p.estado
+        SELECT d.id, d.confirmada, d.equipo_id, p.estado, t.estado AS torneo_estado
         FROM disponibilidad d
         JOIN partida p ON p.id = d.partida_id
+        JOIN torneo t ON t.id = p.torneo_id
         WHERE d.id = ?
         """,
         (disponibilidad_id,),
     ).fetchone()
     if registro is None:
         raise ErrorDisponibilidad(MENSAJE_NO_EXISTE)
+
+    if registro["torneo_estado"] == "Borrador":
+        raise ErrorDisponibilidad(
+            "No se puede confirmar disponibilidad mientras el torneo esté en estado Borrador."
+        )
 
     persona = conexion.execute(
         "SELECT id, tipo, equipo_id FROM persona WHERE id = ?", (persona_id,)

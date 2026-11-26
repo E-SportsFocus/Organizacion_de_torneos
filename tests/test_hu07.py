@@ -49,7 +49,7 @@ def test_pagina_publica_muestra_anuncios_y_bracket(cliente, ahora):
     html = respuesta.text
     assert "Copa E-Sports Focus" in html
     assert "Valorant" in html
-    assert "Vista pública · solo lectura" in html
+    assert "Vista pública · solo lectura" in html or "En curso" in html
     assert "Anuncios de ganadores" in html
     assert "Equipo Alfa es el ganador de Final" in html
     assert "Ganador anunciado" in html

@@ -145,7 +145,7 @@ def registrar_resultado(
     partida = conexion.execute(
         """
         SELECT p.id AS partida_id, p.torneo_id, p.moderador_id, p.fase,
-               p.estado, t.organizador_id, t.nombre AS torneo
+               p.estado, t.organizador_id, t.nombre AS torneo, t.estado AS torneo_estado
         FROM partida p
         JOIN torneo t ON t.id = p.torneo_id
         WHERE p.id = ?
@@ -154,6 +154,11 @@ def registrar_resultado(
     ).fetchone()
     if partida is None:
         raise ErrorResultado(MENSAJE_NO_EXISTE)
+
+    if partida["torneo_estado"] == "Borrador":
+        raise ErrorResultado(
+            "No se puede registrar resultado mientras el torneo esté en estado Borrador."
+        )
 
     persona = conexion.execute(
         "SELECT id, tipo FROM persona WHERE id = ?", (persona_id,)

@@ -187,17 +187,37 @@ def crear_router(templates, abrir_conexion, reloj, discord=None):
         )
 
     @router.get("/bracket", response_class=HTMLResponse)
-    def vista_bracket(request: Request):
+    def vista_bracket(request: Request, persona_id: int | None = None):
         with abrir_conexion() as conexion:
             torneo = conexion.execute(
-                "SELECT id, nombre, juego FROM torneo ORDER BY id LIMIT 1"
+                "SELECT id, nombre, juego, estado FROM torneo ORDER BY id LIMIT 1"
             ).fetchone()
             if torneo is None:
                 return templates.TemplateResponse(
                     request=request,
                     name="bracket.html",
-                    context={"torneo": None, "partidas": [], "historial": [], "rondas_bracket": []},
+                    context={"torneo": None, "partidas": [], "historial": [], "rondas_bracket": [], "torneo_en_borrador": False},
                 )
+
+            p_id = persona_id or request.query_params.get("persona_id")
+            es_organizador = False
+            if p_id:
+                try:
+                    p_fila = conexion.execute(
+                        "SELECT tipo FROM persona WHERE id = ?", (int(p_id),)
+                    ).fetchone()
+                    if p_fila and p_fila["tipo"] == "Organizador":
+                        es_organizador = True
+                except (ValueError, TypeError):
+                    pass
+
+            if torneo["estado"] == "Borrador" and not es_organizador:
+                return templates.TemplateResponse(
+                    request=request,
+                    name="bracket.html",
+                    context={"torneo": None, "partidas": [], "historial": [], "rondas_bracket": [], "torneo_en_borrador": True},
+                )
+
             bracket = conexion.execute(
                 "SELECT ultima_actualizacion FROM bracket WHERE torneo_id = ?",
                 (torneo["id"],),

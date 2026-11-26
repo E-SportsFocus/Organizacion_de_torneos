@@ -224,7 +224,7 @@ def crear_router(templates, abrir_conexion, reloj=None):
             else None
         )
         nombre = str(form.get("nombre", "")).strip()
-        juego = str(form.get("juego", "Valorant")).strip()
+        juego = str(form.get("juego", "")).strip()
         fecha_inicio = str(form.get("fecha_inicio", "")).strip()
         zona_horaria = str(form.get("zona_horaria", "America/Bogota")).strip()
         descripcion = str(form.get("descripcion", "")).strip()

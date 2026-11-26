@@ -19,13 +19,14 @@ def crear_router(templates, abrir_conexion):
     router = APIRouter()
 
     @router.get("/", response_class=HTMLResponse)
-    def inicio(request: Request):
+    def inicio(request: Request, persona_id: int | None = None):
         contexto = {
             "torneo": None,
             "bracket": None,
             "partidas": [],
             "anuncios": [],
             "rondas_bracket": [],
+            "torneo_en_borrador": False,
         }
 
         with abrir_conexion() as conexion:
@@ -38,7 +39,25 @@ def crear_router(templates, abrir_conexion):
                 """
             ).fetchone()
 
+            p_id = persona_id or request.query_params.get("persona_id")
+            es_organizador = False
+            if p_id:
+                try:
+                    p_fila = conexion.execute(
+                        "SELECT tipo FROM persona WHERE id = ?", (int(p_id),)
+                    ).fetchone()
+                    if p_fila and p_fila["tipo"] == "Organizador":
+                        es_organizador = True
+                except (ValueError, TypeError):
+                    pass
+
             if torneo is not None:
+                if torneo["estado"] == "Borrador" and not es_organizador:
+                    contexto["torneo_en_borrador"] = True
+                    return templates.TemplateResponse(
+                        request=request, name="torneo.html", context=contexto
+                    )
+
                 bracket = conexion.execute(
                     "SELECT ultima_actualizacion FROM bracket WHERE torneo_id = ?",
                     (torneo["id"],),

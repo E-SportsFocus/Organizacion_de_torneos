@@ -113,7 +113,7 @@ def crear_o_actualizar_torneo(
     organizador_id,
     torneo_id=None,
     nombre="",
-    juego="Valorant",
+    juego="",
     fecha_inicio=None,
     zona_horaria="America/Bogota",
     descripcion="",

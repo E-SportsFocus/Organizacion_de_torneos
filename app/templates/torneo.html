@@ -1,7 +1,14 @@
 {% extends "base.html" %}
 {% block titulo %}Torneo — E-Sports Focus{% endblock %}
 {% block contenido %}
-{% if not torneo or not torneo.nombre %}
+{% if torneo_en_borrador %}
+<div class="tarjeta">
+    <h2>Torneo no publicado</h2>
+    <div class="aviso aviso-info" style="margin-top: 1rem;">
+        El torneo aún no está publicado. Está en preparación por la organización.
+    </div>
+</div>
+{% elif not torneo or not torneo.nombre %}
 <div class="tarjeta">
     <h2>Torneo</h2>
     <p class="suave">No hay ningún torneo configurado todavía. Entra como Organizador para crearlo y configurarlo.</p>
@@ -9,7 +16,11 @@
 {% else %}
 <section class="hero-banner">
     <div class="hero-insignia">
+        {% if torneo.estado %}
+        <span class="etiqueta etiqueta-estado">{{ torneo.estado }}</span>
+        {% else %}
         <span class="etiqueta etiqueta-estado">Vista pública · solo lectura</span>
+        {% endif %}
         {% if torneo.juego %}
         <span class="hero-juego">{{ torneo.juego }}</span>
         {% endif %}

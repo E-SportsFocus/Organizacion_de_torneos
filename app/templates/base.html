@@ -853,6 +853,7 @@
     {% set en_jugador = ruta.startswith('/jugador') %}
     {% set en_moderador = ruta.startswith('/moderador') %}
     {% set en_organizador = ruta.startswith('/organizador') %}
+    {% set es_organizador = en_organizador or (nav_organizador and persona_actual and persona_actual == nav_organizador.id|string) or (persona and persona.tipo == 'Organizador') %}
 
     <header class="barra">
         <div class="barra-lado-izquierdo">
@@ -912,7 +913,7 @@
                        {% if ruta == '/' %}aria-current="page"{% endif %}>Inicio</a>
                     <a class="menu-enlace menu-nav {{ 'activo' if ruta == '/bracket' else '' }}" href="/bracket"
                        {% if ruta == '/bracket' %}aria-current="page"{% endif %}>Bracket</a>
-                    {% if en_organizador %}
+                    {% if es_organizador %}
                     <a class="menu-enlace menu-nav {{ 'activo' if ruta == '/organizador/torneo/gestion' else '' }}"
                        href="/organizador/torneo/gestion{% if persona %}?persona_id={{ persona.id }}{% elif organizador %}?persona_id={{ organizador.id }}{% elif nav_organizador %}?persona_id={{ nav_organizador.id }}{% endif %}"
                        {% if ruta == '/organizador/torneo/gestion' %}aria-current="page"{% endif %}>Creación de torneo</a>

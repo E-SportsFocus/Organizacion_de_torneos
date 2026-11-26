@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% block titulo %}Bracket — E-Sports Focus{% endblock %}
 {% block contenido %}
+{% if torneo_en_borrador %}
+<div class="tarjeta">
+    <div class="seccion-cabecera" style="margin-bottom:.5rem">
+        <div>
+            <h2 style="margin:0">Bracket del torneo</h2>
+            <div class="aviso aviso-info" style="margin-top: 1rem;">
+                El torneo aún no está publicado. El bracket estará disponible una vez que el torneo sea publicado por la organización.
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
 <div class="tarjeta">
     <div class="seccion-cabecera" style="margin-bottom:.5rem">
         <div>
@@ -174,6 +186,7 @@
     <p class="suave">Aún no hay actualizaciones del bracket.</p>
     {% endif %}
 </div>
+{% endif %}
 {% endif %}
 
 <style>

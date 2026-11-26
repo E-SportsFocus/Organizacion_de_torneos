@@ -26,7 +26,7 @@
                 {% for partida in partidas %}
                 <tr>
                     <td>{{ partida.fecha_texto }}</td>
-                    <td>{{ partida.torneo }}</td>
+                    <td>{{ partida.torneo }}{% if partida.torneo_estado %} <span class="suave">({{ partida.torneo_estado }})</span>{% endif %}</td>
                     <td><strong>{{ partida.fase }}</strong></td>
                     <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
                     <td>
@@ -39,7 +39,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if partida.estado == "Programada" and partida.confirmada == "Pendiente" %}
+                        {% if partida.torneo_estado == "Borrador" %}
+                        <span class="suave">Torneo en borrador</span>
+                        {% elif partida.estado == "Programada" and partida.confirmada == "Pendiente" %}
                         <form method="post" action="/disponibilidad/{{ partida.disponibilidad_id }}/confirmar" style="margin-bottom:.35rem">
                             <input type="hidden" name="persona_id" value="{{ persona.id }}">
                             <button class="boton" type="submit">Confirmar disponibilidad</button>
