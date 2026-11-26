@@ -30,6 +30,11 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 ## HU-10 - Gherkin
 
 ## Casos de uso
+Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene el selector de estado), actualizamos `09-caso-de-uso.md` con estos cambios:
+* **CU-01 (Confirmar disponibilidad):** Se agrega la precondición de que el torneo no este en `Borrador` (debe estar en `En curso`) y el rechazo si está en borardor.
+* **CU-04 (Registrar resultado):** Se exige que el torneo no esté en `Borrador` (debe estar en `En curso`) y se bloquea el registro si está en borrador.
+* **CU-09 (Gestionar torneo):** Se suma la acción de cambiar el estado del torneo (`Borrador`, `Inscripciones abiertas`, `En curso` y `Finalizado`), exclusiva del **Organizador**, dejando el estado visible en la plataforma
+
 
 ## Modelo de dominio
 
