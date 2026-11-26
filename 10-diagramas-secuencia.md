@@ -77,7 +77,7 @@ DSS-07 — Consulta del torneo según su estado y el rol del usuario
 - Requisito: [RP-07](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Actores: Jugador, Moderador, Visitante y Organizador
 
-![DSS-07](./diagramas/Nuevo-DSS-07.png)
+![DSS-05](./diagramas/Nuevo-DSS-05.png)
 
 Variantes representadas:
 
