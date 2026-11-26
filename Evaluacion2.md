@@ -27,7 +27,7 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 - CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
 
-## HU-10 - Gherkin
+## HU-10 — Control del estado del torneo por el Organizador (Gherkin)
 
 Historia: Como organizador, quiero ser el único que pueda ver y modificar un torneo en estado "Borrador" y cambiar su estado, para preparar el torneo sin que los usuarios (Jugador, Moderador y Visitante) accedan a él ni registren acciones antes de tiempo.
 
