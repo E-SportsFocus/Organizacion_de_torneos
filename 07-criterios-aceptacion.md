@@ -329,7 +329,7 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Entonces el sistema no registra el torneo
     Y muestra un mensaje de error indicando los datos obligatorios requeridos
 ```
-## HU-10 - Gherkin
+## HU-10 — Control del estado del torneo por el Organizador
 
 Historia: Como organizador, quiero ser el único que pueda ver y modificar un torneo en estado "Borrador" y cambiar su estado, para preparar el torneo sin que los usuarios (Jugador, Moderador y Visitante) accedan a él ni registren acciones antes de tiempo.
 
