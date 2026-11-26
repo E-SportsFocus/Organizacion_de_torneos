@@ -55,8 +55,8 @@ Los estados son situaciones de la solicitud: Solicitada, Aprobada, Rechazada y V
 ## EST-03 — Ciclo de vida de Torneo
 
 - Clase del dominio: [Torneo](./08-modelo-dominio.md)
-- Historia relacionada: [HU-09](./07-criterios-aceptacion.md)
-- Requisito: [RP-11](./Clasificación_de_requisitos.md)
+- Historia relacionada: [HU-09](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
+- Requisito: [RP-11](./Clasificación_de_requisitos.md) Y [RP-12](./Clasificación_de_requisitos.md)
 
 ![EST-03](Images/diagramaestado1.png)
 
