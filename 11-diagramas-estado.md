@@ -58,7 +58,7 @@ Los estados son situaciones de la solicitud: Solicitada, Aprobada, Rechazada y V
 - Historia relacionada: [HU-09](./07-criterios-aceptacion.md)
 - Requisito: [RP-11](./Clasificación_de_requisitos.md)
 
-![EST-03](./diagramas/est-03.png)
+![EST-03](Images/diagramaestado1.png)
 
 Archivo fuente: [`./diagramas/est-03.puml`](./diagramas/est-03.puml)
 
