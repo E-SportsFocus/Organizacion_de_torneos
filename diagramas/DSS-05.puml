@@ -1,0 +1,34 @@
+@startuml
+title DSS-05 - Consulta del torneo según su estado y el rol del usuario
+actor "Jugador / Moderador / Visitante" as U
+actor Organizador
+participant "Sistema E-Sports Focus" as S
+
+== Usuario que no es Organizador ==
+U -> S : Abre el inicio o el bracket del torneo
+alt Torneo en estado "Borrador"
+  S --> U : Informar que el torneo aún no está publicado
+  note right of S
+    El torneo queda completamente oculto:
+    no se muestran datos, partidas ni bracket
+  end note
+  U -> S : Intenta confirmar disponibilidad
+  S --> U : Rechazar la operación; el torneo aún no está publicado
+  note right of S
+    No se permite confirmar disponibilidad
+    mientras el torneo esté en estado "Borrador"
+  end note
+else Torneo en "Inscripciones abiertas", "En curso" o "Finalizado"
+  S --> U : Mostrar el torneo con su estado actual
+  S --> U : Mostrar anuncios de ganadores y el bracket
+  note right of S : Vista de solo lectura
+end
+
+== Organizador ==
+Organizador -> S : Abre la gestión del torneo
+S --> Organizador : Mostrar el torneo con su estado actual
+note right of S
+  El Organizador ve y puede modificar el torneo
+  en cualquier estado, incluido "Borrador"
+end note
+@enduml
