@@ -53,7 +53,7 @@ Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene
 - Requisito: [RP-05](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Sistemas externos que participan: Discord
 
-ACA PONER CAMBIO DSS-02
+![DSS-02](./diagramas/Cambio DSS-02.png)
 
 
 Variantes representadas:
@@ -74,7 +74,7 @@ Variantes representadas:
 - Requisito: [RP-11](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Actor: Organizador
 
-ACA PONER CAMBIO DSS-04
+![DSS-04](./diagramas/Cambio DSS-04.png)
 
 Variantes representadas:
 
@@ -91,7 +91,7 @@ Variantes representadas:
 - Requisito: [RP-07](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Actores: Jugador, Moderador, Visitante y Organizador
 
-ACA PONER NUEVO DIAGRAMA DSS-07
+![DSS-07](./diagramas/Nuevo DSS-07.png)
 
 Variantes representadas:
 
