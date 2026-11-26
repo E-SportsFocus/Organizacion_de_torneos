@@ -25,7 +25,7 @@ En algunos apartados tendran cambios diminutos pero en otros seran un poco mas e
 Como organizador de torneos me gustaría tener control total sobre la edición y estados del torneo, estos permisos deben ser exclusivamente del rol “Organizador/a”.
 
 **Criterios de aceptación:**
-- CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
+- CA1: El sistema muestra el estado actual del torneo, ocultando completamente el apartado de Borrador para los usuario menos para el Organizador.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
 
 ## HU-10 — Control del estado del torneo por el Organizador (Gherkin)
