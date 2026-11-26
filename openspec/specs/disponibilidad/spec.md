@@ -8,7 +8,7 @@ Permite que un jugador confirme en la plataforma la disponibilidad de su equipo 
 
 ### Requirement: Confirmación de disponibilidad dentro del plazo
 
-El sistema DEBE (SHALL) permitir que un jugador de un equipo confirme la disponibilidad de ese equipo para una partida programada, registrándola como "Confirmada" con su fecha de confirmación.
+El sistema DEBE (SHALL) permitir que un jugador de un equipo confirme la disponibilidad de ese equipo para una partida programada, registrándola como "Confirmada" con su fecha de confirmación. La vista del jugador DEBE (SHALL) indicar el torneo al que pertenece cada partida.
 
 #### Scenario: Un equipo confirma su disponibilidad dentro del plazo
 
@@ -17,6 +17,7 @@ El sistema DEBE (SHALL) permitir que un jugador de un equipo confirme la disponi
 - **WHEN** un jugador del equipo confirma la disponibilidad del equipo
 - **THEN** la disponibilidad del equipo queda registrada como "Confirmada"
 - **AND** el Moderador puede consultar el estado de la disponibilidad
+- **AND** la partida indica el torneo al que pertenece
 
 ### Requirement: Disponibilidad pendiente y partida para revisión
 

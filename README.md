@@ -3,7 +3,7 @@
 - [Ingeniería de requisitos - Entrega 1](IngReq-Entrega1.md)
 - [Ingeniería de requisitos - Entrega 2](./IngReq-Entrega%202.md)
 
-## Aplicación web (HU-03, HU-04, HU-05, HU-06, HU-07 y HU-08)
+## Aplicación web (HU-03, HU-04, HU-05, HU-06, HU-07, HU-08 y HU-09)
 
 Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la documentación de requisitos. Historias implementadas:
 
@@ -13,6 +13,7 @@ Aplicación web sencilla en Python (FastAPI + Jinja2 + SQLite) generada desde la
 - **HU-06 — Anuncio automático del ganador** (CU-06): publicación en la plataforma, anuncio simulado en Discord y pantalla del Organizador.
 - **HU-07 — Inicio público del torneo** (CU-07): anuncios y bracket resumido de solo lectura en la página de inicio (con enlace al detalle de partidas en `/bracket`), con un menú desplegable común para navegar y cambiar de rol de demostración.
 - **HU-08 — Visualización gráfica del Bracket del torneo** (CU-08): árbol interactivo de llaves tipo esport (Liquipedia/VLR) organizado por columnas de rondas secuenciales, con marcadores individuales, destaque del equipo ganador, estado claro para partidas pendientes y coexistencia con la tabla de auditoría (RP-10).
+- **HU-09 — Creación y gestión de torneos, participantes y premios** (CU-09): formulario exclusivo del Organizador para configurar datos generales, inscribir equipos y definir la estructura de premios; el estado del torneo se valida contra el catálogo `Borrador`, `Inscripciones abiertas`, `En curso` y `Finalizado`.
 
 ### Requisitos
 
@@ -35,7 +36,7 @@ Remove-Item data\app.db -ErrorAction SilentlyContinue
 python -m app.db.seed
 ```
 
-Carga 1 torneo ("Copa E-Sports Focus"), 8 equipos de 2 jugadores, 2 moderadores (Marta Arbitraje y Óscar Réplica), 1 organizador (Olga Organización) y las 4 llaves iniciales de **Cuartos de final** en simulación real:
+Carga los datos base con **1 torneo en blanco** que el Organizador completa desde **Gestión de Torneo** (HU-09), 8 equipos de 2 jugadores, 2 moderadores (Marta Arbitraje y Óscar Réplica), 1 organizador (Olga Organización) y las 4 llaves iniciales de **Cuartos de final** en simulación real:
 
 1. Alfa vs Bravo (`Programada`, disponibilidad `Pendiente`).
 2. Charlie vs Delta (`Programada`, disponibilidad `Pendiente`).
@@ -44,6 +45,7 @@ Carga 1 torneo ("Copa E-Sports Focus"), 8 equipos de 2 jugadores, 2 moderadores 
 
 **Flujo de simulación real:**
 
+0. Entra como **Olga Organización** y completa el nombre, el juego, la fecha de inicio, la zona horaria y el estado en **Gestión de Torneo** (HU-09). El torneo arranca en `Borrador`.
 1. Los **Jugadores** confirman la disponibilidad de su equipo (HU-04) o solicitan un cambio de horario (HU-05).
 2. Cuando **ambos equipos** de una partida confirman disponibilidad, la partida pasa automáticamente de `Programada` a `Pendiente de resultado`.
 3. El **Moderador** registra el marcador oficial (HU-03) → la partida pasa a `Anunciada` y el ganador se anuncia (HU-06).
@@ -106,8 +108,8 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 
 ### Recorrido de HU-07 (inicio público y menú desplegable)
 
-1. Abre <http://localhost:8000>: el inicio ya muestra el torneo, sin pasar por ningún botón.
-2. Verás el nombre y el juego del torneo, la marca **Vista pública · solo lectura**, los **Anuncios de ganadores**, el **Bracket** resumido y el enlace hacia el detalle de partidas en `/bracket`.
+1. Abre <http://localhost:8000>: el inicio ya muestra el torneo configurado, sin pasar por ningún botón.
+2. Verás el nombre y el juego del torneo, la marca **Vista pública · solo lectura**, los **Anuncios de ganadores**, el **Bracket resumido por fases** y el enlace hacia el detalle de partidas en `/bracket`. La tabla detallada con marcador e historial vive solo en `/bracket`.
 3. Las partidas con resultado muestran el ganador; las partidas pendientes muestran **Sin resultado** y no inventan un ganador.
 4. Pulsa el botón **☰** de la derecha: el menú se despliega bajo la barra, alineado a la derecha, con **Navegación** (Inicio y Bracket) y **Entrar como**, que muestra tres botones: **Jugador**, **Moderador** y **Organizador**.
 5. Pulsa uno de los tres botones para desplegar la lista de personas de ese rol (solo una lista a la vez). Elige una persona y entrarás a su vista. Cierra el menú con la **X**, con **Esc** o tocando fuera.
@@ -128,9 +130,9 @@ La notificación al Organizador y a los Jugadores se guarda en la tabla `notific
 
 1. Abre el menú **☰** y entra como **Olga Organización** (Organizador).
 2. En el panel del Organizador, accede al módulo **Gestión de Torneo** o pulsa en **Crear / Configurar Torneo**.
-3. En la sección de **Datos Generales**, configura el nombre del torneo, el videojuego, la fecha/hora de inicio, la zona horaria y una descripción oficial.
+3. En la sección de **Datos Generales**, configura el nombre del torneo, el videojuego, la fecha/hora de inicio, la zona horaria, el estado (`Borrador`, `Inscripciones abiertas`, `En curso` o `Finalizado`) y una descripción oficial.
 4. En la sección de **Participantes**, visualiza y selecciona los equipos y jugadores que competirán en el torneo.
 5. En la sección de **Premios**, define la bolsa de premios y el desglose oficial por posición (1.º, 2.º y 3.º lugar).
 6. Al guardar los cambios, la información se almacena en la base de datos y se hace visible tanto en el panel administrativo como en la portada pública del torneo.
 
-Las 5 pruebas de `tests/test_hu03.py` corresponden a los 5 escenarios Gherkin de `07-criterios-aceptacion.md`, las 4 de `tests/test_hu04.py` a los escenarios de HU-04, las 5 de `tests/test_hu05.py` a los escenarios de HU-05, las 3 de `tests/test_hu06.py` a los escenarios de HU-06, las 4 de `tests/test_hu07.py` a los escenarios de HU-07 y las 5 de `tests/test_hu08.py` a los escenarios y avance dinámico de HU-08. En total son 43 pruebas.
+La suite reúne **49 pruebas**. Las de aceptación corresponden a los escenarios Gherkin de `07-criterios-aceptacion.md`: 5 de `tests/test_hu03.py`, 4 de `tests/test_hu04.py`, 5 de `tests/test_hu05.py`, 3 de `tests/test_hu06.py`, 4 de `tests/test_hu07.py`, 5 de `tests/test_hu08.py` (incluido el avance dinámico) y 6 de `tests/test_hu09.py`. Las 17 restantes son pruebas de servicios y de regresión de `tests/test_servicios_resultado.py` y `tests/test_servicios_disponibilidad.py`.

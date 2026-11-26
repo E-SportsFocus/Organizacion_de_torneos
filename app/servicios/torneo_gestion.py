@@ -9,6 +9,14 @@ class ErrorGestionTorneo(Exception):
         super().__init__(mensaje)
 
 
+ESTADOS_TORNEO = (
+    "Borrador",
+    "Inscripciones abiertas",
+    "En curso",
+    "Finalizado",
+)
+
+
 def listar_equipos_con_jugadores(conexion):
     """Devuelve todos los equipos registrados con sus integrantes."""
     filas = conexion.execute(
@@ -81,8 +89,8 @@ def obtener_equipos_inscritos(conexion, torneo_id):
     return resultado
 
 
-def validar_datos_torneo(nombre, juego, fecha_inicio, zona_horaria):
-    """Valida los campos obligatorios del torneo."""
+def validar_datos_torneo(nombre, juego, fecha_inicio, zona_horaria, estado=None):
+    """Valida los campos obligatorios y el catálogo de estados del torneo."""
     if not nombre or not nombre.strip():
         raise ErrorGestionTorneo("El nombre del torneo es obligatorio.")
     if len(nombre.strip()) < 3:
@@ -91,6 +99,13 @@ def validar_datos_torneo(nombre, juego, fecha_inicio, zona_horaria):
         raise ErrorGestionTorneo("El videojuego es obligatorio.")
     if not zona_horaria or not zona_horaria.strip():
         raise ErrorGestionTorneo("La zona horaria es obligatoria.")
+    if estado is None:
+        estado = "Borrador"
+    if estado not in ESTADOS_TORNEO:
+        raise ErrorGestionTorneo(
+            "El estado del torneo no es válido. "
+            "Usa Borrador, Inscripciones abiertas, En curso o Finalizado."
+        )
 
 
 def crear_o_actualizar_torneo(
@@ -102,7 +117,7 @@ def crear_o_actualizar_torneo(
     fecha_inicio=None,
     zona_horaria="America/Bogota",
     descripcion="",
-    estado="En curso",
+    estado="Borrador",
     bolsa_premios="",
     premios=None,
     equipos_ids=None,
@@ -110,7 +125,7 @@ def crear_o_actualizar_torneo(
 ):
     """Crea o actualiza un torneo con sus premios e inscripciones."""
     ahora = ahora or datetime.now()
-    validar_datos_torneo(nombre, juego, fecha_inicio, zona_horaria)
+    validar_datos_torneo(nombre, juego, fecha_inicio, zona_horaria, estado)
 
     if torneo_id:
         conexion.execute(
@@ -126,7 +141,7 @@ def crear_o_actualizar_torneo(
                 fecha_inicio or ahora.strftime("%Y-%m-%dT%H:%M"),
                 zona_horaria.strip(),
                 descripcion.strip() if descripcion else "",
-                estado or "En curso",
+                estado or "Borrador",
                 bolsa_premios.strip() if bolsa_premios else "",
                 torneo_id,
             ),
@@ -144,7 +159,7 @@ def crear_o_actualizar_torneo(
                 organizador_id,
                 fecha_inicio or ahora.strftime("%Y-%m-%dT%H:%M"),
                 descripcion.strip() if descripcion else "",
-                estado or "En curso",
+                estado or "Borrador",
                 bolsa_premios.strip() if bolsa_premios else "",
             ),
         )

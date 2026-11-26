@@ -21,4 +21,11 @@ note bottom of EnCurso
   Se disputan las partidas
   según el bracket oficial.
 end note
+
+note bottom of Finalizado
+  En la aplicación web el Organizador selecciona el estado
+  al guardar el torneo; no hay transiciones automáticas.
+  Los valores válidos son Borrador, Inscripciones abiertas,
+  En curso y Finalizado.
+end note
 @enduml

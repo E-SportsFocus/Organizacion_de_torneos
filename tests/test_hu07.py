@@ -53,7 +53,10 @@ def test_pagina_publica_muestra_anuncios_y_bracket(cliente, ahora):
     assert "Anuncios de ganadores" in html
     assert "Equipo Alfa es el ganador de Final" in html
     assert "Ganador anunciado" in html
-    assert "Bracket" in html
+    assert "Bracket resumido" in html
+    assert "Enfrentamientos Oficiales" not in html
+    assert "<th>Equipos</th>" not in html
+    assert "<th>Ganador</th>" not in html
     assert "<h3 style=\"margin-top:0\">Partidas</h3>" not in html
     assert "Ver detalle completo de partidas y marcador en Bracket" in html
     assert "Equipo Bravo" in html

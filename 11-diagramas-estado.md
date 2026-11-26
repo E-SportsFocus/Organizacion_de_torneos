@@ -9,23 +9,23 @@
 
 Archivo fuente: [`./diagramas/est-01.puml`](./diagramas/est-01.puml)
 
-Los estados son situaciones de la partida: Programada, En curso, Pendiente de resultado, Resultado confirmado y Anunciada.
+Los estados son situaciones de la partida: Programada, En curso, Pendiente de resultado, Resultado confirmado y Anunciada. La aplicación web implementa la ruta **Programada → Pendiente de resultado → Anunciada**; los estados **En curso** y **Resultado confirmado** pertenecen al flujo con API (HU-01), que no se implementa en esta entrega.
 
 ### Tabla de transiciones
 
-| Estado origen | Evento | Guarda | Acción | Estado destino |
-|---|---|---|---|---|
-| — (inicial) | Partida creada en el torneo | — | — | Programada |
-| Programada | Cambio de horario aprobado | — | Actualizar fecha y hora de la partida | Programada |
-| Programada | Hora de inicio alcanzada | Algún equipo sin confirmar disponibilidad | Marcar la partida para revisión del Moderador | Programada |
-| Programada | Hora de inicio alcanzada | Ambos equipos confirmaron disponibilidad | Iniciar la partida | En curso |
-| En curso | Resultado válido recibido de la API | No existe resultado registrado | Registrar resultado con origen automático; actualizar bracket; notificar | Resultado confirmado |
-| En curso | Plazo de detección vencido | Sin resultado válido de la API | Dejar la partida pendiente y avisar al Moderador para el registro manual | Pendiente de resultado |
-| Pendiente de resultado | Resultado completo registrado por el Moderador | Moderador asignado, resultado de ambos equipos y un ganador | Registrar resultado con origen manual; actualizar bracket; notificar | Resultado confirmado |
-| Resultado confirmado | Resultado repetido recibido de la API | Mismo resultado ya registrado | No registrar duplicado | Resultado confirmado |
-| Resultado confirmado | Registro y notificación completados | — | Publicar el ganador en la plataforma y anunciarlo en Discord (si Discord no responde, el anuncio queda pendiente de envío) | Anunciada |
-| Anunciada | Resultado repetido recibido de la API | Mismo resultado ya registrado | No registrar duplicado | Anunciada |
-| Anunciada | — (final) | — | — | — (final) |
+| Estado origen | Evento | Guarda | Acción | Estado destino | Implementado en la app |
+|---|---|---|---|---|---|
+| — (inicial) | Partida creada en el torneo | — | — | Programada | Sí (`partida.estado` por defecto) |
+| Programada | Cambio de horario aprobado | — | Actualizar fecha y hora de la partida | Programada | Sí (HU-05) |
+| Programada | Hora de inicio alcanzada | Algún equipo sin confirmar disponibilidad | Marcar la partida para revisión del Moderador | Programada | Sí (alerta de revisión de HU-04) |
+| Programada | Ambos equipos confirman disponibilidad | Los dos equipos tienen `Confirmada` | Pasar la partida a pendiente para que el Moderador registre el marcador | Pendiente de resultado | Sí (HU-04) |
+| Pendiente de resultado | Resultado completo registrado por el Moderador | Moderador asignado, marcador de ambos equipos y un ganador | Registrar resultado con origen manual; actualizar bracket; notificar; anunciar | Anunciada | Sí (HU-03 y HU-06) |
+| Anunciada | Resultado repetido | Mismo resultado ya registrado | No registrar duplicado | Anunciada | Sí (restricción única de `resultado.partida_id`) |
+| Programada | Hora de inicio alcanzada | Ambos equipos confirmaron disponibilidad | Iniciar la partida | En curso | No (flujo con API, HU-01) |
+| En curso | Resultado válido recibido de la API | No existe resultado registrado | Registrar resultado con origen automático; actualizar bracket; notificar | Resultado confirmado | No (flujo con API, HU-01) |
+| En curso | Plazo de detección vencido | Sin resultado válido de la API | Dejar la partida pendiente y avisar al Moderador para el registro manual | Pendiente de resultado | No (flujo con API, HU-01) |
+| Resultado confirmado | Registro y notificación completados | — | Publicar el ganador y anunciarlo en Discord | Anunciada | No (en la app el resultado manual va directo a Anunciada) |
+| Anunciada | — (final) | — | — | — (final) | Sí (estado final) |
 
 ## EST-02 — Ciclo de vida de SolicitudCambioHorario
 
@@ -62,16 +62,18 @@ Los estados son situaciones de la solicitud: Solicitada, Aprobada, Rechazada y V
 
 Archivo fuente: [`./diagramas/est-03.puml`](./diagramas/est-03.puml)
 
-Los estados son situaciones del campeonato: Borrador, Inscripciones abiertas, En curso y Finalizado.
+Los estados son situaciones del campeonato: Borrador, Inscripciones abiertas, En curso y Finalizado. La aplicación guarda el estado en `torneo.estado`, valida que sea uno de esos cuatro valores y permite al Organizador seleccionarlo al guardar el torneo; no hay transiciones automáticas.
 
 ### Tabla de transiciones
 
-| Estado origen | Evento | Guarda | Acción | Estado destino |
-|---|---|---|---|---|
-| — (inicial) | Torneo registrado por el Organizador | Nombre y juego válidos | Guardar datos generales y estructura inicial | Borrador |
-| Borrador | Publicar torneo / habilitar convocatoria | Datos generales completos | Habilitar selección de equipos participantes | Inscripciones abiertas |
-| Inscripciones abiertas | Equipos inscritos y bracket generado | Mínimo de equipos inscritos | Generar llaves y programar partidas iniciales | En curso |
-| En curso | Final disputada y resultado confirmado | Todos los enfrentamientos resueltos | Publicar podio, distribuir premios y anunciar campeón | Finalizado |
-| Finalizado | — (final) | — | — | — (final) |
+| Estado origen | Evento | Guarda | Acción | Estado destino | Implementado en la app |
+|---|---|---|---|---|---|
+| — (inicial) | Torneo registrado por el Organizador | Nombre y juego válidos | Guardar datos generales y estructura inicial | Borrador | Sí (valor inicial por defecto) |
+| Borrador | El Organizador selecciona "Inscripciones abiertas" | — | Habilitar la selección de equipos participantes | Inscripciones abiertas | Sí (selección manual) |
+| Inscripciones abiertas | El Organizador selecciona "En curso" | — | Iniciar la competencia | En curso | Sí (selección manual) |
+| En curso | El Organizador selecciona "Finalizado" | — | Cerrar el torneo y publicar el podio | Finalizado | Sí (selección manual) |
+| Finalizado | — (final) | — | — | — (final) | Sí (estado final) |
+
+La aplicación no impone el orden de las transiciones: el Organizador puede corregir el estado mientras administra el torneo. La validación cubre el catálogo de valores y rechaza cualquier estado fuera de la lista; la prueba `test_estado_invalido_torneo` verifica ese caso inválido.
 
 

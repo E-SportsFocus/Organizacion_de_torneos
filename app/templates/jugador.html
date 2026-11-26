@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th>Fecha</th>
+                    <th>Torneo</th>
                     <th>Fase</th>
                     <th>Estado de la partida</th>
                     <th>Disponibilidad</th>
@@ -25,6 +26,7 @@
                 {% for partida in partidas %}
                 <tr>
                     <td>{{ partida.fecha_texto }}</td>
+                    <td>{{ partida.torneo }}</td>
                     <td><strong>{{ partida.fase }}</strong></td>
                     <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
                     <td>

@@ -3,14 +3,14 @@
 ## Proyecto
 - Nombre: E-Sports Focus — Organización de torneos
 - Repositorio de documentación: esta carpeta
-- Última auditoría: 2026-11-19 — resultado: con supuestos (sin bloqueantes)
+- Última auditoría: 2026-11-26 — resultado: consistencia de artefactos y código revisada
 
 ## Mapa de artefactos (rutas detectadas)
 | Artefacto | Ruta(s) | Estado |
 |-----------|---------|--------|
 | BPMN AS-IS | `Images/diagrama.bpmn`, `Images/diagrama.png`, `Proceso_AS-IS.md` | completo |
 | BPMN TO-BE | `Images/diagram.bpmn`, `Images/diagram.png`, `Rediseño_y_TO-BE.md` | completo |
-| Historias de usuario | `Historias_de_usuario.md` (HU-01..03), `07-criterios-aceptacion.md` (HU-01..06) | completo |
+| Historias de usuario | `Historias_de_usuario.md` (HU-01..03), `07-criterios-aceptacion.md` (HU-01..09) | completo |
 | Criterios Gherkin | `07-criterios-aceptacion.md` | completo |
 | Modelo de dominio | `diagramas/modelo-dominio.puml`, `diagramas/modelo-dominio.png`, `08-modelo-dominio.md` | completo |
 | Casos de uso | `09-casos-de-uso.md`, `diagramas/casos-de-uso.puml`, `diagramas/casos-de-uso.png` | completo |
@@ -40,6 +40,7 @@
 - 2026-11-22 — **Ajuste de Inicio y Paleta de colores:** se retiró la tarjeta redundante de Partidas del inicio (`/`), dejando solo Anuncios y Bracket resumido con enlace hacia `/bracket` (donde reside la tabla completa con marcadores e historial). Se incorporó la paleta de colores personalizada (`#F4E9CD`, `#9DBEBB`, `#77ACA2`, `#468189`) mediante variables CSS armónicas para mejorar la estética visual y cumplir criterios de contraste/accesibilidad. Se actualizaron los artefactos de requisitos y la especificación.
 - 2026-11-22 — **HU-08 implementada y validada:** visualización gráfica de bracket tipo árbol con llaves competitivas, rondas secuenciales y actualización dinámica de ganadores.
 - 2026-11-23 — **HU-09 acordada con el docente:** incorporación del módulo exclusivo del Organizador para creación y configuración de torneos, gestión de jugadores/equipos participantes y estructura de premios (RP-11, CU-09). Ficha en `.cin324/historias/HU-09.md`.
+- 2026-11-26 — **Ajuste de consistencia de artefactos y código:** se completó el modelo de dominio (atributos de Torneo, asociación `inscribe`, Premio sin «condiciones de entrega» y correspondencia clase → tabla SQLite); se corrigió la trazabilidad (sin `Anuncio` como clase, con enlaces a código y pruebas); se actualizaron los criterios Gherkin (HU-04 con torneo visible, HU-08 con avance dinámico, HU-09 con actualización y estado inválido); se agregó la columna **Torneo** en la vista del jugador; el inicio muestra un bracket resumido por fases y la tabla detallada queda solo en `/bracket`; se validó el catálogo de estados del torneo (rechazando también el valor vacío); los torneos existentes con estado vacío se normalizan a `Borrador` (migración `008`); y `resultado.moderador_id` pasó a admitir `NULL` para alinear la base con el modelo (migración `007`).
 
 ## Stack (se define una sola vez)
 - Decisión: 2026-11-17 — **Opción B (Python)**, confirmada por el estudiante
@@ -60,9 +61,9 @@
 | HU-04 | implementada, validada y archivada | `openspec/changes/archive/2026-11-19-hu-04-confirmar-disponibilidad` | 2026-11-19 | Confirmación de disponibilidad; 4 escenarios y 12 pruebas; validada sin bloqueantes |
 | HU-05 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-05-cambio-horario` | 2026-11-22 | Solicitud y resolución de cambio de horario; 5 escenarios y 5 pruebas; 38 pruebas en total; spec en `openspec/specs/cambio-horario/spec.md` |
 | HU-06 | implementada, validada y archivada | `openspec/changes/archive/2026-11-20-hu-06-anuncio-ganador` | 2026-11-20 | Anuncio del ganador; 3 escenarios y 3 pruebas; pantalla del Organizador con opción B; 29 pruebas en total |
-| HU-07 | implementada, validada y archivada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; 33 pruebas en total; spec en `openspec/specs/torneo-publico/spec.md` |
-| HU-08 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-08-bracket-grafico` | 2026-11-22 | Visualización gráfica del Bracket del torneo (árbol de llaves estilo Liquipedia/VLR con avance dinámico en vivo); 4 escenarios y 5 pruebas; 43 pruebas en total; spec en `openspec/specs/bracket-grafico/spec.md` |
-| HU-09 | implementada, validada y archivada | `openspec/changes/archive/2026-11-23-hu-09-gestion-torneo` | 2026-11-23 | Creación y gestión de torneos, participantes y premios por el Organizador (RP-11, CU-09); 4 escenarios y 5 pruebas; 48 pruebas en total; spec en `openspec/specs/gestion-torneo/spec.md` |
+| HU-07 | implementada, validada y archivada; reajustada | `openspec/changes/archive/2026-11-21-hu-07-pagina-torneo` | 2026-11-21 | Inicio público del torneo y menú desplegable con tres botones de rol; 4 escenarios y 4 pruebas; spec en `openspec/specs/torneo-publico/spec.md`. Reajuste 2026-11-26: bracket resumido por fases y tabla detallada solo en `/bracket`. |
+| HU-08 | implementada, validada y archivada | `openspec/changes/archive/2026-11-22-hu-08-bracket-grafico` | 2026-11-22 | Visualización gráfica del Bracket del torneo (árbol de llaves estilo Liquipedia/VLR con avance dinámico en vivo); 5 escenarios y 5 pruebas; spec en `openspec/specs/bracket-grafico/spec.md` |
+| HU-09 | implementada, validada y archivada; ampliada | `openspec/changes/archive/2026-11-23-hu-09-gestion-torneo` | 2026-11-23 | Creación y gestión de torneos, participantes y premios por el Organizador (RP-11, CU-09); 6 escenarios y 6 pruebas; 49 pruebas en total; spec en `openspec/specs/gestion-torneo/spec.md`. Incluye validación del catálogo de estados. |
 
 ## Validaciones
 | Historia | Informe | Estado | Fecha |
@@ -76,6 +77,7 @@
 | HU-05 | Implementación (validada) | 38 pruebas pasan; `openspec validate` válido; capacidad `cambio-horario` especificada y probada | 2026-11-22 |
 | HU-08 | Implementación (validada) | 42 pruebas pasan; `openspec validate` válido; capacidad `bracket-grafico` especificada y probada | 2026-11-22 |
 | HU-09 | Implementación (validada y archivada) | 48 pruebas pasan; `openspec validate --all` (7 specs válidas); capacidad `gestion-torneo` especificada, probada y archivada | 2026-11-23 |
+| Consistencia | Revisión de artefactos vs código | 49 pruebas pasan; `openspec validate --all` válido; modelo, trazabilidad, Gherkin, CU, estados y README alineados | 2026-11-26 |
 
 ## Cambios posteriores
 | Cambio | Historia afectada | Motivo | Fecha |
@@ -83,3 +85,5 @@
 | Ajuste semántico de disponibilidad (colores verde/amarillo/rojo, estado Cancelado por plazo vencido) y retiro de emojis excepto copa | HU-04, HU-07 | Petición del estudiante para clarificar estados de disponibilidad y refinar la estética visual | 2026-11-22 |
 | Rediseño heurístico UX/UI (4 fases: Arquitectura Inicio/Bracket, Wayfinding/Migas, Hero y VS-inline, Responsividad y Badges) | HU-07 | Auditoría de usabilidad y jerarquía visual aprobada por el estudiante | 2026-11-22 |
 | Simplificación de inicio (sin tabla Partidas redundante) y paleta modo oscuro/claro con alternador | HU-07 | Petición del estudiante para clarificar la vista pública y dotar de identidad visual con tema dual | 2026-11-22 |
+| Bracket resumido por fases en `/` y tabla detallada solo en `/bracket` | HU-07 | El inicio conservaba una tabla de enfrentamientos; se reemplazó por el resumen exigido por la spec | 2026-11-26 |
+| Corrección de consistencia de modelo, trazabilidad, Gherkin, casos de uso, estados, vista del jugador, README y esquema (cambio OpenSpec `openspec/changes/archive/2026-11-26-ajuste-consistencia-artefactos`) | HU-04, HU-07, HU-08, HU-09 | Revisión de la rúbrica y correcciones del profesor | 2026-11-26 |

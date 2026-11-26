@@ -85,10 +85,9 @@
             <div class="campo-grupo">
                 <label for="estado">Estado del torneo</label>
                 <select class="input-control" id="estado" name="estado">
-                    <option value="" {% if not torneo or not torneo.estado %}selected disabled{% endif %}>Selecciona un estado...</option>
-                    <option value="En curso" {% if torneo and torneo.estado == 'En curso' %}selected{% endif %}>En curso</option>
+                    <option value="Borrador" {% if not torneo or not torneo.estado or torneo.estado == 'Borrador' %}selected{% endif %}>Borrador</option>
                     <option value="Inscripciones abiertas" {% if torneo and torneo.estado == 'Inscripciones abiertas' %}selected{% endif %}>Inscripciones abiertas</option>
-                    <option value="Borrador" {% if torneo and torneo.estado == 'Borrador' %}selected{% endif %}>Borrador</option>
+                    <option value="En curso" {% if torneo and torneo.estado == 'En curso' %}selected{% endif %}>En curso</option>
                     <option value="Finalizado" {% if torneo and torneo.estado == 'Finalizado' %}selected{% endif %}>Finalizado</option>
                 </select>
             </div>

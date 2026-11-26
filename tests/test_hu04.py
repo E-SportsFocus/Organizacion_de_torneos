@@ -35,6 +35,8 @@ def test_confirmacion_dentro_del_plazo(cliente, ahora):
 
     assert respuesta.status_code == 200
     assert "Disponibilidad del equipo confirmada." in respuesta.text
+    assert "<th>Torneo</th>" in respuesta.text
+    assert "Torneo de prueba" in respuesta.text
     registro = datos.disponibilidad(escenario["partida"], escenario["alfa"])
     assert registro["confirmada"] == "Confirmada"
     assert registro["fecha_confirmacion"] is not None

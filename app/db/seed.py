@@ -76,7 +76,7 @@ def sembrar(conexion, ahora=None):
             "",
             organizador_id,
             "",
-            "",
+            "Borrador",
         ),
     )
     torneo_id = cursor.lastrowid

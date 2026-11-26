@@ -1,6 +1,6 @@
 # Criterios de aceptación (Gherkin)
 
-Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-06 son nuevas en esta entrega y cubren los requisitos RP-01, RP-02, RP-03 y RP-07 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
+Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-09 se incorporaron en las Entregas 2 y 3 y cubren los requisitos RP-01, RP-02, RP-03, RP-06, RP-07, RP-09, RP-10 y RP-11 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
 
 ## HU-01 — Registro automático del resultado
 
@@ -116,6 +116,7 @@ Característica: Confirmación de disponibilidad de un equipo para una partida
     Cuando un jugador del equipo confirma la disponibilidad del equipo
     Entonces la disponibilidad del equipo queda registrada como "Confirmada"
     Y el Moderador puede consultar el estado de la disponibilidad
+    Y la partida indica el torneo al que pertenece
 
   Escenario: Un equipo sin confirmar queda con disponibilidad pendiente
     Dado que el equipo tiene una partida programada en el torneo
@@ -279,6 +280,13 @@ Característica: Visualización gráfica interactiva del Bracket del torneo
     Cuando navega por la sección
     Entonces dispone del árbol visual interactivo de llaves
     Y puede consultar el historial detallado de actualizaciones y auditoría
+
+  Escenario: El ganador avanza dinámicamente a la siguiente ronda
+    Dado que una partida de Cuartos de final o Semifinal tiene un resultado registrado
+    Cuando el Moderador registra el resultado
+    Entonces el equipo ganador se incorpora a la partida de la siguiente fase
+    Y la nueva partida aparece en el bracket en estado "Programada"
+    Y el equipo ganador debe confirmar su disponibilidad para esa nueva partida
 ```
 
 ## HU-09 — Creación y gestión de torneos, participantes y premios
@@ -314,4 +322,18 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Cuando envía el formulario
     Entonces el sistema no registra el torneo
     Y muestra un mensaje de error indicando los datos obligatorios requeridos
+
+  Escenario: Actualización de un torneo existente conservando integridad
+    Dado que existe un torneo creado por el Organizador con premios y equipos inscritos
+    Cuando el Organizador modifica sus datos generales o su estructura de premios
+    Y guarda los cambios
+    Entonces el torneo conserva su identificador
+    Y los premios y las inscripciones se actualizan sin duplicar registros
+    Y la información actualizada se muestra en el panel y en la vista pública
+
+  Escenario: Validación del estado del torneo
+    Dado que el Organizador está configurando el estado del torneo
+    Cuando envía un estado distinto de "Borrador", "Inscripciones abiertas", "En curso" o "Finalizado"
+    Entonces el sistema no registra el torneo
+    Y muestra un mensaje indicando que el estado no es válido
 ```

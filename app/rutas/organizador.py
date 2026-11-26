@@ -228,7 +228,7 @@ def crear_router(templates, abrir_conexion, reloj=None):
         fecha_inicio = str(form.get("fecha_inicio", "")).strip()
         zona_horaria = str(form.get("zona_horaria", "America/Bogota")).strip()
         descripcion = str(form.get("descripcion", "")).strip()
-        estado = str(form.get("estado", "En curso")).strip()
+        estado = str(form.get("estado", "Borrador")).strip()
         bolsa_premios = str(form.get("bolsa_premios", "")).strip()
 
         equipos_ids = [

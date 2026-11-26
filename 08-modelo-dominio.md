@@ -14,14 +14,14 @@ Archivo fuente: [`./diagramas/modelo-dominio.puml`](./diagramas/modelo-dominio.p
 | Jugador | Integrante de un equipo que compite en las partidas. | nickname, país |
 | Moderador | Persona que arbitra las partidas y registra resultados cuando la API no está disponible. | — |
 | Organizador | Persona responsable de un torneo, que recibe resultados y anuncia ganadores. | cuenta oficial |
-| Torneo | Campeonato de un videojuego, con sus partidas y su bracket. | nombre, juego, zona horaria |
+| Torneo | Campeonato de un videojuego, con sus partidas y su bracket. | nombre, juego, fecha y hora de inicio, zona horaria, bolsa de premios, descripción, estado |
 | Partida | Enfrentamiento entre dos equipos dentro de un torneo. | fecha y hora programada, fase, estado |
 | Equipo | Grupo de jugadores que compite como unidad. | nombre, país |
 | Resultado | Marcador oficial de una partida, con su origen y su registro. | marcador por equipo, fecha y hora de registro, origen |
 | Bracket | Vista del torneo que muestra las fases, los equipos y los resultados, y conserva el historial de sus actualizaciones. | última actualización, historial de actualizaciones |
 | Disponibilidad | Confirmación de que un equipo puede jugar una partida. | confirmada, fecha de confirmación |
 | SolicitudCambioHorario | Petición de un equipo para mover una partida a otro horario. | nuevo horario propuesto, fecha de solicitud, motivo de rechazo, estado |
-| Premio | Reconocimiento o recompensa oficial asignada a una posición en el torneo. | posición (1.º, 2.º, 3.º), monto/descripción, condiciones de entrega |
+| Premio | Reconocimiento o recompensa oficial asignada a una posición en el torneo. | posición (1.º, 2.º, 3.º), monto/descripción |
 
 ## Asociaciones
 
@@ -42,6 +42,28 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 | solicita | Equipo — SolicitudCambioHorario | 1 a 0..* | Cada solicitud de cambio la hace un equipo; un equipo puede hacer varias solicitudes. |
 | sobre | Partida — SolicitudCambioHorario | 1 a 0..* | Una partida puede tener varias solicitudes de cambio a lo largo del tiempo. |
 | premia con | Torneo — Premio | 1 a 0..* | Un torneo define una estructura con varios premios asignados por posición (composición). |
+| inscribe | Torneo — Equipo | 1 a 0..* | Un torneo inscribe a varios equipos participantes y un equipo puede inscribirse en varios torneos. La inscripción se conserva en la tabla `torneo_equipo`. |
+
+## Correspondencia con la base de datos
+
+La aplicación persiste el modelo de dominio en SQLite. Esta tabla permite verificar que cada clase tiene un lugar explícito en el esquema.
+
+| Clase del dominio | Tabla(s) SQLite | Observaciones |
+|---|---|---|
+| Persona | `persona` | La columna `tipo` distingue `Jugador`, `Moderador` y `Organizador`. |
+| Jugador | `persona` | Se identifica por `tipo = 'Jugador'` y se asocia a `equipo_id`. |
+| Moderador | `persona` | Se identifica por `tipo = 'Moderador'`. |
+| Organizador | `persona` | Se identifica por `tipo = 'Organizador'`. |
+| Torneo | `torneo`, `torneo_equipo` | `torneo_equipo` materializa la asociación `inscribe`. |
+| Partida | `partida`, `disponibilidad` | `disponibilidad` registra la confirmación de cada equipo para la partida. |
+| Equipo | `equipo` | — |
+| Resultado | `resultado`, `resultado_marcador` | `resultado_marcador` guarda el marcador de cada equipo. |
+| Bracket | `bracket`, `bracket_actualizacion` | `bracket_actualizacion` conserva el historial auditable (RP-10). |
+| Disponibilidad | `disponibilidad` | Una fila por equipo y partida. |
+| SolicitudCambioHorario | `solicitud_cambio_horario` | — |
+| Premio | `premio` | `monto_texto` y `descripcion` cubren el atributo monto/descripción. |
+
+Las tablas `anuncio`, `notificacion` e `integraciones_log` son registros técnicos de las historias HU-03 y HU-06; no representan clases del modelo de dominio.
 
 ## Decisiones de modelado
 
@@ -49,7 +71,7 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 - Equipo agrega Jugadores (agregación) y no los compone, porque un jugador puede cambiar de equipo y seguir existiendo.
 - Torneo compone Partida y Partida compone Resultado (composición), porque una partida no existe fuera de su torneo y un resultado no existe fuera de su partida.
 - Disponibilidad se modeló como clase y no como atributo de Equipo, porque la disponibilidad cambia para cada partida. La disponibilidad es del equipo: la confirma un jugador en nombre del equipo, por lo que no se modela una confirmación por integrante.
-- Quién registró un resultado se modeló como asociación Moderador — Resultado (y no como atributo), porque es una relación entre dos conceptos del negocio; en los resultados automáticos no hay Moderador.
+- Quién registró un resultado se modeló como asociación Moderador — Resultado (y no como atributo), porque es una relación entre dos conceptos del negocio; en los resultados automáticos no hay Moderador. Por eso `resultado.moderador_id` admite `NULL`: los resultados manuales (HU-03) siempre informan al Moderador y los automáticos (HU-01) no lo requieren.
 - El Resultado no admite empate: el marcador por equipo debe identificar un ganador, porque el bracket necesita avanzar. La regla se valida al registrar el resultado (HU-03).
 - No se modelaron como clases los roles de Jugador "capitán" ni de "suplente", porque la Entrega 1 no los define. Queda como posible extensión si el equipo lo confirma.
 

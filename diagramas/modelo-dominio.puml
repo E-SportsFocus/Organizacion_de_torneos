@@ -65,7 +65,6 @@ class SolicitudCambioHorario {
 class Premio {
   posición
   monto / descripción
-  condiciones de entrega
 }
 
 Persona <|-- Jugador

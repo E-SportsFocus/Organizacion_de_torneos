@@ -88,56 +88,82 @@
 <div class="tarjeta">
     <div class="seccion-cabecera">
         <div>
-            <h3 style="margin-top:0; margin-bottom:.15rem">Enfrentamientos Oficiales</h3>
-            <p class="suave seccion-bajada">Calendario y estado de las partidas programadas del campeonato</p>
+            <h3 style="margin-top:0; margin-bottom:.15rem">Bracket resumido</h3>
+            <p class="suave seccion-bajada">Progresión por fases; el marcador y el historial están en el detalle completo.</p>
         </div>
     </div>
-    {% if partidas %}
-    <div class="tabla-contenedor">
-        <table>
-            <thead>
-                <tr>
-                    <th>Fase</th>
-                    <th>Fecha</th>
-                    <th>Equipos</th>
-                    <th>Ganador</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for partida in partidas %}
-                <tr>
-                    <td><strong>{{ partida.fase }}</strong></td>
-                    <td class="suave">{{ partida.fecha_texto }}</td>
-                    <td>
-                        <div class="vs-inline">
-                            {% for equipo in partida.equipos %}
-                            <span class="equipo-nombre {% if partida.resultado and partida.resultado.ganador.equipo == equipo.equipo %}equipo-ganador{% endif %}">{{ equipo.equipo }}</span>
-                            {% if not loop.last %}
-                            <span class="vs-separador">vs</span>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
-                    </td>
-                    <td>
-                        {% if partida.resultado %}
-                        <span class="ganador-destacado">{{ partida.resultado.ganador.equipo }}</span>
-                        {% else %}
-                        <span class="suave">Sin resultado</span>
-                        {% endif %}
-                    </td>
-                    <td><span class="etiqueta etiqueta-estado">{{ partida.estado }}</span></td>
-                </tr>
+    {% if rondas_bracket %}
+    <div class="bracket-resumen">
+        {% for ronda in rondas_bracket %}
+        <div class="bracket-resumen-ronda">
+            <h4>{{ ronda.nombre }}</h4>
+            <ul>
+                {% for partida in ronda.partidas %}
+                <li>
+                    <span class="bracket-resumen-equipos">
+                        {{ partida.equipos[0].nombre }}
+                        <span class="vs-separador">vs</span>
+                        {{ partida.equipos[1].nombre }}
+                    </span>
+                    {% if partida.tiene_resultado and partida.ganador_nombre %}
+                    <span class="ganador-destacado">{{ partida.ganador_nombre }}</span>
+                    {% else %}
+                    <span class="suave">{{ partida.estado }} · Sin resultado</span>
+                    {% endif %}
+                </li>
                 {% endfor %}
-            </tbody>
-        </table>
+            </ul>
+        </div>
+        {% endfor %}
     </div>
     <div class="bracket-cta">
-        <a href="/bracket" class="boton-enlace">Ver árbol de clasificaciones y marcadores en Bracket →</a>
+        <a href="/bracket" class="boton-enlace">Ver detalle completo de partidas y marcador en Bracket →</a>
     </div>
     {% else %}
     <p class="suave">El torneo no tiene partidas registradas.</p>
     {% endif %}
 </div>
+
+<style>
+.bracket-resumen {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-top: .75rem;
+}
+.bracket-resumen-ronda h4 {
+    margin: 0 0 .45rem 0;
+    color: var(--color-primario);
+    font-size: .92rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.bracket-resumen-ronda ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .45rem;
+}
+.bracket-resumen-ronda li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .6rem;
+    padding: .5rem .65rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 6px;
+    background: var(--color-bg);
+    font-size: .84rem;
+}
+.bracket-resumen-equipos {
+    min-width: 0;
+}
+.bracket-resumen-ronda li .suave,
+.bracket-resumen-ronda li .ganador-destacado {
+    flex-shrink: 0;
+    text-align: right;
+}
+</style>
 {% endif %}
 {% endblock %}

@@ -5,16 +5,24 @@ title EST-01 - Ciclo de vida de Partida
 
 Programada --> Programada : cambio de horario aprobado
 Programada --> Programada : hora de inicio\n[algún equipo sin confirmar]
-Programada --> EnCurso : hora de inicio\n[ambos equipos confirmaron]
-EnCurso --> Pendiente : plazo de detección vencido\n[sin resultado válido]
-EnCurso --> Confirmado : resultado válido de la API\n[sin resultado registrado]
-Pendiente --> Confirmado : resultado manual completo\n[Moderador asignado]
-Confirmado --> Confirmado : resultado repetido de la API\n[mismo resultado registrado]
-Confirmado --> Anunciada : registro y notificación completados
-Anunciada --> Anunciada : resultado repetido de la API\n[mismo resultado registrado]
+Programada --> Pendiente : ambos equipos confirmaron\ndisponibilidad
+Pendiente --> Anunciada : resultado manual registrado\ny anunciado
+Anunciada --> Anunciada : resultado repetido\n[mismo resultado registrado]
 Anunciada --> [*]
+
+' Flujo con API (HU-01), no implementado en la aplicación web
+Programada -[dashed]-> EnCurso : hora de inicio\n[ambos confirmaron] (API)
+EnCurso -[dashed]-> Confirmado : resultado válido de la API
+EnCurso -[dashed]-> Pendiente : plazo de detección vencido\n[sin resultado]
+Confirmado -[dashed]-> Anunciada : registro y notificación\ncompletados
 
 state "En curso" as EnCurso
 state "Pendiente de resultado" as Pendiente
 state "Resultado confirmado" as Confirmado
+
+note right of EnCurso
+  Estados y transiciones del flujo con API (HU-01).
+  No se implementan en esta aplicación web: el registro
+  manual (HU-03) pasa de Pendiente de resultado a Anunciada.
+end note
 @enduml

@@ -4,6 +4,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.servicios import anuncio as servicio_anuncio
+from app.servicios import bracket as servicio_bracket
 from app.servicios import resultado as servicio_resultado
 from app.servicios import torneo_gestion as servicio_torneo
 
@@ -24,6 +25,7 @@ def crear_router(templates, abrir_conexion):
             "bracket": None,
             "partidas": [],
             "anuncios": [],
+            "rondas_bracket": [],
         }
 
         with abrir_conexion() as conexion:
@@ -44,6 +46,9 @@ def crear_router(templates, abrir_conexion):
                 partidas = servicio_resultado.listar_bracket(conexion, torneo["id"])
                 anuncios = servicio_anuncio.anuncios_por_partida(conexion)
                 premios = servicio_torneo.obtener_premios_torneo(conexion, torneo["id"])
+                rondas_bracket = servicio_bracket.obtener_bracket_estructurado(
+                    conexion, torneo["id"]
+                )
 
                 for partida in partidas:
                     partida["anuncio"] = anuncios.get(partida["partida_id"])
@@ -53,6 +58,7 @@ def crear_router(templates, abrir_conexion):
                     "bracket": dict(bracket) if bracket else None,
                     "partidas": partidas,
                     "premios": premios,
+                    "rondas_bracket": rondas_bracket,
                     "anuncios": [
                         partida
                         for partida in partidas

@@ -19,19 +19,19 @@ Archivo fuente: [`./diagramas/casos-de-uso.puml`](./diagramas/casos-de-uso.puml)
 
 ## Casos de uso y su origen
 
-| ID | Caso de uso (objetivo del actor) | Actor principal | Historia de origen |
-|---|---|---|---|
-| CU-01 | Confirmar la disponibilidad del equipo para una partida | Jugador | [HU-04](./07-criterios-aceptacion.md) |
-| CU-02 | Solicitar un cambio de horario de una partida | Jugador | [HU-05](./07-criterios-aceptacion.md) |
-| CU-03 | Obtener el resultado oficial de una partida sin reporte manual | Moderador | [HU-01](./07-criterios-aceptacion.md) |
-| CU-04 | Registrar el resultado de una partida cuando la API no está disponible | Moderador | [HU-03](./07-criterios-aceptacion.md) |
-| CU-05 | Consultar el bracket actualizado y el resultado notificado | Jugador | [HU-02](./07-criterios-aceptacion.md) |
-| CU-06 | Anunciar al ganador de una partida | Organizador | [HU-06](./07-criterios-aceptacion.md) |
-| CU-07 | Consultar el torneo público (anuncios y bracket) | Visitante | [HU-07](./07-criterios-aceptacion.md) |
-| CU-08 | Consultar el bracket gráfico e interactivo de llaves | Visitante / Jugador | [HU-08](./07-criterios-aceptacion.md) |
-| CU-09 | Gestionar creación y configuración del torneo, participantes y premios | Organizador | [HU-09](./07-criterios-aceptacion.md) |
+| ID | Caso de uso (objetivo del actor) | Actor principal | Historia de origen | Implementación (ruta / módulo) |
+|---|---|---|---|---|
+| CU-01 | Confirmar la disponibilidad del equipo para una partida | Jugador | [HU-04](./07-criterios-aceptacion.md) | `GET /jugador` y `POST /disponibilidad/{id}/confirmar` → [`app/rutas/disponibilidad.py`](./app/rutas/disponibilidad.py) |
+| CU-02 | Solicitar un cambio de horario de una partida | Jugador | [HU-05](./07-criterios-aceptacion.md) | `POST /cambio-horario/solicitar`, `POST /cambio-horario/{id}/aprobar`, `POST /cambio-horario/{id}/rechazar` → [`app/rutas/cambio_horario.py`](./app/rutas/cambio_horario.py) |
+| CU-03 | Obtener el resultado oficial de una partida sin reporte manual | Moderador | [HU-01](./07-criterios-aceptacion.md) | No implementado: requiere la API del videojuego (RY-03 pendiente). |
+| CU-04 | Registrar el resultado de una partida cuando la API no está disponible | Moderador | [HU-03](./07-criterios-aceptacion.md) | `POST /partidas/{id}/resultado` → [`app/rutas/resultado.py`](./app/rutas/resultado.py) |
+| CU-05 | Consultar el bracket actualizado y el resultado notificado | Jugador | [HU-02](./07-criterios-aceptacion.md) | `GET /bracket` → [`app/rutas/resultado.py`](./app/rutas/resultado.py) |
+| CU-06 | Anunciar al ganador de una partida | Organizador | [HU-06](./07-criterios-aceptacion.md) | `GET /organizador` → [`app/rutas/organizador.py`](./app/rutas/organizador.py) |
+| CU-07 | Consultar el torneo público (anuncios y bracket resumido) | Visitante | [HU-07](./07-criterios-aceptacion.md) | `GET /` → [`app/rutas/torneo.py`](./app/rutas/torneo.py) |
+| CU-08 | Consultar el bracket gráfico e interactivo de llaves | Visitante / Jugador | [HU-08](./07-criterios-aceptacion.md) | `GET /bracket` → [`app/rutas/resultado.py`](./app/rutas/resultado.py) |
+| CU-09 | Gestionar creación y configuración del torneo, participantes y premios | Organizador | [HU-09](./07-criterios-aceptacion.md) | `GET /organizador/torneo/gestion` y `POST /organizador/torneo/guardar` → [`app/rutas/organizador.py`](./app/rutas/organizador.py) |
 
-Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-07 se incorporó el 2026-11-20 a partir de la validación del estudiante y también se documenta en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).
+Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-04 a HU-09 se documentan también en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). La columna **Implementación** enlaza cada caso de uso con la ruta y el módulo que lo realiza; CU-03 queda fuera del alcance de la aplicación web porque la integración con la API del videojuego (HU-01) no está implementada.
 
 ## Actores secundarios por caso de uso
 

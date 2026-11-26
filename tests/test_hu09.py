@@ -131,6 +131,40 @@ def test_validacion_campos_obligatorios_torneo(base, ahora):
     assert "al menos 3 caracteres" in exc_corto.value.mensaje.lower()
 
 
+def test_estado_invalido_torneo(base, ahora):
+    """HU-09 · Escenario: Validación del estado del torneo (transición inválida)"""
+    datos, ruta = base
+    organizador = datos.organizador("Olga Organización")
+
+    with pytest.raises(servicio.ErrorGestionTorneo) as exc_estado:
+        servicio.crear_o_actualizar_torneo(
+            datos.conexion,
+            organizador_id=organizador,
+            nombre="Copa Inválida",
+            juego="Valorant",
+            fecha_inicio="2026-11-24T10:00",
+            estado="Cancelado",
+            ahora=ahora,
+        )
+    assert "estado del torneo no es válido" in exc_estado.value.mensaje.lower()
+
+    with pytest.raises(servicio.ErrorGestionTorneo) as exc_vacio:
+        servicio.crear_o_actualizar_torneo(
+            datos.conexion,
+            organizador_id=organizador,
+            nombre="Copa sin estado",
+            juego="Valorant",
+            fecha_inicio="2026-11-24T10:00",
+            estado="",
+            ahora=ahora,
+        )
+    assert "estado del torneo no es válido" in exc_vacio.value.mensaje.lower()
+
+    assert (
+        datos.conexion.execute("SELECT COUNT(*) FROM torneo").fetchone()[0] == 0
+    )
+
+
 def test_actualizacion_de_torneo_y_premios_existentes(base, ahora):
     """HU-09 · Actualización de un torneo ya existente conservando integridad"""
     datos, ruta = base
