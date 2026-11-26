@@ -11,7 +11,7 @@ Debe poder verse: El estado de los torneos.
 
 Se nos pidio modificar el comportamiento de los estados de un torneo, ya que el torneo al estar en borrador los jugadores puedes seguir accediendo a el y modificar su estado, debido a esto decidimos unicamente modificar el "Diagrama de estado" ya que dentro de nuestra app ya tenemos una etiqueta dedicada a al estado del torneo sea "Borrador" "Inscripcion abierta" entre otros pero estos seran los principales, al modificar el diagrama de estado modificaremos el como se comporta dentro del sistema delimitando que al estar en estado "borrador" unicamente el organizador pueda tener acceso a ella.
 
-Lo que haremos es cambiar el diagrama de estado en la parte de EST-03 que es el ciclo de vida del torneo, las historias que sean necesarias y si es que es necesario crear una nueva para esta especificación y agregar la clasificación de requisitos, 
+Lo que haremos es cambiar el diagrama de estado en la parte de EST-03 que es el ciclo de vida del torneo, agregar o modificar que sean necesarias y agregar la clasificación de requisitos. 
 
 
 ## HU-NEW: Estado Torneo - Interacción Organizador/Usuario 
@@ -20,6 +20,8 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 **Criterios de aceptación:**
 - CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
+
+## Clasificación de requisitos 
 
 **Diagrama de estado**
 
