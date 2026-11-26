@@ -29,9 +29,9 @@ Archivo fuente: [`./diagramas/casos-de-uso.puml`](./diagramas/casos-de-uso.puml)
 | CU-06 | Anunciar al ganador de una partida | Organizador | [HU-06](./07-criterios-aceptacion.md) |
 | CU-07 | Consultar el torneo público (anuncios y bracket) | Visitante | [HU-07](./07-criterios-aceptacion.md) |
 | CU-08 | Consultar el bracket gráfico e interactivo de llaves | Visitante / Jugador | [HU-08](./07-criterios-aceptacion.md) |
-| CU-09 | Gestionar creación y configuración del torneo, participantes y premios | Organizador | [HU-09](./07-criterios-aceptacion.md) |
+| CU-09 | Gestionar creación, estado y configuración del torneo, participantes y premios | Organizador | [HU-09](./07-criterios-aceptacion.md), [HU-10] (./07-criterios-aceptacion.md)  |
 
-Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-07 se incorporó el 2026-11-20 a partir de la validación del estudiante y también se documenta en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).
+Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1)](./Historias_de_usuario.md); sus criterios de aceptación en Gherkin están en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md). HU-07 se incorporó el 2026-11-20 a partir de la validación del estudiante y también se documenta en [07-criterios-aceptacion.md](./07-criterios-aceptacion.md).[HU-10](07-criterios-aceptacion.md#hu-10) se incorporó para el control de estados del torneo (Borrador, Inscripciones abiertas, En curso y Finalizado) y su visibilidad según el rol; sus criterios en Gherkin están en 07-criterios-aceptacion.md.
 
 ## Actores secundarios por caso de uso
 
@@ -44,11 +44,14 @@ Las historias HU-01 a HU-03 están definidas en [Historias de usuario (Entrega 1
 | CU-06 | Discord | Recibe el anuncio del ganador en el canal del torneo. |
 | CU-07 | Ninguno | Es una consulta de solo lectura; no notifica ni modifica datos. |
 | CU-08 | Ninguno | Es una consulta de solo lectura del árbol de llaves; no modifica datos. |
-| CU-09 | Ninguno | Configuración administrativa del torneo y premios realizada directamente por el Organizador. |
+| CU-09 | Ninguno | Configuración administrativa del torneo, estados y premios realizada directamente por el Organizador. |
 
-## Relaciones entre casos de uso
+## Relaciones y restricciones entre casos de uso
 
 - No se usaron relaciones `<<include>>` ni `<<extend>>`.
 - CU-06 no es una extensión opcional de CU-03 ni de CU-04: el anuncio del ganador ocurre siempre que el resultado queda confirmado, sea por la API (CU-03) o por registro manual (CU-04). Por eso se mantiene como caso de uso propio del Organizador, activado por el resultado confirmado. Su flujo se muestra en [DSS-01](./10-diagramas-secuencia.md) y [DSS-02](./10-diagramas-secuencia.md).
 - Tampoco se usó `<<include>>`, porque el anuncio es un objetivo propio del Organizador y no un paso interno de los casos de uso que registran el resultado.
-
+- **Restricciones por estado del torneo (RP-12 / HU-10):**
+  - **CU-01 y CU-04:** Exigen como precondición que el torneo no se encuentre en estado `Borrador` (debe estar `En curso`); si está en `Borrador`, el sistema rechaza la confirmación de disponibilidad o el registro de resultados.
+  - **CU-07 y CU-08:** Los torneos en estado `Borrador` permanecen ocultos para Jugadores, Moderadores y Visitantes; el estado actual del torneo se muestra visiblemente cuando está publicado.
+  - **CU-09:** El Organizador es el único rol autorizado para visualizar y modificar torneos en `Borrador` y ejecutar las transiciones entre estados (`Borrador`, `Inscripciones abiertas`, `En curso` y `Finalizado`), sin requerir un caso de uso adicional.
