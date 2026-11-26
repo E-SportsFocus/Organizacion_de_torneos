@@ -9,8 +9,9 @@ Debe poder verse: El estado de los torneos.
 
 ## Solución
 
-Se nos pidió modificar el comportamiento de los estados de un torneo, ya que el torneo al estar en borrador, los jugadores puedes seguir accediendo a el y modificar su estado, debiendo ser exclusivamente para el organizador. Debido a esto decidimos agregar una nueva historia de usuario haciendo que esto nos haga unos cambio en los siguientes apartados:
+Se nos pidió modificar el comportamiento de los estados de un torneo, ya que el torneo al estar en borrador, los jugadores puedes seguir accediendo a el y modificar su estado, debiendo ser exclusivamente para el organizador. Debido a esto decidimos agregar una nueva historia de usuario y modificamos algunas haciendo que esto nos haga unos cambio en los siguientes apartados:
 
+- HU-03, HU-04 y HU-09
 - modificar el diagrama de estado
 - clasificación de requerimientos
 - modelo de dominio
