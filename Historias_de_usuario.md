@@ -110,7 +110,7 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 **Actividad TO-BE asociada:**Gestión de estados y control de permisos del torneo
 
 **Criterios de aceptación:**
-- CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
+- CA1: El sistema muestra el estado actual del torneo, ocultando completamente el apartado de Borrador para los usuario menos para el Organizador.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
 
 ## Regresar 
