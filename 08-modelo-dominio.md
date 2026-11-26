@@ -14,14 +14,14 @@ Archivo fuente: [`./diagramas/modelo-dominio.puml`](./diagramas/modelo-dominio.p
 | Jugador | Integrante de un equipo que compite en las partidas. | nickname, país |
 | Moderador | Persona que arbitra las partidas y registra resultados cuando la API no está disponible. | — |
 | Organizador | Persona responsable de un torneo, que recibe resultados y anuncia ganadores. | cuenta oficial |
-| Torneo | Campeonato de un videojuego, con sus partidas y su bracket. | nombre, juego, zona horaria |
+| Torneo | Campeonato de un videojuego, con sus partidas y su bracket. | nombre, juego, zona horaria, bolsa de premios, descripción, estado |
 | Partida | Enfrentamiento entre dos equipos dentro de un torneo. | fecha y hora programada, fase, estado |
 | Equipo | Grupo de jugadores que compite como unidad. | nombre, país |
 | Resultado | Marcador oficial de una partida, con su origen y su registro. | marcador por equipo, fecha y hora de registro, origen |
 | Bracket | Vista del torneo que muestra las fases, los equipos y los resultados, y conserva el historial de sus actualizaciones. | última actualización, historial de actualizaciones |
 | Disponibilidad | Confirmación de que un equipo puede jugar una partida. | confirmada, fecha de confirmación |
 | SolicitudCambioHorario | Petición de un equipo para mover una partida a otro horario. | nuevo horario propuesto, fecha de solicitud, motivo de rechazo, estado |
-| Premio | Reconocimiento o recompensa oficial asignada a una posición en el torneo. | posición (1.º, 2.º, 3.º), monto/descripción, condiciones de entrega |
+| Premio | Reconocimiento o recompensa oficial asignada a una posición en el torneo. | posición (1.º, 2.º, 3.º), monto/descripción |
 
 ## Asociaciones
 
@@ -42,6 +42,7 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 | solicita | Equipo — SolicitudCambioHorario | 1 a 0..* | Cada solicitud de cambio la hace un equipo; un equipo puede hacer varias solicitudes. |
 | sobre | Partida — SolicitudCambioHorario | 1 a 0..* | Una partida puede tener varias solicitudes de cambio a lo largo del tiempo. |
 | premia con | Torneo — Premio | 1 a 0..* | Un torneo define una estructura con varios premios asignados por posición (composición). |
+| inscribe | Torneo — Equipo | 1 a 0..* | Un equipo tiene la posibilidad de participar en varios torneos
 
 ## Decisiones de modelado
 
@@ -52,4 +53,5 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 - Quién registró un resultado se modeló como asociación Moderador — Resultado (y no como atributo), porque es una relación entre dos conceptos del negocio; en los resultados automáticos no hay Moderador.
 - El Resultado no admite empate: el marcador por equipo debe identificar un ganador, porque el bracket necesita avanzar. La regla se valida al registrar el resultado (HU-03).
 - No se modelaron como clases los roles de Jugador "capitán" ni de "suplente", porque la Entrega 1 no los define. Queda como posible extensión si el equipo lo confirma.
+- El atributo estado de Torneo controla qué operaciones se permiten: en Borrador solo el Organizador ve y modifica el torneo; Disponibilidad, SolicitudCambioHorario y Resultado solo se registran con el torneo En curso
 
