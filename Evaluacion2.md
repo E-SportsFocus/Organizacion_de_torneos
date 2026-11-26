@@ -56,9 +56,9 @@ Característica: Control del estado del torneo por el Organizador
     Entonces el sistema rechaza la operación
     Y el torneo conserva el estado "Borrador"
 ```
-## Cambios en HU-03 Y HU-04
+## Cambios en HU-03, HU-04 y HU-09
 
-Para la HU-03 se agrega este nuevo escenario:
+**Para la HU-03 se agrega este nuevo escenario:**
 ```gherkin
   Escenario: No se registra un resultado si el torneo está en Borrador
     Dado que el torneo está en estado "Borrador"
@@ -67,7 +67,7 @@ Para la HU-03 se agrega este nuevo escenario:
     Entonces el sistema rechaza la operación
     Y el estado y el resultado de la partida no cambian
 ```
-Para la HU-04 se agrega este nuevo escenario:
+**Para la HU-04 se agrega este nuevo escenario:**
 ```gherkin
   Escenario: No se confirma disponibilidad si el torneo está en Borrador
     Dado que el torneo está en estado "Borrador"
@@ -83,6 +83,17 @@ Con este nuevo escenario podemos resolver la inconsistencia que habia en esta HU
     Y que el equipo tiene partidas programadas en el torneo
     Cuando un jugador del equipo consulta sus partidas
     Entonces ve cada partida con el nombre y el estado del torneo
+```
+
+**Para la HU-09 se modifica una linea:**
+
+Antes:
+```gherkin
+    Y el torneo queda disponible para su administración
+```
+Despues:
+```gherkin
+    Y el torneo queda en estado "Borrador", visible solo para el Organizador
 ```
 ## Casos de uso
 Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene el selector de estado), actualizamos `09-caso-de-uso.md` con estos cambios:
