@@ -1,0 +1,28 @@
+@startuml
+title DSS-04 - Creación y gestión de torneo, participantes y premios
+actor Organizador
+participant "Sistema E-Sports Focus" as S
+
+Organizador -> S : Ingresa datos del torneo (nombre, juego, fecha/hora, bolsa, reglamento)
+Organizador -> S : Selecciona equipos participantes a inscribir
+Organizador -> S : Define estructura y distribución de premios por posición
+
+alt Usuario con rol Organizador
+  alt Datos obligatorios completos (nombre y juego válidos)
+    S -> S : Registrar o actualizar información oficial del torneo
+    S -> S : Inscribir equipos participantes en la nómina oficial
+    S -> S : Guardar estructura y montos de premios por posición
+    S --> Organizador : Confirmar configuración guardada exitosamente
+    note right of S
+      Un torneo nuevo queda en estado "Borrador":
+      oculto para Jugadores, Moderadores y Visitantes;
+      solo el Organizador puede verlo y modificarlo.
+    end note
+  else Datos obligatorios incompletos (falta nombre o juego)
+    S --> Organizador : Rechazar registro y notificar campos requeridos
+    note right of S : No se modifica el estado del torneo
+  end
+else Usuario sin rol Organizador
+  S --> Organizador : Rechazar acceso a la gestión del torneo
+end
+@enduml
