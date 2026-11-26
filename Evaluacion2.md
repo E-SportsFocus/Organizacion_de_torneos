@@ -40,12 +40,18 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 <img width="700" height="900" alt="image" src="Images/diagramaestado.jpeg">
 
 ## Diagrama de secuencia 
+
+- Caso de uso: [CU-03](./09-casos-de-uso.md) y [CU-06](./09-casos-de-uso.md)
+- Historia: [HU-01](./07-criterios-aceptacion.md), [HU-02](./07-criterios-aceptacion.md) y [HU-06](./07-criterios-aceptacion.md)
+- Sistemas externos que participan: API del videojuego, Discord
+
+- 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 [DSS-02 — Registro manual del resultado cuando la API no está disponible
-Caso de uso: [CU-04](./09-casos-de-uso.md) y [CU-06](./09-casos-de-uso.md)
-Historia: [HU-03](./07-criterios-aceptacion.md), [HU-02](./07-criterios-aceptacion.md), [HU-06](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
-Requisito: [RP-05](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
-Sistemas externos que participan: Discord
+- Caso de uso: [CU-04](./09-casos-de-uso.md) y [CU-06](./09-casos-de-uso.md)
+- Historia: [HU-03](./07-criterios-aceptacion.md), [HU-02](./07-criterios-aceptacion.md), [HU-06](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
+- Requisito: [RP-05](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
+- Sistemas externos que participan: Discord
 
 ACA PONER CAMBIO DSS-02
 
