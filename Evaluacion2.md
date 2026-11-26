@@ -18,7 +18,7 @@ Lo que haremos es cambiar el diagrama de estado en la parte de EST-03 que es el 
 Como organizador de torneos me gustaría tener control total sobre la edición y estados del torneo, estos permisos deben ser exclusivamente del rol “Organizador/a”.
 
 **Criterios de aceptación:**
-- CA1: El sistema no deberá mostrar al usuario en ningún caso un torneo que aun no este en curso.
+- CA1: El sistema muestra el estado actual del torneo, ocultando completamente el apartado de Borrador para los usuario menos para el Organizador.
 - CA2: El organizador/a debe poder alternar estados entre torneos y tener acceso a modificarlos
 
 ## Clasificación de requisitos 
