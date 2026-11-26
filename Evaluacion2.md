@@ -25,4 +25,4 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 
 **Diagrama de estado**
 
-<img width="2819" height="1997" alt="image" src="Images/diagradadeestado.jpeg" />
+<img width="2819" height="1997" alt="image" src="Images/diagradaestado.jpeg" />
