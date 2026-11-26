@@ -329,3 +329,32 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Entonces el sistema no registra el torneo
     Y muestra un mensaje de error indicando los datos obligatorios requeridos
 ```
+## HU-10 - Gherkin
+
+Historia: Como organizador, quiero ser el único que pueda ver y modificar un torneo en estado "Borrador" y cambiar su estado, para preparar el torneo sin que los usuarios (Jugador, Moderador y Visitante) accedan a él ni registren acciones antes de tiempo.
+
+```gherkin
+Característica: Control del estado del torneo por el Organizador
+
+  Escenario: El estado del torneo es visible para los usuarios
+    Dado que el torneo está en estado "Inscripciones abiertas"
+    Cuando un Jugador abre el inicio del torneo
+    Entonces ve el torneo con su estado "Inscripciones abiertas"
+
+  Escenario: Un torneo en Borrador no se muestra a los usuarios
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador, un Moderador o un Visitante abre el inicio o el bracket
+    Entonces el sistema no muestra el torneo
+    Y informa que el torneo aún no está publicado
+
+  Escenario: El Organizador cambia el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando el Organizador cambia el estado a "Inscripciones abiertas"
+    Entonces el torneo queda en estado "Inscripciones abiertas"
+
+  Escenario: Solo el Organizador puede cambiar el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador o un Moderador intenta cambiar el estado del torneo
+    Entonces el sistema rechaza la operación
+    Y el torneo conserva el estado "Borrador"
+```
