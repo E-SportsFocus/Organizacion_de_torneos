@@ -105,6 +105,11 @@ Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene
 
 ## Modelo de dominio
 
+Se agregaron atributos a la clase Torneo. (bolsa de premios, descripción y estado). También se añadió una nueva linea a la tabla de asociaciones la cual es:
+
+|---|---|---|---|
+| inscribe | Torneo — Equipo | 1 a 0..* | Un equipo tiene la posibilidad de participar en varios torneos
+
 ## Clasificación de requisitos 
 
 Se agrego una nueva linea a la tabla de clasificación de requisitos la cual consisten en:
