@@ -60,6 +60,7 @@ def listar_partidas_equipo(conexion, equipo_id, ahora):
         JOIN torneo t ON t.id = p.torneo_id
         JOIN disponibilidad d ON d.partida_id = p.id AND d.equipo_id = ?
         JOIN equipo e ON e.id = d.equipo_id
+        WHERE t.estado != 'Borrador'
         ORDER BY p.fecha_hora
         """,
         (equipo_id,),
@@ -97,6 +98,7 @@ def listar_partidas_moderador(conexion, ahora):
         LEFT JOIN persona m ON m.id = p.moderador_id
         JOIN disponibilidad d ON d.partida_id = p.id
         JOIN equipo e ON e.id = d.equipo_id
+        WHERE t.estado != 'Borrador'
         ORDER BY p.fecha_hora, e.nombre
         """
     ).fetchall()

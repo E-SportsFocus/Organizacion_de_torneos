@@ -138,6 +138,18 @@ def test_no_se_registra_resultado_si_torneo_en_borrador(base, ahora):
     assert "Borrador" in exc.value.mensaje
 
 
+def test_jugador_no_ve_partidas_si_torneo_en_borrador(cliente, ahora):
+    """HU-10 · Un jugador no ve partidas si el torneo está en estado Borrador."""
+    http, datos = cliente
+    esc = _crear_torneo_borrador(datos, ahora)
+
+    respuesta = http.get(f"/jugador?persona_id={esc['jugador_alfa']}")
+    assert respuesta.status_code == 200
+    html = respuesta.text
+    assert "El equipo no tiene partidas programadas." in html
+    assert "Cuartos de final" not in html
+
+
 def test_jugador_ve_torneo_y_estado_en_sus_partidas(cliente, ahora):
     """HU-10 / HU-04 · El jugador ve el nombre y el estado del torneo en su panel."""
     http, datos = cliente
