@@ -72,7 +72,7 @@ Variantes representadas:
 - alt — usuario sin rol Organizador: el sistema rechaza el acceso a la gestión del torneo.
 
 ## DSS-05 — Consulta del torneo según su estado y el rol del usuario
-- Caso de uso: [CU-07](./09-casos-de-uso.md), [CU-08](./09-casos-de-uso.md) y [CU-10](./09-casos-de-uso.md)
+- Caso de uso: [CU-07](./09-casos-de-uso.md), [CU-08](./09-casos-de-uso.md) y [CU-09](./09-casos-de-uso.md)
 - Historia: [HU-07](./07-criterios-aceptacion.md), [HU-08](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
 - Requisito: [RP-07](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Actores: Jugador, Moderador, Visitante y Organizador
