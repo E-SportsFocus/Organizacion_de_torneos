@@ -1,6 +1,6 @@
 # Criterios de aceptación (Gherkin)
 
-Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-06 son nuevas en esta entrega y cubren los requisitos RP-01, RP-02, RP-03 y RP-07 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
+Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-09 son nuevas en esta entrega y cubren los requisitos RP-01, RP-02, RP-03 y RP-07 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
 
 ## HU-01 — Registro automático del resultado
 
