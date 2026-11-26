@@ -74,7 +74,7 @@ Variantes representadas:
 - Requisito: [RP-11](./Clasificación_de_requisitos.md) y [RP-12](./Clasificación_de_requisitos.md)
 - Actor: Organizador
 
-![DSS-04](./diagramas/Cambio DSS-04.png)
+![DSS-04](./diagramas/Cambio-DSS-04.png)
 
 Variantes representadas:
 
