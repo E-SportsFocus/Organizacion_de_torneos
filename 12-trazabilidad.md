@@ -13,9 +13,10 @@
 | RP-07 | [HU-07](./07-criterios-aceptacion.md) | [CU-07](./09-casos-de-uso.md) | — | — | Torneo, Partida, Equipo, Resultado, Bracket | `GET /` → [`inicio`](./app/rutas/torneo.py); `GET /torneo` redirige a `/` | [`tests/test_hu07.py`](./tests/test_hu07.py) (4 escenarios) |
 | RP-06, RP-10 | [HU-08](./07-criterios-aceptacion.md) | [CU-08](./09-casos-de-uso.md) | — | [EST-01](./11-diagramas-estado.md) | Bracket, Partida, Equipo, Resultado | `GET /bracket` → [`vista_bracket`](./app/rutas/resultado.py); [`obtener_bracket_estructurado`](./app/servicios/bracket.py), [`avanzar_ganador`](./app/servicios/bracket.py) | [`tests/test_hu08.py`](./tests/test_hu08.py) (5 escenarios) |
 | RP-11 | [HU-09](./07-criterios-aceptacion.md) | [CU-09](./09-casos-de-uso.md) | [DSS-04](./10-diagramas-secuencia.md) | [EST-03](./11-diagramas-estado.md) | Torneo, Premio, Organizador, Equipo, Jugador | `GET /organizador/torneo/gestion`, `POST /organizador/torneo/guardar` → [`organizador.py`](./app/rutas/organizador.py); [`crear_o_actualizar_torneo`](./app/servicios/torneo_gestion.py) | [`tests/test_hu09.py`](./tests/test_hu09.py) (6 escenarios) |
+| RP-12 | [HU-10](Evaluacion2.md) | [CU-10](Evaluacion2.md) | [DSS-05](./10-diagramas-secuencia.md) | [EST-03](Evaluacion2.md) | Torneo, Organizador | Control de visibilidad y operaciones en estado Borrador | Verificado en HU-09 y HU-10 |
 | RP-09 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | — | — | Disponibilidad | Requisito no funcional transversal; se verifica con la métrica M-FI01 y depende de que HU-04 esté disponible. | — (la disponibilidad operacional se mide fuera de la suite) |
 
-Las historias HU-01 a HU-09 aparecen todas en la matriz. Las pruebas de aceptación identifican en su docstring la historia y el escenario Gherkin con el formato `HU-xx · Escenario: ...`.
+Las historias HU-01 a HU-10 aparecen reflejadas en la matriz. Las pruebas de aceptación identifican en su docstring la historia y el escenario Gherkin con el formato `HU-xx · Escenario: ...`.
 
 ## Observaciones
 

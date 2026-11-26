@@ -42,7 +42,7 @@ La multiplicidad de cada extremo indica cuántas instancias de esa clase se rela
 | solicita | Equipo — SolicitudCambioHorario | 1 a 0..* | Cada solicitud de cambio la hace un equipo; un equipo puede hacer varias solicitudes. |
 | sobre | Partida — SolicitudCambioHorario | 1 a 0..* | Una partida puede tener varias solicitudes de cambio a lo largo del tiempo. |
 | premia con | Torneo — Premio | 1 a 0..* | Un torneo define una estructura con varios premios asignados por posición (composición). |
-| inscribe | Torneo — Equipo | 1 a 0..* | Un torneo inscribe a varios equipos participantes y un equipo puede inscribirse en varios torneos. La inscripción se conserva en la tabla `torneo_equipo`. |
+| inscribe | Torneo — Equipo | 0..* a 0..* | Un torneo inscribe a varios equipos participantes y un equipo puede inscribirse en varios torneos. La inscripción se conserva en la tabla `torneo_equipo`. |
 
 ## Correspondencia con la base de datos
 
@@ -74,4 +74,5 @@ Las tablas `anuncio`, `notificacion` e `integraciones_log` son registros técnic
 - Quién registró un resultado se modeló como asociación Moderador — Resultado (y no como atributo), porque es una relación entre dos conceptos del negocio; en los resultados automáticos no hay Moderador. Por eso `resultado.moderador_id` admite `NULL`: los resultados manuales (HU-03) siempre informan al Moderador y los automáticos (HU-01) no lo requieren.
 - El Resultado no admite empate: el marcador por equipo debe identificar un ganador, porque el bracket necesita avanzar. La regla se valida al registrar el resultado (HU-03).
 - No se modelaron como clases los roles de Jugador "capitán" ni de "suplente", porque la Entrega 1 no los define. Queda como posible extensión si el equipo lo confirma.
+- El atributo estado de Torneo controla qué operaciones se permiten: en Borrador solo el Organizador ve y modifica el torneo; Disponibilidad, SolicitudCambioHorario y Resultado solo se registran con el torneo En curso
 

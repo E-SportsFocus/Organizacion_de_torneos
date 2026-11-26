@@ -1,6 +1,6 @@
 # Criterios de aceptación (Gherkin)
 
-Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-09 se incorporaron en las Entregas 2 y 3 y cubren los requisitos RP-01, RP-02, RP-03, RP-06, RP-07, RP-09, RP-10 y RP-11 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
+Los escenarios se redactan en lenguaje del negocio, usando los términos del [modelo de dominio](./08-modelo-dominio.md). HU-01 a HU-03 provienen de [Historias de usuario (Entrega 1)](./Historias_de_usuario.md). HU-04 a HU-10 cubren los requisitos RP-01 a RP-12 de la [clasificación de requisitos](./Clasificación_de_requisitos.md).
 
 ## HU-01 — Registro automático del resultado
 
@@ -101,6 +101,13 @@ Característica: Registro manual del resultado por un Moderador asignado
     Cuando registra el mismo marcador para ambos equipos
     Entonces el sistema no confirma el resultado
     Y solicita un marcador con un ganador
+
+  Escenario: No se registra un resultado si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el usuario es el Moderador asignado a la partida
+    Cuando intenta registrar el resultado de la partida
+    Entonces el sistema rechaza la operación
+    Y el estado y el resultado de la partida no cambian
 ```
 
 ## HU-04 — Confirmación de disponibilidad
@@ -137,6 +144,13 @@ Característica: Confirmación de disponibilidad de un equipo para una partida
     Cuando un jugador intenta confirmar la disponibilidad de su equipo
     Entonces el sistema no acepta la confirmación
     Y la disponibilidad de la partida no cambia
+
+  Escenario: No se confirma disponibilidad si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el equipo tiene una partida programada en el torneo
+    Cuando un jugador del equipo intenta confirmar la disponibilidad del equipo
+    Entonces el sistema rechaza la confirmación
+    Y la disponibilidad del equipo no cambia
 ```
 
 ## HU-05 — Solicitud de cambio de horario
@@ -301,7 +315,7 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Cuando ingresa el nombre del torneo, selecciona el videojuego, define la fecha y hora de inicio y la zona horaria
     Y presiona "Guardar torneo"
     Entonces el sistema registra el nuevo torneo vinculado al Organizador
-    Y el torneo queda disponible para su administración
+    Y el torneo queda en estado "Borrador", visible solo para el Organizador
 
   Escenario: Asignación e inscripción de equipos participantes
     Dado que existe un torneo creado por el Organizador
@@ -336,4 +350,33 @@ Característica: Creación y gestión integral de torneos, participantes y premi
     Cuando envía un estado distinto de "Borrador", "Inscripciones abiertas", "En curso" o "Finalizado"
     Entonces el sistema no registra el torneo
     Y muestra un mensaje indicando que el estado no es válido
+```
+## HU-10 — Control del estado del torneo por el Organizador
+
+Historia: Como organizador, quiero ser el único que pueda ver y modificar un torneo en estado "Borrador" y cambiar su estado, para preparar el torneo sin que los usuarios (Jugador, Moderador y Visitante) accedan a él ni registren acciones antes de tiempo.
+
+```gherkin
+Característica: Control del estado del torneo por el Organizador
+
+  Escenario: El estado del torneo es visible para los usuarios
+    Dado que el torneo está en estado "Inscripciones abiertas"
+    Cuando un Jugador abre el inicio del torneo
+    Entonces ve el torneo con su estado "Inscripciones abiertas"
+
+  Escenario: Un torneo en Borrador no se muestra a los usuarios
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador, un Moderador o un Visitante abre el inicio o el bracket
+    Entonces el sistema no muestra el torneo
+    Y informa que el torneo aún no está publicado
+
+  Escenario: El Organizador cambia el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando el Organizador cambia el estado a "Inscripciones abiertas"
+    Entonces el torneo queda en estado "Inscripciones abiertas"
+
+  Escenario: Solo el Organizador puede cambiar el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador o un Moderador intenta cambiar el estado del torneo
+    Entonces el sistema rechaza la operación
+    Y el torneo conserva el estado "Borrador"
 ```

@@ -55,10 +55,10 @@ Los estados son situaciones de la solicitud: Solicitada, Aprobada, Rechazada y V
 ## EST-03 — Ciclo de vida de Torneo
 
 - Clase del dominio: [Torneo](./08-modelo-dominio.md)
-- Historia relacionada: [HU-09](./07-criterios-aceptacion.md)
-- Requisito: [RP-11](./Clasificación_de_requisitos.md)
+- Historia relacionada: [HU-09](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
+- Requisito: [RP-11](./Clasificación_de_requisitos.md) Y [RP-12](./Clasificación_de_requisitos.md)
 
-![EST-03](./diagramas/est-03.png)
+![EST-03](Images/diagramaestado1.png)
 
 Archivo fuente: [`./diagramas/est-03.puml`](./diagramas/est-03.puml)
 
@@ -74,6 +74,7 @@ Los estados son situaciones del campeonato: Borrador, Inscripciones abiertas, En
 | En curso | El Organizador selecciona "Finalizado" | — | Cerrar el torneo y publicar el podio | Finalizado | Sí (selección manual) |
 | Finalizado | — (final) | — | — | — (final) | Sí (estado final) |
 
-La aplicación no impone el orden de las transiciones: el Organizador puede corregir el estado mientras administra el torneo. La validación cubre el catálogo de valores y rechaza cualquier estado fuera de la lista; la prueba `test_estado_invalido_torneo` verifica ese caso inválido.
+La aplicación valida el catálogo de estados y rechaza cualquier estado fuera de la lista; la prueba `test_estado_invalido_torneo` verifica ese caso inválido. En estado "Borrador", confirmar disponibilidad (Jugador) y registrar resultados (Moderador) no son transiciones permitidas: el sistema las rechaza (HU-03, HU-04 y HU-10).
 
+En estado "Borrador", confirmar disponibilidad (Jugador) y registrar resultados (Moderador) no son transiciones permitidas: el sistema las rechaza (HU-03, HU-04 y HU-10).
 

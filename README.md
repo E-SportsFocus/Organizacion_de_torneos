@@ -2,6 +2,7 @@
 
 - [Ingeniería de requisitos - Entrega 1](IngReq-Entrega1.md)
 - [Ingeniería de requisitos - Entrega 2](./IngReq-Entrega%202.md)
+- [Ingeniería de requisitos - Evaluación 2](./Evaluacion2.md)
 
 ## Aplicación web (HU-03, HU-04, HU-05, HU-06, HU-07, HU-08 y HU-09)
 
