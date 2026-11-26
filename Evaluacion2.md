@@ -107,6 +107,10 @@ Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene
 
 ## Clasificación de requisitos 
 
+Se agrego una nueva linea a la tabla de clasificación de requisitos la cual consisten en:
+
+| RP-12 | En estado Borrador el torneo solo es visible y modificable por el Organizador; no s permite confirmar disponibilidad ni registrar resultados. | Funcional | Gestión de estados y control de permisos del torneo. | 
+
 ## Diagrama de estado
 
 <img width="700" height="900" alt="image" src="Images/diagramaestado.jpeg">
@@ -132,8 +136,6 @@ Variantes representadas:
 - La API del videojuego no participa en este diagrama: su falta de resultado válido es la condición de partida (partida en estado "Pendiente de resultado").
 
 
-
-
 DSS-04 — Creación y gestión de torneo, participantes y premios
 - Caso de uso: [CU-09](./09-casos-de-uso.md)
 - Historia: [HU-09](./07-criterios-aceptacion.md) y [HU-10](./07-criterios-aceptacion.md)
@@ -148,7 +150,6 @@ Variantes representadas:
 - alt anidado — datos obligatorios completos (nombre y juego válidos): el sistema registra o actualiza la información oficial del torneo, inscribe los equipos participantes en la nómina oficial, guarda la escala de premios desglosada por posición y confirma la operación al Organizador. Un torneo nuevo queda en estado "Borrador", oculto para Jugadores, Moderadores y Visitantes: solo el Organizador puede verlo y modificarlo (HU-10, CA1).
 - alt anidado — datos obligatorios incompletos (falta nombre o juego): el sistema rechaza el guardado e informa los campos requeridos, sin modificar los datos ni el estado del torneo.
 - alt — usuario sin rol Organizador: el sistema rechaza el acceso a la gestión del torneo.
-
 
 
 DSS-07 — Consulta del torneo según su estado y el rol del usuario
