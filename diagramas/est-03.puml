@@ -2,23 +2,21 @@
 title EST-03 - Ciclo de vida de Torneo
 left to right direction
 
-[*] --> Borrador : torneo registrado por Organizador
-
-Borrador --> InscripcionesAbiertas : abrir inscripciones
-InscripcionesAbiertas --> EnCurso : equipos inscritos y bracket generado
-EnCurso --> Finalizado : final disputada y campeón anunciado
-Finalizado --> [*]
-
+state "Borrador" as Borrador
 state "Inscripciones abiertas" as InscripcionesAbiertas
 state "En curso" as EnCurso
+state "Finalizado" as Finalizado
 
-note bottom of Borrador
-  El Organizador configura los datos
-  generales, el juego y los premios.
-end note
+[*] --> Borrador : torneo registrado\n[Organizador]
 
-note bottom of EnCurso
-  Se disputan las partidas
-  según el bracket oficial.
-end note
+Borrador --> Borrador : editar configuración\n[Organizador]
+Borrador --> InscripcionesAbiertas : abrir inscripciones\n[Organizador]
+
+InscripcionesAbiertas --> InscripcionesAbiertas : inscribir equipo y corroborar datos\n[Jugador / Organizador]
+InscripcionesAbiertas --> EnCurso : iniciar torneo\n[equipos inscritos y bracket generado]
+
+EnCurso --> EnCurso : confirmar disponibilidad y registrar resultados\n[Jugador / Moderador]
+EnCurso --> Finalizado : finalizar torneo / anunciar ganador y entregar premios
+
+Finalizado --> [*]
 @enduml
