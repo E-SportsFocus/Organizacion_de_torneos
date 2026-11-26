@@ -68,10 +68,14 @@ Los estados son situaciones del campeonato: Borrador, Inscripciones abiertas, En
 
 | Estado origen | Evento | Guarda | Acción | Estado destino |
 |---|---|---|---|---|
-| — (inicial) | Torneo registrado por el Organizador | Nombre y juego válidos | Guardar datos generales y estructura inicial | Borrador |
-| Borrador | Publicar torneo / habilitar convocatoria | Datos generales completos | Habilitar selección de equipos participantes | Inscripciones abiertas |
-| Inscripciones abiertas | Equipos inscritos y bracket generado | Mínimo de equipos inscritos | Generar llaves y programar partidas iniciales | En curso |
-| En curso | Final disputada y resultado confirmado | Todos los enfrentamientos resueltos | Publicar podio, distribuir premios y anunciar campeón | Finalizado |
+| — (inicial) | Torneo registrado | Organizador | Guardar datos generales | Borrador |
+| Borrador | Editar configuración | Organizador | Guardar cambios | Borrador |
+| Borrador | Abrir inscripciones | Organizador | Publicar el torneo | Inscripciones abiertas |
+| Inscripciones abiertas | Inscribir equipo y corroborar datos | Jugador / Organizador | Registrar inscripción | Inscripciones abiertas |
+| Inscripciones abiertas | Iniciar torneo | Equipos inscritos y bracket generado | Generar llaves y programar partidas | En curso |
+| En curso | Confirmar disponibilidad y registrar resultados | Jugador / Moderador | Registrar disponibilidad o resultado | En curso |
+| En curso | Finalizar torneo | — | Anunciar ganador y entregar premios | Finalizado |
 | Finalizado | — (final) | — | — | — (final) |
 
+En estado "Borrador", confirmar disponibilidad (Jugador) y registrar resultados (Moderador) no son transiciones permitidas: el sistema las rechaza (HU-03, HU-04 y HU-10).
 
