@@ -4,20 +4,20 @@
 
 | Requisito (Entrega 1) | Historia | Caso de uso | Secuencia | Estado | Clases del dominio |
 |---|---|---|---|---|---|
-| RP-01 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | [EST-01](./11-diagramas-estado.md) | Disponibilidad, Equipo, Partida |
+| RP-01 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | [EST-03](./11-diagramas-estado.md) | Disponibilidad, Equipo, Partida |
 | RP-02 | [HU-05](./07-criterios-aceptacion.md) | [CU-02](./09-casos-de-uso.md) | [DSS-03](./10-diagramas-secuencia.md) | [EST-02](./11-diagramas-estado.md) | SolicitudCambioHorario, Equipo, Partida |
 | RP-03 | [HU-05](./07-criterios-aceptacion.md) | [CU-02](./09-casos-de-uso.md) | [DSS-03](./10-diagramas-secuencia.md) | [EST-02](./11-diagramas-estado.md) | SolicitudCambioHorario, Moderador |
 | RP-04 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Partida, Resultado |
-| RP-05 | [HU-03](./07-criterios-aceptacion.md) | [CU-04](./09-casos-de-uso.md) | [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Moderador, Resultado, Partida |
+| RP-05 | [HU-03](./07-criterios-aceptacion.md) | [CU-04](./09-casos-de-uso.md) | [DSS-02](./10-diagramas-secuencia.md) | [EST-03](./11-diagramas-estado.md) | Moderador, Resultado, Partida |
 | RP-06 | [HU-02](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Organizador, Jugador |
 | RP-07 | [HU-06](./07-criterios-aceptacion.md) | [CU-06](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Organizador, Partida |
-| RP-07 | [HU-07](./07-criterios-aceptacion.md) | [CU-07](./09-casos-de-uso.md) | — | — | Torneo, Partida, Equipo, Resultado, Anuncio |
+| RP-07 | [HU-07](./07-criterios-aceptacion.md) | [CU-07](./09-casos-de-uso.md) | — | — | Torneo, Partida, Equipo, Resultado |
 | RP-06, RP-10 | [HU-08](./07-criterios-aceptacion.md) | [CU-08](./09-casos-de-uso.md) | — | [EST-01](./11-diagramas-estado.md) | Bracket, Partida, Equipo, Resultado |
 | RP-11 | [HU-09](./07-criterios-aceptacion.md) | [CU-09](./09-casos-de-uso.md) | [DSS-04](./10-diagramas-secuencia.md) | [EST-03](./11-diagramas-estado.md) | Torneo, Premio, Organizador, Equipo, Jugador |
 | RP-08 | [HU-01](./07-criterios-aceptacion.md) | [CU-03](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Resultado, Partida |
 | RP-09 | [HU-04](./07-criterios-aceptacion.md) | [CU-01](./09-casos-de-uso.md) | --- | --- | Disponibilidad |
 | RP-10 | [HU-02](./07-criterios-aceptacion.md), [HU-03](./07-criterios-aceptacion.md) | [CU-05](./09-casos-de-uso.md), [CU-04](./09-casos-de-uso.md) | [DSS-01](./10-diagramas-secuencia.md), [DSS-02](./10-diagramas-secuencia.md) | [EST-01](./11-diagramas-estado.md) | Bracket, Resultado, Moderador |
-
+| RP-12 | [HU-10](Evaluacion2.md) | [CU-10](Evaluacion2.md) | [DDS-05](Evaluacion2.md), [DSS-07](Evaluacion2.md)| [EST-03](Evaluacion2.md) | Torneo, Organizador|
 Las historias HU-01 a HU-09 aparecen todas en la matriz.
 
 ## Observaciones
