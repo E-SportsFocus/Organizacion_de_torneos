@@ -35,7 +35,7 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 
 ## Clasificación de requisitos 
 
-**Diagrama de estado**
+## Diagrama de estado
 
 <img width="700" height="900" alt="image" src="Images/diagramaestado.jpeg">
 
