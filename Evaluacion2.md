@@ -12,12 +12,12 @@ Debe poder verse: El estado de los torneos.
 Se nos pidió modificar el comportamiento de los estados de un torneo, ya que el torneo al estar en borrador, los jugadores puedes seguir accediendo a el y modificar su estado, debiendo ser exclusivamente para el organizador. Debido a esto decidimos agregar una nueva historia de usuario y modificamos algunas haciendo que esto nos haga unos cambio en los siguientes apartados:
 
 - HU-03, HU-04 y HU-09
-- modificar el diagrama de estado
-- clasificación de requerimientos
-- modelo de dominio
-- diagrama de secuencia
-- casos de uso
-- la trazabilidad
+- Modificar el diagrama de estado
+- Clasificación de requerimientos
+- Modelo de dominio
+- Diagrama de secuencia
+- Casos de uso
+- La trazabilidad
 
 En algunos apartados tendran cambios diminutos pero en otros seran un poco mas extensos debido al cambio que se nos pide.
 
