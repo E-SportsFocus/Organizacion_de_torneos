@@ -29,6 +29,61 @@ Como organizador de torneos me gustaría tener control total sobre la edición y
 
 ## HU-10 - Gherkin
 
+Historia: Como organizador, quiero ser el único que pueda ver y modificar un torneo en estado "Borrador" y cambiar su estado, para preparar el torneo sin que los usuarios (Jugador, Moderador y Visitante) accedan a él ni registren acciones antes de tiempo.
+
+```gherkin
+Característica: Control del estado del torneo por el Organizador
+
+  Escenario: El estado del torneo es visible para los usuarios
+    Dado que el torneo está en estado "Inscripciones abiertas"
+    Cuando un Jugador abre el inicio del torneo
+    Entonces ve el torneo con su estado "Inscripciones abiertas"
+
+  Escenario: Un torneo en Borrador no se muestra a los usuarios
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador, un Moderador o un Visitante abre el inicio o el bracket
+    Entonces el sistema no muestra el torneo
+    Y informa que el torneo aún no está publicado
+
+  Escenario: El Organizador cambia el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando el Organizador cambia el estado a "Inscripciones abiertas"
+    Entonces el torneo queda en estado "Inscripciones abiertas"
+
+  Escenario: Solo el Organizador puede cambiar el estado del torneo
+    Dado que el torneo está en estado "Borrador"
+    Cuando un Jugador o un Moderador intenta cambiar el estado del torneo
+    Entonces el sistema rechaza la operación
+    Y el torneo conserva el estado "Borrador"
+```
+## Cambios en HU-03 Y HU-04
+
+Para la HU-03 se agrega este nuevo escenario:
+```gherkin
+  Escenario: No se registra un resultado si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el usuario es el Moderador asignado a la partida
+    Cuando intenta registrar el resultado de la partida
+    Entonces el sistema rechaza la operación
+    Y el estado y el resultado de la partida no cambian
+```
+Para la HU-04 se agrega este nuevo escenario:
+```gherkin
+  Escenario: No se confirma disponibilidad si el torneo está en Borrador
+    Dado que el torneo está en estado "Borrador"
+    Y que el equipo tiene una partida programada en el torneo
+    Cuando un jugador del equipo intenta confirmar la disponibilidad del equipo
+    Entonces el sistema rechaza la confirmación
+    Y la disponibilidad del equipo no cambia
+```
+Con este nuevo escenario podemos resolver la inconsistencia que habia en esta HU.
+```gherkin
+  Escenario: El jugador ve a qué torneo pertenecen sus partidas
+    Dado que el torneo no está en estado "Borrador"
+    Y que el equipo tiene partidas programadas en el torneo
+    Cuando un jugador del equipo consulta sus partidas
+    Entonces ve cada partida con el nombre y el estado del torneo
+```
 ## Casos de uso
 Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene el selector de estado), actualizamos `09-caso-de-uso.md` con estos cambios:
 * **CU-01 (Confirmar disponibilidad):** Se agrega la precondición de que el torneo no este en `Borrador` (debe estar en `En curso`) y el rechazo si está en borardor.
