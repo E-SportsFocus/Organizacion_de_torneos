@@ -111,7 +111,7 @@ Se agrego una nueva linea a la tabla de clasificación de requisitos la cual con
 
 | ID | Requisito | Tipo | Actividad TO-BE asociada |
 |---|---|---|---|
-| RP-12 | En estado Borrador el torneo solo es visible y modificable por el Organizador; no s permite confirmar disponibilidad ni registrar resultados. | Funcional | Gestión de estados y control de permisos del torneo. | 
+| RP-12 | En estado Borrador el torneo solo es visible y modificable por el Organizador; no se permite confirmar disponibilidad ni registrar resultados. | Funcional | Gestión de estados y control de permisos del torneo. | 
 
 ## Diagrama de estado
 
