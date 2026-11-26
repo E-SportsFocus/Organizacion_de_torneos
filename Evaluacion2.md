@@ -108,6 +108,8 @@ Para cubrir **HU-10** sin crear un caso de uso nuevo (ya que el formulario tiene
 ## Clasificación de requisitos 
 
 Se agrego una nueva linea a la tabla de clasificación de requisitos la cual consisten en:
+
+| ID | Requisito | Tipo | Actividad TO-BE asociada |
 |---|---|---|---|
 | RP-12 | En estado Borrador el torneo solo es visible y modificable por el Organizador; no s permite confirmar disponibilidad ni registrar resultados. | Funcional | Gestión de estados y control de permisos del torneo. | 
 
