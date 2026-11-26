@@ -110,7 +110,8 @@ Se agregaron atributos a la clase Torneo. (bolsa de premios, descripción y esta
 |---|---|---|---|
 | inscribe | Torneo — Equipo | 1 a 0..* | Un equipo tiene la posibilidad de participar en varios torneos
 
-Al igual que tambien se añadio linea de texto en decisiones de modelado sobre el atributo estado de Torneo
+Al igual que tambien se añadio linea de texto en decisiones de modelado sobre el atributo estado de Torneo:
+El atributo estado de Torneo controla qué operaciones se permiten: en Borrador solo el Organizador ve y modifica el torneo; Disponibilidad, SolicitudCambioHorario y Resultado solo se registran con el torneo En curso.
 
 ## Clasificación de requisitos 
 
